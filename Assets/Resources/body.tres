@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dgciv3nn8v3kp" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody0.png" id="1_yf0vu"]
 [ext_resource type="Texture2D" uid="uid://bcaciqtdynuym" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody1.png" id="2_e765a"]
-[ext_resource type="Texture2D" uid="uid://b2kus4ktmum7q" path="res://Assets/Sprites/Clothing Frames/headless body poses/Kick Frames/KickBody1.png" id="3_yf0vu"]
-[ext_resource type="Texture2D" uid="uid://c10oecpuoipjt" path="res://Assets/Sprites/Clothing Frames/headless body poses/Kick Frames/KickBody2.png" id="4_e765a"]
+[ext_resource type="Texture2D" uid="uid://dekvuh2xltrh1" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody1.png" id="3_yf0vu"]
+[ext_resource type="Texture2D" uid="uid://brmf06qwpr3ac" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody2.png" id="4_e765a"]
 [ext_resource type="Texture2D" uid="uid://btn7txieww8mm" path="res://Assets/Sprites/Clothing Frames/body with a head/Mirror Frames/FinalizedBody(1).png" id="5_7x5ig"]
 [ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="6_6srg8"]
 [ext_resource type="Texture2D" uid="uid://sa0rvvidg838" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody2.png" id="7_x60y8"]
