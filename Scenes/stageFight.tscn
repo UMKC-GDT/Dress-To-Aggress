@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://dwfm7nqf8femv"]
+[gd_scene load_steps=11 format=4 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="Texture2D" uid="uid://hql0e531i2dd" path="res://Assets/Streets of Fight files/Streets of Fight files/Assets/Stage Layers/tileset.png" id="1_1c2mv"]
+[ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Scenes/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
@@ -555,6 +556,8 @@ size = Vector2(27, 256)
 
 [node name="Test Level" type="Node2D"]
 
+[node name="Game Manager" parent="." instance=ExtResource("1_8chw7")]
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(1, 11)
 tile_set = SubResource("TileSet_sb12i")
@@ -621,3 +624,6 @@ MIDAIR_DASH = false
 stream = ExtResource("5_6v6pp")
 volume_db = -7.429
 autoplay = true
+
+[connection signal="one_died" from="Player" to="Game Manager" method="_on_player_one_died"]
+[connection signal="cpu_died" from="Player2" to="Game Manager" method="_on_cpu_died"]

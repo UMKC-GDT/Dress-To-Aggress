@@ -1,5 +1,7 @@
 extends BaseCharacterController
 
+signal cpu_died
+
 #These are all booleans that are used to override functions way below and replace the original Input. checks. Basically, we're giving the CPU buttons! :D
 var pressing_left = false
 var pressing_right = false
@@ -312,3 +314,6 @@ func check_for_pose():
 func check_for_jump():
 	if pressing_jump:
 		start_action(4, func(): start_jump(0), "jump startup")
+		
+func report_dead():
+	cpu_died.emit()
