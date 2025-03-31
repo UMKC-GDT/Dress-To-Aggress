@@ -566,6 +566,7 @@ size = Vector2(224, 20)
 [node name="Game Manager" parent="." instance=ExtResource("1_8chw7")]
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(1, 11)
 position = Vector2(1, 14.65)
 tile_set = SubResource("TileSet_sb12i")
 format = 2
@@ -611,6 +612,7 @@ MIDAIR_DASH = false
 position = Vector2(-482, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Wall2"]
+position = Vector2(574, -11)
 position = Vector2(585, -11)
 shape = SubResource("RectangleShape2D_1c2mv")
 
@@ -618,6 +620,7 @@ shape = SubResource("RectangleShape2D_1c2mv")
 position = Vector2(-241, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Wall"]
+position = Vector2(149, -15)
 position = Vector2(138, -14)
 shape = SubResource("RectangleShape2D_1c2mv")
 
