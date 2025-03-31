@@ -222,7 +222,7 @@ shape = SubResource("RectangleShape2D_5tmop")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.303)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"kick"
+animation = &"idle"
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
@@ -271,5 +271,5 @@ debug_color = Color(0.786632, 0.431925, 0, 0.42)
 script = ExtResource("24_lcnf3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Hitbox"]
-position = Vector2(3.5, 4)
+position = Vector2(20, 4)
 shape = SubResource("RectangleShape2D_7slhi")

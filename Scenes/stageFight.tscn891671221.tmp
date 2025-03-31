@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=11 format=4 uid="uid://dtp5eywvmmy1j"]
-=======
-[gd_scene load_steps=11 format=4 uid="uid://dwfm7nqf8femv"]
->>>>>>> Stashed changes
+[gd_scene load_steps=10 format=4 uid="uid://dwfm7nqf8femv"]
 
 [ext_resource type="Texture2D" uid="uid://hql0e531i2dd" path="res://Assets/Streets of Fight files/Streets of Fight files/Assets/Stage Layers/tileset.png" id="1_1c2mv"]
-[ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Scenes/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
@@ -558,16 +553,10 @@ sources/0 = SubResource("TileSetAtlasSource_4ptq8")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5oh2v"]
-size = Vector2(224, 20)
-
 [node name="Test Level" type="Node2D"]
-
-[node name="Game Manager" parent="." instance=ExtResource("1_8chw7")]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(1, 11)
-position = Vector2(1, 14.65)
 tile_set = SubResource("TileSet_sb12i")
 format = 2
 
@@ -613,7 +602,6 @@ position = Vector2(-482, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Wall2"]
 position = Vector2(574, -11)
-position = Vector2(585, -11)
 shape = SubResource("RectangleShape2D_1c2mv")
 
 [node name="Invisible Wall" type="StaticBody2D" parent="."]
@@ -621,7 +609,6 @@ position = Vector2(-241, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Wall"]
 position = Vector2(149, -15)
-position = Vector2(138, -14)
 shape = SubResource("RectangleShape2D_1c2mv")
 
 [node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
@@ -634,14 +621,3 @@ MIDAIR_DASH = false
 stream = ExtResource("5_6v6pp")
 volume_db = -7.429
 autoplay = true
-
-<<<<<<< Updated upstream
-[connection signal="one_died" from="Player" to="Game Manager" method="_on_player_one_died"]
-[connection signal="cpu_died" from="Player2" to="Game Manager" method="_on_cpu_died"]
-=======
-[node name="Ceiling" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
-position = Vector2(0, -19)
-shape = SubResource("RectangleShape2D_5oh2v")
->>>>>>> Stashed changes
