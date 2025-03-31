@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btn7txieww8mm" path="res://Assets/Sprites/Clothing Frames/body with a head/Mirror Frames/FinalizedBody(1).png" id="5_7x5ig"]
 [ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="6_6srg8"]
 [ext_resource type="Texture2D" uid="uid://sa0rvvidg838" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody2.png" id="7_x60y8"]
-[ext_resource type="Script" path="res://Scripts/Wearable.gd" id="8_tkqwu"]
+[ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="8_tkqwu"]
 [ext_resource type="Texture2D" uid="uid://c8yivn807quku" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody0.png" id="9_ifsd7"]
 [ext_resource type="Texture2D" uid="uid://crbs3nhs62y7c" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody1.png" id="10_glqxt"]
 [ext_resource type="Texture2D" uid="uid://dgtcc0m7blb80" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody2.png" id="11_tkqwu"]
@@ -17,16 +17,21 @@
 script = ExtResource("8_tkqwu")
 ClothingType = "BASE"
 Rarity = "BASE"
-attackDamageChange = 0.0
-defenseChange = 0.0
-stylePoints = 0
-styleMultiplier = 0.0
-speedChange = 0.0
 name = ""
 outfitSet = ""
 outfitPattern = ""
 description = ""
 color = Color(1, 1, 1, 1)
+stylePoints = 0
+styleMultiplier = 0.0
+attackDamageChange = 0.0
+attackSpeedChange = 0.0
+defenseChange = 0.0
+walkSpeedChange = 0.0
+dashSpeedChange = 0.0
+jumpHeightChange = 0.0
+hitstunLengthChange = 0.0
+knockbackChange = 0.0
 mirrorPose = ExtResource("5_7x5ig")
 idlePose0 = ExtResource("1_yf0vu")
 idlePose1 = ExtResource("2_e765a")

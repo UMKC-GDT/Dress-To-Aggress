@@ -111,7 +111,7 @@ var punch_data = {
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 0,
 	"damage": 10 * punch_damage_mult,
-	"startup_animation" : "jump startup",
+	"startup_animation" : "punch startup",
 	"active_animation" : "punch",
 	"recovery_animation" : "punch recovery",
 }
@@ -130,7 +130,7 @@ var kick_data = {
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
 	"damage": 30 * kick_damage_mult,
-	"startup_animation" : "jump startup",
+	"startup_animation" : "kick startup",
 	"active_animation" : "kick",
 	"recovery_animation" : "kick recovery",
 }
