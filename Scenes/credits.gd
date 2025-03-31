@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _process(delta: float) -> void:
 	$RichTextLabel.position.y -= 50 * delta
 

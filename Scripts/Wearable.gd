@@ -14,14 +14,14 @@ class_name Wearable
 @export var styleMultiplier: float #x.x multiplier
 
 @export_category("Fighting Information") # All use x.x multiplier
-@export var attackDamageChange: float
-@export var attackSpeedChange: float
-@export var defenseChange: float
-@export var walkSpeedChange: float 
-@export var dashSpeedChange: float
-@export var jumpHeightChange: float 
-@export var hitstunLengthChange: float
-@export var knockbackChange: float
+@export var attackDamageChange: float = 1
+@export var attackSpeedChange: float = 1
+@export var defenseChange: float = 1
+@export var walkSpeedChange: float = 1
+@export var dashSpeedChange: float = 1
+@export var jumpHeightChange: float = 1
+@export var hitstunLengthChange: float = 1
+@export var knockbackChange: float = 1
 
 @export_category("Animation Frames")
 @export var mirrorPose: Texture2D

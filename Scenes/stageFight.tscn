@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://dwfm7nqf8femv"]
+[gd_scene load_steps=10 format=4 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="Texture2D" uid="uid://hql0e531i2dd" path="res://Assets/Streets of Fight files/Streets of Fight files/Assets/Stage Layers/tileset.png" id="1_1c2mv"]
+[ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Scenes/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
@@ -579,10 +580,15 @@ z_index = -2
 use_parent_material = true
 tile_set = SubResource("TileSet_sb12i")
 
+[node name="Runway" type="Sprite2D" parent="TileMap"]
+position = Vector2(0, 33)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("2_5oh2v")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(11, -9)
 offset = Vector2(-11, 47.595)
-zoom = Vector2(8.204, 8.62)
+zoom = Vector2(6.989, 7.343)
 
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(-47, 15)
