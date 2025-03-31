@@ -32,9 +32,9 @@ var enemy_blocking = false
 var enemy_approaching
 
 #Rather than an enum, THIS is what you check horizontal distance against to react based on the player's distance. If their horizontal distance is less than kick range, they're in kick range, for example. 
-var pose_range = 31
-var punch_range = 34
-var kick_range = 46
+var pose_range = 11
+var punch_range = 18
+var kick_range = 32
 
 var kick_time = 0.30
 var punch_time = 0.15
@@ -79,7 +79,7 @@ func handle_input(delta):
 	handle_states(direction, delta)
 	
 	#this is where the fun begins
-	run_ai()
+	#run_ai()
 
 #The fun. This is where our AI code can go, and, to whomever's working on the AI code, work your magic here. All of the code below can be edited and extended to however deep you want, based on the given eyes.
 func run_ai():
