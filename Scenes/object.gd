@@ -35,7 +35,7 @@ func set_random_pants_wearable():
 	var pants = ["bluePants.tres","blueShorts.tres","purplePants.tres","whiteShorts.tres"]
 	
 	#picks a random numbe
-	var rand = rng.randi_range(0,pants.size()-1)
+	var rand = rng.randi_range(1,pants.size()-1)
 	
 	#generates random pants
 	current_wearable = load(path + pants[rand])
