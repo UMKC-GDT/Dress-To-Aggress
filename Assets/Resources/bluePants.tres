@@ -20,14 +20,23 @@ Rarity = "COMMON"
 name = "bluePants"
 outfitSet = "Basic"
 outfitPattern = "Solid"
-description = "blue Shorts"
+description = "These pants increase speed"
 color = Color(0.0663652, 0.276242, 0.361392, 1)
+<<<<<<< Updated upstream
 stylePoints = 25
 styleMultiplier = 1.1
 attackDamageChange = 1.0
 attackSpeedChange = 1.0
 defenseChange = 1.0
 walkSpeedChange = 1.0
+=======
+stylePoints = 0
+styleMultiplier = 0.0
+attackDamageChange = 0.0
+attackSpeedChange = 1.0
+defenseChange = 0.0
+walkSpeedChange = 5.0
+>>>>>>> Stashed changes
 dashSpeedChange = 1.0
 jumpHeightChange = 1.0
 hitstunLengthChange = 1.0
