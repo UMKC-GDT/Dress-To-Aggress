@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxevk147j4wxs"]
+[gd_scene load_steps=9 format=3 uid="uid://dxevk147j4wxs"]
 
 [ext_resource type="Script" uid="uid://ogdqr5ijgblm" path="res://Scenes/main_menu.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://drlfw2n4iyt86" path="res://Assets/Sprites/MainMenuDTI.png" id="2_48xlc"]
+[ext_resource type="AudioStream" uid="uid://bv72j0bwdpg52" path="res://Assets/Music/Dress to Agress Title.mp3" id="3_1ehe0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
 texture = ExtResource("2_48xlc")
@@ -123,6 +124,11 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1ehe0")
+volume_db = -7.964
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_settings_pressed"]

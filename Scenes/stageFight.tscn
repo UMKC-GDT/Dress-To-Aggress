@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://dwfm7nqf8femv"]
+[gd_scene load_steps=9 format=4 uid="uid://dwfm7nqf8femv"]
 
 [ext_resource type="Texture2D" uid="uid://hql0e531i2dd" path="res://Assets/Streets of Fight files/Streets of Fight files/Assets/Stage Layers/tileset.png" id="1_1c2mv"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Scenes/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
+[ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ptq8"]
 texture = ExtResource("1_1c2mv")
@@ -606,3 +607,8 @@ shape = SubResource("RectangleShape2D_1c2mv")
 position = Vector2(19, 15)
 script = ExtResource("4_4ptq8")
 MIDAIR_DASH = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6v6pp")
+volume_db = -7.429
+autoplay = true
