@@ -556,6 +556,7 @@ size = Vector2(27, 256)
 [node name="Test Level" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(1, 11)
 tile_set = SubResource("TileSet_sb12i")
 format = 2
 
@@ -580,7 +581,7 @@ z_index = -2
 use_parent_material = true
 tile_set = SubResource("TileSet_sb12i")
 
-[node name="Runway" type="Sprite2D" parent="TileMap"]
+[node name="Runway" type="Sprite2D" parent="."]
 position = Vector2(0, 33)
 scale = Vector2(0.17, 0.17)
 texture = ExtResource("2_5oh2v")
@@ -591,7 +592,8 @@ offset = Vector2(-11, 47.595)
 zoom = Vector2(6.989, 7.343)
 
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
-position = Vector2(-47, 63)
+position = Vector2(-46, 39)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("3_sb12i")
 MIDAIR_DASH = false
 
@@ -610,7 +612,8 @@ position = Vector2(149, -15)
 shape = SubResource("RectangleShape2D_1c2mv")
 
 [node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
-position = Vector2(19, 63)
+position = Vector2(20, 40)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("4_4ptq8")
 MIDAIR_DASH = false
 
