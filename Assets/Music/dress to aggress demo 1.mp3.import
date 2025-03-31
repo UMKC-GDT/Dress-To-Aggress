@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfxdlpk0w8vf1"
+path="res://.godot/imported/dress to aggress demo 1.mp3-aaf5339f32607828cc9ea8c91b8023d2.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/dress to aggress demo 1.mp3"
+dest_files=["res://.godot/imported/dress to aggress demo 1.mp3-aaf5339f32607828cc9ea8c91b8023d2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
