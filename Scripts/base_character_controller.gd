@@ -93,7 +93,7 @@ var disabled = false
 
 @export var DOUBLE_TAP_TIME = 0.2 # Time window for double tap detection
 @export var DASH_TIME = 0.20 # Dash lasts 0.20 seconds, lengthen this for a longer dash.
-@export var DASH_SPEED = 90 * dash_speed_mult # Set dash speed
+@export var DASH_SPEED = 120 * dash_speed_mult # Set dash speed
 @export var DASH_COOLDOWN = 0.2 # Half a second cooldown between valid dashes. This prevents the player from spamming dash across the screen, without stopping.
 @export var MIDAIR_DASH = true
 
@@ -111,7 +111,7 @@ var punch_data = {
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 0,
 	"damage": 10 * punch_damage_mult,
-	"startup_animation" : "punch startup",
+	"startup_animation" : "punch recovery",
 	"active_animation" : "punch",
 	"recovery_animation" : "punch recovery",
 }
@@ -130,7 +130,7 @@ var kick_data = {
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
 	"damage": 30 * kick_damage_mult,
-	"startup_animation" : "kick startup",
+	"startup_animation" : "kick recovery",
 	"active_animation" : "kick",
 	"recovery_animation" : "kick recovery",
 }
@@ -151,8 +151,8 @@ var throw_data = {
 
 #Defines the player's walk speed, and jump speeds.
 @export var SPEED = 20.0 * movement_speed_mult
-@export var VERTICAL_JUMP_VELOCITY = -250.0 * jump_height_mult
-@export var HORIZONTAL_JUMP_VELOCITY = 70 * jump_speed_mult
+@export var VERTICAL_JUMP_VELOCITY = -300.0 * jump_height_mult
+@export var HORIZONTAL_JUMP_VELOCITY = 120 * jump_speed_mult
 
 
 func set_controls():
@@ -190,7 +190,7 @@ func apply_gravity(delta):
 	
 	if not is_on_floor():
 		#We multiply gravity times 0.8 to make it slightly slower, so mess with this in tandem with the vertical jump velocity to change the player's jumping speed.
-		velocity += (get_gravity() * 0.8) * delta
+		velocity += (get_gravity() * 0.9) * delta
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -678,10 +678,10 @@ func face_your_opponent():
 	horizontal_distance = abs(enemy.global_position.x - global_position.x)
 	vertical_distance = enemy.global_position.y - global_position.y
 	
-	if (horizontal_distance < 10) and (vertical_distance > 19) and is_on_floor():
+	if (horizontal_distance < 26) and (vertical_distance > 19) and is_on_floor():
 		print("I'm standing on top of him.") 
-		velocity.y = -30
-		velocity.x = facing_direction * -1 * 90
+		velocity.y = -50
+		velocity.x = facing_direction * -1 * 140
 	if (horizontal_distance < 0.5) and (vertical_distance > 19) and is_on_floor():
 		print("RANDOM BULLSHIT GO")
 	elif enemy_direction != 0 and enemy_direction != facing_direction and not (horizontal_distance < 0.5):
