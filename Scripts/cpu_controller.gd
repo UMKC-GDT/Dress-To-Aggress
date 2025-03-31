@@ -77,7 +77,7 @@ func handle_input(delta):
 	handle_states(direction, delta)
 	
 	#this is where the fun begins
-	run_ai()
+	#run_ai()
 
 #The fun. This is where our AI code can go, and, to whomever's working on the AI code, work your magic here. All of the code below can be edited and extended to however deep you want, based on the given eyes.
 func run_ai():

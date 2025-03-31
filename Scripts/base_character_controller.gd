@@ -211,6 +211,7 @@ func _ready():
 	if enemy == null:
 		push_error("Enemy node '%s' not found!" % enemy_name)
 	
+	report_dead()
 	
 	set_controls()
 	disable_hitboxes()
@@ -244,6 +245,8 @@ func handle_input(delta):
 
 func handle_states(direction, delta):
 	if direction == 0: block_legal = false
+	
+	if player_type == 1: print(horizontal_distance)
 	
 		#To add a new state, just add a new match case for that specific state, and similarly include the animation to be played and a call for that state's function. 
 	match state:
@@ -659,6 +662,7 @@ func reduce_health(damage):
 		set_deferred("disabled", false)
 		
 		#This is where we handle reporting to the overarching game controller that we're dead, and the round is over...IF WE HAD SOME!!
+		report_dead()
 		
 		print("Welp, guess I'm dead!")
 		dead = true
@@ -752,3 +756,6 @@ func scale_stats():
 	pose_hitstun_mult = 
 	pose_knockback_mult = 
 	pose_damage_mult = '''
+
+func report_dead():
+	pass

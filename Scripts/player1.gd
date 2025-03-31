@@ -5,3 +5,8 @@ func _ready():
 	player_type = 1
 	enemy_name = "Player2"
 	super._ready()
+
+func report_dead():
+	#HEEERE!
+	
+	pass
