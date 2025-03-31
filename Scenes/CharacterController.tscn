@@ -20,13 +20,13 @@
 [ext_resource type="Texture2D" uid="uid://dekvuh2xltrh1" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody1.png" id="14_ehku4"]
 [ext_resource type="Texture2D" uid="uid://l7gd33og44cx" path="res://Assets/Player Sprites/throw.png" id="14_q288o"]
 [ext_resource type="Texture2D" uid="uid://87nsyv7sulrk" path="res://Assets/Player Sprites/throw recovery.png" id="15_lcnf3"]
-[ext_resource type="Script" path="res://Scripts/hurtbox.gd" id="16_u1c27"]
+[ext_resource type="Script" uid="uid://c4tm5bp6m4ur6" path="res://Scripts/hurtbox.gd" id="16_u1c27"]
 [ext_resource type="Texture2D" uid="uid://sa0rvvidg838" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody2.png" id="17_lhw4f"]
-[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="17_op7ga"]
+[ext_resource type="Script" uid="uid://c2vqkmhy0bijw" path="res://Scripts/hitbox.gd" id="17_op7ga"]
 [ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="18_27xmm"]
 [ext_resource type="Script" uid="uid://c12shv00mnant" path="res://Scenes/GenerateAnimationLayer.gd" id="23_31scl"]
 [ext_resource type="Resource" uid="uid://bqsttykalac5f" path="res://Assets/Resources/body.tres" id="24_5ye0y"]
-[ext_resource type="Script" path="res://Scripts/throw_hitbox.gd" id="24_lcnf3"]
+[ext_resource type="Script" uid="uid://cpwnjci14lgit" path="res://Scripts/throw_hitbox.gd" id="24_lcnf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tmop"]
 size = Vector2(27, 50)

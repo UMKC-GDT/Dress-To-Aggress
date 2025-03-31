@@ -1,19 +1,18 @@
 extends Node2D
 
-var tree: SceneTree = get_tree()
-
-func _on_timer_timeout() -> void:
-	$"../Player".disabled = true
-	$"../Player2".disabled = true
-	$RichTextLabel.text = "You Weren't Quick Enough. The Drugs Got Distributed."
+func _ready() -> void:
+	$RichTextLabel.text = ""
 
 func _on_player_one_died() -> void:
+	print("Player One Died. Bozo.")
 	$RichTextLabel.text = "You Lose. Try Again!"
-	$"RichTextLabel/Win_Lose Timer".start()
+	$RichTextLabel/Timer.start()
 	
 func _on_cpu_died() -> void:
+	print("CPU Died. Nice Job!")
 	$RichTextLabel.text = "You Win! Congratulations, the villains have been stopped!"
-	$"RichTextLabel/Win_Lose Timer".start()
+	$RichTextLabel/Timer.start()
 
-func _on_win_lose_timer_timeout() -> void:
+func _on_timer_timeout() -> void:
+	var tree: SceneTree = get_tree()
 	tree.change_scene_to_file("res://Scenes/main_menu.tscn")

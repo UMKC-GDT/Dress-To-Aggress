@@ -211,8 +211,6 @@ func _ready():
 	if enemy == null:
 		push_error("Enemy node '%s' not found!" % enemy_name)
 	
-	report_dead()
-	
 	set_controls()
 	disable_hitboxes()
 	#scale_stats()

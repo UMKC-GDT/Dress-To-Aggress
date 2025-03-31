@@ -5,19 +5,16 @@
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_oj352")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 50.0
-autostart = true
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 442.0
-offset_top = 162.0
-offset_right = 842.0
-offset_bottom = 562.0
-text = "lose"
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 101.0
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 12
+text = "WIN OR LOSE HERE"
 
-[node name="Win_Lose Timer" type="Timer" parent="RichTextLabel"]
+[node name="Timer" type="Timer" parent="RichTextLabel"]
 wait_time = 5.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="RichTextLabel/Win_Lose Timer" to="." method="_on_win_lose_timer_timeout"]
+[connection signal="timeout" from="RichTextLabel/Timer" to="." method="_on_timer_timeout"]
