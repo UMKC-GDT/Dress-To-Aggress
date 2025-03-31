@@ -86,9 +86,9 @@ func run_ai():
 	
 	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
-		if get_random_number() < 15: approach()
+		if randf() < 0.2: approach()
 	elif horizontal_distance < kick_range - 2:
-		if get_random_number() < 15: retreat()
+		if randf() < 0.8: retreat()
 	else:
 		release_inputs()
 	
@@ -96,31 +96,50 @@ func run_ai():
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
-				if get_random_number() < 10:
+				if randf() < 0.5:
 					kick()
 	
+	#if horizontal_distance < kick_range:
+	#	if get_random_number() < 1:
+	#		punch()
+	#	elif get_random_number() < 2:
+	#		kick()
 	if horizontal_distance < kick_range:
-		if get_random_number() < 1:
+		if randf() < 0.35:
 			punch()
-		elif get_random_number() < 2:
+		elif randf() < 0.35:
 			kick()
 	
 	#Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
-		if get_random_number() < 5:
+		if randf() < 0.3:
 			if is_on_floor(): use_pose()
 	
 	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
-		block(punch_time)
+		if randf() < 0.6:
+			block(punch_time)
+		elif randf() < 0.6:
+			dash_away()
 	
 	elif (Input.is_action_just_pressed(enemy.kick_input) and horizontal_distance <= kick_range):
-		block(kick_time) 
+		if randf() < 0.6:
+			block(kick_time) 
+		elif randf() < 0.6:
+			dash_away()
 	
 	#Example on punishing after blocking a kick. This can be easily copied to make it punish punches.
 	if (enemy_just_attacked and enemy.state == CharacterState.RECOVERY and horizontal_distance <= kick_range):
-		if get_random_number() < 5:
+		if randf() < 0.5:
 			kick()
+	if (enemy_just_attacked and enemy.state == CharacterState.RECOVERY and horizontal_distance <= punch_range):
+		if randf() < 0.5:
+			punch()
+	if (enemy_blocking and enemy.state == CharacterState.WALK and horizontal_distance <= kick_range):
+		if randf() < 0.4:
+			approach()
+			use_pose()
+
 
 #This set of functions define the CPU's movement relative to the player. A little bit of underlying logic here, might not need to mess with it. Hopefully. Maybe.
 func walk_closer():
@@ -195,7 +214,8 @@ func approach():
 			dash_towards()
 		else:
 			print(roll)
-			jump_forward()
+			if randf() < 0.35:
+				jump_forward()
 
 func retreat():
 	roll = get_random_number()
@@ -207,7 +227,8 @@ func retreat():
 			dash_away()
 		else:
 			print(roll)
-			jump_away()
+			if randf() < 0.35:
+				jump_away()
 
 #These functions make the CPU "press buttons". It makes the corresponding boolean true for an instant, and then makes it false, similarly to how a player presses and releases a button. 
 func block(time):
