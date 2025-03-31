@@ -24,7 +24,7 @@ description = "These pants increase speed"
 color = Color(0.0663652, 0.276242, 0.361392, 1)
 <<<<<<< Updated upstream
 stylePoints = 25
-styleMultiplier = 1.1
+styleMultiplier = 1.0
 attackDamageChange = 1.0
 attackSpeedChange = 1.0
 defenseChange = 1.0

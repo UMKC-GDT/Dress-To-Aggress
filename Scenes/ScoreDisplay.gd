@@ -1,13 +1,15 @@
 extends Label
 
 var items_wearing : Array
-var style_points_list : Array
+var style_points_list : Array = [100]
 var style_mult_list : Array
 var style_points : int
 var style_mult : float
 var style_total : float
 var file : FileAccess
 var tree : SceneTree = get_tree()
+
+signal send_total(total)
 
 func _ready():
 	# Stores data in file into a list and gets the first 2 items that appear
@@ -16,6 +18,7 @@ func _ready():
 	items_wearing = [data[0], data[1]]
 	print(items_wearing)
 	
+	# Gets every item the player is wearing and puts them in thei respective lists
 	for item_wearing in items_wearing:
 		var item = load("res://Assets/Resources/%s.tres" % item_wearing)
 		style_points_list.append(item.get_style_points())
@@ -38,14 +41,18 @@ func _ready():
 		text = "Score: %s" % int(style_total)
 	else:
 		text = "Score: %s" % style_total
+		
+	emit_signal("send_total", style_total)
 	#print('total: ', style_total)
-	
+
+# Gets the sum of a list/array
 func sum(list : Array):
 	var total : int
 	for num in list:
 		total += num
 	return total
-	
+
+# Gets the sum of a list/array as if it were a multiplier
 func mult_sum(list: Array):
 	var total : float = 1
 	for num in list:
