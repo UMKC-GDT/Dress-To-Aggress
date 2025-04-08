@@ -223,7 +223,7 @@ shape = SubResource("RectangleShape2D_5tmop")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.303)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"punch startup"
+animation = &"kick"
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
