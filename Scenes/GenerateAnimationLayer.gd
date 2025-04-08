@@ -20,11 +20,11 @@ func  _ready() -> void:
 	
 	#load pants
 	if self.name == "PantsLayer":
-		self.current_wearable = load("res://Assets/Resources/"+pants_text+".tres")
+		self.current_wearable = load("res://Assets/Resources/Wearables/"+pants_text+".tres")
 		
 	#load shirt
 	if self.name == "ShirtLayer":
-		self.current_wearable = load("res://Assets/Resources/"+shirt_text+".tres")
+		self.current_wearable = load("res://Assets/Resources/Wearables/"+shirt_text+".tres")
 	
 	#set postion to the body (might have   to adjust when merges wit htomies movement)
 	#self.position  = $"../Body".position

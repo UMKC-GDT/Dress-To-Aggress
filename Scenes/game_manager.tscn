@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://craw0c07od0ad"]
+[gd_scene load_steps=3 format=3 uid="uid://craw0c07od0ad"]
 
 [ext_resource type="Script" uid="uid://cn7h6ou5ydy21" path="res://game_manager.gd" id="1_oj352"]
+[ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_e5fcp"]
 
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_oj352")
@@ -11,6 +12,7 @@ offset_right = 120.0
 offset_bottom = 51.0
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_e5fcp")
 theme_override_font_sizes/normal_font_size = 12
 text = "WIN OR LOSE HERE"
 scroll_active = false
@@ -25,6 +27,7 @@ offset_top = 16.0
 offset_right = 122.0
 offset_bottom = 66.0
 theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_e5fcp")
 theme_override_font_sizes/bold_italics_font_size = 1
 text = "TIM"
 scroll_active = false
