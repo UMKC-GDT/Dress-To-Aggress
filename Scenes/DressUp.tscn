@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=13 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
@@ -6,12 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://bwk3nqn71sejv" path="res://Assets/Sprites/mirrorLayer.png" id="4_a1r1u"]
 [ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="5_icb47"]
-[ext_resource type="Resource" uid="uid://bdypd0nw7umi7" path="res://Assets/Resources/bluePants.tres" id="6_c28ve"]
 [ext_resource type="PackedScene" uid="uid://dfp7lwjhqnn0k" path="res://Scenes/dressup_timer.tscn" id="8_6bvah"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="9_a1r1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
 size = Vector2(1151, 52)
+
+[sub_resource type="Resource" id="Resource_6bvah"]
+metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
+
+[sub_resource type="Resource" id="Resource_a1r1u"]
+metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
+
+[sub_resource type="Resource" id="Resource_afhxr"]
+metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
 
 [node name="World" type="Node2D"]
 
@@ -64,15 +72,15 @@ offset_bottom = -15.0
 
 [node name="randomPants" parent="." instance=ExtResource("2_tlwt5")]
 position = Vector2(213, -213)
-current_wearable = ExtResource("6_c28ve")
+current_wearable = SubResource("Resource_6bvah")
 
 [node name="randomPants2" parent="." instance=ExtResource("2_tlwt5")]
 position = Vector2(75, -3)
-current_wearable = ExtResource("6_c28ve")
+current_wearable = SubResource("Resource_a1r1u")
 
 [node name="randomPants3" parent="." instance=ExtResource("2_tlwt5")]
 position = Vector2(373, 5)
-current_wearable = ExtResource("6_c28ve")
+current_wearable = SubResource("Resource_afhxr")
 
 [node name="Mirror" type="Sprite2D" parent="."]
 position = Vector2(-1, 2.99999)

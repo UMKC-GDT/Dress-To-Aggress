@@ -42,12 +42,14 @@ func  _ready() -> void:
 	createAnimation("idle")
 	createAnimation("jump")
 	createAnimation("jump startup")
+	createAnimation("kick startup")
 	createAnimation("kick")
 	createAnimation("kick recovery")
 	createAnimation("pose")
 	createAnimation("pose recovery")
 	createAnimation("walk backward")
 	createAnimation("walk forward")
+	createAnimation("punch startup")
 	createAnimation("punch")
 	createAnimation("punch recovery")
 	
@@ -74,6 +76,8 @@ func createAnimation(anim_name: String):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_kick_pose0(), 1.0)
 	if(anim_name =="jump startup"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
+	if(anim_name =="kick startup"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_kick_pose0(), 1.0)
 	if(anim_name =="kick"):
 		#animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_kick_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_kick_pose1(), 1.0)
@@ -93,6 +97,8 @@ func createAnimation(anim_name: String):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_walk_pose1(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_walk_pose2(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_walk_pose3(), 1.0)
+	if(anim_name =="punch startup"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_punch_pose0(), 1.0)
 	if(anim_name =="punch"):
 		#animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_punch_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_punch_pose1(), 1.0)

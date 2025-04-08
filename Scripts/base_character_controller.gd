@@ -253,6 +253,7 @@ func handle_states(direction, delta):
 			animation_player.play("idle")
 			PantsLayer.play("idle")
 			ShirtLayer.play("idle")
+			change_color(Color(Color.WHITE, 1.0))
 			idle_state(direction)
 			
 		CharacterState.WALK:
@@ -287,6 +288,9 @@ func handle_states(direction, delta):
 			jump_state(direction, delta)
 		
 		CharacterState.DASH:
+			
+			change_color(Color(Color.LIGHT_YELLOW, 1.0))
+			
 			if dash_direction == 1:
 				if facing_direction == -1: 
 					animation_player.play("dash left")
@@ -309,11 +313,13 @@ func handle_states(direction, delta):
 			dash_state(delta)
 		
 		CharacterState.STARTUP:
+			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			#Noting this to remember later. Freezing the player's horizontal velocity during startup might be a problem. 
 			if is_on_floor(): velocity.x = 0
 		
 		CharacterState.PUNCH:
+			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			animation_player.play(punch_data["active_animation"])
 			PantsLayer.play(punch_data["active_animation"])
@@ -321,13 +327,18 @@ func handle_states(direction, delta):
 			punch_state(delta)
 		
 		CharacterState.KICK:
+			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			animation_player.play(kick_data["active_animation"])
 			PantsLayer.play(kick_data["active_animation"])
 			ShirtLayer.play(kick_data["active_animation"])
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
 			kick_state(delta)
 		
 		CharacterState.RECOVERY:
+			#change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
 			if cancellable: check_for_attack()
@@ -336,6 +347,7 @@ func handle_states(direction, delta):
 		CharacterState.HURT:
 			block_legal = false
 			disable_hitboxes()
+			change_color(Color(Color.PALE_VIOLET_RED, 1.0))
 			if is_on_floor():
 				velocity.x = move_toward(velocity.x, 0, 25)
 		
@@ -343,10 +355,14 @@ func handle_states(direction, delta):
 			animation_player.play("block")
 			PantsLayer.play("block")
 			ShirtLayer.play("block")
+			
+			change_color(Color(Color.ROYAL_BLUE, 1.0))
+			
 			disable_hitboxes()
 			block_state(delta)
 		
 		CharacterState.POSE_STARTUP:
+			change_color(Color(Color.HOT_PINK, 1.0))
 			velocity.x = 0
 		
 		CharacterState.POSE:
@@ -358,6 +374,7 @@ func handle_states(direction, delta):
 		
 		CharacterState.DEAD:
 			animation_player.play("dead")
+			change_color(Color(Color.DIM_GRAY, 1.0))
 			PantsLayer.play("dead")
 			ShirtLayer.play("dead")
 			velocity.x = move_toward(velocity.x, 0, 25)
@@ -454,7 +471,7 @@ func punch_state(delta):
 	else:
 		start_recovery(punch_data["recovery_frames"], punch_data["recovery_animation"])
 
-#This is where the code goes for the moment the punch is active. LATER ON, add the sound effect in this function.
+#This is where the code goes for the moment the kick is active. LATER ON, add the sound effect in this function.
 func start_kick():
 	if (state == CharacterState.STARTUP): 
 		attack_timer = kick_data["active_frames"] * FRAME
@@ -471,6 +488,9 @@ func kick_state(delta):
 	if attack_timer > 0:
 		attack_timer -= delta
 	else:
+		animation_player.position.x = 4
+		ShirtLayer.position.x = 4
+		PantsLayer.position.x = 4
 		start_recovery(kick_data["recovery_frames"], kick_data["recovery_animation"])
 
 #In block_state(), slow down at regular speed, decrement block_timer by delta until it's 0 and change_state(CharacterState.IDLE)
@@ -556,6 +576,7 @@ func pose(target):
 	else:
 		if target.has_method("get_hit_with"):
 			target.get_hit_with(throw_data)
+			change_color(Color(Color.DEEP_PINK, 1.0))
 			start_recovery(throw_data["pose_frames"], throw_data["active_animation"])
 
 #In pose_broken(), enter POSE state, get knocked back slightly, and then start_recovery for recovery_frames / 2
@@ -590,6 +611,9 @@ func check_for_attack():
 	
 	if Input.is_action_pressed(kick_input):
 		stop_all_timers()
+		animation_player.position.x = 18
+		ShirtLayer.position.x = 18
+		PantsLayer.position.x = 18
 		start_action(kick_data["startup_frames"], func(): 
 			if state == CharacterState.STARTUP:
 				start_kick()
@@ -758,3 +782,6 @@ func scale_stats():
 
 func report_dead():
 	pass
+
+func change_color(color):
+	self.modulate = color
