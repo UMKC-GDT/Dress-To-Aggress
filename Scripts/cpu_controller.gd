@@ -71,6 +71,8 @@ func handle_input(delta):
 		elif (state != CharacterState.DASH) and (direction == 1 and not pressing_right) or (direction == -1 and not pressing_left):
 			direction = 0
 			block_legal = false
+	else:
+		direction = 0
 	
 	#find_range()
 	find_state()
@@ -83,6 +85,8 @@ func handle_input(delta):
 
 #The fun. This is where our AI code can go, and, to whomever's working on the AI code, work your magic here. All of the code below can be edited and extended to however deep you want, based on the given eyes.
 func run_ai():
+	
+	if disabled: return
 	
 	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
