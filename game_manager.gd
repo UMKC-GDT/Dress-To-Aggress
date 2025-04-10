@@ -23,7 +23,7 @@ func _on_cpu_died() -> void:
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
-	tree.change_scene_to_file("res://Scenes/main_menu.tscn")
+	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 
 
 func _on_fight_timer_timeout() -> void:
