@@ -9,8 +9,8 @@ var file : FileAccess
 
 func _ready() -> void:
 	#default clothes if none were picked (we might change this)
-	pants_text =  "blueShorts"
-	shirt_text = "redShirt"
+	pants_text =  "whiteShorts"
+	shirt_text = "whiteShirt"
 	
 	#open save file
 	file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE)

@@ -27,7 +27,7 @@ var pose_knockback_mult = 1
 var pose_damage_mult = 1
 
 
-@export var health = 100
+@export var health = 200
 @export var health_UI : RichTextLabel
 
 # Based on the player type, in a later function, these'll be redefined or left empty depending on who's controlling it. This list will be expanded with each control.

@@ -9,14 +9,27 @@ var animation_player: AnimatedSprite2D
 
 
 func  _ready() -> void:
-
 	animation_player = self
 	
-	#get the clothing items to generate from the save file
-	var textFile = "res://Assets/OutfitSaveFile.txt"
-	var file  = FileAccess.open(textFile, FileAccess.READ)
-	var shirt_text =  file.get_as_text().get_slice(",",1)
-	var pants_text =  file.get_as_text().get_slice(",",0)
+	var shirt_text :String
+	var pants_text : String
+	
+	var rng = RandomNumberGenerator.new()
+	
+	if(get_parent().name == "Player2"):
+		#generate a random outfit
+		var pants = ["blueShorts","purplePants","whiteShorts"]
+		var shirts = ["redShirt","whiteShirt","greenShirt","blackShirt"]
+		var rand1 = rng.randi_range(0,pants.size()-1)
+		var rand2 = rng.randi_range(0,shirts.size()-1)
+		pants_text = pants[rand1]
+		shirt_text =  shirts[rand2]
+	else:
+		#get the clothing items to generate from the save file
+		var textFile = "res://Assets/OutfitSaveFile.txt"
+		var file  = FileAccess.open(textFile, FileAccess.READ)
+		shirt_text =  file.get_as_text().get_slice(",",1)
+		pants_text =  file.get_as_text().get_slice(",",0)
 	
 	#load pants
 	if self.name == "PantsLayer":
