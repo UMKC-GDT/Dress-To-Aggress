@@ -28,6 +28,7 @@ var pose_damage_mult = 1
 
 
 @export var health = 100
+@export var health_UI : RichTextLabel
 
 # Based on the player type, in a later function, these'll be redefined or left empty depending on who's controlling it. This list will be expanded with each control.
 var left_input = ""
@@ -738,6 +739,7 @@ func block_attack(attack_data):
 
 func update_healthbar():
 	#This is where we'd call on the UI to update the reduced health -- IF I HAD ONE!!
+	health_UI.text = str(health)
 	print(str(player_type) + ": Health: " + str(health))
 
 func disable_control():
