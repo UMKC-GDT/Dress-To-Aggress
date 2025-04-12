@@ -1,4 +1,4 @@
-purplePants,redShirt,,,m
+blueShorts,whiteShirt,,m
 whiteShorts,redShirt,t,,
 =======
 whiteShorts,whiteShirt,,

@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=11 format=3 uid="uid://b1fc1024thyov"]
 
-[ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
+[ext_resource type="Script" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
 [ext_resource type="PackedScene" uid="uid://cvacyegnnbes0" path="res://Scenes/object.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
@@ -13,12 +13,6 @@
 size = Vector2(1151, 52)
 
 [sub_resource type="Resource" id="Resource_6bvah"]
-metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
-
-[sub_resource type="Resource" id="Resource_a1r1u"]
-metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
-
-[sub_resource type="Resource" id="Resource_afhxr"]
 metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
 
 [node name="World" type="Node2D"]
@@ -50,37 +44,49 @@ position = Vector2(-0.5, 300)
 shape = SubResource("RectangleShape2D_aqk2v")
 
 [node name="randomShirt" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(72, -151)
+position = Vector2(50, -130)
 
-[node name="TextEdit" parent="randomShirt" index="2"]
-offset_top = -115.0
-offset_bottom = -15.0
-
-[node name="randomShirt3" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(351, -141)
-
-[node name="TextEdit" parent="randomShirt3" index="2"]
-offset_top = -115.0
-offset_bottom = -15.0
+[node name="Panel" parent="randomShirt" index="2"]
+offset_top = -120.73
+offset_bottom = -22.73
 
 [node name="randomShirt2" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(219, 94)
+position = Vector2(200, 89.61)
 
-[node name="TextEdit" parent="randomShirt2" index="2"]
-offset_top = -115.0
-offset_bottom = -15.0
+[node name="Panel" parent="randomShirt2" index="2"]
+offset_top = -120.73
+offset_bottom = -22.73
+
+[node name="randomShirt3" parent="." instance=ExtResource("2_tlwt5")]
+position = Vector2(340, -130)
+
+[node name="Panel" parent="randomShirt3" index="2"]
+offset_top = -120.73
+offset_bottom = -22.73
 
 [node name="randomPants" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(213, -213)
+position = Vector2(50, -50)
 current_wearable = SubResource("Resource_6bvah")
 
+[node name="Panel" parent="randomPants" index="2"]
+offset_top = -39.245
+offset_bottom = 58.755
+
 [node name="randomPants2" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(75, -3)
-current_wearable = SubResource("Resource_a1r1u")
+position = Vector2(200, -214.005)
+current_wearable = SubResource("Resource_6bvah")
+
+[node name="Panel" parent="randomPants2" index="2"]
+offset_top = -39.245
+offset_bottom = 58.755
 
 [node name="randomPants3" parent="." instance=ExtResource("2_tlwt5")]
-position = Vector2(373, 5)
-current_wearable = SubResource("Resource_afhxr")
+position = Vector2(340, -50)
+current_wearable = SubResource("Resource_6bvah")
+
+[node name="Panel" parent="randomPants3" index="2"]
+offset_top = -39.245
+offset_bottom = 58.755
 
 [node name="Mirror" type="Sprite2D" parent="."]
 position = Vector2(-1, 2.99999)
@@ -98,5 +104,8 @@ volume_db = -11.712
 autoplay = true
 
 [editable path="randomShirt"]
-[editable path="randomShirt3"]
 [editable path="randomShirt2"]
+[editable path="randomShirt3"]
+[editable path="randomPants"]
+[editable path="randomPants2"]
+[editable path="randomPants3"]

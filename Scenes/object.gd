@@ -7,7 +7,7 @@ var offset: Vector2
 var initialPos: Vector2
 var started = false 
 var platforms = 0
-var stat_box : TextEdit
+var stat_box : Panel
 
 @export var current_wearable: Wearable # WILL ERROR IF NO WEARABLE PRESENT
 
@@ -21,7 +21,7 @@ func _ready():
 	get_child(0).modulate = current_wearable.get_color()
 	stat_box = get_child(2)
 	stat_box.visible = false
-	stat_box.text = current_wearable.get_description()
+	stat_box.get_child(0).text = current_wearable.get_description()
 	$Sprite2D.texture = current_wearable.get_mirror_pose()
 
 
