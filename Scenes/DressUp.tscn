@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=12 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="5_icb47"]
 [ext_resource type="PackedScene" uid="uid://dfp7lwjhqnn0k" path="res://Scenes/dressup_timer.tscn" id="8_6bvah"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="9_a1r1u"]
+[ext_resource type="Texture2D" uid="uid://dsc2o5oxjlle7" path="res://Assets/Sprites/speach buble.png" id="9_g5fta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
 size = Vector2(1151, 52)
@@ -93,15 +94,34 @@ position = Vector2(-1, 2.99999)
 scale = Vector2(0.765563, 0.665306)
 texture = ExtResource("4_a1r1u")
 
-[node name="Dressup Timer" parent="." instance=ExtResource("8_6bvah")]
+[node name="Dressup Timer" parent="." node_paths=PackedStringArray("speech_text") instance=ExtResource("8_6bvah")]
 modulate = Color(0.662085, 0.11511, 0.191862, 1)
 position = Vector2(-544, -282)
 scale = Vector2(2, 2)
+speech_text = NodePath("../Node2D")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_a1r1u")
 volume_db = -11.712
 autoplay = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(440, -2)
+
+[node name="SpeachBuble" type="Sprite2D" parent="Node2D"]
+position = Vector2(-118.5, -232)
+scale = Vector2(0.1, 0.066)
+texture = ExtResource("9_g5fta")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -311.5
+offset_top = -273.0
+offset_right = 84.5
+offset_bottom = -233.0
+scale = Vector2(2, 2)
+text = "You're on in ten seconds!"
 
 [editable path="randomShirt"]
 [editable path="randomShirt2"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxevk147j4wxs"]
 
-[ext_resource type="Script" uid="uid://ogdqr5ijgblm" path="res://Scenes/main_menu.gd" id="1_1ehe0"]
+[ext_resource type="Script" path="res://Scenes/main_menu.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://drlfw2n4iyt86" path="res://Assets/Sprites/MainMenuDTI.png" id="2_48xlc"]
 [ext_resource type="AudioStream" uid="uid://bv72j0bwdpg52" path="res://Assets/Music/Dress to Agress Title.mp3" id="3_1ehe0"]
 
@@ -73,9 +73,9 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
@@ -87,9 +87,9 @@ text = "Start game"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
@@ -101,9 +101,9 @@ text = "Options"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
@@ -115,9 +115,9 @@ text = "Credits"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")

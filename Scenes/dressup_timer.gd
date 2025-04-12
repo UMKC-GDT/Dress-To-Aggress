@@ -2,6 +2,8 @@ extends Node2D
 
 @export var dressupTimer: float
 
+@export var speech_text: Node2D
+
 
 var pants_text :String
 var shirt_text :String
@@ -12,13 +14,27 @@ func _ready() -> void:
 	pants_text =  "whiteShorts"
 	shirt_text = "whiteShirt"
 	
+	speech_text.visible = false;
+	
+	
 	#open save file
 	file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE)
 	
 	$Timer.start(dressupTimer)
 	
 func _process(delta: float) -> void:
+	
+			
 	$RichTextLabel.text = str($Timer.time_left).pad_decimals(2)
+	
+	if(str($Timer.time_left).pad_decimals(2) == "9.50"):
+		var tween = get_tree().create_tween()
+		speech_text.visible = true;
+		tween.tween_property(speech_text, "scale", Vector2(1.1,1.1), .1)
+		tween.tween_property(speech_text, "scale", Vector2(1,1), .1)
+	if(str($Timer.time_left).pad_decimals(2) == "7.50"):
+		speech_text.visible = false;
+	
 
 func _on_timer_timeout() -> void:
 	#results is the array of clothing items that are one the player
