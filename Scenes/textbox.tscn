@@ -1,7 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddtgg77pj78oe"]
+[gd_scene load_steps=13 format=3 uid="uid://ddtgg77pj78oe"]
 
 [ext_resource type="Script" uid="uid://b33a4rsdt13ct" path="res://Scripts/textbox.gd" id="1_i40gg"]
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="2_i40gg"]
+[ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="3_yyjux"]
+[ext_resource type="Texture2D" uid="uid://bnco33r432dwp" path="res://Assets/Sprites/pixel images/gloves-removebg-preview.png" id="4_g1jww"]
+[ext_resource type="Script" uid="uid://bylsuk3y7c1yj" path="res://Scenes/imageMovement.gd" id="5_va30d"]
+[ext_resource type="Texture2D" uid="uid://b2xdpsby85lkk" path="res://Assets/Sprites/pixel images/shoe-removebg-preview.png" id="6_o3c07"]
+[ext_resource type="Texture2D" uid="uid://cdtbbrkfi5282" path="res://Assets/Sprites/pixel images/mask-removebg-preview.png" id="7_3c3k1"]
+[ext_resource type="Texture2D" uid="uid://bcfxdmoevauyy" path="res://Assets/Sprites/pixel images/glasses-removebg-preview.png" id="8_6b5qr"]
+[ext_resource type="Texture2D" uid="uid://dqaqorqvwrcfi" path="res://Assets/Sprites/pixel images/hand-mirror-in-pixel-art-style-vector-removebg-preview.png" id="9_re0wv"]
+[ext_resource type="Texture2D" uid="uid://bu6m0c0dj6d8v" path="res://Assets/Sprites/pixel images/makeup-removebg-preview.png" id="10_a2hxw"]
+[ext_resource type="Texture2D" uid="uid://djtvurkoggyyh" path="res://Assets/Sprites/pixel images/hangar-removebg-preview.png" id="11_aeah3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i40gg"]
 bg_color = Color(0.964706, 0.388235, 0.470588, 1)
@@ -39,5 +48,100 @@ autowrap_mode = 2
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yyjux")
+volume_db = -11.0
+autoplay = true
+
+[node name="Gloves-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(1280, 599)
+scale = Vector2(0.902, 0.876)
+texture = ExtResource("4_g1jww")
+script = ExtResource("5_va30d")
+
+[node name="Gloves-removebg-preview3" type="Sprite2D" parent="."]
+position = Vector2(-1778, 639)
+scale = Vector2(0.902, 0.876)
+texture = ExtResource("4_g1jww")
+script = ExtResource("5_va30d")
+
+[node name="Gloves-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-449, 589)
+scale = Vector2(0.902, 0.876)
+texture = ExtResource("4_g1jww")
+script = ExtResource("5_va30d")
+
+[node name="Shoe-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(1047, 592)
+scale = Vector2(0.413, 0.483)
+texture = ExtResource("6_o3c07")
+script = ExtResource("5_va30d")
+
+[node name="Shoe-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-1474, 622)
+scale = Vector2(0.413, 0.483)
+texture = ExtResource("6_o3c07")
+script = ExtResource("5_va30d")
+
+[node name="Mask-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(769, 604)
+scale = Vector2(0.516744, 0.490901)
+texture = ExtResource("7_3c3k1")
+script = ExtResource("5_va30d")
+
+[node name="Mask-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-929, 625)
+scale = Vector2(0.516744, 0.490901)
+texture = ExtResource("7_3c3k1")
+script = ExtResource("5_va30d")
+
+[node name="Glasses-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(311, 644)
+scale = Vector2(0.417476, 0.433058)
+texture = ExtResource("8_6b5qr")
+script = ExtResource("5_va30d")
+
+[node name="Glasses-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-2346, 687)
+scale = Vector2(0.417476, 0.433058)
+texture = ExtResource("8_6b5qr")
+script = ExtResource("5_va30d")
+
+[node name="Hand-mirror-in-pixel-art-style-vector-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(554, 605)
+scale = Vector2(0.649, 0.751)
+texture = ExtResource("9_re0wv")
+script = ExtResource("5_va30d")
+
+[node name="Hand-mirror-in-pixel-art-style-vector-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-704, 611)
+scale = Vector2(0.649, 0.751)
+texture = ExtResource("9_re0wv")
+script = ExtResource("5_va30d")
+
+[node name="Makeup-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(180, 611)
+scale = Vector2(0.665663, 0.654255)
+texture = ExtResource("10_a2hxw")
+script = ExtResource("5_va30d")
+
+[node name="Makeup-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-1102, 624)
+scale = Vector2(0.665663, 0.654255)
+texture = ExtResource("10_a2hxw")
+script = ExtResource("5_va30d")
+
+[node name="Hangar-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(-159, 619)
+scale = Vector2(0.528, 0.574)
+texture = ExtResource("11_aeah3")
+script = ExtResource("5_va30d")
+
+[node name="Hangar-removebg-preview2" type="Sprite2D" parent="."]
+position = Vector2(-2048, 634)
+scale = Vector2(0.528, 0.574)
+texture = ExtResource("11_aeah3")
+script = ExtResource("5_va30d")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

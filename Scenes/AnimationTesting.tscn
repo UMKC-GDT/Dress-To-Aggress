@@ -1,7 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cncif5fdaqbyd"]
 
 [ext_resource type="Script" uid="uid://c12shv00mnant" path="res://Scenes/GenerateAnimationLayer.gd" id="1_c8tcj"]
-[ext_resource type="Resource" path="res://Assets/Resources/bluePants.tres" id="2_dnq0y"]
 [ext_resource type="Resource" uid="uid://bqsttykalac5f" path="res://Assets/Resources/Wearables/body.tres" id="4_f8v3u"]
 [ext_resource type="Resource" uid="uid://but5elvbkg7mi" path="res://Assets/Resources/Wearables/greenShirt.tres" id="4_m2xbj"]
 
@@ -14,6 +13,9 @@ animations = [{
 "name": &"default",
 "speed": 1.0
 }]
+
+[sub_resource type="Resource" id="Resource_gq63q"]
+metadata/__load_path__ = "res://Assets/Resources/bluePants.tres"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x7cev"]
 
@@ -32,7 +34,7 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dnq0y")
 script = ExtResource("1_c8tcj")
-current_wearable = ExtResource("2_dnq0y")
+current_wearable = SubResource("Resource_gq63q")
 
 [node name="ShirtLayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

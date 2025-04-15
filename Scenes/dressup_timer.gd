@@ -15,6 +15,7 @@ func _ready() -> void:
 	shirt_text = "whiteShirt"
 	
 	speech_text.visible = false;
+	$"../AudioStreamPlayer".play(12.0)
 	
 	
 	#open save file

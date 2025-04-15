@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duiowavso27p3"]
 
-[ext_resource type="Script" path="res://Scripts/hurtbox.gd" id="1_5iwlp"]
+[ext_resource type="Script" uid="uid://c4tm5bp6m4ur6" path="res://Scripts/hurtbox.gd" id="1_5iwlp"]
 
 [node name="Hurtbox" type="Node2D"]
 

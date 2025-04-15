@@ -15,4 +15,5 @@ func _on_timer_timeout() -> void:
 
 func change_scene() -> void:
 	await get_tree().create_timer(1.5).timeout
+	print($AudioStreamPlayer.get_playback_position())
 	get_tree().change_scene_to_file("res://Scenes/DressUp.tscn")
