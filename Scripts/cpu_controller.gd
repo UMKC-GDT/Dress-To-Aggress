@@ -53,6 +53,8 @@ func release_inputs():
 func _ready():
 	player_type = 0
 	enemy_name = "Player"
+	healthbar = $"../Healthbar2"
+	healthbar.init_health(health)
 	super._ready()
 
 #Overloads the player's handle_input for the CPU. by checking the booleans and calling other necessary functions to set its eyes.

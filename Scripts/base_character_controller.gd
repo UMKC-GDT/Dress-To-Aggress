@@ -29,6 +29,7 @@ var pose_damage_mult = 1
 
 @export var health = 200
 @export var health_UI : RichTextLabel
+@onready var healthbar = $Healthbar
 
 # Based on the player type, in a later function, these'll be redefined or left empty depending on who's controlling it. This list will be expanded with each control.
 var left_input = ""
@@ -215,7 +216,6 @@ func _ready():
 	set_controls()
 	disable_hitboxes()
 	scale_stats()
-	update_healthbar()
 
 #This is the first function at the heart of the character controller functionality, called every frame. It handles taking in inputs, but also establishing what inputs are valid for each state, and calling the corresponding function for that state. 
 func handle_input(delta):
@@ -739,7 +739,8 @@ func block_attack(attack_data):
 
 func update_healthbar():
 	#This is where we'd call on the UI to update the reduced health -- IF I HAD ONE!!
-	health_UI.text = str(health)
+	healthbar.health = health
+	#health_UI.text = str(health)
 	print(str(player_type) + ": Health: " + str(health))
 
 func disable_control():

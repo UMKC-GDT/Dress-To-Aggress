@@ -200,7 +200,7 @@ size = Vector2(27, 50)
 size = Vector2(30, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu3r3"]
-size = Vector2(40, 77)
+size = Vector2(38, 77)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7slhi"]
 size = Vector2(9, 50)
@@ -264,7 +264,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kick Hitbox"]
-position = Vector2(14, -13)
+position = Vector2(13, -13)
 shape = SubResource("RectangleShape2D_yu3r3")
 debug_color = Color(0.786632, 0.431925, 0, 0.42)
 

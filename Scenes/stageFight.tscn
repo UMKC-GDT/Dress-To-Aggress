@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=10 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
-[ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Scenes/CharacterController.tscn" id="2_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
+[ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="7_8chw7"]
+[ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="8_xqkhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
@@ -47,43 +49,36 @@ position = Vector2(11, -9)
 offset = Vector2(-11, 47.595)
 zoom = Vector2(6.989, 7.343)
 
-[node name="Player" parent="." node_paths=PackedStringArray("health_UI") instance=ExtResource("2_f7g2b")]
+[node name="Player" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(-46, 39)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("3_sb12i")
-health_UI = NodePath("../RichTextLabel2")
 
 [node name="Game Manager" parent="." instance=ExtResource("1_8chw7")]
 position = Vector2(-85, 3)
 
-[node name="Player2" parent="." node_paths=PackedStringArray("health_UI") instance=ExtResource("2_f7g2b")]
+[node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(20, 40)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("4_4ptq8")
-health_UI = NodePath("../RichTextLabel")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_6v6pp")
 volume_db = -7.429
 autoplay = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-texture_filter = 1
-offset_left = 32.0
-offset_top = -14.0
-offset_right = 89.0
-offset_bottom = 12.0
-text = "enemy"
-scroll_active = false
+[node name="Healthbar" parent="." instance=ExtResource("7_8chw7")]
+z_index = 3
+offset_left = -86.0
+offset_top = -6.0
+offset_right = -11.0
+offset_bottom = -2.0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-texture_filter = 1
-offset_left = -88.0
-offset_top = -13.0
-offset_right = -31.0
-offset_bottom = 13.0
-text = "player"
-scroll_active = false
+[node name="Healthbar2" parent="." instance=ExtResource("8_xqkhk")]
+offset_left = 11.0
+offset_top = -6.0
+offset_right = 85.0
+offset_bottom = -2.0
 
 [connection signal="one_died" from="Player" to="Game Manager" method="_on_player_one_died"]
 [connection signal="cpu_died" from="Player2" to="Game Manager" method="_on_cpu_died"]
