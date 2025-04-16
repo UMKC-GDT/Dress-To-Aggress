@@ -73,7 +73,7 @@ var vertical_distance = 0
 var dash_direction = 0
 var dashes_left = 1
 
-#This Frame constant defines a frame as one sixtieth of a second, for consistent timing, and it means attacks can be defined in terms of frames (3 frame startup, 5 frame active, etc) which is consistent with the typical mechanics of fighting games. 
+# This Frame constant defines a frame as one sixtieth of a second, for consistent timing, and it means attacks can be defined in terms of frames (3 frame startup, 5 frame active, etc) which is consistent with the typical mechanics of fighting games. 
 # A surprise tool that'll help us later!
 const FRAME = 1.0 / 60.0
 var current_time = 0
@@ -110,7 +110,7 @@ var punch_data = {
 	"air_hitstun" : 20 / punch_hitstun_mult,
 	"ground_knockback_force" : 100 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
-	"forward_force": 0,
+	"forward_force": 70,
 	"damage": 10 * punch_damage_mult,
 	"startup_animation" : "punch recovery",
 	"active_animation" : "punch",
@@ -122,7 +122,7 @@ var punch_deceleration = 10
 var kick_data = {
 	"startup_frames" : 14 / kick_speed_mult,
 	"active_frames" : 6,
-	"recovery_frames" : 20 / kick_speed_mult,
+	"recovery_frames" : 23 / kick_speed_mult,
 	"blockstun_frames" : 12,
 	"onBlock_FA" : -12,
 	"ground_hitstun": 22 * kick_hitstun_mult,
@@ -245,7 +245,7 @@ func handle_input(delta):
 func handle_states(direction, delta):
 	if direction == 0: block_legal = false
 	
-	if player_type == 1: print(horizontal_distance)
+	#if player_type == 1: print(horizontal_distance)
 	
 		#To add a new state, just add a new match case for that specific state, and similarly include the animation to be played and a call for that state's function. 
 	match state:
