@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=17 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
@@ -8,6 +8,13 @@
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
 [ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="7_8chw7"]
 [ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="8_xqkhk"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="9_muimr"]
+[ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="10_bo4e7"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="11_g776m"]
+[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="11_tg752"]
+[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="12_g776m"]
+[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="13_iwpvo"]
+[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="14_3dx3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
@@ -80,5 +87,55 @@ offset_top = -6.0
 offset_right = 85.0
 offset_bottom = -2.0
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.866667)
+position = Vector2(1.935, 37.1)
+scale = Vector2(0.45, 0.379)
+texture = ExtResource("9_muimr")
+script = ExtResource("10_bo4e7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -131.0
+offset_top = -85.0
+offset_right = 145.0
+offset_bottom = 63.0
+theme_override_fonts/normal_font = ExtResource("11_g776m")
+text = "The opposing fashion show contestent is secretly an agent for the drug smuggling ring! 
+
+To move:
+
+
+"
+scroll_active = false
+
+[node name="Button" type="Button" parent="Sprite2D"]
+modulate = Color(0.921362, 0.63823, 0.965459, 1)
+offset_left = -47.035
+offset_top = 57.087
+offset_right = 41.965
+offset_bottom = 88.087
+text = "Start"
+
+[node name="WKey2" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-102.522, 48.6807)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("11_tg752")
+
+[node name="AKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-118.078, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("12_g776m")
+
+[node name="DKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-71.4111, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("13_iwpvo")
+
+[node name="SKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-93.6333, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("14_3dx3i")
+
 [connection signal="one_died" from="Player" to="Game Manager" method="_on_player_one_died"]
 [connection signal="cpu_died" from="Player2" to="Game Manager" method="_on_cpu_died"]
+[connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]

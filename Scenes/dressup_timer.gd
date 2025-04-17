@@ -21,7 +21,7 @@ func _ready() -> void:
 	#open save file
 	file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE)
 	
-	$Timer.start(dressupTimer)
+	#$Timer.start(dressupTimer)
 	
 func _process(delta: float) -> void:
 	

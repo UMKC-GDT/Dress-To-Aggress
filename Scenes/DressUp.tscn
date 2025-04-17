@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=15 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dfp7lwjhqnn0k" path="res://Scenes/dressup_timer.tscn" id="8_6bvah"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="9_a1r1u"]
 [ext_resource type="Texture2D" uid="uid://dsc2o5oxjlle7" path="res://Assets/Sprites/speach buble.png" id="9_g5fta"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="10_afhxr"]
+[ext_resource type="Script" uid="uid://djfj1gcrmcc7t" path="res://Scenes/StartPanel.gd" id="11_v7r8m"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
 size = Vector2(1151, 52)
@@ -121,6 +124,34 @@ offset_right = 84.5
 offset_bottom = -233.0
 scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.866667)
+position = Vector2(6.50002, 0.5)
+scale = Vector2(2.94462, 2.47867)
+texture = ExtResource("10_afhxr")
+script = ExtResource("11_v7r8m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -131.0
+offset_top = -68.0
+offset_right = 128.0
+offset_bottom = 69.0
+theme_override_fonts/normal_font = ExtResource("12_0d1k1")
+text = "Drag and Drop clothing items onto your player.
+
+You have 10 seconds to create your disguise!"
+scroll_active = false
+
+[node name="Button" type="Button" parent="Sprite2D"]
+modulate = Color(0.921362, 0.63823, 0.965459, 1)
+offset_left = -47.035
+offset_top = 57.087
+offset_right = 41.965
+offset_bottom = 88.087
+text = "Start"
+
+[connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 
 [editable path="randomShirt"]
 [editable path="randomShirt2"]
