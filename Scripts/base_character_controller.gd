@@ -123,9 +123,9 @@ var punch_deceleration = 10
 var kick_data = {
 	"startup_frames" : 14 / kick_speed_mult,
 	"active_frames" : 6,
-	"recovery_frames" : 23 / kick_speed_mult,
+	"recovery_frames" : 24 / kick_speed_mult,
 	"blockstun_frames" : 12,
-	"onBlock_FA" : -12,
+	"onBlock_FA" : -16,
 	"ground_hitstun": 22 * kick_hitstun_mult,
 	"air_hitstun" : 22 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
@@ -310,7 +310,9 @@ func handle_states(direction, delta):
 					animation_player.play("dash left")
 					PantsLayer.play("dash left")
 					ShirtLayer.play("dash left")
-				
+			
+			if (direction == facing_direction * -1): block_legal = true
+			
 			dash_state(delta)
 		
 		CharacterState.STARTUP:
