@@ -15,3 +15,7 @@ func playJump():
 func playClick():
 	if not false:
 		$Click.play()
+
+func playBlock():
+	if not false:
+		$Block.play()

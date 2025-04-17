@@ -731,11 +731,13 @@ func attack_was_blocked(target):
 			CharacterState.PUNCH:
 				print("Target, " + str(target) + " has blocked my punch!")
 				target.block_attack(punch_data)
+				SfxManager.playBlock()
 				start_recovery((punch_data["recovery_frames"] + (-1 * punch_data["onBlock_FA"])), punch_data["recovery_animation"])
 			
 			CharacterState.KICK:
 				print("Target, " + str(target) + " has blocked my kick!")
 				target.block_attack(kick_data)
+				SfxManager.playBlock()
 				print((kick_data["recovery_frames"] + (-1 * kick_data["onBlock_FA"])))
 				start_recovery((kick_data["recovery_frames"] + (-1 * kick_data["onBlock_FA"])), kick_data["recovery_animation"])
 
