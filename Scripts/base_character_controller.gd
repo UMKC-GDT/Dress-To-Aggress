@@ -759,25 +759,34 @@ func enable_control():
 	set_controls()
 
 func scale_stats():
+	
+	#The stats of the current implementation of the clothing stats system were set with it in mind that they'd be *added* rather than set directly to the clothing.
+	#This means that, on the clothing items themselves, they need a 0 on the stats they don't affect, and the specified positive or negative decimal values from the spreadsheet for the stats they *do* affect.
+	#Here, we have to then just add those values to the given mults starting off at 1. If the clothing has a 0 and it's not supposed to affect that clothing, it'll just add 0. If two clothing items add to the same item, they'll stack, as intended. If they add and subtract the same stat, then the stat will keep the difference, as intended. 
+	
 	var pants = get_child(3).current_wearable
 	var shirt = get_child(4).current_wearable
-	movement_speed_mult = pants.get_walk_speed_change() + shirt.get_walk_speed_change()
-	dash_speed_mult = pants.get_dash_speed_change()+ shirt.get_dash_speed_change()
+	
+	movement_speed_mult += pants.get_walk_speed_change() + shirt.get_walk_speed_change()
+	dash_speed_mult += pants.get_dash_speed_change()+ shirt.get_dash_speed_change()
 	#dash_available =
-	jump_height_mult =pants.get_jump_height_change()+ shirt.get_jump_height_change()
+	jump_height_mult += pants.get_jump_height_change()+ shirt.get_jump_height_change()
 	#jump_speed_mult =
-#
+	
+	# So, fun fact for the below stat mults -- in the current implementation of the clothing stats system, the shirts will affect the punch stats, and the pants will affect the kick stats. So, the given mults only need to check for that item of clothing!
+	
 	#punch_speed_mult = 
 	#punch_hitstun_mult = 
 	#punch_knockback_mult = 
-	punch_damage_mult = pants.get_attack_damage_change() +shirt.get_attack_damage_change()
-#
+	#TODO: Remove this comment later, just specifically signifying that, for the other punch stats, follow this same method, of only checking the shirt's stat change for that stat. Same for the kicks below.
+	punch_damage_mult = shirt.get_attack_damage_change()
+	
 	#kick_speed_mult = 
 	#kick_hitstun_mult = 
 	#kick_knockback_mult = 
 	#kick_forward_mult = 
-	#kick_damage_mult = 
-#
+	kick_damage_mult = pants.get_attack_damage_change()
+	
 	#pose_speed_mult = 
 	#pose_hitstun_mult = 
 	#pose_knockback_mult = 
