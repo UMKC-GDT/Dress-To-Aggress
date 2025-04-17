@@ -4,6 +4,7 @@ class_name BaseCharacterController
 @export var player_type  = 0  # 0 = CPU, 1 = Player 1, 2 = Player 2
 @export var enemy_name = "player1"  # Name of the enemy node
 
+
 var movement_speed_mult = 1
 var dash_speed_mult = 1
 var dash_available = true
@@ -425,6 +426,7 @@ func start_jump(direction):
 		velocity.x = 0
 	
 	change_state(CharacterState.JUMP)
+	SfxManager.playJump()
 
 func jump_state(direction, delta):
 	if not left_ground_check and not is_on_floor():
@@ -465,6 +467,7 @@ func start_punch():
 	cancellable = true
 	
 	change_state(CharacterState.PUNCH)
+	SfxManager.playMiss()
 
 func punch_state(delta):
 	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -484,6 +487,7 @@ func start_kick():
 		cancellable = false
 		
 		change_state(CharacterState.KICK)
+		SfxManager.playMiss()
 
 func kick_state(delta):
 	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -662,10 +666,12 @@ func attack_hit(target):
 			CharacterState.PUNCH:
 				print("Hitting " + str(target) + " with the almighty punch!")
 				target.get_hit_with(punch_data)
+				SfxManager.playHit()
 			
 			CharacterState.KICK:
 				print("Hitting " + str(target) + " with the almighty kick!")
 				target.get_hit_with(kick_data)
+				SfxManager.playHit()
 
 func reduce_health(damage):
 	health -= damage

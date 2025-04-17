@@ -19,6 +19,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 global="*res://Scenes/global.gd"
+SfxManager="*res://Scenes/SFXManager.tscn"
 
 [display]
 
