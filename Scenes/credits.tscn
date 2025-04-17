@@ -1,15 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc56ttjj3q13u"]
+[gd_scene load_steps=3 format=3 uid="uid://cc56ttjj3q13u"]
 
 [ext_resource type="Script" uid="uid://y14xmvlxq88g" path="res://Scenes/credits.gd" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="2_gryuy"]
 
 [node name="Credits" type="Node2D"]
 script = ExtResource("1_r18jl")
 
+[node name="Panels" type="Sprite2D" parent="."]
+position = Vector2(640.5, 361)
+scale = Vector2(3.94154, 3.41232)
+texture = ExtResource("2_gryuy")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 clip_contents = false
-offset_top = 405.0
-offset_right = 1280.0
-offset_bottom = 1125.0
+offset_left = 20.0
+offset_top = 171.0
+offset_right = 1300.0
+offset_bottom = 1721.0
+theme_override_font_sizes/normal_font_size = 25
 text = "
 
 
@@ -26,33 +34,55 @@ text = "
 
 The UMKC Game Dev Club
 
-Berenice Moreno-Perez
-Cameron Cianciolo
-Eric Schmidt
-Mason Allaman
-Oliver Eulert
-Rachael Garner
-Sailor Usher
-Sam Granade
-Temuulen Munkhjargal
-Tomie Williams
-Trevor Norton
-Tyler Ross
-Vincent Yang"
+Berenice Moreno-Perez -  Art
+Cameron Cianciolo  - Programming (Dress Up Scene
+Eric Schmidt - Sound Design
+Mason Allaman  - Programming
+Oliver Eulert - Programming
+Rachael Garner - Art
+Sailor Usher  - Programming
+Sam Granade - Sound Design
+Temuulen Munkhjargal - Programming
+Tomie Williams - Programming
+Trevor Norton - Programming
+Tyler Ross - Programming
+Vincent Yang - Programming"
 scroll_active = false
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 visible = false
-offset_left = 1127.0
-offset_top = 624.0
-offset_right = 1247.0
-offset_bottom = 696.0
+modulate = Color(0.68679, 0.681069, 1, 1)
+offset_left = 1026.0
+offset_top = 532.0
+offset_right = 1146.0
+offset_bottom = 604.0
 text = "Back"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 227.0
+offset_top = 694.0
+offset_right = 1171.0
+offset_bottom = 721.0
+color = Color(0.0627451, 0.0784314, 0.121569, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 180.0
+offset_top = 1.0
+offset_right = 1124.0
+offset_bottom = 28.0
+color = Color(0.0627451, 0.0784314, 0.121569, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 226.0
+offset_top = 694.0
+offset_right = 1103.0
+offset_bottom = 697.0
+color = Color(0.282353, 0.301961, 0.329412, 1)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
