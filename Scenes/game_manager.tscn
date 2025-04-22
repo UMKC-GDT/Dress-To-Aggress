@@ -7,35 +7,79 @@
 script = ExtResource("1_oj352")
 
 [node name="Message" type="RichTextLabel" parent="."]
-offset_top = 1.0
-offset_right = 120.0
-offset_bottom = 51.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 30.0
+offset_right = 30.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("2_e5fcp")
 theme_override_font_sizes/normal_font_size = 12
-text = "WIN OR LOSE HERE"
+text = "READY?"
 scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="Message"]
+[node name="Message Timer" type="Timer" parent="Message"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Victory Message" type="RichTextLabel" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 58.0
+offset_right = 60.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("2_e5fcp")
+theme_override_font_sizes/normal_font_size = 12
+text = "You LOSE!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message Timer" type="Timer" parent="Victory Message"]
 wait_time = 5.0
 one_shot = true
 
 [node name="Fight Timer Display" type="RichTextLabel" parent="."]
-offset_left = 72.0
-offset_top = 16.0
-offset_right = 122.0
-offset_bottom = 66.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 15.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("2_e5fcp")
 theme_override_font_sizes/bold_italics_font_size = 1
-text = "TIM"
+text = "99"
 scroll_active = false
+horizontal_alignment = 1
 
 [node name="Fight Timer" type="Timer" parent="Fight Timer Display"]
-wait_time = 50.0
+wait_time = 99.0
 one_shot = true
-autostart = true
 
-[connection signal="timeout" from="Message/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Message/Message Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Victory Message/Message Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Fight Timer Display/Fight Timer" to="." method="_on_fight_timer_timeout"]

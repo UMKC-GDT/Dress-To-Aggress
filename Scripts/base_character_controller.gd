@@ -238,6 +238,7 @@ func handle_input(delta):
 		elif (state != CharacterState.DASH) and (direction == 1 and not Input.is_action_pressed(right_input)) or (direction == -1 and not Input.is_action_pressed(left_input)):
 			direction = 0
 	
+	if disabled: direction = 0
 	#This handles checking for the dash input, completely outside of the defined states below.
 	check_for_dash()
 	
@@ -656,7 +657,7 @@ func check_for_dash():
 			last_right_press_time = current_time
 
 func check_for_jump():
-	if Input.is_action_pressed(jump_input):
+	if not disabled and Input.is_action_pressed(jump_input):
 		start_action(4, func(): start_jump(0), "jump startup")
 
 func attack_hit(target):

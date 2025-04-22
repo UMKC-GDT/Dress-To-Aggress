@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="7_8chw7"]
 [ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="8_xqkhk"]
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="9_muimr"]
-[ext_resource type="Script" path="res://Scenes/PanelStartFightScene.gd" id="10_bo4e7"]
+[ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="10_bo4e7"]
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="11_g776m"]
 [ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="11_tg752"]
 [ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="12_g776m"]
@@ -57,15 +57,16 @@ offset = Vector2(-11, 47.595)
 zoom = Vector2(6.989, 7.343)
 
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
-position = Vector2(-46, 39)
+position = Vector2(-50, 39)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("3_sb12i")
 
 [node name="Game Manager" parent="." instance=ExtResource("1_8chw7")]
-position = Vector2(-85, 3)
+z_index = 3
+position = Vector2(0, -5)
 
 [node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
-position = Vector2(20, 40)
+position = Vector2(50, 40)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("4_4ptq8")
 
@@ -88,6 +89,7 @@ offset_right = 85.0
 offset_bottom = -2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(1.935, 37.1)
 scale = Vector2(0.45, 0.379)
