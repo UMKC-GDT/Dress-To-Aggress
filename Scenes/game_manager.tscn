@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://craw0c07od0ad"]
+[gd_scene load_steps=12 format=3 uid="uid://craw0c07od0ad"]
 
 [ext_resource type="Script" uid="uid://cn7h6ou5ydy21" path="res://game_manager.gd" id="1_oj352"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_e5fcp"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="3_sq00h"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="4_mmt5l"]
+[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="5_jencv"]
+[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="6_kmrvs"]
+[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="7_e6ru4"]
+[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="8_sm5re"]
+[ext_resource type="Texture2D" uid="uid://d36k4m7bxo1td" path="res://Assets/Sprites/key_j.tres" id="9_hjqsb"]
+[ext_resource type="Texture2D" uid="uid://0x8abal8e3j5" path="res://Assets/Sprites/key_k.tres" id="10_y8n5u"]
+[ext_resource type="Texture2D" uid="uid://dosospwu3m8m6" path="res://Assets/Sprites/key_L.tres" id="11_5tjy5"]
 
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_oj352")
@@ -13,9 +22,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -30.0
-offset_top = 30.0
+offset_top = 10.0
 offset_right = 30.0
-offset_bottom = 50.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
@@ -32,22 +41,23 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Victory Message" type="RichTextLabel" parent="."]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = 58.0
-offset_right = 60.0
-offset_bottom = 78.0
+offset_left = -84.0
+offset_top = 23.0
+offset_right = 126.0
+offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("2_e5fcp")
-theme_override_font_sizes/normal_font_size = 12
-text = "You LOSE!"
+theme_override_font_sizes/normal_font_size = 10
+text = "That outfit? A fashion disaster."
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -79,6 +89,112 @@ horizontal_alignment = 1
 [node name="Fight Timer" type="Timer" parent="Fight Timer Display"]
 wait_time = 99.0
 one_shot = true
+
+[node name="Controls Panel" type="Sprite2D" parent="."]
+position = Vector2(0, 200)
+scale = Vector2(0.32, 0.262)
+texture = ExtResource("3_sq00h")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -40.0
+offset_top = -59.5844
+offset_right = 118.0
+offset_bottom = -36.5844
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 16
+text = "- Move & Jump"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -23.2558
+offset_top = -36.8856
+offset_right = 134.744
+offset_bottom = -13.8856
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 12
+text = "Retreat to block!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -130.233
+offset_top = -82.2833
+offset_right = 129.767
+offset_bottom = -59.2833
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 16
+text = "Controls:
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -40.0
+offset_top = -2.83734
+offset_right = 118.0
+offset_bottom = 20.1627
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 16
+text = "- Punch"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -40.0
+offset_top = 26.4362
+offset_right = 118.0
+offset_bottom = 49.4362
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 16
+text = "- Kick"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -40.0
+offset_top = 54.4604
+offset_right = 118.0
+offset_bottom = 77.4604
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 16
+text = "- POSE!"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Controls Panel"]
+offset_left = -51.1628
+offset_top = 79.4459
+offset_right = 50.8372
+offset_bottom = 96.4459
+theme_override_fonts/normal_font = ExtResource("4_mmt5l")
+theme_override_font_sizes/normal_font_size = 12
+text = "Punch to start!
+"
+
+[node name="KeyA" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-98, -21.798)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("5_jencv")
+
+[node name="KeyS" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-78, -21.798)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("6_kmrvs")
+
+[node name="KeyD" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-58, -21.798)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("7_e6ru4")
+
+[node name="KeyW" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-78, -47)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("8_sm5re")
+
+[node name="KeyJ" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-58, 9.41266)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("9_hjqsb")
+
+[node name="KeyK" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-58, 37.7862)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("10_y8n5u")
+
+[node name="KeyL" type="Sprite2D" parent="Controls Panel"]
+position = Vector2(-58, 65.8097)
+scale = Vector2(0.6, 0.7)
+texture = ExtResource("11_5tjy5")
 
 [connection signal="timeout" from="Message/Message Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Victory Message/Message Timer" to="." method="_on_timer_timeout"]
