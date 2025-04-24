@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=13 format=3 uid="uid://but5elvbkg7mi"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://but5elvbkg7mi"]
 
+[ext_resource type="Texture2D" uid="uid://cp0h2c2r74y14" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves2.png" id="1_gy1x1"]
 [ext_resource type="Texture2D" uid="uid://dhvjdnoflaakm" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve0.png" id="1_qr15n"]
+[ext_resource type="Texture2D" uid="uid://wfprhjluofer" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves1.png" id="2_lc6s8"]
 [ext_resource type="Texture2D" uid="uid://dwxaiy6noqu1q" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve1.png" id="2_wprcd"]
 [ext_resource type="Texture2D" uid="uid://dbf76elru6rnq" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve1.png" id="3_5uor5"]
 [ext_resource type="Texture2D" uid="uid://pbxx8w5v3fxw" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve2.png" id="4_sg2uk"]
@@ -43,4 +45,6 @@ kickPose0 = ExtResource("3_5uor5")
 kickPose1 = ExtResource("4_sg2uk")
 punchPose0 = ExtResource("6_3wy5u")
 punchPose1 = ExtResource("7_s5ipp")
+hurtPose = ExtResource("2_lc6s8")
+Pose28 = ExtResource("1_gy1x1")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"

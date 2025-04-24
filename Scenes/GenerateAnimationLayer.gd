@@ -81,7 +81,7 @@ func createAnimation(anim_name: String):
 	if(anim_name =="dead"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
 	if(anim_name =="hurt"):
-		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_hurt_pose(), 1.0)
 	if(anim_name =="idle"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose1(), 1.0)
@@ -97,9 +97,9 @@ func createAnimation(anim_name: String):
 	if(anim_name =="kick recovery"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_kick_pose0(), 1.0)
 	if(anim_name =="pose"):
-		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_pose28(), 1.0)
 	if(anim_name =="pose recovery"):
-		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_hurt_pose(), 1.0)
 	if(anim_name =="walk backward"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_walk_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_walk_pose1(), 1.0)
