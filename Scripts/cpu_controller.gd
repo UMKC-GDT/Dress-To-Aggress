@@ -105,7 +105,7 @@ func run_ai():
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
-				if randf() < 0.05:
+				if randf() < 0.005:
 					kick()
 	
 	#if horizontal_distance < kick_range:
