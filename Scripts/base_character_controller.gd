@@ -367,7 +367,7 @@ func handle_states(direction, delta):
 			block_state(delta)
 		
 		CharacterState.POSE_STARTUP:
-			change_color(Color(Color.HOT_PINK, 1.0))
+			#change_color(Color(Color.HOT_PINK, 1.0))
 			velocity.x = 0
 		
 		CharacterState.POSE:
@@ -584,7 +584,7 @@ func pose(target):
 	else:
 		if target.has_method("get_hit_with"):
 			target.get_hit_with(throw_data)
-			change_color(Color(Color.DEEP_PINK, 1.0))
+			#change_color(Color(Color.DEEP_PINK, 1.0))
 			start_recovery(throw_data["pose_frames"], throw_data["active_animation"])
 
 #In pose_broken(), enter POSE state, get knocked back slightly, and then start_recovery for recovery_frames / 2
