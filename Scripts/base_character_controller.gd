@@ -799,10 +799,12 @@ func scale_stats():
 	#kick_forward_mult = 
 	kick_damage_mult = pants.get_attack_damage_change()
 	
-	#pose_speed_mult = 
-	#pose_hitstun_mult = 
-	#pose_knockback_mult = 
-	#pose_damage_mult =
+	pose_speed_mult = shirt.get_pose_speed_change() + pants.get_pose_speed_change()
+	pose_hitstun_mult = shirt.get_pose_hitstun_change() + pants.get_pose_hitstun_change()
+	pose_knockback_mult = shirt.get_pose_knockback_change() + pants.get_pose_knockback_change()
+	pose_damage_mult = shirt.get_pose_damage_change() + pants.get_pose_damage_change()
+	print(pose_damage_mult)
+	print(throw_data["damage"])
 
 func report_dead():
 	pass

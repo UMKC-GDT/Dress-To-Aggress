@@ -1,5 +1,4 @@
-purplePants,blackShirt,m
-whiteShorts,redShirt,t,,
+blueShorts,purpleShirtS,,whiteShorts,redShirt,t,,
 =======
 whiteShorts,whiteShirt,,
 >>>>>>> Stashed changes

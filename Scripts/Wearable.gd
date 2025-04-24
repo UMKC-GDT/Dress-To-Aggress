@@ -14,14 +14,18 @@ class_name Wearable
 @export var styleMultiplier: float #x.x multiplier
 
 @export_category("Fighting Information") # All use x.x multiplier
-@export var attackDamageChange: float = 1
-@export var attackSpeedChange: float = 1
-@export var defenseChange: float = 1
-@export var walkSpeedChange: float = 1
-@export var dashSpeedChange: float = 1
-@export var jumpHeightChange: float = 1
-@export var hitstunLengthChange: float = 1
-@export var knockbackChange: float = 1
+@export var attackDamageChange: float = 0
+@export var attackSpeedChange: float = 0
+@export var defenseChange: float = 0
+@export var walkSpeedChange: float = 0
+@export var dashSpeedChange: float = 0
+@export var jumpHeightChange: float = 0
+@export var hitstunLengthChange: float = 0
+@export var knockbackChange: float = 0
+@export var poseSpeedChange: float = 0
+@export var poseHitstunChange: float = 0
+@export var poseKnockbackChange: float = 0
+@export var poseDamageChange: float = 0
 
 @export_category("Animation Frames")
 @export var mirrorPose: Texture2D
@@ -91,6 +95,18 @@ func get_hitstun_length_change() -> float:
 
 func get_knockback_change() -> float:
 	return knockbackChange
+
+func get_pose_speed_change() -> float:
+	return poseSpeedChange
+
+func get_pose_hitstun_change() -> float:
+	return poseHitstunChange
+
+func get_pose_knockback_change() -> float:
+	return poseKnockbackChange
+
+func get_pose_damage_change() -> float:
+	return poseDamageChange
 
 # Animation Frames getters
 func get_mirror_pose() -> Texture2D:
