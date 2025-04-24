@@ -14,5 +14,6 @@ func _ready():
 
 func report_dead():
 	#HEEERE!
+	SfxManager.playDeath()
 	one_died.emit()
 	pass

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/C-Jump0.mp3-5f1fbbfe4981589e8f7c5c3a6d2cea1d.
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

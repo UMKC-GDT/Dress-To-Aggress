@@ -19,3 +19,11 @@ func playClick():
 func playBlock():
 	if not false:
 		$Block.play()
+		
+func playDeath():
+	if not false:
+		$Death.play()
+		
+func playKick():
+	if not false:
+		$Kick.play()

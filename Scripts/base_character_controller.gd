@@ -488,7 +488,7 @@ func start_kick():
 		cancellable = false
 		
 		change_state(CharacterState.KICK)
-		SfxManager.playMiss()
+		SfxManager.playKick()
 
 func kick_state(delta):
 	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -523,6 +523,7 @@ func start_recovery(frames, animation):
 	timer.timeout.connect(func(): if state != CharacterState.STARTUP and state != CharacterState.HURT: change_state(CharacterState.IDLE))
 
 func get_hit_with(attack_data):
+	SfxManager.playHit()
 	change_state(CharacterState.HURT)
 	
 	animation_player.play("hurt")
@@ -667,12 +668,12 @@ func attack_hit(target):
 			CharacterState.PUNCH:
 				print("Hitting " + str(target) + " with the almighty punch!")
 				target.get_hit_with(punch_data)
-				SfxManager.playHit()
+				
 			
 			CharacterState.KICK:
 				print("Hitting " + str(target) + " with the almighty kick!")
 				target.get_hit_with(kick_data)
-				SfxManager.playHit()
+				
 
 func reduce_health(damage):
 	health -= damage

@@ -1,30 +1,36 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2lwm3sm4cw5t"]
+[gd_scene load_steps=23 format=3 uid="uid://b2lwm3sm4cw5t"]
 
 [ext_resource type="Script" uid="uid://cu43xrvle0i7t" path="res://Scenes/sfx_control.gd" id="1_f4uu4"]
-[ext_resource type="AudioStream" uid="uid://dfwoe1itvwjfo" path="res://Assets/SFX/jump.wav" id="2_vj88y"]
-[ext_resource type="AudioStream" uid="uid://dsqq2r5mj4306" path="res://Assets/SFX/jump2.wav" id="3_bjkat"]
-[ext_resource type="AudioStream" uid="uid://b1t70bkxbm40e" path="res://Assets/SFX/miss.wav" id="4_nnfwa"]
-[ext_resource type="AudioStream" uid="uid://i1rryipa470n" path="res://Assets/SFX/hitHurt.wav" id="5_3jmqo"]
-[ext_resource type="AudioStream" uid="uid://c2asvnymsjki5" path="res://Assets/SFX/hitHurt (1).wav" id="6_tx5lw"]
-[ext_resource type="AudioStream" uid="uid://dhqv0cwjjntxb" path="res://Assets/SFX/hitHurt (2).wav" id="7_co85x"]
-[ext_resource type="AudioStream" uid="uid://cmbv23sth7m83" path="res://Assets/SFX/hitHurt4.wav" id="8_tcp0d"]
+[ext_resource type="AudioStream" uid="uid://cigl1kuiepkl8" path="res://Assets/SFX/sounds/C-Jump.mp3" id="2_hdnws"]
+[ext_resource type="AudioStream" uid="uid://berjqmge0h6fv" path="res://Assets/SFX/sounds/C-Jump0.mp3" id="3_7twoe"]
+[ext_resource type="AudioStream" uid="uid://qmkwmwh3qobi" path="res://Assets/SFX/sounds/B-Jump.mp3" id="4_8nyne"]
+[ext_resource type="AudioStream" uid="uid://c8k5fed52mujm" path="res://Assets/SFX/sounds/B-Punch.mp3" id="5_68tuw"]
+[ext_resource type="AudioStream" uid="uid://lcxei868hg2m" path="res://Assets/SFX/sounds/B-BigHurt.mp3" id="6_px57j"]
+[ext_resource type="AudioStream" uid="uid://cwqiiop1eyubl" path="res://Assets/SFX/sounds/B-SmallHurt.mp3" id="7_q5dfi"]
+[ext_resource type="AudioStream" uid="uid://p05ck4wmgkq" path="res://Assets/SFX/sounds/C-BigHurt.mp3" id="8_rni1b"]
+[ext_resource type="AudioStream" uid="uid://bctc3x03llstd" path="res://Assets/SFX/sounds/C-SmallHurt.mp3" id="9_7sy4l"]
 [ext_resource type="AudioStream" uid="uid://gjytvdef7xpd" path="res://Assets/SFX/blipSelect (1).wav" id="9_bjkat"]
 [ext_resource type="AudioStream" uid="uid://um0wvdrnygax" path="res://Assets/SFX/blipSelect.wav" id="10_nnfwa"]
 [ext_resource type="AudioStream" uid="uid://bcinmf38td75r" path="res://Assets/SFX/block1.wav" id="11_tx5lw"]
 [ext_resource type="AudioStream" uid="uid://nqpjbyxxypgd" path="res://Assets/SFX/block2.wav" id="12_co85x"]
 [ext_resource type="AudioStream" uid="uid://d86div7gls2a" path="res://Assets/SFX/block3.wav" id="13_tcp0d"]
+[ext_resource type="AudioStream" uid="uid://k172wqb7u7wg" path="res://Assets/SFX/sounds/B-Kick.mp3" id="15_piebn"]
+[ext_resource type="AudioStream" uid="uid://de3kobddqya23" path="res://Assets/SFX/sounds/C-Kick.mp3" id="16_1b3t6"]
+[ext_resource type="AudioStream" uid="uid://csrvg570dlqp2" path="res://Assets/SFX/sounds/B-Death.mp3" id="17_luhre"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qbjw7"]
-streams_count = 2
-stream_0/stream = ExtResource("2_vj88y")
-stream_1/stream = ExtResource("3_bjkat")
+streams_count = 3
+stream_0/stream = ExtResource("2_hdnws")
+stream_1/stream = ExtResource("3_7twoe")
+stream_2/stream = ExtResource("4_8nyne")
+stream_2/weight = 0.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hdnws"]
 streams_count = 4
-stream_0/stream = ExtResource("5_3jmqo")
-stream_1/stream = ExtResource("6_tx5lw")
-stream_2/stream = ExtResource("7_co85x")
-stream_3/stream = ExtResource("8_tcp0d")
+stream_0/stream = ExtResource("6_px57j")
+stream_1/stream = ExtResource("7_q5dfi")
+stream_2/stream = ExtResource("8_rni1b")
+stream_3/stream = ExtResource("9_7sy4l")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f4uu4"]
 streams_count = 2
@@ -37,6 +43,11 @@ stream_0/stream = ExtResource("11_tx5lw")
 stream_1/stream = ExtResource("12_co85x")
 stream_2/stream = ExtResource("13_tcp0d")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q06vj"]
+streams_count = 2
+stream_0/stream = ExtResource("15_piebn")
+stream_1/stream = ExtResource("16_1b3t6")
+
 [node name="SfxManager" type="Node2D"]
 script = ExtResource("1_f4uu4")
 
@@ -44,7 +55,7 @@ script = ExtResource("1_f4uu4")
 stream = SubResource("AudioStreamRandomizer_qbjw7")
 
 [node name="Miss" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_nnfwa")
+stream = ExtResource("5_68tuw")
 
 [node name="HitSounds" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_hdnws")
@@ -54,3 +65,9 @@ stream = SubResource("AudioStreamRandomizer_f4uu4")
 
 [node name="Block" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_7twoe")
+
+[node name="Kick" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_q06vj")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_luhre")
