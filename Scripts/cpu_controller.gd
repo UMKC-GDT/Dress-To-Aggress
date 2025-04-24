@@ -92,17 +92,20 @@ func run_ai():
 	
 	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
-		if randf() < 0.2: approach()
+		if randf() < 0.03: approach()
 	elif horizontal_distance < kick_range - 2:
-		if randf() < 0.8: retreat()
+		if randf() < 0.08: retreat()
 	else:
 		release_inputs()
+		
+	if enemy_just_attacked and horizontal_distance < kick_range - 2:
+		if randf() < 0.4: dash_away()
 	
 	#Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
-				if randf() < 0.5:
+				if randf() < 0.05:
 					kick()
 	
 	#if horizontal_distance < kick_range:
@@ -111,38 +114,38 @@ func run_ai():
 	#	elif get_random_number() < 2:
 	#		kick()
 	if horizontal_distance < kick_range:
-		if randf() < 0.35:
+		if randf() < 0.05:
 			punch()
-		elif randf() < 0.35:
+		elif randf() < 0.05:
 			kick()
 	
 	#Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
-		if randf() < 0.3:
+		if randf() < 0.03:
 			if is_on_floor(): use_pose()
 	
 	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
-		if randf() < 0.6:
+		if randf() < 0.06:
 			block(punch_time)
-		elif randf() < 0.6:
+		elif randf() < 0.06:
 			dash_away()
 	
 	elif (Input.is_action_just_pressed(enemy.kick_input) and horizontal_distance <= kick_range):
-		if randf() < 0.6:
+		if randf() < 0.06:
 			block(kick_time) 
-		elif randf() < 0.6:
+		elif randf() < 0.06:
 			dash_away()
 	
 	#Example on punishing after blocking a kick. This can be easily copied to make it punish punches.
 	if (enemy_just_attacked and enemy.state == CharacterState.RECOVERY and horizontal_distance <= kick_range):
-		if randf() < 0.5:
+		if randf() < 0.005:
 			kick()
 	if (enemy_just_attacked and enemy.state == CharacterState.RECOVERY and horizontal_distance <= punch_range):
-		if randf() < 0.5:
+		if randf() < 0.005:
 			punch()
 	if (enemy_blocking and enemy.state == CharacterState.WALK and horizontal_distance <= kick_range):
-		if randf() < 0.4:
+		if randf() < 0.004:
 			approach()
 			use_pose()
 
@@ -246,12 +249,12 @@ func block(time):
 
 func punch():
 	punch_pressed = true
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.02).timeout
 	punch_pressed = false
 
 func kick():
 	kick_pressed = true
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.03).timeout
 	kick_pressed = false
 
 func jump():
