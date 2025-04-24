@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxevk147j4wxs"]
+[gd_scene load_steps=10 format=3 uid="uid://dxevk147j4wxs"]
 
 [ext_resource type="Script" uid="uid://ogdqr5ijgblm" path="res://Scenes/main_menu.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://drlfw2n4iyt86" path="res://Assets/Sprites/MainMenuDTI.png" id="2_48xlc"]
 [ext_resource type="AudioStream" uid="uid://bv72j0bwdpg52" path="res://Assets/Music/Dress to Agress Title.mp3" id="3_1ehe0"]
+[ext_resource type="Texture2D" uid="uid://knkvni2oq6kh" path="res://Assets/Sprites/MMGameBackground.png" id="3_ce3w2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
 texture = ExtResource("2_48xlc")
@@ -53,6 +54,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ce3w2")
+
+[node name="MmGameBackground" type="Sprite2D" parent="."]
+position = Vector2(642, 359)
+scale = Vector2(2.22222, 2.21605)
+texture = ExtResource("3_ce3w2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
