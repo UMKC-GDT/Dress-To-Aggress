@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://csr6cip63yj6v"]
+
+[ext_resource type="Texture2D" uid="uid://cp0h2c2r74y14" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves2.png" id="1_8hkwe"]
+[ext_resource type="Texture2D" uid="uid://wfprhjluofer" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves1.png" id="2_yfhuv"]
+[ext_resource type="Texture2D" uid="uid://dhvjdnoflaakm" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve0.png" id="3_m3mcs"]
+[ext_resource type="Texture2D" uid="uid://dwxaiy6noqu1q" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve1.png" id="4_8p64q"]
+[ext_resource type="Texture2D" uid="uid://dbf76elru6rnq" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve1.png" id="5_frq7h"]
+[ext_resource type="Texture2D" uid="uid://pbxx8w5v3fxw" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve2.png" id="6_qq5i7"]
+[ext_resource type="Texture2D" uid="uid://ialgbdgj5hw0" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Mirror Frames/FinalizedModelLongSleeve.png" id="7_8gp8m"]
+[ext_resource type="Texture2D" uid="uid://dckp4bghy70ml" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Punch Frames/PunchLongSleeve1.png" id="8_4ht7q"]
+[ext_resource type="Texture2D" uid="uid://c3u13hdtq8nft" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Punch Frames/PunchLongSleeve2.png" id="9_168ed"]
+[ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_qwfw7"]
+[ext_resource type="Texture2D" uid="uid://bksjgxh1fyag4" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Walk Frames/WalkLongSleeve0.png" id="11_onx3l"]
+[ext_resource type="Texture2D" uid="uid://bqej65d8gmo3w" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Walk Frames/WalkLongSleeve1.png" id="12_eaias"]
+[ext_resource type="Texture2D" uid="uid://ddvg7100aqrlw" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Walk Frames/WalkLongSleeve2.png" id="13_jgyif"]
+[ext_resource type="Texture2D" uid="uid://di68p6046j5h" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Walk Frames/WalkLongSleeve3.png" id="14_fgk60"]
+
+[resource]
+script = ExtResource("10_qwfw7")
+ClothingType = "SHIRT"
+Rarity = "COMMON"
+name = "blueShirt"
+outfitSet = "Basic"
+outfitPattern = "Solid"
+description = "This shirt increases Dash Speed"
+color = Color(0.270787, 0.592095, 0.853807, 1)
+stylePoints = 50
+styleMultiplier = 1.0
+attackDamageChange = 0.0
+attackSpeedChange = -0.25
+defenseChange = 0.0
+walkSpeedChange = 0.0
+dashSpeedChange = 0.5
+jumpHeightChange = 0.0
+hitstunLengthChange = 0.0
+knockbackChange = 0.5
+poseSpeedChange = 0.0
+poseHitstunChange = 0.0
+poseKnockbackChange = 0.0
+poseDamageChange = -0.25
+mirrorPose = ExtResource("7_8gp8m")
+idlePose0 = ExtResource("3_m3mcs")
+idlePose1 = ExtResource("4_8p64q")
+walkPose0 = ExtResource("11_onx3l")
+walkPose1 = ExtResource("12_eaias")
+walkPose2 = ExtResource("13_jgyif")
+walkPose3 = ExtResource("14_fgk60")
+kickPose0 = ExtResource("5_frq7h")
+kickPose1 = ExtResource("6_qq5i7")
+punchPose0 = ExtResource("8_4ht7q")
+punchPose1 = ExtResource("9_168ed")
+hurtPose = ExtResource("2_yfhuv")
+Pose28 = ExtResource("1_8hkwe")
+metadata/_custom_type_script = "uid://0bwef23hrt6j"

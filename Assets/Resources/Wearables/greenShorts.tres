@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://bbxm6682qctg4"]
+
+[ext_resource type="Texture2D" uid="uid://tin4v6to5qet" path="res://Assets/Sprites/Clothing Frames/shorts/Pose28/Pose28Shorts2.png" id="1_yqcm0"]
+[ext_resource type="Texture2D" uid="uid://baay5fmh8cjme" path="res://Assets/Sprites/Clothing Frames/shorts/Pose28/Pose28Shorts1.png" id="2_14scb"]
+[ext_resource type="Texture2D" uid="uid://d0xs70xxi4iyo" path="res://Assets/Sprites/Clothing Frames/shorts/Idle Frames/IdleShorts0.png" id="3_r11sy"]
+[ext_resource type="Texture2D" uid="uid://1wdqy8qirfwq" path="res://Assets/Sprites/Clothing Frames/shorts/Idle Frames/IdleShorts1.png" id="4_qybt4"]
+[ext_resource type="Texture2D" uid="uid://bya83yk4rh1ch" path="res://Assets/Sprites/Clothing Frames/shorts/Kick Frames/KickShorts1.png" id="5_kllb8"]
+[ext_resource type="Texture2D" uid="uid://dnqn33rtbvtnv" path="res://Assets/Sprites/Clothing Frames/shorts/Kick Frames/KickShorts2.png" id="6_faumy"]
+[ext_resource type="Texture2D" uid="uid://d4mitgebpydng" path="res://Assets/Sprites/Clothing Frames/shorts/Mirror Frames/FinalizedModelShorts.png" id="7_472ja"]
+[ext_resource type="Texture2D" uid="uid://ciryr3n1rmcx3" path="res://Assets/Sprites/Clothing Frames/shorts/Punch Frames/PunchShorts1.png" id="8_t2dts"]
+[ext_resource type="Texture2D" uid="uid://c6uluxe0ri1n2" path="res://Assets/Sprites/Clothing Frames/shorts/Punch Frames/PunchShorts2.png" id="9_27drt"]
+[ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_5j15b"]
+[ext_resource type="Texture2D" uid="uid://dt0wevvnr3yc5" path="res://Assets/Sprites/Clothing Frames/shorts/Walk Frames/WalkShorts0.png" id="11_gjoqc"]
+[ext_resource type="Texture2D" uid="uid://6k8jn617wuij" path="res://Assets/Sprites/Clothing Frames/shorts/Walk Frames/WalkShorts1.png" id="12_7753h"]
+[ext_resource type="Texture2D" uid="uid://ba15hnj8q5iv0" path="res://Assets/Sprites/Clothing Frames/shorts/Walk Frames/WalkShorts2.png" id="13_e8orr"]
+[ext_resource type="Texture2D" uid="uid://chm5wcjr3hyc6" path="res://Assets/Sprites/Clothing Frames/shorts/Walk Frames/WalkShorts3.png" id="14_edsmk"]
+
+[resource]
+script = ExtResource("10_5j15b")
+ClothingType = "LEGWEAR"
+Rarity = "COMMON"
+name = "greenShorts"
+outfitSet = "Basic"
+outfitPattern = "Solid"
+description = "These shorts decrease speed"
+color = Color(0.169255, 0.299461, 0.143964, 1)
+stylePoints = 25
+styleMultiplier = 1.0
+attackDamageChange = 0.0
+attackSpeedChange = -0.125
+defenseChange = 0.0
+walkSpeedChange = -0.125
+dashSpeedChange = 0.0
+jumpHeightChange = 0.0
+hitstunLengthChange = 0.0
+knockbackChange = 0.0
+poseSpeedChange = 0.0
+poseHitstunChange = 0.0
+poseKnockbackChange = 0.0
+poseDamageChange = 0.25
+mirrorPose = ExtResource("7_472ja")
+idlePose0 = ExtResource("3_r11sy")
+idlePose1 = ExtResource("4_qybt4")
+walkPose0 = ExtResource("11_gjoqc")
+walkPose1 = ExtResource("12_7753h")
+walkPose2 = ExtResource("13_e8orr")
+walkPose3 = ExtResource("14_edsmk")
+kickPose0 = ExtResource("5_kllb8")
+kickPose1 = ExtResource("6_faumy")
+punchPose0 = ExtResource("8_t2dts")
+punchPose1 = ExtResource("9_27drt")
+hurtPose = ExtResource("2_14scb")
+Pose28 = ExtResource("1_yqcm0")
+metadata/_custom_type_script = "uid://0bwef23hrt6j"
