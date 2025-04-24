@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b2lwm3sm4cw5t"]
+[gd_scene load_steps=24 format=3 uid="uid://b2lwm3sm4cw5t"]
 
 [ext_resource type="Script" uid="uid://cu43xrvle0i7t" path="res://Scenes/sfx_control.gd" id="1_f4uu4"]
 [ext_resource type="AudioStream" uid="uid://cigl1kuiepkl8" path="res://Assets/SFX/sounds/C-Jump.mp3" id="2_hdnws"]
@@ -11,12 +11,14 @@
 [ext_resource type="AudioStream" uid="uid://bctc3x03llstd" path="res://Assets/SFX/sounds/C-SmallHurt.mp3" id="9_7sy4l"]
 [ext_resource type="AudioStream" uid="uid://gjytvdef7xpd" path="res://Assets/SFX/blipSelect (1).wav" id="9_bjkat"]
 [ext_resource type="AudioStream" uid="uid://um0wvdrnygax" path="res://Assets/SFX/blipSelect.wav" id="10_nnfwa"]
-[ext_resource type="AudioStream" uid="uid://bcinmf38td75r" path="res://Assets/SFX/block1.wav" id="11_tx5lw"]
-[ext_resource type="AudioStream" uid="uid://nqpjbyxxypgd" path="res://Assets/SFX/block2.wav" id="12_co85x"]
-[ext_resource type="AudioStream" uid="uid://d86div7gls2a" path="res://Assets/SFX/block3.wav" id="13_tcp0d"]
+[ext_resource type="AudioStream" uid="uid://egdraw2jc33e" path="res://Assets/SFX/sounds/T-Block.mp3" id="12_8nyne"]
 [ext_resource type="AudioStream" uid="uid://k172wqb7u7wg" path="res://Assets/SFX/sounds/B-Kick.mp3" id="15_piebn"]
 [ext_resource type="AudioStream" uid="uid://de3kobddqya23" path="res://Assets/SFX/sounds/C-Kick.mp3" id="16_1b3t6"]
+[ext_resource type="AudioStream" uid="uid://cwe0r8omh7e6v" path="res://Assets/SFX/sounds/T-KickAir.mp3" id="16_68tuw"]
 [ext_resource type="AudioStream" uid="uid://csrvg570dlqp2" path="res://Assets/SFX/sounds/B-Death.mp3" id="17_luhre"]
+[ext_resource type="AudioStream" uid="uid://q6oxt4ose2k4" path="res://Assets/SFX/sounds/T-PunchAir.mp3" id="17_px57j"]
+[ext_resource type="AudioStream" uid="uid://be0581c3idtsl" path="res://Assets/SFX/sounds/T-Punch.mp3" id="18_q5dfi"]
+[ext_resource type="AudioStream" uid="uid://n0tmmns2mki8" path="res://Assets/SFX/sounds/T-Kick.mp3" id="19_rni1b"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qbjw7"]
 streams_count = 3
@@ -36,12 +38,6 @@ stream_3/stream = ExtResource("9_7sy4l")
 streams_count = 2
 stream_0/stream = ExtResource("9_bjkat")
 stream_1/stream = ExtResource("10_nnfwa")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7twoe"]
-streams_count = 3
-stream_0/stream = ExtResource("11_tx5lw")
-stream_1/stream = ExtResource("12_co85x")
-stream_2/stream = ExtResource("13_tcp0d")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q06vj"]
 streams_count = 2
@@ -64,10 +60,22 @@ stream = SubResource("AudioStreamRandomizer_hdnws")
 stream = SubResource("AudioStreamRandomizer_f4uu4")
 
 [node name="Block" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_7twoe")
+stream = ExtResource("12_8nyne")
 
 [node name="Kick" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_q06vj")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_luhre")
+
+[node name="KickMiss" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_68tuw")
+
+[node name="PunchMiss" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_px57j")
+
+[node name="PunchHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_q5dfi")
+
+[node name="KickHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_rni1b")

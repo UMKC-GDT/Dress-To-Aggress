@@ -27,3 +27,19 @@ func playDeath():
 func playKick():
 	if not false:
 		$Kick.play()
+		
+func playKickMiss():
+	if not false:
+		$KickMiss.play()
+
+func playPunchMiss():
+	if not false:
+		$PunchMiss.play()
+		
+func playKickHit():
+	if not false:
+		$KickHit.play()
+
+func playPunchHit():
+	if not false:
+		$PunchHit.play()
