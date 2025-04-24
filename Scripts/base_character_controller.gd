@@ -468,7 +468,7 @@ func start_punch():
 	cancellable = true
 	
 	change_state(CharacterState.PUNCH)
-	SfxManager.playMiss()
+	SfxManager.playPunchMiss()
 
 func punch_state(delta):
 	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -488,7 +488,7 @@ func start_kick():
 		cancellable = false
 		
 		change_state(CharacterState.KICK)
-		SfxManager.playKick()
+		SfxManager.playKickMiss()
 
 func kick_state(delta):
 	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -667,11 +667,13 @@ func attack_hit(target):
 		match state:
 			CharacterState.PUNCH:
 				print("Hitting " + str(target) + " with the almighty punch!")
+				SfxManager.playPunchHit()
 				target.get_hit_with(punch_data)
 				
 			
 			CharacterState.KICK:
 				print("Hitting " + str(target) + " with the almighty kick!")
+				SfxManager.playKickHit()
 				target.get_hit_with(kick_data)
 				
 
