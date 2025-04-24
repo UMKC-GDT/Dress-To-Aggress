@@ -126,13 +126,13 @@ func run_ai():
 	
 	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
-		if randf() < 0.06:
+		if randf() < 0.6:
 			block(punch_time)
 		elif randf() < 0.06:
 			dash_away()
 	
 	elif (Input.is_action_just_pressed(enemy.kick_input) and horizontal_distance <= kick_range):
-		if randf() < 0.06:
+		if randf() < 0.6:
 			block(kick_time) 
 		elif randf() < 0.06:
 			dash_away()
