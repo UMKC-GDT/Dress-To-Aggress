@@ -49,33 +49,47 @@ script = ExtResource("1_f4uu4")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_qbjw7")
+volume_db = 5.0
 
-[node name="Miss" type="AudioStreamPlayer2D" parent="."]
+[node name="KickVoice" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_1b3t6")
+volume_db = 5.0
+
+[node name="PunchVoice" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_68tuw")
+volume_db = 5.0
 
 [node name="HitSounds" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_hdnws")
+volume_db = 5.0
 
 [node name="Click" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_f4uu4")
 
 [node name="Block" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_8nyne")
+volume_db = 5.0
 
 [node name="Kick" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_q06vj")
+volume_db = 5.0
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_luhre")
+volume_db = 10.0
 
 [node name="KickMiss" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_68tuw")
+volume_db = 10.0
 
 [node name="PunchMiss" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_px57j")
+volume_db = 10.0
 
 [node name="PunchHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_q5dfi")
+volume_db = 10.0
 
 [node name="KickHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_rni1b")
+volume_db = 10.0

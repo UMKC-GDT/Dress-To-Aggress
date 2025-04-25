@@ -32,9 +32,9 @@ var enemy_blocking = false
 var enemy_approaching
 
 #Rather than an enum, THIS is what you check horizontal distance against to react based on the player's distance. If their horizontal distance is less than kick range, they're in kick range, for example. 
-var pose_range = 31
-var punch_range = 34
-var kick_range = 46
+var pose_range = 32
+var punch_range = 36
+var kick_range = 50
 
 var kick_time = 0.30
 var punch_time = 0.15
@@ -107,14 +107,9 @@ func run_ai():
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
 				if randf() < 0.005:
 					kick()
-	
-	#if horizontal_distance < kick_range:
-	#	if get_random_number() < 1:
-	#		punch()
-	#	elif get_random_number() < 2:
-	#		kick()
+
 	if horizontal_distance < kick_range:
-		if randf() < 0.05:
+		if randf() < 0.07:
 			punch()
 		elif randf() < 0.05:
 			kick()
@@ -126,13 +121,13 @@ func run_ai():
 	
 	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
-		if randf() < 0.6:
+		if randf() < 0.4:
 			block(punch_time)
 		elif randf() < 0.06:
 			dash_away()
 	
 	elif (Input.is_action_just_pressed(enemy.kick_input) and horizontal_distance <= kick_range):
-		if randf() < 0.6:
+		if randf() < 0.4:
 			block(kick_time) 
 		elif randf() < 0.06:
 			dash_away()

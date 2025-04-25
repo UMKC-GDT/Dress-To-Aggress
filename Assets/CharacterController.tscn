@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://cpwnjci14lgit" path="res://Scripts/throw_hitbox.gd" id="24_lcnf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tmop"]
-size = Vector2(27, 50)
+size = Vector2(13, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pbfsw"]
 animations = [{
@@ -197,13 +197,13 @@ animations = [{
 size = Vector2(27, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q13i1"]
-size = Vector2(30, 50)
+size = Vector2(29, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu3r3"]
-size = Vector2(38, 71.5)
+size = Vector2(41, 71.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7slhi"]
-size = Vector2(9, 50)
+size = Vector2(9.5, 50)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_q13i1")
@@ -255,7 +255,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch Hitbox"]
-position = Vector2(9, 1)
+position = Vector2(8.5, 1)
 shape = SubResource("RectangleShape2D_q13i1")
 debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
 
@@ -264,7 +264,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kick Hitbox"]
-position = Vector2(13, -10.25)
+position = Vector2(14.5, -10.25)
 shape = SubResource("RectangleShape2D_yu3r3")
 debug_color = Color(0.786632, 0.431925, 0, 0.42)
 
@@ -272,5 +272,5 @@ debug_color = Color(0.786632, 0.431925, 0, 0.42)
 script = ExtResource("24_lcnf3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Hitbox"]
-position = Vector2(20, 4)
+position = Vector2(20.25, 4)
 shape = SubResource("RectangleShape2D_7slhi")

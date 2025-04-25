@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=18 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
@@ -19,6 +19,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg752"]
+size = Vector2(339, 20)
+
 [node name="Test Level" type="Node2D"]
 
 [node name="Runway" type="Sprite2D" parent="."]
@@ -27,29 +30,28 @@ scale = Vector2(0.17, 0.17)
 texture = ExtResource("2_5oh2v")
 
 [node name="Invisible Wall" type="StaticBody2D" parent="Runway"]
-position = Vector2(-1417.65, -188.235)
+position = Vector2(-560, -188.235)
 scale = Vector2(5.88235, 5.88235)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall"]
-position = Vector2(140, -15)
+position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_1c2mv")
 
 [node name="Invisible Wall2" type="StaticBody2D" parent="Runway"]
-position = Vector2(-2835.29, -182.353)
+position = Vector2(560, -182.353)
 scale = Vector2(5.88235, 5.88235)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall2"]
-position = Vector2(585, -11)
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_1c2mv")
 
 [node name="Invisible Wall3" type="StaticBody2D" parent="Runway"]
-position = Vector2(-52.9412, -3076.47)
-rotation = 1.5708
+position = Vector2(0, 480.55)
 scale = Vector2(5.88235, 5.88235)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall3"]
-position = Vector2(585, -11)
-shape = SubResource("RectangleShape2D_1c2mv")
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_tg752")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(11, -9)
@@ -72,7 +74,7 @@ script = ExtResource("4_4ptq8")
 
 [node name="Background Track" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_6v6pp")
-volume_db = -6.5
+volume_db = -10.0
 
 [node name="Healthbar" parent="." instance=ExtResource("7_8chw7")]
 z_index = 3

@@ -4,10 +4,14 @@ func playHit():
 	if not false:
 		$HitSounds.play()
 	
-func playMiss():
+func playPunchVoice():
 	if not false:
-		$Miss.play()
-	
+		$PunchVoice.play()
+
+func playKickVoice():
+	if not false:
+		$KickVoice.play()
+
 func playJump():
 	if not false:
 		$Jump.play()
