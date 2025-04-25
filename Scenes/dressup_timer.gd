@@ -11,21 +11,19 @@ var file : FileAccess
 
 func _ready() -> void:
 	#default clothes if none were picked (we might change this)
-	pants_text =  "whiteShorts"
-	shirt_text = "whiteShirt"
+	pants_text =  "grayShorts"
+	shirt_text = "grayShirtS"
 	
 	speech_text.visible = false;
 	$"../AudioStreamPlayer".play(12.0)
-	
 	
 	#open save file
 	file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE)
 	
 	#$Timer.start(dressupTimer)
-	
+
 func _process(delta: float) -> void:
 	
-			
 	$RichTextLabel.text = str($Timer.time_left).pad_decimals(2)
 	
 	if(str($Timer.time_left).pad_decimals(2) == "9.50"):

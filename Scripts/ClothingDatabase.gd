@@ -1,8 +1,7 @@
 extends Node
 
 var pants_list = [
-	"blueShorts", "purplePants", "whiteShorts", "blackPants",
-	"greenShorts", "redPants", "brownPants", "brownShorts"
+	"blueShorts", "bluePants", "purplePants", "purpleShorts", "whiteShorts", "whitePants", "blackPants", "blackShorts", "greenShorts", "greenPants", "redPants", "redShorts", "brownPants", "brownShorts"
 ]
 
-var shirts_list = ["blueShirtL", "purpleShirtS", "whiteShirtL", "blackShirtS", "greenShirtL", "redShirtS", "redShirtL", "brownShirtL", "brownShirtS"]
+var shirts_list = ["blueShirtL", "blueShirtS", "purpleShirtS", "purpleShirtL", "whiteShirtL", "whiteShirtS", "blackShirtS", "blackShirtL", "greenShirtS", "greenShirtL", "redShirtS", "redShirtL", "brownShirtL", "brownShirtS"]

@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://bke81yc6r1qky"]
+
+[ext_resource type="Texture2D" uid="uid://c86ote5ny0tqv" path="res://Assets/Sprites/Clothing Frames/TankTop/Pose 28/Pose28TankTop2.png" id="1_4ojxs"]
+[ext_resource type="Texture2D" uid="uid://blp37uqgtutyg" path="res://Assets/Sprites/Clothing Frames/TankTop/Pose 28/Pose28TankTop1.png" id="2_ggbrl"]
+[ext_resource type="Texture2D" uid="uid://befe1kgue6m5d" path="res://Assets/Sprites/Clothing Frames/TankTop/Idle Frames/IdleTankTop0.png" id="3_gbyab"]
+[ext_resource type="Texture2D" uid="uid://c8dedxku14gmt" path="res://Assets/Sprites/Clothing Frames/TankTop/Idle Frames/IdleTankTop1.png" id="4_ydby7"]
+[ext_resource type="Texture2D" uid="uid://cxv8l604cup7c" path="res://Assets/Sprites/Clothing Frames/TankTop/Kick Frames/KickTankTop1.png" id="5_tfops"]
+[ext_resource type="Texture2D" uid="uid://c6fm3kr4h78pm" path="res://Assets/Sprites/Clothing Frames/TankTop/Kick Frames/KickTankTop2.png" id="6_vrfap"]
+[ext_resource type="Texture2D" uid="uid://5by10m7sf0jw" path="res://Assets/Sprites/Clothing Frames/TankTop/Mirror Frames/FinalizedModelTankTop.png" id="7_dvho8"]
+[ext_resource type="Texture2D" uid="uid://bcmoamei1rl4v" path="res://Assets/Sprites/Clothing Frames/TankTop/Punch Frames/PunchTankTop1.png" id="8_glvhv"]
+[ext_resource type="Texture2D" uid="uid://ddcp6eyf42nte" path="res://Assets/Sprites/Clothing Frames/TankTop/Punch Frames/PunchTankTop2.png" id="9_e8naj"]
+[ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_kiuqp"]
+[ext_resource type="Texture2D" uid="uid://cucscdajnr4nq" path="res://Assets/Sprites/Clothing Frames/TankTop/Walk Frames/WalkTankTop0.png" id="11_bj2xp"]
+[ext_resource type="Texture2D" uid="uid://dxepgjv0aomr1" path="res://Assets/Sprites/Clothing Frames/TankTop/Walk Frames/WalkTankTop1.png" id="12_l7hgv"]
+[ext_resource type="Texture2D" uid="uid://d2b4exycwbjvf" path="res://Assets/Sprites/Clothing Frames/TankTop/Walk Frames/WalkTankTop2.png" id="13_7an8y"]
+[ext_resource type="Texture2D" uid="uid://veq4symhd1wh" path="res://Assets/Sprites/Clothing Frames/TankTop/Walk Frames/WalkTankTop3.png" id="14_1kfqo"]
+
+[resource]
+script = ExtResource("10_kiuqp")
+ClothingType = "SHIRT"
+Rarity = "COMMON"
+name = "blueShirtS"
+outfitSet = "Basic"
+outfitPattern = "Solid"
+description = "This shirt increases knockback!"
+color = Color(0.270588, 0.592157, 0.854902, 1)
+stylePoints = 10
+styleMultiplier = 1.0
+attackDamageChange = 0.0
+attackSpeedChange = -0.25
+defenseChange = 0.0
+walkSpeedChange = 0.0
+dashSpeedChange = 0.25
+jumpHeightChange = 0.0
+hitstunLengthChange = 0.0
+knockbackChange = 0.5
+poseSpeedChange = 0.0
+poseHitstunChange = 0.0
+poseKnockbackChange = 0.0
+poseDamageChange = -0.125
+healthChange = 0.0
+mirrorPose = ExtResource("7_dvho8")
+idlePose0 = ExtResource("3_gbyab")
+idlePose1 = ExtResource("4_ydby7")
+walkPose0 = ExtResource("11_bj2xp")
+walkPose1 = ExtResource("12_l7hgv")
+walkPose2 = ExtResource("13_7an8y")
+walkPose3 = ExtResource("14_1kfqo")
+kickPose0 = ExtResource("5_tfops")
+kickPose1 = ExtResource("6_vrfap")
+punchPose0 = ExtResource("8_glvhv")
+punchPose1 = ExtResource("9_e8naj")
+hurtPose = ExtResource("2_ggbrl")
+Pose28 = ExtResource("1_4ojxs")

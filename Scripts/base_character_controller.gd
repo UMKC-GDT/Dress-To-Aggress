@@ -792,7 +792,7 @@ func attack_was_blocked(target):
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
 				
-				velocity.x = -1 * (facing_direction) * punch_data["ground_knockback_force"] + 50
+				velocity.x = -1 * (facing_direction) * 150 + 50
 				
 				start_recovery((punch_data["recovery_frames"] + (-1 * punch_data["onBlock_FA"])), punch_data["recovery_animation"])
 			
