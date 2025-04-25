@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="2_i40gg"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="3_yyjux"]
 [ext_resource type="Texture2D" uid="uid://bnco33r432dwp" path="res://Assets/Sprites/pixel images/gloves-removebg-preview.png" id="4_g1jww"]
-[ext_resource type="Script" uid="uid://bylsuk3y7c1yj" path="res://Scenes/imageMovement.gd" id="5_va30d"]
+[ext_resource type="Script" path="res://Scenes/imageMovement.gd" id="5_va30d"]
 [ext_resource type="Texture2D" uid="uid://b2xdpsby85lkk" path="res://Assets/Sprites/pixel images/shoe-removebg-preview.png" id="6_o3c07"]
 [ext_resource type="Texture2D" uid="uid://cdtbbrkfi5282" path="res://Assets/Sprites/pixel images/mask-removebg-preview.png" id="7_3c3k1"]
 [ext_resource type="Texture2D" uid="uid://bcfxdmoevauyy" path="res://Assets/Sprites/pixel images/glasses-removebg-preview.png" id="8_6b5qr"]

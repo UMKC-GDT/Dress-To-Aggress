@@ -848,9 +848,6 @@ func scale_stats():
 	DASH_SPEED *= dash_speed_mult
 	DASH_TIME /= dash_speed_mult
 	
-	if player_type == 1: print("Movement speed mult: " + str(movement_speed_mult))
-	if player_type == 1: print("New movement speed:" + str(SPEED))
-	
 	#dash_available +=
 	jump_height_mult += pants.get_jump_height_change()+ shirt.get_jump_height_change()
 	#jump_speed_mult +=
@@ -860,12 +857,15 @@ func scale_stats():
 	punch_speed_mult += shirt.get_attack_speed_change()
 	punch_data["startup_frames"] /= punch_speed_mult
 	punch_data["recovery_frames"] /= punch_speed_mult
+
+	punch_hitstun_mult += shirt.get_hitstun_length_change()
+	punch_data["ground_hitstun"] /= punch_hitstun_mult
+	punch_data["air_hitstun"] /= punch_hitstun_mult
 	
-	print("attack speed: " + str(punch_speed_mult))
-	print(punch_data["startup_frames"])
+	punch_knockback_mult += shirt.get_knockback_change()
+	punch_data["ground_knockback_force"] *= punch_knockback_mult
+	punch_data["air_knockback_force"] *= punch_knockback_mult
 	
-	#punch_hitstun_mult += 
-	#punch_knockback_mult += 
 	punch_damage_mult += shirt.get_attack_damage_change()
 	punch_data["damage"] *= punch_damage_mult 
 	
@@ -873,11 +873,14 @@ func scale_stats():
 	kick_data["startup_frames"] /= kick_speed_mult
 	kick_data["recovery_frames"] /= kick_speed_mult
 	
-	print("attack speed: " + str(kick_speed_mult))
-	print(kick_data["startup_frames"])
-	#kick_hitstun_mult += 
-	#kick_knockback_mult += 
-	#kick_forward_mult += 
+	kick_hitstun_mult += pants.get_hitstun_length_change()
+	kick_data["ground_hitstun"] /= kick_hitstun_mult
+	kick_data["air_hitstun"] /= kick_hitstun_mult
+	
+	kick_knockback_mult += pants.get_knockback_change()
+	kick_data["ground_knockback_force"] *= kick_knockback_mult
+	kick_data["air_knockback_force"] *= kick_knockback_mult
+	
 	kick_damage_mult += pants.get_attack_damage_change()
 	kick_data["damage"] *= kick_damage_mult 
 	
@@ -893,8 +896,6 @@ func scale_stats():
 	
 	pose_damage_mult += shirt.get_pose_damage_change() + pants.get_pose_damage_change()
 	throw_data["damage"] = 20 * pose_damage_mult
-	
-	
 
 
 func report_dead():
