@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://bjfgvv5whkxw5"]
+
+[ext_resource type="Texture2D" uid="uid://cbdaq3w2ioqtq" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants2.png" id="1_ur6qo"]
+[ext_resource type="Texture2D" uid="uid://b1hg3ipsarxko" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants1.png" id="2_jlqh6"]
+[ext_resource type="Texture2D" uid="uid://bsrbv4absdkx1" path="res://Assets/Sprites/Clothing Frames/Pants/Idle Frames/IdlePants0.png" id="3_3lvx8"]
+[ext_resource type="Texture2D" uid="uid://byh3nprx5hpui" path="res://Assets/Sprites/Clothing Frames/Pants/Idle Frames/IdlePants1.png" id="4_5le2h"]
+[ext_resource type="Texture2D" uid="uid://dvcjlv868wdq5" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants1.png" id="5_g0r87"]
+[ext_resource type="Texture2D" uid="uid://cvycmdo8x76ah" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants2.png" id="6_qnty3"]
+[ext_resource type="Texture2D" uid="uid://pdxgrk5kljxd" path="res://Assets/Sprites/Clothing Frames/Pants/Mirror Frames/FinalizedPants.png" id="7_00aat"]
+[ext_resource type="Texture2D" uid="uid://5mp8wap8bl42" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants1.png" id="8_hea4s"]
+[ext_resource type="Texture2D" uid="uid://lwkwfmuihtt" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants2.png" id="9_umaep"]
+[ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_3ebb5"]
+[ext_resource type="Texture2D" uid="uid://bqec7vemkel0f" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants0.png" id="11_5hc3i"]
+[ext_resource type="Texture2D" uid="uid://8lvmd6wd264r" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants1.png" id="12_77blh"]
+[ext_resource type="Texture2D" uid="uid://c5whrb28xc3s7" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants2.png" id="13_vcn6p"]
+[ext_resource type="Texture2D" uid="uid://diwy8d8bipu3j" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants3.png" id="14_picl5"]
+
+[resource]
+script = ExtResource("10_3ebb5")
+ClothingType = "LEGWEAR"
+Rarity = "COMMON"
+name = "brownPants"
+outfitSet = "Basic"
+outfitPattern = "Solid"
+description = "These pants have balanced stats!"
+color = Color(0.656699, 0.527085, 0.380283, 1)
+stylePoints = 50
+styleMultiplier = 1.0
+attackDamageChange = 0.0
+attackSpeedChange = 0.0
+defenseChange = 0.0
+walkSpeedChange = 0.0
+dashSpeedChange = 0.0
+jumpHeightChange = 0.0
+hitstunLengthChange = 0.0
+knockbackChange = 0.0
+poseSpeedChange = 0.0
+poseHitstunChange = 0.0
+poseKnockbackChange = 0.0
+poseDamageChange = 0.0
+mirrorPose = ExtResource("7_00aat")
+idlePose0 = ExtResource("3_3lvx8")
+idlePose1 = ExtResource("4_5le2h")
+walkPose0 = ExtResource("11_5hc3i")
+walkPose1 = ExtResource("12_77blh")
+walkPose2 = ExtResource("13_vcn6p")
+walkPose3 = ExtResource("14_picl5")
+kickPose0 = ExtResource("5_g0r87")
+kickPose1 = ExtResource("6_qnty3")
+punchPose0 = ExtResource("8_hea4s")
+punchPose1 = ExtResource("9_umaep")
+hurtPose = ExtResource("2_jlqh6")
+Pose28 = ExtResource("1_ur6qo")
+metadata/_custom_type_script = "uid://0bwef23hrt6j"

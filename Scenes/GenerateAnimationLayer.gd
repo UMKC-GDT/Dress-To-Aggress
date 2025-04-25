@@ -18,8 +18,8 @@ func  _ready() -> void:
 	
 	if(get_parent().name == "Player2"):
 		#generate a random outfit
-		var pants = ["blueShorts","purplePants","whiteShorts","blackPants","greenShorts", "redPants"]
-		var shirts = ["blueShirtL", "purpleShirtS", "whiteShirtL","blackShirtS","greenShirtL","redShirtS"]
+		var pants = ["blueShorts","purplePants","whiteShorts","blackPants","greenShorts", "redPants", "brownPants", "brownShorts"]
+		var shirts = ["blueShirtL", "purpleShirtS", "whiteShirtL","blackShirtS","greenShirtL","redShirtS", "brownShirtL", "brownShirtS"]
 		var rand1 = rng.randi_range(0,pants.size()-1)
 		var rand2 = rng.randi_range(0,shirts.size()-1)
 		pants_text = pants[rand1]
