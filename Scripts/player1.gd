@@ -8,7 +8,7 @@ func _ready():
 	player_type = 1
 	enemy_name = "Player2"
 	healthbar = $"../Healthbar"
-	print(health)
+	super.scale_stats()
 	healthbar.init_health(health)
 	super._ready()
 

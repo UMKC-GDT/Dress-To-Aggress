@@ -24,10 +24,6 @@ func init_health(_health):
 	health = _health
 	value = health
 	
-	print(health)
-	print(max_value)
-	print(value)
-	
 	$DamageBar.max_value = health
 	$DamageBar.value = health
 

@@ -54,6 +54,7 @@ func _ready():
 	player_type = 0
 	enemy_name = "Player"
 	healthbar = $"../Healthbar2"
+	super.scale_stats()
 	healthbar.init_health(health)
 	super._ready()
 

@@ -20,6 +20,7 @@ config/icon="res://Assets/icon.svg"
 
 global="*res://Scenes/global.gd"
 SfxManager="*res://Scenes/SFXManager.tscn"
+ClothingDatabase="*res://Scripts/ClothingDatabase.gd"
 
 [display]
 

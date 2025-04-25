@@ -38,6 +38,7 @@ poseSpeedChange = 0.0
 poseHitstunChange = 0.0
 poseKnockbackChange = 0.0
 poseDamageChange = 0.0
+healthChange = 0.25
 mirrorPose = ExtResource("7_472ja")
 idlePose0 = ExtResource("3_r11sy")
 idlePose1 = ExtResource("4_qybt4")

@@ -27,6 +27,7 @@ var pose_hitstun_mult = 1
 var pose_knockback_mult = 1
 var pose_damage_mult = 1
 
+var health_mult = 1
 
 @export var health = 200
 @export var health_UI : RichTextLabel
@@ -223,7 +224,6 @@ func _ready():
 	
 	set_controls()
 	disable_hitboxes()
-	scale_stats()
 
 #This is the first function at the heart of the character controller functionality, called every frame. It handles taking in inputs, but also establishing what inputs are valid for each state, and calling the corresponding function for that state. 
 func handle_input(delta):
@@ -896,6 +896,9 @@ func scale_stats():
 	
 	pose_damage_mult += shirt.get_pose_damage_change() + pants.get_pose_damage_change()
 	throw_data["damage"] = 20 * pose_damage_mult
+	
+	health_mult += shirt.get_health_change() + pants.get_health_change()
+	health = 200 * health_mult
 
 
 func report_dead():

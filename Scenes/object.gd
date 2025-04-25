@@ -12,6 +12,7 @@ var stat_box : Panel
 @export var current_wearable: Wearable # WILL ERROR IF NO WEARABLE PRESENT
 
 func _ready():
+	
 	#to make  sure that there is alwasy a pants and shirt option, the object is differeent babsed on the name
 	if("randomPants" in self.name):
 		set_random_pants_wearable()
@@ -32,25 +33,25 @@ func set_random_pants_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
 	#this array  of pants must be the exact names  as the resources
-	var pants = ["blueShorts.tres","purplePants.tres","whiteShorts.tres","blackPants.tres","greenShorts.tres","redPants.tres", "brownPants.tres", "brownShorts.tres"]
+	var pants = ClothingDatabase.pants_list
 	
 	#picks a random numbe
 	var rand = rng.randi_range(0,pants.size()-1)
 	
 	#generates random pants
-	current_wearable = load(path + pants[rand])
+	current_wearable = load(path + pants[rand] + ".tres")
 	
 func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
 	#this array  of shirts must be the exact names  as the resources
-	var shirts = ["redShirtS.tres","whiteShirtL.tres","greenShirtL.tres","blackShirtS.tres","purpleShirtS.tres","blueShirtL.tres", "brownShirtL.tres", "brownShirtS.tres"]
+	var shirts = ClothingDatabase.shirts_list
 	
 	#picks a random number
 	var rand = rng.randi_range(0,shirts.size()-1)
 	
 	#generates random shirt
-	current_wearable = load(path + shirts[rand])
+	current_wearable = load(path + shirts[rand] + ".tres")
 	
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():

@@ -26,6 +26,7 @@ class_name Wearable
 @export var poseHitstunChange: float = 0
 @export var poseKnockbackChange: float = 0
 @export var poseDamageChange: float = 0
+@export var healthChange: float = 0
 
 @export_category("Animation Frames")
 @export var mirrorPose: Texture2D
@@ -107,6 +108,9 @@ func get_pose_knockback_change() -> float:
 
 func get_pose_damage_change() -> float:
 	return poseDamageChange
+
+func get_health_change() -> float:
+	return healthChange
 
 # Animation Frames getters
 func get_mirror_pose() -> Texture2D:
