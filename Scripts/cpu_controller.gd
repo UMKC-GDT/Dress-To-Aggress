@@ -346,4 +346,5 @@ func check_for_jump():
 		start_action(4, func(): start_jump(0), "jump startup")
 		
 func report_dead():
+	SfxManager.playDeath()
 	cpu_died.emit()

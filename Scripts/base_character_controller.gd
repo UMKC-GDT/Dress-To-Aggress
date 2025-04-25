@@ -468,7 +468,7 @@ func start_punch():
 	cancellable = true
 	
 	change_state(CharacterState.PUNCH)
-	SfxManager.playMiss()
+	SfxManager.playPunchMiss()
 
 func punch_state(delta):
 	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -488,7 +488,7 @@ func start_kick():
 		cancellable = false
 		
 		change_state(CharacterState.KICK)
-		SfxManager.playMiss()
+		SfxManager.playKickMiss()
 
 func kick_state(delta):
 	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -523,6 +523,7 @@ func start_recovery(frames, animation):
 	timer.timeout.connect(func(): if state != CharacterState.STARTUP and state != CharacterState.HURT: change_state(CharacterState.IDLE))
 
 func get_hit_with(attack_data):
+	SfxManager.playHit()
 	change_state(CharacterState.HURT)
 	
 	animation_player.play("hurt")
@@ -666,13 +667,15 @@ func attack_hit(target):
 		match state:
 			CharacterState.PUNCH:
 				print("Hitting " + str(target) + " with the almighty punch!")
+				SfxManager.playPunchHit()
 				target.get_hit_with(punch_data)
-				SfxManager.playHit()
+				
 			
 			CharacterState.KICK:
 				print("Hitting " + str(target) + " with the almighty kick!")
+				SfxManager.playKickHit()
 				target.get_hit_with(kick_data)
-				SfxManager.playHit()
+				
 
 func reduce_health(damage):
 	health -= damage
@@ -798,10 +801,12 @@ func scale_stats():
 	#kick_forward_mult = 
 	kick_damage_mult = pants.get_attack_damage_change()
 	
-	#pose_speed_mult = 
-	#pose_hitstun_mult = 
-	#pose_knockback_mult = 
-	#pose_damage_mult =
+	pose_speed_mult = shirt.get_pose_speed_change() + pants.get_pose_speed_change()
+	pose_hitstun_mult = shirt.get_pose_hitstun_change() + pants.get_pose_hitstun_change()
+	pose_knockback_mult = shirt.get_pose_knockback_change() + pants.get_pose_knockback_change()
+	pose_damage_mult = shirt.get_pose_damage_change() + pants.get_pose_damage_change()
+	print(pose_damage_mult)
+	print(throw_data["damage"])
 
 func report_dead():
 	pass

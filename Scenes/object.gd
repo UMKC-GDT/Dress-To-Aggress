@@ -32,7 +32,7 @@ func set_random_pants_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
 	#this array  of pants must be the exact names  as the resources
-	var pants = ["blueShorts.tres","purplePants.tres","whiteShorts.tres"]
+	var pants = ["blueShorts.tres","purplePants.tres","whiteShorts.tres","blackPants.tres","greenShorts.tres","redPants.tres"]
 	
 	#picks a random numbe
 	var rand = rng.randi_range(0,pants.size()-1)
@@ -44,7 +44,7 @@ func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
 	#this array  of shirts must be the exact names  as the resources
-	var shirts = ["redShirt.tres","whiteShirt.tres","greenShirt.tres","blackShirt.tres"]
+	var shirts = ["redShirt.tres","whiteShirt.tres","greenShirt.tres","blackShirt.tres","purpleShirtS.tres","blueShirt.tres"]
 	
 	#picks a random number
 	var rand = rng.randi_range(0,shirts.size()-1)

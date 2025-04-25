@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/B-Kick.mp3-997764b93c7d78936ffaa939a0528d50.m
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
