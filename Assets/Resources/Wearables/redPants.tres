@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://dy7pvihmxqcx6"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://dy7pvihmxqcx6"]
 
 [ext_resource type="Texture2D" uid="uid://cbdaq3w2ioqtq" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants2.png" id="1_k7a8a"]
 [ext_resource type="Texture2D" uid="uid://b1hg3ipsarxko" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants1.png" id="2_m7qry"]
@@ -6,9 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://byh3nprx5hpui" path="res://Assets/Sprites/Clothing Frames/Pants/Idle Frames/IdlePants1.png" id="4_8ogf0"]
 [ext_resource type="Texture2D" uid="uid://dvcjlv868wdq5" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants1.png" id="5_st3tu"]
 [ext_resource type="Texture2D" uid="uid://cvycmdo8x76ah" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants2.png" id="6_ov80c"]
+[ext_resource type="Texture2D" uid="uid://cptokg04nuose" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants1.png" id="7_8ogf0"]
 [ext_resource type="Texture2D" uid="uid://pdxgrk5kljxd" path="res://Assets/Sprites/Clothing Frames/Pants/Mirror Frames/FinalizedPants.png" id="7_23dfc"]
 [ext_resource type="Texture2D" uid="uid://5mp8wap8bl42" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants1.png" id="8_cch27"]
+[ext_resource type="Texture2D" uid="uid://bj8uljibd7ylm" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants2.png" id="8_st3tu"]
 [ext_resource type="Texture2D" uid="uid://lwkwfmuihtt" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants2.png" id="9_o4h48"]
+[ext_resource type="Texture2D" uid="uid://bhkle8nseq04h" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants3.png" id="9_ov80c"]
 [ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_3tgln"]
 [ext_resource type="Texture2D" uid="uid://bqec7vemkel0f" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants0.png" id="11_aewc4"]
 [ext_resource type="Texture2D" uid="uid://8lvmd6wd264r" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants1.png" id="12_foc2f"]
@@ -52,4 +55,7 @@ punchPose0 = ExtResource("8_cch27")
 punchPose1 = ExtResource("9_o4h48")
 hurtPose = ExtResource("2_m7qry")
 Pose28 = ExtResource("1_k7a8a")
+knockOut_pose0 = ExtResource("7_8ogf0")
+knockOut_pose1 = ExtResource("8_st3tu")
+knockOut_pose2 = ExtResource("9_ov80c")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"

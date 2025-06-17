@@ -43,6 +43,9 @@ class_name Wearable
 @export var blockPose: Texture2D
 @export var hurtPose: Texture2D
 @export var Pose28: Texture2D
+@export var knockOut_pose0: Texture2D
+@export var knockOut_pose1: Texture2D
+@export var knockOut_pose2: Texture2D
 
 # Clothing Properties getters
 func get_clothing_type() -> String:
@@ -154,3 +157,12 @@ func get_hurt_pose() -> Texture2D:
 
 func get_pose28() -> Texture2D:
 	return Pose28
+	
+func get_knockOut_pose0() -> Texture2D:
+	return knockOut_pose0
+	
+func get_knockOut_pose1() -> Texture2D:
+	return knockOut_pose1
+	
+func get_knockOut_pose2() -> Texture2D:
+	return knockOut_pose2

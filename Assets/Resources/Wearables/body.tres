@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://bqsttykalac5f"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://bqsttykalac5f"]
 
 [ext_resource type="Texture2D" uid="uid://bhawkr50bhrev" path="res://Assets/Sprites/Clothing Frames/body with a head/pose28/Pose28Body2.png" id="1_qr6uq"]
 [ext_resource type="Texture2D" uid="uid://dgciv3nn8v3kp" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody0.png" id="1_yf0vu"]
@@ -8,9 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://brmf06qwpr3ac" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody2.png" id="4_e765a"]
 [ext_resource type="Texture2D" uid="uid://btn7txieww8mm" path="res://Assets/Sprites/Clothing Frames/body with a head/Mirror Frames/FinalizedBody(1).png" id="5_7x5ig"]
 [ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="6_6srg8"]
+[ext_resource type="Texture2D" uid="uid://tm0evwng88q2" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody1.png" id="7_icxvb"]
 [ext_resource type="Texture2D" uid="uid://sa0rvvidg838" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody2.png" id="7_x60y8"]
+[ext_resource type="Texture2D" uid="uid://cxa7n3ahs11vt" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody2.png" id="8_qa04o"]
 [ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="8_tkqwu"]
 [ext_resource type="Texture2D" uid="uid://c8yivn807quku" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody0.png" id="9_ifsd7"]
+[ext_resource type="Texture2D" uid="uid://b7oro4kwqphj3" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody3.png" id="9_nthol"]
 [ext_resource type="Texture2D" uid="uid://crbs3nhs62y7c" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody1.png" id="10_glqxt"]
 [ext_resource type="Texture2D" uid="uid://dgtcc0m7blb80" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody2.png" id="11_tkqwu"]
 [ext_resource type="Texture2D" uid="uid://dga6ui5ynyqcf" path="res://Assets/Sprites/Clothing Frames/body with a head/Walk Frames/WalkBody3.png" id="12_co83p"]
@@ -38,6 +41,7 @@ poseSpeedChange = 0.0
 poseHitstunChange = 0.0
 poseKnockbackChange = 0.0
 poseDamageChange = 0.0
+healthChange = 0.0
 mirrorPose = ExtResource("5_7x5ig")
 idlePose0 = ExtResource("1_yf0vu")
 idlePose1 = ExtResource("2_e765a")
@@ -51,3 +55,6 @@ punchPose0 = ExtResource("6_6srg8")
 punchPose1 = ExtResource("7_x60y8")
 hurtPose = ExtResource("2_7vdul")
 Pose28 = ExtResource("1_qr6uq")
+knockOut_pose0 = ExtResource("7_icxvb")
+knockOut_pose1 = ExtResource("8_qa04o")
+knockOut_pose2 = ExtResource("9_nthol")

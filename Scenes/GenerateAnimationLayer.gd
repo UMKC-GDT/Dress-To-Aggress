@@ -79,7 +79,10 @@ func createAnimation(anim_name: String):
 	if(anim_name =="dash right"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
 	if(anim_name =="dead"):
-		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 1.0)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_idle_pose0(), 0.7)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_knockOut_pose0(), 0.7)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_knockOut_pose1(), 0.7)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_knockOut_pose2(), 35.0)
 	if(anim_name =="hurt"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_hurt_pose(), 1.0)
 	if(anim_name =="idle"):

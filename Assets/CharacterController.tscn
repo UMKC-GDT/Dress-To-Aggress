@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://chyj64wwnwo67"]
+[gd_scene load_steps=37 format=3 uid="uid://chyj64wwnwo67"]
 
 [ext_resource type="Texture2D" uid="uid://bkv1eebpqokq1" path="res://Assets/Sprites/Player Sprites/dashb1.png" id="1_n7ghd"]
 [ext_resource type="Script" uid="uid://cmdthl362buy2" path="res://Scripts/base_character_controller.gd" id="1_q13i1"]
@@ -7,14 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://basbruxqgetyk" path="res://Assets/Sprites/Player Sprites/dashf1.png" id="3_ivps1"]
 [ext_resource type="Texture2D" uid="uid://15o2brjumj6l" path="res://Assets/Sprites/Player Sprites/dashf2.png" id="4_urp6f"]
 [ext_resource type="Texture2D" uid="uid://cagujdubdoy5q" path="res://Assets/Sprites/Player Sprites/hurt.png" id="6_q13i1"]
-[ext_resource type="Texture2D" uid="uid://dkcxbf147dtnv" path="res://Assets/Sprites/Player Sprites/dead.png" id="7_7slhi"]
+[ext_resource type="Texture2D" uid="uid://cll4n0h2o633e" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody0.png" id="7_164t6"]
 [ext_resource type="Texture2D" uid="uid://cjpdoeaduc5kj" path="res://Assets/Sprites/Player Sprites/walkb1.png" id="7_u1c27"]
+[ext_resource type="Texture2D" uid="uid://tm0evwng88q2" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody1.png" id="8_cd0cm"]
 [ext_resource type="Texture2D" uid="uid://b6jkfhqjd1vjq" path="res://Assets/Sprites/Player Sprites/jump.png" id="8_ivps1"]
 [ext_resource type="Texture2D" uid="uid://dvoo30d0ryex8" path="res://Assets/Sprites/Player Sprites/walkb2.png" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://dgciv3nn8v3kp" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody0.png" id="9_31scl"]
+[ext_resource type="Texture2D" uid="uid://cxa7n3ahs11vt" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody2.png" id="9_l01sm"]
 [ext_resource type="Texture2D" uid="uid://b5bs3y6tt60os" path="res://Assets/Sprites/Player Sprites/walk1.png" id="9_q13i1"]
 [ext_resource type="Texture2D" uid="uid://ut1m5k3kdcpp" path="res://Assets/Sprites/Player Sprites/jump startup.png" id="9_urp6f"]
 [ext_resource type="Texture2D" uid="uid://bcaciqtdynuym" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody1.png" id="10_5ye0y"]
+[ext_resource type="Texture2D" uid="uid://b7oro4kwqphj3" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody3.png" id="10_prtgt"]
 [ext_resource type="Texture2D" uid="uid://thfvgsvr8gj5" path="res://Assets/Sprites/Player Sprites/walk2.png" id="10_pylmc"]
 [ext_resource type="Texture2D" uid="uid://brmf06qwpr3ac" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody2.png" id="13_v20cc"]
 [ext_resource type="Texture2D" uid="uid://dekvuh2xltrh1" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody1.png" id="14_ehku4"]
@@ -65,7 +68,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_7slhi")
+"texture": ExtResource("7_164t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cd0cm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_l01sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_prtgt")
 }],
 "loop": true,
 "name": &"dead",
@@ -223,7 +235,7 @@ shape = SubResource("RectangleShape2D_5tmop")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.303)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"kick"
+animation = &"dead"
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 

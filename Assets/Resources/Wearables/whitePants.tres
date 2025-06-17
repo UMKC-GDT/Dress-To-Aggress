@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=15 format=3 uid="uid://bk20jq56o6xp8"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://bk20jq56o6xp8"]
 
 [ext_resource type="Texture2D" uid="uid://cbdaq3w2ioqtq" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants2.png" id="1_ej726"]
 [ext_resource type="Texture2D" uid="uid://b1hg3ipsarxko" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants1.png" id="2_271ul"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dvcjlv868wdq5" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants1.png" id="5_gcbn2"]
 [ext_resource type="Texture2D" uid="uid://cvycmdo8x76ah" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants2.png" id="6_1vv05"]
 [ext_resource type="Texture2D" uid="uid://pdxgrk5kljxd" path="res://Assets/Sprites/Clothing Frames/Pants/Mirror Frames/FinalizedPants.png" id="7_exr8w"]
+[ext_resource type="Texture2D" uid="uid://cptokg04nuose" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants1.png" id="7_lskmo"]
+[ext_resource type="Texture2D" uid="uid://bj8uljibd7ylm" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants2.png" id="8_gcbn2"]
 [ext_resource type="Texture2D" uid="uid://5mp8wap8bl42" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants1.png" id="8_pcoo2"]
+[ext_resource type="Texture2D" uid="uid://bhkle8nseq04h" path="res://Assets/Sprites/Clothing Frames/Pants/Knockout Frames/KnockOutPants3.png" id="9_1vv05"]
 [ext_resource type="Texture2D" uid="uid://lwkwfmuihtt" path="res://Assets/Sprites/Clothing Frames/Pants/Punch Frames/PunchPants2.png" id="9_yukl1"]
 [ext_resource type="Script" uid="uid://0bwef23hrt6j" path="res://Scripts/Wearable.gd" id="10_4wxeg"]
 [ext_resource type="Texture2D" uid="uid://bqec7vemkel0f" path="res://Assets/Sprites/Clothing Frames/Pants/Walk Frames/WalkPants0.png" id="11_j8vib"]
@@ -52,4 +55,7 @@ punchPose0 = ExtResource("8_pcoo2")
 punchPose1 = ExtResource("9_yukl1")
 hurtPose = ExtResource("2_271ul")
 Pose28 = ExtResource("1_ej726")
+knockOut_pose0 = ExtResource("7_lskmo")
+knockOut_pose1 = ExtResource("8_gcbn2")
+knockOut_pose2 = ExtResource("9_1vv05")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"

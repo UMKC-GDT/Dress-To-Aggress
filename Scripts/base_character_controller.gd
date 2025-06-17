@@ -743,7 +743,7 @@ func reduce_health(damage):
 		stop_all_timers()
 		
 		change_state(CharacterState.DEAD)
-		rotation_degrees = 90
+		#rotation_degrees = 90
 		
 		# Force collision update
 		set_deferred("disabled", true)
