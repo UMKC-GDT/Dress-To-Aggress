@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="2_i40gg"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="3_yyjux"]
 [ext_resource type="Texture2D" uid="uid://bnco33r432dwp" path="res://Assets/Sprites/pixel images/gloves-removebg-preview.png" id="4_g1jww"]
-[ext_resource type="Script" path="res://Scenes/imageMovement.gd" id="5_va30d"]
+[ext_resource type="Script" uid="uid://bylsuk3y7c1yj" path="res://Scenes/imageMovement.gd" id="5_va30d"]
 [ext_resource type="Texture2D" uid="uid://b2xdpsby85lkk" path="res://Assets/Sprites/pixel images/shoe-removebg-preview.png" id="6_o3c07"]
 [ext_resource type="Texture2D" uid="uid://cdtbbrkfi5282" path="res://Assets/Sprites/pixel images/mask-removebg-preview.png" id="7_3c3k1"]
 [ext_resource type="Texture2D" uid="uid://bcfxdmoevauyy" path="res://Assets/Sprites/pixel images/glasses-removebg-preview.png" id="8_6b5qr"]
@@ -32,6 +32,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i40gg")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.786
+anchor_top = 0.603
+anchor_right = 0.93
+anchor_bottom = 0.69
+offset_left = -0.0800171
+offset_top = -0.160034
+offset_right = -0.400146
+offset_bottom = 3.19995
+theme_override_fonts/font = ExtResource("2_i40gg")
+theme_override_font_sizes/font_size = 50
+text = "Skip"
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -144,4 +159,5 @@ scale = Vector2(0.528, 0.574)
 texture = ExtResource("11_aeah3")
 script = ExtResource("5_va30d")
 
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

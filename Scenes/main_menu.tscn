@@ -90,6 +90,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 text = "Start game"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
