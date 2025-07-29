@@ -26,10 +26,15 @@ func  _ready() -> void:
 		shirt_text =  shirts[rand2]
 	else:
 		#get the clothing items to generate from the save file
-		var textFile = "res://Assets/OutfitSaveFile.txt"
-		var file  = FileAccess.open(textFile, FileAccess.READ)
-		shirt_text =  file.get_as_text().get_slice(",",1)
-		pants_text =  file.get_as_text().get_slice(",",0)
+		#var textFile = "res://Assets/OutfitSaveFile.txt"
+		#var file  = FileAccess.open(textFile, FileAccess.READ)
+		#shirt_text =  file.get_as_text().get_slice(",",1)
+		#pants_text =  file.get_as_text().get_slice(",",0)
+		
+		var save_resource = preload("res://Assets/Resources/OutfitSaveResource.tres")
+		shirt_text = save_resource.get_shirt_text()
+		pants_text = save_resource.get_pants_text()
+	 
 	
 	#load pants
 	if self.name == "PantsLayer":

@@ -7,7 +7,8 @@ extends Node2D
 
 var pants_text :String
 var shirt_text :String
-var file : FileAccess
+#var file : FileAccess 
+var save_resource: Resource 
 
 func _ready() -> void:
 	#default clothes if none were picked (we might change this)
@@ -18,7 +19,8 @@ func _ready() -> void:
 	$"../AudioStreamPlayer".play(12.0)
 	
 	#open save file
-	file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE)
+	#file  = FileAccess.open("res://Assets/OutfitSaveFile.txt", FileAccess.READ_WRITE) #delete soon
+	save_resource = preload("res://Assets/Resources/OutfitSaveResource.tres")
 	
 	#$Timer.start(dressupTimer)
 
@@ -67,7 +69,9 @@ func _on_timer_timeout() -> void:
 		#print(pants_text)
 		
 	#save file, must  separate with two commas
-	file.store_string(pants_text+","+shirt_text+",")
+	#file.store_string(pants_text+","+shirt_text+",") #delete soon
+	save_resource.set_shirt_text(shirt_text)
+	save_resource.set_pants_text(pants_text)
 	#print(file.get_as_text())
 	
 	#open new file
