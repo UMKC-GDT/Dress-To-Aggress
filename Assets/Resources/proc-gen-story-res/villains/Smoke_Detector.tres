@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Villain" load_steps=2 format=3 uid="uid://ct4xp6jrbm3v5"]
+
+[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Assets/Resources/proc-gen-story-res/villain.gd" id="1_a10b1"]
+
+[resource]
+script = ExtResource("1_a10b1")
+codename = "Smoke Detector"
+epithet = "perfect commentary"
+style_tags = Array[String]([])
+m_o = "Judgement"
+threat_level = 5
+weight = 1.0
+metadata/_custom_type_script = "uid://ce0k3ynbji8ua"

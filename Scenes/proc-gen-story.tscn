@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fu6pkvxf70yi"]
+
+[ext_resource type="Script" uid="uid://cipfp34rh0rbm" path="res://Scripts/proc-gen-story/console_app.gd" id="1_err32"]
+
+[node name="Proc-gen-story" type="Node2D"]
+script = ExtResource("1_err32")

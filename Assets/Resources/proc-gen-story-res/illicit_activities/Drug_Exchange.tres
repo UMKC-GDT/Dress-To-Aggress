@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IllicitActivity" load_steps=2 format=3 uid="uid://bytqphejnkb35"]
+
+[ext_resource type="Script" uid="uid://bjvn23wj0pmns" path="res://Assets/Resources/proc-gen-story-res/illicit_activity.gd" id="1_hotiy"]
+
+[resource]
+script = ExtResource("1_hotiy")
+title = "Drug_Exchange"
+description = "There will be a buyer and a seller. Only the names change."
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://bjvn23wj0pmns"

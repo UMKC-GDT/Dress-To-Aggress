@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://dt6dfv4vcdpn3"]
+
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/scenario_card.gd" id="1_cfs3r"]
+
+[resource]
+script = ExtResource("1_cfs3r")
+title = "Gather Intel"
+description = "Become a fly on the wall"
+stealthy = false
+combat_heavy = true
+weight = 1.0
+metadata/_custom_type_script = "uid://cxy4jdisgreae"

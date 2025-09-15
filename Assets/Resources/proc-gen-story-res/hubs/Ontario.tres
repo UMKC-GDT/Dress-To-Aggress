@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FashionHub" load_steps=2 format=3 uid="uid://d06xlqpgdrhpy"]
+
+[ext_resource type="Script" uid="uid://cixwce1rnn2pu" path="res://Assets/Resources/proc-gen-story-res/fashion_hub.gd" id="1_e62k0"]
+
+[resource]
+script = ExtResource("1_e62k0")
+name = "Le Street"
+city = "Ontario"
+country = "Canada"
+description = "Street Wear Capitol of the World"
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://cixwce1rnn2pu"

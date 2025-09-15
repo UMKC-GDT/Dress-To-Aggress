@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Villain" load_steps=2 format=3 uid="uid://dpf4yojd5sdo5"]
+
+[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Assets/Resources/proc-gen-story-res/villain.gd" id="1_g68be"]
+
+[resource]
+script = ExtResource("1_g68be")
+codename = "The Cat"
+epithet = "scratchy tornado"
+style_tags = Array[String]([])
+m_o = "Slicing and Dicing"
+threat_level = 10
+weight = 1.0
+metadata/_custom_type_script = "uid://ce0k3ynbji8ua"
