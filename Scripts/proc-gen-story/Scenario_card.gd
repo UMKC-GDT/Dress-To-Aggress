@@ -11,6 +11,6 @@ class_name ScenarioCard
 func summary() -> String:
 	var hub_label := hub.display_label()
 	var vil_label := villain.display_label()
-	return "In %s, %s is orchestrating: %s.\nMission: %s." % [
-		hub_label, vil_label, activity.display_label(), objective.display_label()
+	return "At the %s, %s is orchestrating: %s.\nMission: %s.\n%s" % [
+		hub_label, vil_label, activity.display_label(), objective.display_label(), objective.description
 	]

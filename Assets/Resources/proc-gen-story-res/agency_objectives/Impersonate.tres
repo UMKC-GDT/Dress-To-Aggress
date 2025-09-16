@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://c4cyij5qollj7"]
+
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Scripts/proc-gen-story/Agency_Objective.gd" id="1_l07qa"]
+
+[resource]
+script = ExtResource("1_l07qa")
+title = "Impersonate"
+description = "Take on the role of a high value target."
+stealthy = false
+combat_heavy = false
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://cxy4jdisgreae"

@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://dsjka4bpckn64"]
 
-[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/Agency_Objective.gd" id="1_hi662"]
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Scripts/proc-gen-story/Agency_Objective.gd" id="1_hi662"]
 
 [resource]
 script = ExtResource("1_hi662")
 title = "Network"
-description = "Socialize, make connections, and embed yourself in the scene."
-stealthy = true
+description = "Attend the event and make new connections with people in the in crowd."
+stealthy = false
 combat_heavy = false
+tags = Array[String]([])
 weight = 1.0
 metadata/_custom_type_script = "uid://cxy4jdisgreae"

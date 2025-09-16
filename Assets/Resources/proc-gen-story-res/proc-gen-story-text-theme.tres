@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ke63ja1bwhoy"]
+
+[ext_resource type="FontFile" uid="uid://bc7cag763w12b" path="res://Assets/Resources/proc-gen-story-res/Doto_Rounded-Black.ttf" id="1_fp5dv"]
+
+[resource]
+default_font = ExtResource("1_fp5dv")
+default_font_size = 36

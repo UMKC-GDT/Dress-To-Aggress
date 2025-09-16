@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Villain" load_steps=2 format=3 uid="uid://dnpj1bym4b52g"]
 
-[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Assets/Resources/proc-gen-story-res/villain.gd" id="1_vo526"]
+[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Scripts/proc-gen-story/villain.gd" id="1_6herp"]
 
 [resource]
-script = ExtResource("1_vo526")
+script = ExtResource("1_6herp")
 codename = "Samuel Xavier Elijah Phillip"
-epithet = "News"
+epithet = "The News"
 style_tags = Array[String]([])
 m_o = "Misinformation & Psyops"
 threat_level = 1

@@ -9,4 +9,7 @@ class_name Villain
 @export_range(0.0, 10.0, 0.1) var weight: float = 1.0
 
 func display_label() -> String:
-	return (codename + " the " + epithet)
+	if epithet.to_lower().contains("the"):
+		return (codename + " \"" + epithet + "\"")
+	return (codename + " the \"" + epithet + "\"")
+	

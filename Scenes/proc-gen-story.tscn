@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://fu6pkvxf70yi"]
+[gd_scene load_steps=4 format=3 uid="uid://fu6pkvxf70yi"]
 
 [ext_resource type="Script" uid="uid://cipfp34rh0rbm" path="res://Scripts/proc-gen-story/console_app.gd" id="1_err32"]
+[ext_resource type="Texture2D" uid="uid://dnlrmp5vkkpp5" path="res://Scripts/proc-gen-story/Screenshot 2025-09-16 152746.png" id="2_xfj6n"]
+[ext_resource type="Theme" uid="uid://ke63ja1bwhoy" path="res://Assets/Resources/proc-gen-story-res/proc-gen-story-text-theme.tres" id="3_dtuxb"]
 
 [node name="Proc-gen-story" type="Node2D"]
 script = ExtResource("1_err32")
+output_field_path = NodePath("RichTextLabel")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.946667, 0.68, 0.14902)
+position = Vector2(640, 359)
+scale = Vector2(1.34461, 1.33652)
+texture = ExtResource("2_xfj6n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1276.0
+offset_bottom = 719.0
+theme = ExtResource("3_dtuxb")
+text = "LORUM IPSUM DOLOR SIT AMET"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

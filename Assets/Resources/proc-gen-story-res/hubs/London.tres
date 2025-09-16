@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FashionHub" load_steps=2 format=3 uid="uid://c5wff66q1m7dn"]
 
-[ext_resource type="Script" uid="uid://cixwce1rnn2pu" path="res://Assets/Resources/proc-gen-story-res/fashion_hub.gd" id="1_aq4kr"]
+[ext_resource type="Script" uid="uid://cixwce1rnn2pu" path="res://Scripts/proc-gen-story/fashion_hub.gd" id="1_aq4kr"]
 
 [resource]
 script = ExtResource("1_aq4kr")

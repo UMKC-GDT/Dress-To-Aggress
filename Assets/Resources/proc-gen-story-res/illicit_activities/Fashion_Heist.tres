@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="IllicitActivity" load_steps=2 format=3 uid="uid://cgqwmyt8k81q3"]
 
-[ext_resource type="Script" uid="uid://bjvn23wj0pmns" path="res://Assets/Resources/proc-gen-story-res/illicit_activity.gd" id="1_2xibf"]
+[ext_resource type="Script" uid="uid://bjvn23wj0pmns" path="res://Scripts/proc-gen-story/illicit_activity.gd" id="1_2xibf"]
 
 [resource]
 script = ExtResource("1_2xibf")

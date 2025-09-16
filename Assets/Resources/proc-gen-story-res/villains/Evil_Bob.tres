@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Villain" load_steps=2 format=3 uid="uid://bpdd771d4h2iy"]
 
-[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Assets/Resources/proc-gen-story-res/villain.gd" id="1_ohjwi"]
+[ext_resource type="Script" uid="uid://ce0k3ynbji8ua" path="res://Scripts/proc-gen-story/villain.gd" id="1_ohjwi"]
 
 [resource]
 script = ExtResource("1_ohjwi")

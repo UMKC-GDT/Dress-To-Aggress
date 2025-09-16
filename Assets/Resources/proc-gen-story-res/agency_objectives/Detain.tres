@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://cl4j1cx0c72nu"]
 
-[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/Agency_Objective.gd" id="1_kst7i"]
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Scripts/proc-gen-story/Agency_Objective.gd" id="1_cg2ou"]
 
 [resource]
-script = ExtResource("1_kst7i")
+script = ExtResource("1_cg2ou")
 title = "Detain"
-description = "Track down your target, and detain them.."
+description = "Track down your target and detain them."
 stealthy = true
 combat_heavy = true
+tags = Array[String]([])
 weight = 1.0
 metadata/_custom_type_script = "uid://cxy4jdisgreae"

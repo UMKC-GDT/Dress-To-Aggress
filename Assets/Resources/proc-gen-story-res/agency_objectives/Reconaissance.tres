@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://dt6dfv4vcdpn3"]
+
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Scripts/proc-gen-story/Agency_Objective.gd" id="1_sk0fm"]
+
+[resource]
+script = ExtResource("1_sk0fm")
+title = "Reconaissance"
+description = "Become the fly on the wall and learn as much as you can."
+stealthy = true
+combat_heavy = false
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://cxy4jdisgreae"
