@@ -1,0 +1,28 @@
+# SIMPLE PROCEDURAL STORY GENERATOR
+
+Step 1. Create Resources
+	Fashion Hubs
+	Villains
+	Illicit Activities
+	Agency Objectives
+
+Step 2. Random Selection
+	<Fasion Hub> has some <Illicit Activity>.
+	The agency needs you to stop <Villain>, 
+	by accomplishing <Agency Objective>.
+
+Step 3. Profit
+
+To create new resources, just put it in the right folder:
+	res://Assets/Resources/proc-gen-story-res/hubs/
+	res://Assets/Resources/proc-gen-story-res/agency_objectives/
+	res://Assets/Resources/proc-gen-story-res/illicit_activities/
+	res://Assets/Resources/proc-gen-story-res/mission_cards/
+	
+1. Right click on one of those folders and mouse-over "Create".
+2. Create a new resource, and type "Villain" or "Agency Objective" etc.
+3. Name your resource, and then select it once it's been created.
+4. The Fun Part - Fill in the field in the inspector.
+
+It will automatically been picked up by the Story generator as long as it's in the correct folder.
+	
