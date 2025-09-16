@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_a10b1")
 codename = "Smoke Detector"
-epithet = "perfect commentary"
+epithet = "Talent scout"
 style_tags = Array[String]([])
 m_o = "Judgement"
 threat_level = 5

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FashionHub" load_steps=2 format=3 uid="uid://raqfnljhv1e1"]
+
+[ext_resource type="Script" uid="uid://cixwce1rnn2pu" path="res://Assets/Resources/proc-gen-story-res/fashion_hub.gd" id="1_12ps1"]
+
+[resource]
+script = ExtResource("1_12ps1")
+name = "Quadrilatero della Moda"
+city = "Milan"
+country = "Italy"
+description = "Vespas and Sunglasses"
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://cixwce1rnn2pu"

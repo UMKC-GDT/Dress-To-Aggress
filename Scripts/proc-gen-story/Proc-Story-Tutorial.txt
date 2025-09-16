@@ -22,7 +22,7 @@ To create new resources, just put it in the right folder:
 1. Right click on one of those folders and mouse-over "Create".
 2. Create a new resource, and type "Villain" or "Agency Objective" etc.
 3. Name your resource, and then select it once it's been created.
-4. The Fun Part - Fill in the field in the inspector.
+4. The Fun Part - Fill in the fields in the inspector.
 
 It will automatically been picked up by the Story generator as long as it's in the correct folder.
 	

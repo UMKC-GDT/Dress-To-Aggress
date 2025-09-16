@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://dsjka4bpckn64"]
 
-[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/scenario_card.gd" id="1_hi662"]
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/Agency_Objective.gd" id="1_hi662"]
 
 [resource]
 script = ExtResource("1_hi662")

@@ -1,11 +1,16 @@
 extends Resource
-class_name AgencyObjective
+class_name ScenarioCard
 
-@export var title: String                    # e.g. "Recover encoded blueprints"
-@export var description: String = ""
-@export var stealthy: bool = false
-@export var combat_heavy: bool = true
-@export_range(0.0, 10.0, 0.1) var weight: float = 1.0
+@export var hub: FashionHub
+@export var villain: Villain
+@export var activity: IllicitActivity
+@export var objective: AgencyObjective
+@export var seed: int = 0
+@export var tags: Array[String] = []
 
-func display_label() -> String:
-	return title
+func summary() -> String:
+	var hub_label := hub.display_label()
+	var vil_label := villain.display_label()
+	return "In %s, %s is orchestrating: %s.\nMission: %s." % [
+		hub_label, vil_label, activity.display_label(), objective.display_label()
+	]

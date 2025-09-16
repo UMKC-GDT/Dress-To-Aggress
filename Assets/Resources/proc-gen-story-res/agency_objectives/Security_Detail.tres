@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://cgpuim6agffxl"]
+
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/Agency_Objective.gd" id="1_4g56s"]
+
+[resource]
+script = ExtResource("1_4g56s")
+title = "Security Detail"
+description = "Protect a target asset."
+stealthy = true
+combat_heavy = true
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://cxy4jdisgreae"

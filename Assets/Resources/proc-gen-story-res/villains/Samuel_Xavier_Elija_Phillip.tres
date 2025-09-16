@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_vo526")
 codename = "Samuel Xavier Elijah Phillip"
-epithet = "The News"
+epithet = "News"
 style_tags = Array[String]([])
 m_o = "Misinformation & Psyops"
 threat_level = 1

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://cl4j1cx0c72nu"]
 
-[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/scenario_card.gd" id="1_kst7i"]
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/Agency_Objective.gd" id="1_kst7i"]
 
 [resource]
 script = ExtResource("1_kst7i")
-title = "Incapacitate"
-description = "Track down your target, and knock them out."
-stealthy = false
+title = "Detain"
+description = "Track down your target, and detain them.."
+stealthy = true
 combat_heavy = true
 weight = 1.0
 metadata/_custom_type_script = "uid://cxy4jdisgreae"

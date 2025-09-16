@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_hotiy")
-title = "Drug_Exchange"
+title = "Drug Exchange"
 description = "There will be a buyer and a seller. Only the names change."
 tags = Array[String]([])
 weight = 1.0

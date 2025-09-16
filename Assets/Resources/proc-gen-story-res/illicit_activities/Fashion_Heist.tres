@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IllicitActivity" load_steps=2 format=3 uid="uid://cgqwmyt8k81q3"]
+
+[ext_resource type="Script" uid="uid://bjvn23wj0pmns" path="res://Assets/Resources/proc-gen-story-res/illicit_activity.gd" id="1_2xibf"]
+
+[resource]
+script = ExtResource("1_2xibf")
+title = "Fashion Heist"
+description = "They are stealing fashion."
+tags = Array[String]([])
+weight = 1.0
+metadata/_custom_type_script = "uid://bjvn23wj0pmns"
