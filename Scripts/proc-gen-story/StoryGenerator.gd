@@ -1,7 +1,6 @@
 extends Node
 class_name ScenarioGenerator
 
-# Point this at YOUR root data folder (from your screenshot):
 @export var data_root := "res://Assets/Resources/proc-gen-story-res/"
 
 var _rng := RandomNumberGenerator.new()
@@ -36,7 +35,6 @@ func generate(seed: int = 0) -> ScenarioCard:
 func _load_all_in_folder(path: String) -> Array:
 	var out: Array = []
 
-	# OPEN the res:// path directly; don't use dir_exists_absolute on res://
 	var dir := DirAccess.open(path)
 	if dir == null:
 		push_warning("Folder not found or couldn't open: %s" % path)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bytqphejnkb35" path="res://Assets/Resources/proc-gen-story-res/illicit_activities/Drug_Exchange.tres" id="1_ftts8"]
 [ext_resource type="Resource" uid="uid://c5wff66q1m7dn" path="res://Assets/Resources/proc-gen-story-res/hubs/London.tres" id="2_5dntd"]
-[ext_resource type="Resource" uid="uid://dt6dfv4vcdpn3" path="res://Assets/Resources/proc-gen-story-res/agency_objectives/Gather_Info.tres" id="3_bovi5"]
+[ext_resource type="Resource" uid="uid://dt6dfv4vcdpn3" path="res://Assets/Resources/proc-gen-story-res/agency_objectives/Gather_Intel.tres" id="3_bovi5"]
 [ext_resource type="Script" uid="uid://c8gmfav0sq353" path="res://Assets/Resources/proc-gen-story-res/agency_objective.gd" id="4_ilux7"]
 [ext_resource type="Resource" uid="uid://dnpj1bym4b52g" path="res://Assets/Resources/proc-gen-story-res/villains/Samuel_Xavier_Elija_Phillip.tres" id="5_6qnxv"]
 

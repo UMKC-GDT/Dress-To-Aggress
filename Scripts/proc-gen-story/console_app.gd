@@ -6,7 +6,7 @@ class_name ConsoleScenarioApp
 func _ready() -> void:
 	add_child(generator)
 	print("-----------------------------------------")
-	print("Dress to Aggress — Scenario Console")
+	print("Dress to Aggress - Scenario Console")
 	print("Press SPACE to generate a scenario.")
 	print("Press Q to quit.")
 	print("-----------------------------------------")

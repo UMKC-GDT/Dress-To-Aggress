@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AgencyObjective" load_steps=2 format=3 uid="uid://dsjka4bpckn64"]
+
+[ext_resource type="Script" uid="uid://cxy4jdisgreae" path="res://Assets/Resources/proc-gen-story-res/scenario_card.gd" id="1_hi662"]
+
+[resource]
+script = ExtResource("1_hi662")
+title = "Network"
+description = "Socialize, make connections, and embed yourself in the scene."
+stealthy = true
+combat_heavy = false
+weight = 1.0
+metadata/_custom_type_script = "uid://cxy4jdisgreae"
