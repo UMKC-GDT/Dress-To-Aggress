@@ -31,7 +31,7 @@ var health_mult = 1
 
 @export var health = 200
 @export var health_UI : RichTextLabel
-@onready var healthbar = $Healthbar
+@onready var healthbar = $"/root/Test Level/CanvasLayer/Healthbar"
 
 # Based on the player type, in a later function, these'll be redefined or left empty depending on who's controlling it. This list will be expanded with each control.
 var left_input = ""
