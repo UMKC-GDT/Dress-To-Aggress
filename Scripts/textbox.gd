@@ -2,7 +2,7 @@ extends Control
 
 var sentence = "*You are a secret agent, infiltrating an international drug smuggling ring. 
 \n*But it's all hidden... behind a fashion show? 
-\n*You're going to need your sharpest disguise - the fiercest outfit you can imagine."
+\n*You're going to need your sharpest disguise - the fiercest outfit you can imagine.dkjfasdljflkasdjf"
 
 var sen_index = 0
 
