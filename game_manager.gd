@@ -7,11 +7,11 @@ extends Node2D
 
 @onready var fight_timer_display = $"Fight Timer Display"
 @onready var fight_timer = $"Fight Timer Display/Fight Timer"
-@onready var player = $"../Player"
-@onready var cpu = $"../Player2"
+@onready var player = $"/root/Test Level/Player"
+@onready var cpu = $"/root/Test Level/Player2"
 @onready var controls_panel = $"Controls Panel"
 
-@onready var fight_music = $"../Background Track"
+@onready var fight_music = $"/root/Test Level/Background Track"
 
 var timer_started := false
 
