@@ -23,6 +23,10 @@ func _ready() -> void:
 	save_resource = preload("res://Assets/Resources/OutfitSaveResource.tres")
 	
 	#$Timer.start(dressupTimer)
+	
+	# Stops and hides timer (Band-aid solution to removing timer)
+	#$Timer.paused = true;
+	visible = false;
 
 func _process(delta: float) -> void:
 	
@@ -91,3 +95,8 @@ func get_last_outfit() -> Array[Dictionary]:
 	var results = space_state.intersect_point(query)
 	
 	return results
+
+
+func _on_to_stage_button_button_down():
+	# Acts as if the timer ran out, and performs all the code to move onto the stage
+	_on_timer_timeout();
