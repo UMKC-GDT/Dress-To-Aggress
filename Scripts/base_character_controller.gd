@@ -40,10 +40,11 @@ var jump_input = ""
 var punch_input = ""
 var kick_input = ""
 var pose_input = ""
+var crouch_input = ""
 var debug_hurt = ""
 
 #At the heart of the player controller, this is the ENUM that defines all the current states the player can be in. This will get longer as more states are added, and this should be the first place you go to add a new state.
-enum CharacterState { IDLE, WALK, JUMP, DASH, STARTUP, RECOVERY, PUNCH, KICK, HURT, BLOCK, POSE_STARTUP, POSE, DEAD, DISABLED}
+enum CharacterState { IDLE, WALK, JUMP, DASH, STARTUP, RECOVERY, PUNCH, KICK, HURT, BLOCK, POSE_STARTUP, POSE, DEAD, DISABLED, CROUCH, CPUNCH, CKICK, CBLOCK, CHURT}
 var state = CharacterState.IDLE
 var last_state = CharacterState.IDLE
 var left_ground_check = false
@@ -178,6 +179,7 @@ func set_controls():
 			kick_input = "player_kick"
 			pose_input = "player_throw"
 			debug_hurt = "DEBUG_hurt_player"
+			crouch_input = "player_crouch"
 			
 			print("Player 1 Controls Enabled")
 		2: 
@@ -388,7 +390,15 @@ func handle_states(direction, delta):
 			PantsLayer.play("dead")
 			ShirtLayer.play("dead")
 			velocity.x = move_toward(velocity.x, 0, 25)
-	
+		
+		CharacterState.CROUCH:
+			animation_player.play("crouch")
+			#Commenting these out for now; do they exist yet?
+			#PantsLayer.play("crouch")
+			#ShirtLayer.play("crouch")
+			change_color(Color(Color.WHITE, 1.0))
+			crouch_state(direction)
+		
 	move_and_slide()
 
 #Every function below handles the actual logic for each state -- idle_state is called during the idle state, walk_state during the walk state, and so forth. As you could guess, each of those functions then define what can actually be done, and what inputs or conditions transfer us from state to state. 
@@ -398,8 +408,11 @@ func idle_state(direction):
 		
 		if direction: 
 			change_state(CharacterState.WALK)
+		elif Input.is_action_pressed(crouch_input):
+			#change_state(CharacterState.CROUCH)
+			print("This is where we would've crouched! Disabled for now, though.")
 		else:
-			
+				
 			if not disabled:
 				check_for_jump()
 			
@@ -424,6 +437,13 @@ func walk_state(direction):
 		velocity.x = direction * SPEED
 		check_for_attack()
 		check_for_pose()
+
+func crouch_state(direction):
+	pass
+	
+	#Will need to investigate to figure out what exactly can be done from a crouch, but from the top of our head, check for attacks. Check for jump. 
+	# CONSIDER: Should they be able to throw from crouching?
+	# CONSIDER: How will we handle blocking while crouching?
 
 func start_jump(direction):
 	left_ground_check = false
@@ -729,7 +749,7 @@ func attack_hit(target):
 				print("Hitting " + str(target) + " with the almighty kick!")
 				SfxManager.playKickHit()
 				target.get_hit_with(kick_data)
-				
+
 
 func reduce_health(damage):
 	health -= damage
@@ -813,7 +833,7 @@ func block_attack(attack_data):
 	block_timer = attack_data["blockstun_frames"] * FRAME
 
 func update_healthbar():
-	#This is where we'd call on the UI to update the reduced health -- IF I HAD ONE!!
+	#This is where we'd call on the UI to update the reduced health -- IF I HAD ONE!! ---update from later Tomie: we do have one. it's just funny to leave it here now.
 	healthbar.health = health
 	#health_UI.text = str(health)
 	print(str(player_type) + ": Health: " + str(health))

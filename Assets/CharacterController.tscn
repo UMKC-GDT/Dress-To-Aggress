@@ -1,10 +1,12 @@
-[gd_scene load_steps=37 format=3 uid="uid://chyj64wwnwo67"]
+[gd_scene load_steps=39 format=3 uid="uid://chyj64wwnwo67"]
 
 [ext_resource type="Texture2D" uid="uid://bkv1eebpqokq1" path="res://Assets/Sprites/Player Sprites/dashb1.png" id="1_n7ghd"]
 [ext_resource type="Script" uid="uid://cmdthl362buy2" path="res://Scripts/base_character_controller.gd" id="1_q13i1"]
 [ext_resource type="Texture2D" uid="uid://dy1dxkegdhpbf" path="res://Assets/Sprites/Player Sprites/block.png" id="2_bnttp"]
 [ext_resource type="Texture2D" uid="uid://c12ke1xq1bqrf" path="res://Assets/Sprites/Player Sprites/dashb2.png" id="2_nvl01"]
 [ext_resource type="Texture2D" uid="uid://basbruxqgetyk" path="res://Assets/Sprites/Player Sprites/dashf1.png" id="3_ivps1"]
+[ext_resource type="Texture2D" uid="uid://b5pbw3u8u108i" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody0.png" id="3_l01sm"]
+[ext_resource type="Texture2D" uid="uid://c7bn2ilh2a1n3" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody1.png" id="4_prtgt"]
 [ext_resource type="Texture2D" uid="uid://15o2brjumj6l" path="res://Assets/Sprites/Player Sprites/dashf2.png" id="4_urp6f"]
 [ext_resource type="Texture2D" uid="uid://cagujdubdoy5q" path="res://Assets/Sprites/Player Sprites/hurt.png" id="6_q13i1"]
 [ext_resource type="Texture2D" uid="uid://cll4n0h2o633e" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody0.png" id="7_164t6"]
@@ -42,6 +44,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"block",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l01sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_prtgt")
+}],
+"loop": true,
+"name": &"crouch",
 "speed": 5.0
 }, {
 "frames": [{
@@ -235,7 +248,8 @@ shape = SubResource("RectangleShape2D_5tmop")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.303)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"dead"
+animation = &"crouch"
+frame_progress = 0.690509
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
