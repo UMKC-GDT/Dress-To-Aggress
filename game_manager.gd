@@ -86,7 +86,7 @@ func begin_fight():
 
 #Called above, just makes it wait for ten seconds or until the player presses Punch, to give them the time to read the controls. 
 func wait_for_controls_acknowledgement() -> void:
-	var timer := get_tree().create_timer(10.0)
+	var timer := get_tree().create_timer(1000.0)
 	while true:
 		await get_tree().process_frame
 		if Input.is_action_just_pressed("player_punch") or Input.is_action_just_pressed("ui_accept"): 

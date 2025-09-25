@@ -222,10 +222,10 @@ animations = [{
 size = Vector2(27, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q13i1"]
-size = Vector2(29, 50)
+size = Vector2(29, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu3r3"]
-size = Vector2(41, 71.5)
+size = Vector2(41, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7slhi"]
 size = Vector2(9.5, 50)
@@ -248,8 +248,7 @@ shape = SubResource("RectangleShape2D_5tmop")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.303)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"crouch"
-frame_progress = 0.690509
+animation = &"idle"
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
@@ -265,7 +264,7 @@ current_wearable = ExtResource("24_5ye0y")
 position = Vector2(4, 4.5)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"dead"
+animation = &"idle"
 script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
@@ -281,7 +280,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch Hitbox"]
-position = Vector2(8.5, 1)
+position = Vector2(8.5, -14)
 shape = SubResource("RectangleShape2D_q13i1")
 debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
 
@@ -290,7 +289,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kick Hitbox"]
-position = Vector2(14.5, -10.25)
+position = Vector2(14.5, -25)
 shape = SubResource("RectangleShape2D_yu3r3")
 debug_color = Color(0.786632, 0.431925, 0, 0.42)
 

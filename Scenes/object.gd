@@ -41,6 +41,11 @@ func set_random_pants_wearable():
 	#generates random pants
 	current_wearable = load(path + pants[rand] + ".tres")
 	
+	#Prevents the nerfing gray shorts from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
+	if current_wearable.name == "grayShorts":
+		rand = rng.randi_range(0,pants.size()-1)
+		current_wearable = load(path + pants[rand] + ".tres")
+	
 func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
@@ -52,6 +57,11 @@ func set_random_shirt_wearable():
 	
 	#generates random shirt
 	current_wearable = load(path + shirts[rand] + ".tres")
+	
+	#Prevents the nerfing gray shirt from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
+	if current_wearable.name == "grayShirtS":
+		rand = rng.randi_range(0,shirts.size()-1)
+		current_wearable = load(path + shirts[rand] + ".tres")
 	
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():

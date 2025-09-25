@@ -253,6 +253,16 @@ func handle_input(delta):
 	
 	handle_states(direction, delta)
 
+func reset_scale():
+	animation_player.scale.y = 0.3
+	animation_player.position.y = 4.5
+	
+	PantsLayer.scale.y = 0.3
+	PantsLayer.position.y = 4.5
+	
+	ShirtLayer.scale.y = 0.3
+	ShirtLayer.position.y = 4.5
+
 func handle_states(direction, delta):
 	if direction == 0: block_legal = false
 	
@@ -263,10 +273,16 @@ func handle_states(direction, delta):
 			animation_player.play("idle")
 			PantsLayer.play("idle")
 			ShirtLayer.play("idle")
+			
+			#Coming from the temporary solution of manipulating the animation player to simulate crouching...
+			reset_scale()
+			
 			change_color(Color(Color.WHITE, 1.0))
 			idle_state(direction)
 			
 		CharacterState.WALK:
+			reset_scale()
+			
 			if facing_direction == 1:
 				if direction == 1:
 					animation_player.play("walk forward")
@@ -354,6 +370,7 @@ func handle_states(direction, delta):
 			recovery_state(delta)
 		
 		CharacterState.HURT:
+			
 			block_legal = false
 			disable_hitboxes()
 			change_color(Color(Color.PALE_VIOLET_RED, 1.0))
@@ -385,6 +402,8 @@ func handle_states(direction, delta):
 			pose_state(delta)
 		
 		CharacterState.DEAD:
+			reset_scale()
+			
 			animation_player.play("dead")
 			change_color(Color(Color.DIM_GRAY, 1.0))
 			PantsLayer.play("dead")
@@ -392,10 +411,20 @@ func handle_states(direction, delta):
 			velocity.x = move_toward(velocity.x, 0, 25)
 		
 		CharacterState.CROUCH:
-			animation_player.play("crouch")
-			#Commenting these out for now; do they exist yet?
-			#PantsLayer.play("crouch")
-			#ShirtLayer.play("crouch")
+			#For now, we're gonna set it to idle and manipulate the scale of the animation player. Not a permanent solution. Don't forget to come back and fix this.
+			animation_player.play("idle")
+			PantsLayer.play("idle")
+			ShirtLayer.play("idle")
+			
+			animation_player.scale.y = 0.177
+			animation_player.position.y = 14.61
+			
+			PantsLayer.scale.y = 0.177
+			PantsLayer.position.y = 14.61
+			
+			ShirtLayer.scale.y = 0.177
+			ShirtLayer.position.y = 14.61
+			
 			change_color(Color(Color.WHITE, 1.0))
 			crouch_state(direction)
 		
@@ -408,13 +437,12 @@ func idle_state(direction):
 		
 		if direction: 
 			change_state(CharacterState.WALK)
-		elif Input.is_action_pressed(crouch_input):
-			#change_state(CharacterState.CROUCH)
-			print("This is where we would've crouched! Disabled for now, though.")
 		else:
 				
 			if not disabled:
 				check_for_jump()
+				if Input.is_action_pressed(crouch_input):
+					change_state(CharacterState.CROUCH)
 			
 			check_for_attack()
 			check_for_pose()
@@ -433,13 +461,23 @@ func walk_state(direction):
 		change_state(CharacterState.IDLE)
 	elif Input.is_action_pressed(jump_input) and is_on_floor():
 		start_action(4, func(): start_jump(direction), "jump startup")
+	elif Input.is_action_pressed(crouch_input) and is_on_floor():
+		change_state(CharacterState.CROUCH)
 	else:
 		velocity.x = direction * SPEED
 		check_for_attack()
 		check_for_pose()
 
 func crouch_state(direction):
-	pass
+	if disabled: return
+	
+	if Input.is_action_just_released("player_crouch"):
+		print("You just released the crouch button!")
+		change_state(CharacterState.IDLE)
+	
+	disable_hitboxes()
+	cancellable = false
+	velocity.x = move_toward(velocity.x, 0, 20)
 	
 	#Will need to investigate to figure out what exactly can be done from a crouch, but from the top of our head, check for attacks. Check for jump. 
 	# CONSIDER: Should they be able to throw from crouching?
@@ -485,6 +523,9 @@ func dash_state(delta):
 	velocity.y = 0
 	check_for_attack()
 	check_for_pose()
+	
+	if is_on_floor() and Input.is_action_pressed(crouch_input):
+		change_state(CharacterState.CROUCH)
 	
 	if dash_timer > 0:
 		dash_timer -= delta
@@ -919,7 +960,6 @@ func scale_stats():
 	
 	health_mult += shirt.get_health_change() + pants.get_health_change()
 	health = 200 * health_mult
-
 
 func report_dead():
 	pass
