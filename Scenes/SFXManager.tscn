@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://b2lwm3sm4cw5t"]
 
-[ext_resource type="Script" uid="uid://cu43xrvle0i7t" path="res://Scenes/sfx_control.gd" id="1_f4uu4"]
+[ext_resource type="Script" uid="uid://cu43xrvle0i7t" path="res://Scripts/sfx_control.gd" id="1_f4uu4"]
 [ext_resource type="AudioStream" uid="uid://cigl1kuiepkl8" path="res://Assets/SFX/sounds/C-Jump.mp3" id="2_hdnws"]
 [ext_resource type="AudioStream" uid="uid://berjqmge0h6fv" path="res://Assets/SFX/sounds/C-Jump0.mp3" id="3_7twoe"]
 [ext_resource type="AudioStream" uid="uid://qmkwmwh3qobi" path="res://Assets/SFX/sounds/B-Jump.mp3" id="4_8nyne"]

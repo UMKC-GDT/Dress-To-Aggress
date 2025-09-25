@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc56ttjj3q13u"]
 
-[ext_resource type="Script" uid="uid://y14xmvlxq88g" path="res://Scenes/credits.gd" id="1_r18jl"]
+[ext_resource type="Script" uid="uid://y14xmvlxq88g" path="res://Scripts/credits.gd" id="1_r18jl"]
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="2_gryuy"]
 
 [node name="Credits" type="Node2D"]
