@@ -55,13 +55,18 @@ var animation_player: AnimatedSprite2D = $AnimatedSprite2D
 var PantsLayer: AnimatedSprite2D = $PantsLayer
 @onready
 var ShirtLayer: AnimatedSprite2D = $ShirtLayer
+@onready
+var hurtbox: Hurtbox = $"Hurtbox"
+var hurtboxRectangle: RectangleShape2D
+var hurtboxCollision
+
+@onready
+var collision: CollisionShape2D = $"CollisionShape2D"
 
 @onready
 var punch_hitbox: Hitbox = $"Punch Hitbox"
-
 @onready
 var kick_hitbox = $"Kick Hitbox"
-
 @onready
 var throw_hitbox: Hitbox = $"Throw Hitbox"
 
@@ -220,6 +225,11 @@ func _physics_process(delta: float) -> void:
 
 func _ready():
 	enemy = get_parent().get_node(enemy_name)
+	hurtboxCollision = hurtbox.get_node("CollisionShape2D")
+	
+	if hurtboxCollision and hurtboxCollision.shape:
+		hurtboxCollision.shape = hurtboxCollision.shape.duplicate()
+	
 	
 	if enemy == null:
 		push_error("Enemy node '%s' not found!" % enemy_name)
@@ -254,6 +264,11 @@ func handle_input(delta):
 	handle_states(direction, delta)
 
 func reset_scale():
+	if state == CharacterState.CROUCH: return
+	
+	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 50.0)
+	hurtboxCollision.position.y = 4
+	
 	animation_player.scale.y = 0.3
 	animation_player.position.y = 4.5
 	
@@ -371,6 +386,8 @@ func handle_states(direction, delta):
 		
 		CharacterState.HURT:
 			
+			reset_scale()
+			
 			block_legal = false
 			disable_hitboxes()
 			change_color(Color(Color.PALE_VIOLET_RED, 1.0))
@@ -416,6 +433,9 @@ func handle_states(direction, delta):
 			PantsLayer.play("idle")
 			ShirtLayer.play("idle")
 			
+			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+			hurtboxCollision.position.y = 14.5
+			
 			animation_player.scale.y = 0.177
 			animation_player.position.y = 14.61
 			
@@ -441,7 +461,7 @@ func idle_state(direction):
 				
 			if not disabled:
 				check_for_jump()
-				if Input.is_action_pressed(crouch_input):
+				if crouch_input and Input.is_action_pressed(crouch_input):
 					change_state(CharacterState.CROUCH)
 			
 			check_for_attack()
@@ -584,7 +604,7 @@ func block_state(delta):
 	if block_timer > 0:
 		block_timer -= delta
 	else:
-		change_state(CharacterState.IDLE)
+		change_state(last_state)
 
 func start_recovery(frames, animation):
 	#if (state != CharacterState.PUNCH) and (state != CharacterState.KICK): return
@@ -624,6 +644,7 @@ func get_hit_with(attack_data):
 	ShirtLayer.play("hurt")
 	velocity.y = 0
 	velocity.x = 0
+	reset_scale()
 	
 	reduce_health(attack_data["damage"])
 	
@@ -681,7 +702,6 @@ func pose_startup_state(delta):
 	change_color(Color(0.7, 0.1, 0.37))
 	velocity.x = 0
 	
-	if player_type == 1: print("pose state")
 	animation_player.position.x = 4
 	ShirtLayer.position.x = 4
 	PantsLayer.position.x = 4
@@ -719,7 +739,7 @@ func change_state(new_state):
 	if dead: return
 	last_state = state
 	state = new_state
-	if player_type == 0: print(str(player_type) + ": Character State Updated: " + CharacterState.keys()[state])
+	if player_type == 1: print(str(player_type) + ": Character State Updated: " + CharacterState.keys()[state])
 
 func check_for_attack():
 	if disabled == true: 
