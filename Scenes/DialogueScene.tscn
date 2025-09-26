@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6inuov11el3t"]
+
+[ext_resource type="Script" uid="uid://b43qqubuspts2" path="res://Scenes/dialogue_scene.gd" id="1_u248v"]
+[ext_resource type="Texture2D" uid="uid://btn7txieww8mm" path="res://Assets/Sprites/Clothing Frames/body with a head/Mirror Frames/FinalizedBody(1).png" id="2_cyctn"]
+[ext_resource type="Texture2D" uid="uid://pdxgrk5kljxd" path="res://Assets/Sprites/Clothing Frames/Pants/Mirror Frames/FinalizedPants.png" id="3_dutmy"]
+[ext_resource type="Texture2D" uid="uid://5by10m7sf0jw" path="res://Assets/Sprites/Clothing Frames/TankTop/Mirror Frames/FinalizedModelTankTop.png" id="4_ma3ox"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="5_w0xt4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5i7h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_in4g1"]
+
+[node name="DialogueScene" type="Node2D"]
+script = ExtResource("1_u248v")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5i7h")
+
+[node name="CharacterLeft" type="Sprite2D" parent="Panel"]
+position = Vector2(909, 415)
+scale = Vector2(-3, 3)
+texture = ExtResource("2_cyctn")
+
+[node name="Shirt" type="Sprite2D" parent="Panel/CharacterLeft"]
+texture = ExtResource("3_dutmy")
+
+[node name="Pants" type="Sprite2D" parent="Panel/CharacterLeft"]
+texture = ExtResource("4_ma3ox")
+
+[node name="CharacterRight" type="Sprite2D" parent="Panel"]
+position = Vector2(535, 415)
+scale = Vector2(3, 3)
+texture = ExtResource("2_cyctn")
+
+[node name="Shirt" type="Sprite2D" parent="Panel/CharacterRight"]
+texture = ExtResource("3_dutmy")
+
+[node name="Pants" type="Sprite2D" parent="Panel/CharacterRight"]
+texture = ExtResource("4_ma3ox")
+
+[node name="Text box" type="Sprite2D" parent="Panel"]
+modulate = Color(1, 1, 1, 0.470588)
+position = Vector2(619, 604.224)
+scale = Vector2(1182, 231.552)
+texture = SubResource("CanvasTexture_in4g1")
+
+[node name="Text" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = 512.0
+offset_right = -70.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_w0xt4")
+theme_override_font_sizes/font_size = 45
+autowrap_mode = 2
