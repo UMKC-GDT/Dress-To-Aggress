@@ -75,7 +75,8 @@ func set_random_shirt_wearable():
 	#brute force way of adusting colission box to be accurate
 	var length_of_name = current_wearable.name.length()
 	if current_wearable.name[length_of_name-1] == "L": #ShirtL
-		$Area2D/CollisionShape2D.scale.y = 0.3
+		$Area2D/CollisionShape2D.scale.y = 0.450
+		
 		$Area2D/CollisionShape2D.position.y = -31
 	if current_wearable.name[length_of_name-1] == "S": #ShirtS
 		$Area2D/CollisionShape2D.scale.y = 0.2

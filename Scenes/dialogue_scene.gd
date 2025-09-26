@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-var dialogue_script = ["R: dakljfdlkjfa", "L: alkdjakldsjf", "R: adhfasdjflk"]
+var dialogue_script = ["R: dakljfdlkjfa", "L: alkdjakldsjf", "R: adhfasdjflk", "L: dhfjkadshflkjsa"]
 
 var letter = 3
 var line = 0
