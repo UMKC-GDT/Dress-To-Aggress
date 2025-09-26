@@ -8,7 +8,7 @@ func _ready():
 	collision_mask = 1
 	self.area_entered.connect(on_area_entered)
 	
-	disable()
+	#disable()
 
 func on_area_entered(hurtbox: Hurtbox) -> void:
 	if hurtbox == null: return
@@ -22,7 +22,7 @@ func on_area_entered(hurtbox: Hurtbox) -> void:
 		print("Damn, they blocked!")
 		hitbox_parent.attack_was_blocked(hurtbox_parent)
 	elif (hitbox_parent.has_method("attack_hit")):
-		print("Hitbox hit something!")
+		print("CROUCH Hitbox hit something!")
 		hitbox_parent.attack_hit(hurtbox_parent)
 	
 	#Deal damage

@@ -223,7 +223,7 @@ animations = [{
 size = Vector2(27, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q13i1"]
-size = Vector2(29, 50)
+size = Vector2(29, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1yd1"]
 size = Vector2(29, 29)
@@ -287,7 +287,7 @@ position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch Hitbox"]
-position = Vector2(8.5, 1)
+position = Vector2(8.5, -14)
 shape = SubResource("RectangleShape2D_q13i1")
 debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
 

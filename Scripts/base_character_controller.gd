@@ -44,7 +44,7 @@ var crouch_input = ""
 var debug_hurt = ""
 
 #At the heart of the player controller, this is the ENUM that defines all the current states the player can be in. This will get longer as more states are added, and this should be the first place you go to add a new state.
-enum CharacterState { IDLE, WALK, JUMP, DASH, STARTUP, RECOVERY, PUNCH, KICK, HURT, BLOCK, POSE_STARTUP, POSE, DEAD, DISABLED, CROUCH, CPUNCH, CKICK, CBLOCK, CHURT}
+enum CharacterState { IDLE, WALK, JUMP, DASH, STARTUP, RECOVERY, PUNCH, KICK, HURT, BLOCK, POSE_STARTUP, POSE, DEAD, DISABLED, CROUCH, CPUNCH, CKICK, CBLOCK}
 var state = CharacterState.IDLE
 var last_state = CharacterState.IDLE
 var left_ground_check = false
@@ -69,6 +69,10 @@ var punch_hitbox: Hitbox = $"Punch Hitbox"
 var kick_hitbox = $"Kick Hitbox"
 @onready
 var throw_hitbox: Hitbox = $"Throw Hitbox"
+@onready
+var l_punch_hitbox: CrouchHitbox = $"LPunch Hitbox"
+@onready 
+var l_kick_hitbox: CrouchHitbox = $"LKick Hitbox"
 
 
 var enemy = null
@@ -126,6 +130,24 @@ var punch_data = {
 	"recovery_animation" : "punch recovery",
 }
 var punch_deceleration = 10
+
+var crouch_punch_data = {
+	"startup_frames" : 6 / punch_speed_mult,
+	"active_frames" : 4,
+	"recovery_frames" : 11 / punch_speed_mult,
+	"blockstun_frames" : 11,
+	"onBlock_FA" : -3,
+	"ground_hitstun": 25 / punch_hitstun_mult,
+	"air_hitstun" : 25 / punch_hitstun_mult,
+	"ground_knockback_force" : 150 * punch_knockback_mult,
+	"air_knockback_force" : 50 * punch_knockback_mult,
+	"forward_force": 50,
+	"damage": 10 * punch_damage_mult,
+	"startup_animation" : "punch recovery",
+	"active_animation" : "punch",
+	"recovery_animation" : "punch recovery",
+}
+var crouch_punch_deceleration = 10
 
 
 var kick_data = {
@@ -278,6 +300,19 @@ func reset_scale():
 	ShirtLayer.scale.y = 0.3
 	ShirtLayer.position.y = 4.5
 
+func crouch_scale():
+	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+	hurtboxCollision.position.y = 14.5
+	
+	animation_player.scale.y = 0.177
+	animation_player.position.y = 14.61
+	
+	PantsLayer.scale.y = 0.177
+	PantsLayer.position.y = 14.61
+	
+	ShirtLayer.scale.y = 0.177
+	ShirtLayer.position.y = 14.61
+
 func handle_states(direction, delta):
 	if direction == 0: block_legal = false
 	
@@ -361,6 +396,8 @@ func handle_states(direction, delta):
 			startup_state(delta)
 		
 		CharacterState.PUNCH:
+			reset_scale()
+			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			animation_player.play(punch_data["active_animation"])
@@ -368,7 +405,19 @@ func handle_states(direction, delta):
 			ShirtLayer.play(punch_data["active_animation"])
 			punch_state(delta)
 		
+		CharacterState.CPUNCH:
+			crouch_scale()
+			
+			change_color(Color(Color.WHITE, 1.0))
+			block_legal = false
+			animation_player.play(punch_data["active_animation"])
+			PantsLayer.play(punch_data["active_animation"])
+			ShirtLayer.play(punch_data["active_animation"])
+			c_punch_state(delta)
+		
 		CharacterState.KICK:
+			reset_scale()
+			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			animation_player.play(kick_data["active_animation"])
@@ -377,6 +426,7 @@ func handle_states(direction, delta):
 			animation_player.position.x = 18
 			ShirtLayer.position.x = 18
 			PantsLayer.position.x = 18
+			
 			kick_state(delta)
 		
 		CharacterState.RECOVERY:
@@ -433,17 +483,7 @@ func handle_states(direction, delta):
 			PantsLayer.play("idle")
 			ShirtLayer.play("idle")
 			
-			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
-			hurtboxCollision.position.y = 14.5
-			
-			animation_player.scale.y = 0.177
-			animation_player.position.y = 14.61
-			
-			PantsLayer.scale.y = 0.177
-			PantsLayer.position.y = 14.61
-			
-			ShirtLayer.scale.y = 0.177
-			ShirtLayer.position.y = 14.61
+			crouch_scale()
 			
 			change_color(Color(Color.WHITE, 1.0))
 			crouch_state(direction)
@@ -496,6 +536,7 @@ func crouch_state(direction):
 		change_state(CharacterState.IDLE)
 	
 	disable_hitboxes()
+	check_for_attack()
 	cancellable = false
 	velocity.x = move_toward(velocity.x, 0, 20)
 	
@@ -574,6 +615,25 @@ func punch_state(delta):
 	else:
 		start_recovery(punch_data["recovery_frames"], punch_data["recovery_animation"])
 
+func start_c_punch():
+	if (state != CharacterState.STARTUP): return
+	
+	attack_timer = punch_data["active_frames"] * FRAME
+	l_punch_hitbox.enable()
+	cancellable = true
+	
+	change_state(CharacterState.CPUNCH)
+	SfxManager.playPunchMiss()
+	SfxManager.playPunchVoice()
+
+func c_punch_state(delta):
+	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, crouch_punch_deceleration)
+	
+	if attack_timer > 0:
+		attack_timer -= delta
+	else:
+		start_recovery(crouch_punch_data["recovery_frames"], crouch_punch_data["recovery_animation"])
+
 #This is where the code goes for the moment the kick is active. LATER ON, add the sound effect in this function.
 func start_kick():
 	if (state == CharacterState.STARTUP): 
@@ -615,7 +675,12 @@ func start_recovery(frames, animation):
 	PantsLayer.play(animation)
 	ShirtLayer.play(animation)
 	recovery_timer = frames * FRAME
-	recovery_continuation = func(): if state != CharacterState.STARTUP and state != CharacterState.HURT: change_state(CharacterState.IDLE)
+	recovery_continuation = func(): 
+		if state != CharacterState.STARTUP and state != CharacterState.HURT: 
+			if (Input.is_action_pressed(crouch_input)):
+				change_state(CharacterState.CROUCH)
+			else:
+				change_state(CharacterState.IDLE)
 
 func recovery_state(delta):
 	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -746,22 +811,33 @@ func check_for_attack():
 		return
 	
 	if Input.is_action_pressed(punch_input):
-		stop_all_timers()
-		start_action(punch_data["startup_frames"], func(): 
-			if state == CharacterState.STARTUP:
-				start_punch()
-			, punch_data["startup_animation"])
+		if Input.is_action_pressed(crouch_input) and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
+			stop_all_timers()
+			start_action(punch_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_c_punch()
+				, punch_data["startup_animation"])
+		elif not (Input.is_action_pressed(crouch_input)) and state != CharacterState.CROUCH:
+			stop_all_timers()
+			start_action(punch_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_punch()
+				, punch_data["startup_animation"])
 	
 	if Input.is_action_pressed(kick_input):
-		stop_all_timers()
-		animation_player.position.x = 18
-		ShirtLayer.position.x = 18
-		PantsLayer.position.x = 18
-		
-		start_action(kick_data["startup_frames"], func(): 
-			if state == CharacterState.STARTUP:
-				start_kick()
-			, kick_data["startup_animation"])
+		if not (Input.is_action_pressed(crouch_input)) and state != CharacterState.CROUCH:
+			print("You aren't pressing crouch or in the crouch state!")
+			
+			stop_all_timers()
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
+			reset_scale()
+			
+			start_action(kick_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_kick()
+				, kick_data["startup_animation"])
 
 func check_for_pose():
 	if disabled: return
@@ -810,6 +886,11 @@ func attack_hit(target):
 				print("Hitting " + str(target) + " with the almighty kick!")
 				SfxManager.playKickHit()
 				target.get_hit_with(kick_data)
+			
+			CharacterState.CPUNCH:
+				print("Hitting " + str(target) + " with the almighty CROUCH punch!")
+				SfxManager.playPunchHit()
+				target.get_hit_with(crouch_punch_data)
 
 
 func reduce_health(damage):
@@ -840,6 +921,9 @@ func reduce_health(damage):
 func disable_hitboxes():
 	for child in get_children():
 		if child is Hitbox:
+			child.disable()
+		
+		elif child is CrouchHitbox:
 			child.disable()
 
 func face_your_opponent():
