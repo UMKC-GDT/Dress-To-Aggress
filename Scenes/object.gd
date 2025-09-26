@@ -45,6 +45,14 @@ func set_random_pants_wearable():
 	if current_wearable.name == "grayShorts":
 		rand = rng.randi_range(0,pants.size()-1)
 		current_wearable = load(path + pants[rand] + ".tres")
+		
+	#brute force way of adusting colission box to be accurate
+	var length_of_name = current_wearable.name.length()
+	if current_wearable.name[length_of_name-5] == "P": #Pants
+		$Area2D/CollisionShape2D.scale.y = 0.55
+		$Area2D/CollisionShape2D.position.y = 77
+	if current_wearable.name[length_of_name-4] == "o": #Shorts
+		$Area2D/CollisionShape2D.scale.y = 0.2
 	
 func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
@@ -58,10 +66,20 @@ func set_random_shirt_wearable():
 	#generates random shirt
 	current_wearable = load(path + shirts[rand] + ".tres")
 	
+	
 	#Prevents the nerfing gray shirt from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
 	if current_wearable.name == "grayShirtS":
 		rand = rng.randi_range(0,shirts.size()-1)
 		current_wearable = load(path + shirts[rand] + ".tres")
+	
+	#brute force way of adusting colission box to be accurate
+	var length_of_name = current_wearable.name.length()
+	if current_wearable.name[length_of_name-1] == "L": #ShirtL
+		$Area2D/CollisionShape2D.scale.y = 0.3
+		$Area2D/CollisionShape2D.position.y = -31
+	if current_wearable.name[length_of_name-1] == "S": #ShirtS
+		$Area2D/CollisionShape2D.scale.y = 0.2
+		$Area2D/CollisionShape2D.position.y = -65
 	
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():

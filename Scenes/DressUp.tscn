@@ -128,14 +128,15 @@ offset_bottom = -233.0
 scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="InstructionsDisplay" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
 texture = ExtResource("10_afhxr")
 script = ExtResource("11_v7r8m")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+[node name="RichTextLabel" type="RichTextLabel" parent="InstructionsDisplay"]
 offset_left = -131.0
 offset_top = -68.0
 offset_right = 128.0
@@ -146,7 +147,7 @@ text = "Drag and Drop clothing items onto your player.
 You have 10 seconds to create your disguise!"
 scroll_active = false
 
-[node name="Button" type="Button" parent="Sprite2D"]
+[node name="Button" type="Button" parent="InstructionsDisplay"]
 modulate = Color(0.921362, 0.63823, 0.965459, 1)
 offset_left = -47.035
 offset_top = 57.087
@@ -165,8 +166,8 @@ theme_override_font_sizes/font_size = 35
 text = "To Stage"
 script = ExtResource("13_ch7k1")
 
-[connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
-[connection signal="button_down" from="Sprite2D/Button" to="To Stage Button" method="_on_button_button_down"]
+[connection signal="button_down" from="InstructionsDisplay/Button" to="InstructionsDisplay" method="_on_button_button_down"]
+[connection signal="button_down" from="InstructionsDisplay/Button" to="To Stage Button" method="_on_button_button_down"]
 [connection signal="button_down" from="To Stage Button" to="Dressup Timer" method="_on_to_stage_button_button_down"]
 
 [editable path="randomShirt"]
