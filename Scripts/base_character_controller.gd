@@ -100,6 +100,7 @@ var dash_timer = 0.0
 var cancellable = true
 
 var block_legal = false
+var crouch_block_legal = false
 var block_timer = 0.0
 
 var dead = false
@@ -185,7 +186,7 @@ var crouch_kick_data = {
 }
 
 var throw_data = {
-	"startup_frames" : 10 / pose_speed_mult,
+	"startup_frames" : 15 / pose_speed_mult,
 	"active_frames" : 3,
 	"recovery_frames" : 30 / pose_speed_mult,
 	"pose_frames" : 50,
@@ -234,6 +235,7 @@ func set_controls():
 			kick_input = "player2_kick"
 			pose_input = "player2_throw"
 			debug_hurt = "DEBUG_hurt_player2"
+			crouch_input = "player2_crouch"
 			
 			print("Player 2 Controls Enabled")
 
@@ -331,7 +333,9 @@ func crouch_scale():
 	ShirtLayer.position.y = 14.61
 
 func handle_states(direction, delta):
-	if direction == 0: block_legal = false
+	if direction == 0: 
+		block_legal = false
+		crouch_block_legal = false
 	
 		#To add a new state, just add a new match case for that specific state, and similarly include the animation to be played and a call for that state's function. 
 	match state:
@@ -349,6 +353,7 @@ func handle_states(direction, delta):
 			
 		CharacterState.WALK:
 			reset_scale()
+			crouch_block_legal = false
 			
 			if facing_direction == 1:
 				if direction == 1:
@@ -369,8 +374,10 @@ func handle_states(direction, delta):
 					PantsLayer.play("walk forward")
 					ShirtLayer.play("walk forward")
 			
-			if (direction == facing_direction * -1): block_legal = true
-			else: block_legal = false
+			if (direction == facing_direction * -1): 
+				block_legal = true
+			else: 
+				block_legal = false
 			
 			walk_state(direction)
 		
@@ -410,6 +417,7 @@ func handle_states(direction, delta):
 		CharacterState.STARTUP:
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			startup_state(delta)
 		
 		CharacterState.PUNCH:
@@ -417,6 +425,7 @@ func handle_states(direction, delta):
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			animation_player.play(punch_data["active_animation"])
 			PantsLayer.play(punch_data["active_animation"])
 			ShirtLayer.play(punch_data["active_animation"])
@@ -427,6 +436,7 @@ func handle_states(direction, delta):
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			
 			animation_player.play(punch_data["active_animation"])
 			PantsLayer.play(punch_data["active_animation"])
@@ -439,6 +449,7 @@ func handle_states(direction, delta):
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			animation_player.play(kick_data["active_animation"])
 			PantsLayer.play(kick_data["active_animation"])
 			ShirtLayer.play(kick_data["active_animation"])
@@ -453,6 +464,7 @@ func handle_states(direction, delta):
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			
 			animation_player.play(kick_data["active_animation"])
 			PantsLayer.play(kick_data["active_animation"])
@@ -466,6 +478,7 @@ func handle_states(direction, delta):
 		CharacterState.RECOVERY:
 			#change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			crouch_block_legal = false
 			recovery_state(delta)
 		
 		CharacterState.HURT:
@@ -473,6 +486,7 @@ func handle_states(direction, delta):
 			reset_scale()
 			
 			block_legal = false
+			crouch_block_legal = false
 			disable_hitboxes()
 			change_color(Color(Color.PALE_VIOLET_RED, 1.0))
 			if is_on_floor():
@@ -512,6 +526,12 @@ func handle_states(direction, delta):
 			velocity.x = move_toward(velocity.x, 0, 25)
 		
 		CharacterState.CROUCH:
+			
+			if (direction == facing_direction * -1): 
+				crouch_block_legal = true
+			else: 
+				crouch_block_legal = false
+			
 			#For now, we're gonna set it to idle and manipulate the scale of the animation player. Not a permanent solution. Don't forget to come back and fix this.
 			animation_player.play("idle")
 			PantsLayer.play("idle")
@@ -565,7 +585,7 @@ func walk_state(direction):
 func crouch_state(direction):
 	if disabled: return
 	
-	if Input.is_action_just_released("player_crouch"):
+	if Input.is_action_just_released(crouch_input):
 		print("You just released the crouch button!")
 		change_state(CharacterState.IDLE)
 	
@@ -691,7 +711,6 @@ func kick_state(delta):
 		if player_type == 1: print("end kick state")
 		start_recovery(kick_data["recovery_frames"], kick_data["recovery_animation"])
 
-
 func start_c_kick():
 	if (state != CharacterState.STARTUP): return
 	
@@ -722,7 +741,10 @@ func block_state(delta):
 	if block_timer > 0:
 		block_timer -= delta
 	else:
-		change_state(last_state)
+		if Input.is_action_pressed(crouch_input) and is_on_floor():
+			change_state(CharacterState.CROUCH)
+		else:
+			change_state(CharacterState.IDLE)
 
 func start_recovery(frames, animation):
 	#if (state != CharacterState.PUNCH) and (state != CharacterState.KICK): return
@@ -1035,15 +1057,31 @@ func attack_was_blocked(target):
 				
 				start_recovery((punch_data["recovery_frames"] + (-1 * punch_data["onBlock_FA"])), punch_data["recovery_animation"])
 			
+			CharacterState.CPUNCH:
+				print("Target, " + str(target) + " has blocked my CROUCHING punch!")
+				target.block_attack(crouch_punch_data)
+				SfxManager.playBlock()
+				await get_tree().create_timer(attack_timer).timeout
+				
+				velocity.x = -1 * (facing_direction) * 150 + 50
+				
+				start_recovery((crouch_punch_data["recovery_frames"] + (-1 * crouch_punch_data["onBlock_FA"])), crouch_punch_data["recovery_animation"])
+			
 			CharacterState.KICK:
 				print("Target, " + str(target) + " has blocked my kick!")
 				target.block_attack(kick_data)
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
-				
 				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
-				
 				start_recovery((attack_timer + kick_data["recovery_frames"] + (-1 * kick_data["onBlock_FA"])), kick_data["recovery_animation"])
+			
+			CharacterState.CKICK:
+				print("Target, " + str(target) + " has blocked my CROUCHING kick!")
+				target.block_attack(crouch_kick_data)
+				SfxManager.playBlock()
+				await get_tree().create_timer(attack_timer).timeout
+				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
+				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] + (-1 * crouch_kick_data["onBlock_FA"])), crouch_kick_data["recovery_animation"])
 
 #When we're the ones blocking an attack, set state to BLOCK, take negative x velocity of half of the attack's knockback, set block_timer to the given attack's blockstun frames
 func block_attack(attack_data):

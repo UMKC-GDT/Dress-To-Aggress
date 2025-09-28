@@ -154,6 +154,7 @@ func _on_player_one_died() -> void:
 	end_round(0)
 
 func _on_cpu_died() -> void:
+	print("")
 	end_round(1)
 
 func _on_timer_timeout() -> void:

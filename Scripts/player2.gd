@@ -4,4 +4,7 @@ extends BaseCharacterController
 func _ready():
 	player_type = 2
 	enemy_name = "Player"
+	healthbar = $"/root/Test Level/CanvasLayer/Healthbar2"
+	super.scale_stats()
+	healthbar.init_health(health)
 	super._ready()
