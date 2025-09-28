@@ -129,7 +129,6 @@ scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
 [node name="InstructionsDisplay" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
@@ -156,7 +155,6 @@ offset_bottom = 88.087
 text = "Start"
 
 [node name="To Stage Button" type="Button" parent="."]
-visible = false
 offset_left = 269.0
 offset_top = 211.0
 offset_right = 549.0
