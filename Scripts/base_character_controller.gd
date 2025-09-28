@@ -167,6 +167,23 @@ var kick_data = {
 	"recovery_animation" : "kick recovery",
 }
 
+var crouch_kick_data = {
+	"startup_frames" : 14 / kick_speed_mult,
+	"active_frames" : 6,
+	"recovery_frames" : 24 / kick_speed_mult,
+	"blockstun_frames" : 12,
+	"onBlock_FA" : -16,
+	"ground_hitstun": 22 * kick_hitstun_mult,
+	"air_hitstun" : 22 * kick_hitstun_mult,
+	"ground_knockback_force" : 200 * kick_knockback_mult,
+	"air_knockback_force" : 100 * kick_knockback_mult,
+	"forward_force": 100 * kick_forward_mult,
+	"damage": 30 * kick_damage_mult,
+	"startup_animation" : "kick recovery",
+	"active_animation" : "kick",
+	"recovery_animation" : "kick recovery",
+}
+
 var throw_data = {
 	"startup_frames" : 10 / pose_speed_mult,
 	"active_frames" : 3,
@@ -410,9 +427,11 @@ func handle_states(direction, delta):
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
+			
 			animation_player.play(punch_data["active_animation"])
 			PantsLayer.play(punch_data["active_animation"])
 			ShirtLayer.play(punch_data["active_animation"])
+			
 			c_punch_state(delta)
 		
 		CharacterState.KICK:
@@ -428,6 +447,21 @@ func handle_states(direction, delta):
 			PantsLayer.position.x = 18
 			
 			kick_state(delta)
+		
+		CharacterState.CKICK:
+			crouch_scale()
+			
+			change_color(Color(Color.WHITE, 1.0))
+			block_legal = false
+			
+			animation_player.play(kick_data["active_animation"])
+			PantsLayer.play(kick_data["active_animation"])
+			ShirtLayer.play(kick_data["active_animation"])
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
+			
+			c_kick_state(delta)
 		
 		CharacterState.RECOVERY:
 			#change_color(Color(Color.WHITE, 1.0))
@@ -657,6 +691,30 @@ func kick_state(delta):
 		if player_type == 1: print("end kick state")
 		start_recovery(kick_data["recovery_frames"], kick_data["recovery_animation"])
 
+
+func start_c_kick():
+	if (state != CharacterState.STARTUP): return
+	
+	print("Starting crouch kick!")
+	attack_timer = crouch_kick_data["active_frames"] * FRAME
+	velocity.x = crouch_kick_data["forward_force"] * facing_direction
+	l_kick_hitbox.enable()
+		
+	cancellable = false
+		
+	change_state(CharacterState.CKICK)
+	SfxManager.playKickMiss()
+	SfxManager.playKickVoice()
+
+func c_kick_state(delta):
+	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
+	
+	if attack_timer > 0:
+		attack_timer -= delta
+	else:
+		if player_type == 1: print("end kick state")
+		start_recovery(crouch_kick_data["recovery_frames"], crouch_kick_data["recovery_animation"])
+
 #In block_state(), slow down at regular speed, decrement block_timer by delta until it's 0 and change_state(CharacterState.IDLE)
 func block_state(delta):
 	velocity.x = move_toward(velocity.x, 0, 20)
@@ -813,10 +871,10 @@ func check_for_attack():
 	if Input.is_action_pressed(punch_input):
 		if Input.is_action_pressed(crouch_input) and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
 			stop_all_timers()
-			start_action(punch_data["startup_frames"], func(): 
+			start_action(crouch_punch_data["startup_frames"], func(): 
 				if state == CharacterState.STARTUP:
 					start_c_punch()
-				, punch_data["startup_animation"])
+				, crouch_punch_data["startup_animation"])
 		elif not (Input.is_action_pressed(crouch_input)) and state != CharacterState.CROUCH:
 			stop_all_timers()
 			start_action(punch_data["startup_frames"], func(): 
@@ -825,7 +883,19 @@ func check_for_attack():
 				, punch_data["startup_animation"])
 	
 	if Input.is_action_pressed(kick_input):
-		if not (Input.is_action_pressed(crouch_input)) and state != CharacterState.CROUCH:
+		if Input.is_action_pressed(crouch_input) and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
+			stop_all_timers()
+			
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
+			crouch_scale()
+			
+			start_action(crouch_kick_data["startup_frames"], func():
+				if state==CharacterState.STARTUP:
+					start_c_kick()
+				, crouch_kick_data["startup_animation"])
+		elif not (Input.is_action_pressed(crouch_input)) and state != CharacterState.CROUCH:
 			print("You aren't pressing crouch or in the crouch state!")
 			
 			stop_all_timers()
@@ -891,7 +961,11 @@ func attack_hit(target):
 				print("Hitting " + str(target) + " with the almighty CROUCH punch!")
 				SfxManager.playPunchHit()
 				target.get_hit_with(crouch_punch_data)
-
+			
+			CharacterState.CKICK:
+				print("Hitting " + str(target) + " with the almighty CROUCH kick!")
+				SfxManager.playKickHit()
+				target.get_hit_with(crouch_kick_data)
 
 func reduce_health(damage):
 	health -= damage
@@ -1022,32 +1096,46 @@ func scale_stats():
 	punch_speed_mult += shirt.get_attack_speed_change()
 	punch_data["startup_frames"] /= punch_speed_mult
 	punch_data["recovery_frames"] /= punch_speed_mult
+	crouch_punch_data["startup_frames"] /= punch_speed_mult
+	crouch_punch_data["recovery_frames"] /= punch_speed_mult
 
 	punch_hitstun_mult += shirt.get_hitstun_length_change()
 	punch_data["ground_hitstun"] /= punch_hitstun_mult
 	punch_data["air_hitstun"] /= punch_hitstun_mult
+	crouch_punch_data["ground_hitstun"] /= punch_hitstun_mult
+	crouch_punch_data["air_hitstun"] /= punch_hitstun_mult
 	
 	punch_knockback_mult += shirt.get_knockback_change()
 	punch_data["ground_knockback_force"] *= punch_knockback_mult
 	punch_data["air_knockback_force"] *= punch_knockback_mult
+	crouch_punch_data["ground_knockback_force"] *= punch_knockback_mult
+	crouch_punch_data["air_knockback_force"] *= punch_knockback_mult
 	
 	punch_damage_mult += shirt.get_attack_damage_change()
-	punch_data["damage"] *= punch_damage_mult 
+	punch_data["damage"] *= punch_damage_mult
+	crouch_punch_data["damage"] *= punch_damage_mult 
 	
 	kick_speed_mult += pants.get_attack_speed_change()
 	kick_data["startup_frames"] /= kick_speed_mult
 	kick_data["recovery_frames"] /= kick_speed_mult
+	crouch_kick_data["startup_frames"] /= kick_speed_mult
+	crouch_kick_data["recovery_frames"] /= kick_speed_mult
 	
 	kick_hitstun_mult += pants.get_hitstun_length_change()
 	kick_data["ground_hitstun"] /= kick_hitstun_mult
 	kick_data["air_hitstun"] /= kick_hitstun_mult
+	crouch_kick_data["ground_hitstun"] /= kick_hitstun_mult
+	crouch_kick_data["air_hitstun"] /= kick_hitstun_mult
 	
 	kick_knockback_mult += pants.get_knockback_change()
 	kick_data["ground_knockback_force"] *= kick_knockback_mult
 	kick_data["air_knockback_force"] *= kick_knockback_mult
+	crouch_kick_data["ground_knockback_force"] *= kick_knockback_mult
+	crouch_kick_data["air_knockback_force"] *= kick_knockback_mult
 	
 	kick_damage_mult += pants.get_attack_damage_change()
 	kick_data["damage"] *= kick_damage_mult 
+	crouch_kick_data["damage"] *= kick_damage_mult 
 	
 	pose_speed_mult += shirt.get_pose_speed_change() + pants.get_pose_speed_change()
 	throw_data["startup_frames"] = 10 / pose_speed_mult
