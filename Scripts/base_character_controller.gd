@@ -555,8 +555,8 @@ func idle_state(direction):
 				
 			if not disabled:
 				check_for_jump()
-				if crouch_input and Input.is_action_pressed(crouch_input):
-					change_state(CharacterState.CROUCH)
+			if crouch_input and Input.is_action_pressed(crouch_input):
+				change_state(CharacterState.CROUCH)
 			
 			check_for_attack()
 			check_for_pose()
@@ -583,11 +583,11 @@ func walk_state(direction):
 		check_for_pose()
 
 func crouch_state(direction):
-	if disabled: return
-	
 	if Input.is_action_just_released(crouch_input):
 		print("You just released the crouch button!")
 		change_state(CharacterState.IDLE)
+		
+	if disabled: return
 	
 	disable_hitboxes()
 	check_for_attack()
