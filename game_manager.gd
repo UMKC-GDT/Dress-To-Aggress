@@ -121,7 +121,7 @@ func end_round(condition):
 		
 		if player.health > cpu.health:
 			cpu.reduce_health(1000000000)
-		elif cpu.health < player.health:
+		elif player.health < cpu.health:
 			player.reduce_health(1000000000)
 		elif cpu.health == player.health: #If, somehow, they tie in health, we'll flip a coin and give them a random fifty fifty shot on who dies.
 			# sudden death
