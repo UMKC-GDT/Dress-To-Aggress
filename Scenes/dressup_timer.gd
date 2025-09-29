@@ -28,22 +28,24 @@ func _ready() -> void:
 	#$Timer.paused = true;
 	visible = false;
 
-func _process(delta: float) -> void:
-	
-	$RichTextLabel.text = str($Timer.time_left).pad_decimals(2)
-	
-	if(str($Timer.time_left).pad_decimals(2) == "9.50"):
-		var tween = get_tree().create_tween()
-		speech_text.visible = true;
-		tween.tween_property(speech_text, "scale", Vector2(1.1,1.1), .1)
-		tween.tween_property(speech_text, "scale", Vector2(1,1), .1)
-	if(str($Timer.time_left).pad_decimals(2) == "7.50"):
-		speech_text.visible = false;
+# No longer used because the timer is turned off
+#func _process(delta: float) -> void:
+	#
+	#$RichTextLabel.text = str($Timer.time_left).pad_decimals(2)
+	#
+	#if(str($Timer.time_left).pad_decimals(2) == "9.50"):
+		#var tween = get_tree().create_tween()
+		#speech_text.visible = true;
+		#tween.tween_property(speech_text, "scale", Vector2(1.1,1.1), .1)
+		#tween.tween_property(speech_text, "scale", Vector2(1,1), .1)
+	#if(str($Timer.time_left).pad_decimals(2) == "7.50"):
+		#speech_text.visible = false;
 	
 
 func _on_timer_timeout() -> void:
 	#results is the array of clothing items that are one the player
 	var results = get_last_outfit();
+	print(results)
 	
 	#for key in results:
 		#print(key.collider.get_parent().name)
@@ -55,10 +57,14 @@ func _on_timer_timeout() -> void:
 	if results.size() == 2:
 		#if  there is only one, save one that was  added, then the other is default
 		var clothing_name = results[1].collider.get_parent().current_wearable.get_outfit_name()
+		print("T1: " + clothing_name)
+		
 		if (clothing_name.contains("Shirt")):
 			shirt_text = clothing_name
-		elif (clothing_name.contains("Pants")):
+			print("T1.5: " + shirt_text)
+		elif (clothing_name.contains("Pants") || clothing_name.contains("Shorts")):
 			pants_text = clothing_name
+			print("T2: " + pants_text)
 		
 	if results.size() >= 3:
 		#this  makes sure were only getting one shirt and one pants if  there is more than one 
@@ -66,6 +72,7 @@ func _on_timer_timeout() -> void:
 			var current_clothing = results[i].collider.get_parent().current_wearable.get_outfit_name()
 			if(current_clothing.contains("Shirt")):
 				shirt_text = current_clothing
+				print("T3: " + shirt_text)
 			else:
 				pants_text = current_clothing
 			
