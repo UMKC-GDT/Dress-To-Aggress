@@ -80,7 +80,7 @@ func set_random_shirt_wearable():
 		$Area2D/CollisionShape2D.position.y = -31 # original = -31
 	if current_wearable.name[length_of_name-1] == "S": #ShirtS
 		# Currently a band-aid fix, if I can find where to adjust the detection range of the collision, I'll set these values back to their originals
-		$Area2D/CollisionShape2D.scale.y = 0.4 # original = 0.2
+		$Area2D/CollisionShape2D.scale.y = 0.2 # original = 0.2
 		$Area2D/CollisionShape2D.position.y = -65 # original = -65
 	
 #when mouse hovers oveer the clothing 	
