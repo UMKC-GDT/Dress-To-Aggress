@@ -62,10 +62,10 @@ func set_random_shirt_wearable():
 	
 	#picks a random number
 	var rand = rng.randi_range(0,shirts.size()-1)
+	#rand = 9
 	
 	#generates random shirt
 	current_wearable = load(path + shirts[rand] + ".tres")
-	
 	
 	#Prevents the nerfing gray shirt from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
 	if current_wearable.name == "grayShirtS":
@@ -73,14 +73,15 @@ func set_random_shirt_wearable():
 		current_wearable = load(path + shirts[rand] + ".tres")
 	
 	#brute force way of adusting colission box to be accurate
+	# Made collision boxes for shirts less accurate but equalizied, should fix Clothing Saving Bug
 	var length_of_name = current_wearable.name.length()
 	if current_wearable.name[length_of_name-1] == "L": #ShirtL
-		$Area2D/CollisionShape2D.scale.y = 0.450
-		
-		$Area2D/CollisionShape2D.position.y = -31
+		$Area2D/CollisionShape2D.scale.y = 0.4
+		$Area2D/CollisionShape2D.position.y = -31 # original = -31
 	if current_wearable.name[length_of_name-1] == "S": #ShirtS
-		$Area2D/CollisionShape2D.scale.y = 0.2
-		$Area2D/CollisionShape2D.position.y = -65
+		# Currently a band-aid fix, if I can find where to adjust the detection range of the collision, I'll set these values back to their originals
+		$Area2D/CollisionShape2D.scale.y = 0.4 # original = 0.2
+		$Area2D/CollisionShape2D.position.y = -65 # original = -65
 	
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():
