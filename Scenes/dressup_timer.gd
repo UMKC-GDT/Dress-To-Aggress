@@ -98,7 +98,8 @@ func get_last_outfit() -> Array[Dictionary]:
 	query.position = $"../Platform".position
 	query.collide_with_bodies = true  # Adjust as needed
 	query.collide_with_areas = true
-		
+	
+	# This assumes that all collision boxes of each clothing item are touching the intersect point (center of platform box)
 	var results = space_state.intersect_point(query)
 	
 	return results
