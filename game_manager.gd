@@ -15,6 +15,12 @@ extends Node2D
 
 var timer_started := false
 
+#3 round system stuff
+var player_wins = 0
+var cpu_wins = 0
+var round_num = 1
+
+
 # These messages get randomly chosen from, once the player wins or loses.
 var loss_messages = [
 	"That outfit? A fashion disaster.",
@@ -49,6 +55,12 @@ func _ready() -> void:
 
 # Called at the beginning of the round, to do the fun and cool stuff like "READY? FIGHT!". 
 func start_round() -> void:
+	
+	#First, show the round #
+	
+	#Call begin_fight()
+	
+	#Code from previous version below --------- consider splitting everything below into a seperate function to eventually be phased out, since it just handles showing the controls and letting them acknowledge it.
 	message_label.text = "READY?"
 	await get_tree().create_timer(0.3).timeout
 	
@@ -94,9 +106,14 @@ func wait_for_controls_acknowledgement() -> void:
 		if timer.time_left <= 0.0:
 			return
 
+#Called when someone wins, or when the time runs out
 func end_round(condition):
 	disable_control()
 	fight_timer.paused = true
+	
+	#If the condition is 0 or 1 or if it's 3, run the timeout logic to kill someone and then continue
+	
+	
 	
 	if condition == 0: #If the player's lost...
 		animate_message_label("KO!")
@@ -151,15 +168,32 @@ func _process(delta: float) -> void:
 
 #Functions to handle incoming signals and call the according end round condition, or transition to the next part of the game. 
 func _on_player_one_died() -> void:
+	player_wins +=1
 	end_round(0)
 
 func _on_cpu_died() -> void:
+	cpu_wins +=1
 	print("")
 	end_round(1)
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-
+	'''if player_wins >= 2 or cpu_wins >= 2:
+		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	else:
+		print('ROUND END')
+		reset()
+func reset() -> void:
+	print('RESET')
+	#disable both. I think that they will already be disabled but whatever
+	disable_control()
+	#set position
+	$"../../Player".global_position = Vector2(-50, 40)
+	$"../../Player2".global_position = Vector2(50, 40)
+	
+	#.revive
+	_ready()
+	'''
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
