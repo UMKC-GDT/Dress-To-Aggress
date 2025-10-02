@@ -9,6 +9,8 @@ var started = false
 var platforms = 0
 var stat_box : Panel
 
+signal updateStatsBar(clothingObject, toDo)
+
 @export var current_wearable: Wearable # WILL ERROR IF NO WEARABLE PRESENT
 
 func _ready():
@@ -59,6 +61,7 @@ func _on_area_2d_mouse_entered():
 		draggable = true
 		self.scale = Vector2(1.05, 1.05)
 		stat_box.visible = true
+		updateStatsBar.emit(self, 0)
 
 #when mouse shopts hovering over the clothing 
 func _on_area_2d_mouse_exited():

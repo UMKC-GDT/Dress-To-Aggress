@@ -1,7 +1,7 @@
 extends Node2D
 
-var last_clicked
 
+var last_clicked
 
 var draggable = false
 var is_inside_dropable = false
@@ -9,6 +9,7 @@ var body_ref
 var offset: Vector2
 var initialPos: Vector2
 var collider : CollisionShape2D
+
 
 
 func _process(delta):
@@ -45,7 +46,6 @@ func _process(delta):
 				#last_clicked.gravity_scale = 1.0
 			last_clicked = self
 
-	
 
 func _input(event):
 	
@@ -67,12 +67,8 @@ func _input(event):
 			var clicked_object = results[0].collider
 			last_clicked = clicked_object
 			print("0",last_clicked.name)
+			
 		if results.size() > 1:
 			var clicked_object = results[1].collider
 			last_clicked = clicked_object
 			print("1",results[1].collider.name)
-			
-			
-			
-			
-			
