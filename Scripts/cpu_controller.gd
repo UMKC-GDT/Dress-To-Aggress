@@ -9,6 +9,7 @@ var pressing_jump = false
 var punch_pressed = false
 var kick_pressed = false
 var pose_pressed = false
+var crouch_pressed = false
 
 #enum Enemy_Range { POSE, PUNCH, KICK, FAR}
 #var range = Enemy_Range.POSE
@@ -27,6 +28,9 @@ var last_enemy_attack = CharacterState.IDLE
 
 #Could be useful for checking if the enemy's blocking to break their block by POSE
 var enemy_blocking = false
+
+#For checking if the enemy's crouching
+var enemy_crouching = false
 
 #This one defines the enemy CPU's "eyes" for knowing if the player's approaching, retreating, or standing in place. 1 for approaching (getting closer), -1 for retreating, 0 for idle.
 var enemy_approaching
@@ -48,6 +52,7 @@ func release_inputs():
 	punch_pressed = false
 	kick_pressed = false
 	pose_pressed = false
+	crouch_pressed = false
 
 #WARNING!!!!!!! If you get weird errors, >WARNING< MAKE SURE THAT THE ENEMY NAME IS EXACT TO THE NODE IN THE LEVEL >WARNING<. Check this in case of any weird null errors.
 func _ready():
@@ -151,6 +156,7 @@ func walk_closer():
 	
 	block_legal = false
 	
+	
 	if facing_direction == 1:
 		pressing_left = false
 		pressing_right = true
@@ -160,6 +166,7 @@ func walk_closer():
 
 func walk_away():
 	if state != CharacterState.RECOVERY: block_legal = true
+	if state == CharacterState.CROUCH or crouch_pressed: crouch_block_legal = true
 	
 	if facing_direction == 1:
 		pressing_left = true
@@ -208,6 +215,8 @@ func dash_towards():
 				start_dash(facing_direction)
 		dash_direction = facing_direction
 
+func crouch():
+	pass
 
 func approach():
 	roll = get_random_number()
@@ -278,6 +287,11 @@ func find_aggression():
 	elif enemy_state == CharacterState.IDLE:
 		enemy_approaching = 0
 
+func find_crouch():
+	if enemy_state == CharacterState.CROUCH or enemy_state == CharacterState.CPUNCH or enemy_state == CharacterState.CKICK:
+		enemy_crouching = true
+
+
 #func set_range(new_range):
 	#if dead: return
 	#
@@ -307,28 +321,101 @@ func walk_state(direction):
 		change_state(CharacterState.IDLE)
 	elif pressing_jump and is_on_floor():
 		start_action(4, func(): start_jump(direction), "jump startup")
+	elif crouch_pressed and is_on_floor():
+		change_state(CharacterState.CROUCH)
 	else:
 		velocity.x = direction * SPEED
 		check_for_attack()
 		check_for_pose()
+
+func idle_state(direction):
+	if is_on_floor():
+		dashes_left = 1
+		
+		if direction: 
+			change_state(CharacterState.WALK)
+		else:
+				
+			if not disabled:
+				check_for_jump()
+			if crouch_pressed:
+				change_state(CharacterState.CROUCH)
+			
+			check_for_attack()
+			check_for_pose()
+			disable_hitboxes()
+			
+			cancellable = false
+			
+			velocity.x = move_toward(velocity.x, 0, 20)
+
+func crouch_state(direction):
+	if not crouch_pressed:
+		print("CPU just released the crouch button!")
+		change_state(CharacterState.IDLE)
+		
+	if disabled: return
+	
+	disable_hitboxes()
+	check_for_attack()
+	cancellable = false
+	velocity.x = move_toward(velocity.x, 0, 20)
+
+func block_state(delta):
+	velocity.x = move_toward(velocity.x, 0, 20)
+	
+	if block_timer > 0:
+		block_timer -= delta
+	else:
+		if crouch_pressed and is_on_floor():
+			change_state(CharacterState.CROUCH)
+		else:
+			change_state(CharacterState.IDLE)
 
 func check_for_attack():
 	if disabled == true: 
 		return
 	
 	if punch_pressed:
-		stop_all_timers()
-		start_action(punch_data["startup_frames"], func(): 
-			if state == CharacterState.STARTUP:
-				start_punch()
-			, punch_data["startup_animation"])
+		if crouch_pressed and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
+			stop_all_timers()
+			start_action(crouch_punch_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_c_punch()
+				, crouch_punch_data["startup_animation"])
+		elif not (crouch_pressed) and state != CharacterState.CROUCH:
+			stop_all_timers()
+			start_action(punch_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_punch()
+				, punch_data["startup_animation"])
 	
 	if kick_pressed:
-		stop_all_timers()
-		start_action(kick_data["startup_frames"], func(): 
-			if state == CharacterState.STARTUP:
-				start_kick()
-			, kick_data["startup_animation"])
+		if crouch_pressed and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
+			stop_all_timers()
+			
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
+			crouch_scale()
+			
+			start_action(crouch_kick_data["startup_frames"], func():
+				if state==CharacterState.STARTUP:
+					start_c_kick()
+				, crouch_kick_data["startup_animation"])
+		elif not (crouch_pressed) and state != CharacterState.CROUCH:
+			print("CPU isn't pressing crouch or in the crouch state!")
+			
+			stop_all_timers()
+			animation_player.position.x = 18
+			ShirtLayer.position.x = 18
+			PantsLayer.position.x = 18
+			reset_scale()
+			
+			start_action(kick_data["startup_frames"], func(): 
+				if state == CharacterState.STARTUP:
+					start_kick()
+				, kick_data["startup_animation"])
 
 func check_for_pose():
 	if disabled: return
@@ -340,7 +427,23 @@ func check_for_pose():
 func check_for_jump():
 	if pressing_jump:
 		start_action(4, func(): start_jump(0), "jump startup")
-		
+
+func start_recovery(frames, animation):
+	#if (state != CharacterState.PUNCH) and (state != CharacterState.KICK): return
+	if dead: return
+	change_state(CharacterState.RECOVERY)
+	
+	animation_player.play(animation)
+	PantsLayer.play(animation)
+	ShirtLayer.play(animation)
+	recovery_timer = frames * FRAME
+	recovery_continuation = func(): 
+		if state != CharacterState.STARTUP and state != CharacterState.HURT: 
+			if (crouch_pressed):
+				change_state(CharacterState.CROUCH)
+			else:
+				change_state(CharacterState.IDLE)
+
 func report_dead():
 	SfxManager.playDeath()
 	cpu_died.emit()
