@@ -45,7 +45,7 @@ func disable_control():
 
 func _ready() -> void:
 	randomize() #Apparently, this is a surprise tool that'll help us later with generating a certain random number.
-	
+	$"../../FadeTransition/ColorRect".color = 00000000
 	message_label.text = ""
 	fight_timer_display.text = "99"
 	victory_label.text = ""
@@ -178,7 +178,9 @@ func _on_cpu_died() -> void:
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
-	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	transition()
+	print('wins:',player_wins,cpu_wins)
+	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	'''if player_wins >= 2 or cpu_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
@@ -195,5 +197,18 @@ func reset() -> void:
 	#.revive
 	_ready()
 	'''
+
+	
+
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
+
+func transition():
+	print('fading out')
+	$"../../FadeTransition/AnimationPlayer".play("fade_to_black")
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fade_to_black":
+		print()
+		$"../../FadeTransition/AnimationPlayer".play("fade_to_normal")
+		print('faded in')

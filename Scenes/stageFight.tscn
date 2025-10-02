@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=23 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
@@ -22,6 +22,58 @@ size = Vector2(27, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg752"]
 size = Vector2(339, 20)
+
+[sub_resource type="Animation" id="Animation_3dx3i"]
+resource_name = "fade_to_normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_px76k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c3vem"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m73bv"]
+_data = {
+&"RESET": SubResource("Animation_px76k"),
+&"fade_to_black": SubResource("Animation_c3vem"),
+&"fade_to_normal": SubResource("Animation_3dx3i")
+}
 
 [node name="Test Level" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-21.0, 88.0]
@@ -172,6 +224,21 @@ offset_bottom = 52.0
 scale = Vector2(1.64516, 1.64516)
 metadata/_edit_use_anchors_ = true
 
+[node name="FadeTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="FadeTransition"]
+offset_left = -100.0
+offset_top = -24.0
+offset_right = 1400.0
+offset_bottom = 776.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeTransition"]
+libraries = {
+&"": SubResource("AnimationLibrary_m73bv")
+}
+
 [connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
 [connection signal="cpu_died" from="Player2" to="CanvasLayer/Game Manager" method="_on_cpu_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
+[connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]
