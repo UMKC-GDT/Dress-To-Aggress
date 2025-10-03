@@ -8,6 +8,7 @@ var initialPos: Vector2
 var started = false 
 var platforms = 0
 var stat_box : Panel
+var showChange = true;
 
 signal updateStatsBar(clothingObject, toDo)
 
@@ -30,7 +31,8 @@ func _ready():
 
 func get_current_wearable() -> Wearable:
 	return current_wearable
-	
+
+
 func set_random_pants_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
@@ -42,7 +44,8 @@ func set_random_pants_wearable():
 	
 	#generates random pants
 	current_wearable = load(path + pants[rand] + ".tres")
-	
+
+
 func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
@@ -54,14 +57,17 @@ func set_random_shirt_wearable():
 	
 	#generates random shirt
 	current_wearable = load(path + shirts[rand] + ".tres")
-	
+
+
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():
 	if not global.is_dragging:
 		draggable = true
 		self.scale = Vector2(1.05, 1.05)
 		stat_box.visible = true
-		updateStatsBar.emit(self, 0)
+		if showChange:
+			updateStatsBar.emit(self, 0)
+
 
 #when mouse shopts hovering over the clothing 
 func _on_area_2d_mouse_exited():
@@ -70,21 +76,26 @@ func _on_area_2d_mouse_exited():
 		draggable = false
 		self.scale = Vector2(1, 1)
 		stat_box.visible = false
+		updateStatsBar.emit(self, 3)
+
 
 #when clothing enters the platform
 func _on_area_2d_body_entered(body: StaticBody2D):
 	
 	if (body.is_in_group('dropable') and platforms < 1):
+		print("in")
 		platforms += 1
 		is_inside_dropable = true
 		body.modulate = Color(Color.REBECCA_PURPLE, 0.2)
 		body_ref = body
-		
+		updateStatsBar.emit(self, 1)
+
 
 #when clothing leaves the platform
 func _on_area_2d_body_exited(body):
 	if body.is_in_group('dropable') and platforms == 1:
+		print("out")
 		platforms -= 1
 		is_inside_dropable = false
 		body.modulate  = Color(Color.MEDIUM_PURPLE, 0.0)
-		
+		updateStatsBar.emit(self, 2)

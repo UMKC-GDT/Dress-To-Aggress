@@ -15,46 +15,55 @@ var damageStat: int = 50
 @onready var poseChange: ProgressBar = $PoseBar/changeBar
 
 func _ready() -> void:
-	healthBar.value = healthStat
-	healthChange.value = healthBar.value
-	speedBar.value = speedStat
-	speedChange.value = healthChange.value
-	damageBar.value = damageStat
-	damageChange.value = damageBar.value
-	poseBar.value = poseStat
-	poseChange.value = poseBar.value
+	resetBars()
 
 
-func updateStatsBars(clickedObj, toDo):
+func updateStatsBars(clickedObj, toDo) -> void:
 	var changeArr = getAverageStatChange(clickedObj)
 	
-	print("Average speed change " + str(changeArr[0]))
-	print("Average health change " + str(changeArr[1]))
-	print("Average pose change " + str(changeArr[2]))
-	print("Average damage change " + str(changeArr[3]))
+	#print("Average speed change " + str(changeArr[0]))
+	#print("Average health change " + str(changeArr[1]))
+	#print("Average damage change " + str(changeArr[2]))
+	#print("Average pose change " + str(changeArr[3]))
 	
-	var speedDif = speedBar.value * (1 + changeArr[0])
-	var healthDif = healthBar.value * (1 + changeArr[1])
-	var damageDif = damageBar.value * (1 + changeArr[2])
-	var poseDif = poseBar.value * (1 + changeArr[3])
-	print(speedDif)
-	print(healthDif)
-	print(damageDif)
-	print(poseDif)
+	# finds actual amount to increase/decrease
+	var speedDif = speedBar.value * changeArr[0]
+	var healthDif = healthBar.value * changeArr[1]
+	var damageDif = damageBar.value * changeArr[2]
+	var poseDif = poseBar.value * changeArr[3]
 	
-	show_increase(speedChange, speedDif)
-	show_increase(healthChange, healthDif)
-	show_increase(damageChange, damageDif)
-	show_increase(poseChange, poseDif)
+	
+	match(toDo):
+		0: # shows change for all bars
+			showChange(healthBar, healthChange, speedDif)
+			showChange(speedBar, speedChange, healthDif)
+			showChange(damageBar, damageChange, damageDif)
+			showChange(poseBar, poseChange, poseDif)
+		1: # changes all bars + all the stats if resetBars() is called at some point
+			commitChange(healthBar, healthChange, speedDif)
+			commitChange(speedBar, speedChange, healthDif)
+			commitChange(damageBar, damageChange, damageDif)
+			commitChange(poseBar, poseChange, poseDif)
+			speedStat += speedDif
+			healthStat += healthDif
+			damageStat += damageDif
+			poseStat += poseDif
+		2: # undos changes caused above when clothes are taken off
+			resetBars()
+		3:
+			resetBars()
+		_:
+			print(toDo, " Entered. Expected 0-3")
 
 
 func getAverageStatChange(clickedObj) -> Array:
-	var clothing = clickedObj.current_wearable
+	var clothing = clickedObj.current_wearable # gets clothings stats
 	var speedAvg = 0
 	var healthAvg = 0
 	var poseAvg = 0
 	var damageAvg = 0
 	
+	# averages changes to stats, could be changed because some result in 0 when there are noticable differences
 	speedAvg += clothing.get_walk_speed_change() + clothing.get_dash_speed_change() + clothing.get_pose_speed_change() + clothing.get_attack_speed_change()
 	speedAvg /= 4;
 	healthAvg += clothing.get_health_change() + clothing.get_defense_change()
@@ -64,56 +73,49 @@ func getAverageStatChange(clickedObj) -> Array:
 	damageAvg += clothing.get_attack_damage_change() + clothing.get_hitstun_length_change() + clothing.get_knockback_change()
 	damageAvg/3
 	
-	
-	var changeArr = [speedAvg, healthAvg, damageAvg, poseAvg]
-	return changeArr
+	return [speedAvg, healthAvg, damageAvg, poseAvg]
 
 
-func reset(statBar: ProgressBar, changeBar: ProgressBar):
-	pass
+func showChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
+	if dif < 0: # if it's a decrease
+		#print("Showing decrease")
+		# creates new theme with color yellow to give to the bar
+		# this prevents them all from changing color
+		var styleBox = changeBar.get_theme_stylebox("fill").duplicate()
+		styleBox.bg_color = Color.YELLOW;
+		changeBar.add_theme_stylebox_override("fill", styleBox)
+		changeBar.value = statBar.value
+		statBar.value += dif
+	else: # if its an increase
+		#print("Showing increase")
+		var styleBox = changeBar.get_theme_stylebox("fill").duplicate()
+		styleBox.bg_color = Color.GREEN;
+		changeBar.add_theme_stylebox_override("fill", styleBox)
+		changeBar.value += dif
 
 
-func show_increase(changeBar: ProgressBar, amount: int):
-	print("Showing increase")
-	var styleBox = changeBar.get_theme_stylebox("fill").duplicate()
-	styleBox.bg_color = Color.GREEN;
-	changeBar.add_theme_stylebox_override("fill", styleBox)
-	changeBar.value = amount
-
-
-func increase_stat(statBar: ProgressBar, changeBar: ProgressBar, amount: int):
-	print("Increasing stat")
-	statBar.value += amount
-	changeBar.value = statBar.value
-
-
-func show_decrease(statBar: ProgressBar, changeBar: ProgressBar, amount: int):
-	print("Showing decrease")
-	var styleBox = changeBar.get_theme_stylebox("fill").duplicate()
-	styleBox.bg_color = Color.YELLOW;
-	changeBar.add_theme_stylebox_override("fill", styleBox)
-	changeBar.value = statBar.value
-	statBar.value -= amount
-
-
-func decrease_stat(statBar: ProgressBar, changeBar: ProgressBar, amount: int, showing : bool = true):
-	print("Decreasing stat")
-	if(showing):
-		changeBar.value -= amount
+func commitChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
+	if dif < 0:
+		#print("Increasing stat")
+		statBar.value += dif
+		changeBar.value = statBar.value
 	else:
-		statBar.value -= amount
-		changeBar.value = changeBar.value
+		#print("Decreasing stat")
+		changeBar.value = statBar.value
 
 
-# Testing Functions
-func _on_button_pressed() -> void:
-	show_increase(speedChange, 10)
+func undoChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
+	dif *= -1
+	statBar.value += dif
+	changeBar.value = statBar.value
 
-func _on_button_2_pressed() -> void:
-	increase_stat(speedBar, speedChange, 10)
 
-func _on_button_3_pressed() -> void:
-	show_decrease(speedBar, speedChange, 10)
-
-func _on_button_4_pressed() -> void:
-	decrease_stat(speedBar, speedChange, 10)
+func resetBars():
+	healthBar.value = healthStat
+	healthChange.value = healthBar.value
+	speedBar.value = speedStat
+	speedChange.value = healthChange.value
+	damageBar.value = damageStat
+	damageChange.value = damageBar.value
+	poseBar.value = poseStat
+	poseChange.value = poseBar.value

@@ -231,34 +231,6 @@ text = "Pose
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Button" type="Button" parent="StatsBars"]
-offset_left = 129.0
-offset_top = -101.0
-offset_right = 247.0
-offset_bottom = -51.0
-text = "show increase"
-
-[node name="Button3" type="Button" parent="StatsBars"]
-offset_left = 339.0
-offset_top = -101.0
-offset_right = 462.0
-offset_bottom = -51.0
-text = "show decrease"
-
-[node name="Button4" type="Button" parent="StatsBars"]
-offset_left = 469.0
-offset_top = -101.0
-offset_right = 587.0
-offset_bottom = -51.0
-text = "decrease"
-
-[node name="Button2" type="Button" parent="StatsBars"]
-offset_left = 253.0
-offset_top = -101.0
-offset_right = 301.0
-offset_bottom = -51.0
-text = "increase"
-
 [node name="Drag-Interaction-Provider" type="Node2D" parent="."]
 script = ExtResource("1_aqk2v")
 
@@ -396,10 +368,6 @@ offset_right = 41.965
 offset_bottom = 88.087
 text = "Start"
 
-[connection signal="pressed" from="StatsBars/Button" to="StatsBars" method="_on_button_pressed"]
-[connection signal="pressed" from="StatsBars/Button3" to="StatsBars" method="_on_button_3_pressed"]
-[connection signal="pressed" from="StatsBars/Button4" to="StatsBars" method="_on_button_4_pressed"]
-[connection signal="pressed" from="StatsBars/Button2" to="StatsBars" method="_on_button_2_pressed"]
 [connection signal="updateStatsBar" from="randomShirt" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt2" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt3" to="StatsBars" method="updateStatsBars"]
