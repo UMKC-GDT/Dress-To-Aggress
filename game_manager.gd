@@ -57,7 +57,7 @@ func _ready() -> void:
 func start_round() -> void:
 	
 	#First, show the round #
-	
+	print('Round:',round_num)
 	#Call begin_fight()
 	
 	#Code from previous version below --------- consider splitting everything below into a seperate function to eventually be phased out, since it just handles showing the controls and letting them acknowledge it.
@@ -65,10 +65,13 @@ func start_round() -> void:
 	await get_tree().create_timer(0.3).timeout
 	
 	# Slide in the controls panel from Y=200 to Y=55
-	controls_panel.position.y = 200
-	var tween := create_tween()
-	tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if round_num == 1: #For other rounds the panel shouldn't apear
+		controls_panel.position.y = 200
+		var tween := create_tween()
+		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	else: #Maybe add something here to let the player know that it wait for the player to press the punch button
+		print()
 
 	# Wait for either 10 seconds, or for the player to press the punch button.
 	await wait_for_controls_acknowledgement()
