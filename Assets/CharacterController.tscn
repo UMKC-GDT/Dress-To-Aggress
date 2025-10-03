@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://c12shv00mnant" path="res://Scenes/GenerateAnimationLayer.gd" id="23_31scl"]
 [ext_resource type="Resource" uid="uid://bqsttykalac5f" path="res://Assets/Resources/Wearables/body.tres" id="24_5ye0y"]
 [ext_resource type="Script" uid="uid://cpwnjci14lgit" path="res://Scripts/throw_hitbox.gd" id="24_lcnf3"]
-[ext_resource type="Script" uid="uid://dmd8ckg8c7g5k" path="res://Scripts/crouch_hitbox.gd" id="32_prtgt"]
+[ext_resource type="Script" path="res://Scripts/crouch_hitbox.gd" id="32_prtgt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tmop"]
 size = Vector2(13, 50)
