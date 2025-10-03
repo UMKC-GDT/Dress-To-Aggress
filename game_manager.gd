@@ -13,6 +13,7 @@ extends Node2D
 
 @onready var fight_music = $"/root/Test Level/Background Track"
 
+
 var timer_started := false
 
 #3 round system stuff
@@ -44,8 +45,8 @@ func disable_control():
 	cpu.disabled = true
 
 func _ready() -> void:
+	$"../../FadeTransition/ColorRect".color = 000000
 	randomize() #Apparently, this is a surprise tool that'll help us later with generating a certain random number.
-	$"../../FadeTransition/ColorRect".color = 00000000
 	message_label.text = ""
 	fight_timer_display.text = "99"
 	victory_label.text = ""
@@ -57,11 +58,12 @@ func _ready() -> void:
 func start_round() -> void:
 	
 	#First, show the round #
+	message_label.text = 'ROUND'+str(round_num)
 	print('Round:',round_num)
 	#Call begin_fight()
 	
 	#Code from previous version below --------- consider splitting everything below into a seperate function to eventually be phased out, since it just handles showing the controls and letting them acknowledge it.
-	message_label.text = "READY?"
+	#message_label.text = "READY?"
 	await get_tree().create_timer(0.3).timeout
 	
 	# Slide in the controls panel from Y=200 to Y=55
@@ -70,9 +72,16 @@ func start_round() -> void:
 		var tween := create_tween()
 		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	else: #Maybe add something here to let the player know that it wait for the player to press the punch button
-		print()
-
+	else: #timer that triggers the battle. maybe add a graphic that counts down. There has to be a better way to do this
+		print('Start timer started')
+		victory_label.text = '3'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = '2'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = '1'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = ''
+		begin_fight()
 	# Wait for either 10 seconds, or for the player to press the punch button.
 	await wait_for_controls_acknowledgement()
 	
@@ -181,27 +190,14 @@ func _on_cpu_died() -> void:
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
-	transition()
 	print('wins:',player_wins,cpu_wins)
-	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	'''if player_wins >= 2 or cpu_wins >= 2:
+	round_num +=1
+	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	if player_wins >= 2 or cpu_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
 		print('ROUND END')
-		reset()
-func reset() -> void:
-	print('RESET')
-	#disable both. I think that they will already be disabled but whatever
-	disable_control()
-	#set position
-	$"../../Player".global_position = Vector2(-50, 40)
-	$"../../Player2".global_position = Vector2(50, 40)
-	
-	#.revive
-	_ready()
-	'''
-
-	
+		transition()
 
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
@@ -212,6 +208,19 @@ func transition():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_to_black":
+			#set position
+		$"../../Player".global_position = Vector2(-50, 40)
+		$"../../Player2".global_position = Vector2(50, 40)
 		print()
 		$"../../FadeTransition/AnimationPlayer".play("fade_to_normal")
 		print('faded in')
+		reset()
+
+func reset() -> void:
+	print('RESET')
+	victory_label.text = ""
+	fight_timer_display.text = "99"
+	#disable both. I think that they will already be disabled but whatever
+	disable_control()
+	#player.revive
+	start_round()
