@@ -180,7 +180,7 @@ func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	transition()
 	print('wins:',player_wins,cpu_wins)
-	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	'''if player_wins >= 2 or cpu_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
