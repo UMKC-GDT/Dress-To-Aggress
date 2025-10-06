@@ -133,3 +133,5 @@ func get_last_outfit() -> Array[Dictionary]:
 func _on_to_stage_button_button_down():
 	# Acts as if the timer ran out, and performs all the code to move onto the stage
 	_on_timer_timeout();
+
+	

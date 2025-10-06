@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=18 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
@@ -14,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
 [ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
+[ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
 size = Vector2(1151, 52)
@@ -164,9 +165,31 @@ theme_override_font_sizes/font_size = 35
 text = "To Stage"
 script = ExtResource("13_ch7k1")
 
+[node name="DifficultySelect" type="OptionButton" parent="."]
+offset_left = -532.0
+offset_top = -315.0
+offset_right = -369.0
+offset_bottom = -284.0
+theme_override_fonts/font = ExtResource("13_yagx5")
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "Choose Difficulty"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+popup/item_0/separator = true
+popup/item_1/text = "Easy"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Hard"
+popup/item_3/id = 3
+script = ExtResource("15_2mlfk")
+
 [connection signal="button_down" from="InstructionsDisplay/Button" to="InstructionsDisplay" method="_on_button_button_down"]
 [connection signal="button_down" from="InstructionsDisplay/Button" to="To Stage Button" method="_on_button_button_down"]
 [connection signal="button_down" from="To Stage Button" to="Dressup Timer" method="_on_to_stage_button_button_down"]
+[connection signal="item_selected" from="DifficultySelect" to="DifficultySelect" method="_on_item_selected"]
 
 [editable path="randomShirt"]
 [editable path="randomShirt2"]
