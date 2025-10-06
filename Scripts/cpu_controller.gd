@@ -85,6 +85,7 @@ func handle_input(delta):
 	#find_range()
 	find_state()
 	find_aggression()
+	find_crouch()
 	check_enemy_attack()
 	handle_states(direction, delta)
 	
@@ -116,9 +117,17 @@ func run_ai():
 
 	if horizontal_distance < kick_range:
 		if randf() < 0.07:
-			punch()
+			if randf() < 0.5:
+				crouch()
+				punch()
+			else:
+				punch()
 		elif randf() < 0.05:
-			kick()
+			if randf() < 0.5:
+				crouch()
+				kick()
+			else:
+				kick()
 	
 	#Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
@@ -128,13 +137,25 @@ func run_ai():
 	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
 		if randf() < 0.4:
-			block(punch_time)
+			if enemy_crouching:
+				crouch()
+				block(punch_time)
+				uncrouch()
+			else:
+				uncrouch()
+				block(punch_time)
 		elif randf() < 0.06:
 			dash_away()
 	
 	elif (Input.is_action_just_pressed(enemy.kick_input) and horizontal_distance <= kick_range):
 		if randf() < 0.4:
-			block(kick_time) 
+			if enemy_crouching:
+				crouch()
+				block(kick_time)
+				uncrouch()
+			else:
+				uncrouch()
+				block(kick_time)
 		elif randf() < 0.06:
 			dash_away()
 	
@@ -155,6 +176,7 @@ func run_ai():
 func walk_closer():
 	
 	block_legal = false
+	uncrouch()
 	
 	
 	if facing_direction == 1:
@@ -178,6 +200,7 @@ func walk_away():
 func jump_forward():
 	pressing_left = false
 	pressing_right = false
+	uncrouch()
 	walk_closer()
 	pressing_jump = true
 	await get_tree().create_timer(0.1).timeout
@@ -186,6 +209,7 @@ func jump_forward():
 	pressing_right = false
 
 func jump_away():
+	uncrouch()
 	walk_away()
 	pressing_jump = true
 	await get_tree().create_timer(0.2).timeout
@@ -198,6 +222,8 @@ func dash_away():
 	if (dash_available == false): return
 	if disabled: return
 	
+	uncrouch()
+	
 	if state == CharacterState.IDLE or state == CharacterState.WALK or state == CharacterState.JUMP:
 		if dashes_left == 1 and (current_time - last_dash_time >= DASH_COOLDOWN): #check that dash is off cooldown
 			if (not is_on_floor() and MIDAIR_DASH) or (is_on_floor()):
@@ -209,6 +235,8 @@ func dash_towards():
 	if (dash_available == false): return
 	if disabled: return
 	
+	uncrouch()
+	
 	if state == CharacterState.IDLE or state == CharacterState.WALK or state == CharacterState.JUMP:
 		if dashes_left == 1 and (current_time - last_dash_time >= DASH_COOLDOWN): #check that dash is off cooldown
 			if (not is_on_floor() and MIDAIR_DASH) or (is_on_floor()):
@@ -216,10 +244,14 @@ func dash_towards():
 		dash_direction = facing_direction
 
 func crouch():
-	pass
+	crouch_pressed = true
+
+func uncrouch():
+	crouch_pressed = false
 
 func approach():
 	roll = get_random_number()
+	uncrouch()
 	
 	if (is_on_floor()):
 		if roll <= 80:
@@ -233,6 +265,7 @@ func approach():
 
 func retreat():
 	roll = get_random_number()
+	uncrouch()
 	
 	if (is_on_floor()):
 		if roll <= 80:
@@ -256,11 +289,13 @@ func punch():
 	punch_pressed = true
 	await get_tree().create_timer(0.02).timeout
 	punch_pressed = false
+	uncrouch()
 
 func kick():
 	kick_pressed = true
 	await get_tree().create_timer(0.03).timeout
 	kick_pressed = false
+	uncrouch()
 
 func jump():
 	pressing_jump = true
@@ -290,7 +325,8 @@ func find_aggression():
 func find_crouch():
 	if enemy_state == CharacterState.CROUCH or enemy_state == CharacterState.CPUNCH or enemy_state == CharacterState.CKICK:
 		enemy_crouching = true
-
+	else:
+		enemy_crouching = false
 
 #func set_range(new_range):
 	#if dead: return

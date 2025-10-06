@@ -30,6 +30,7 @@ var pose_damage_mult = 1
 var health_mult = 1
 
 @export var health = 200
+var starting_health = 0
 @export var health_UI : RichTextLabel
 @onready var healthbar = $"/root/Test Level/CanvasLayer/Healthbar"
 
@@ -1190,9 +1191,17 @@ func scale_stats():
 	
 	health_mult += shirt.get_health_change() + pants.get_health_change()
 	health = 200 * health_mult
+	starting_health = health
 
 func report_dead():
 	pass
 
 func change_color(color):
 	self.modulate = color
+
+func revive():
+	dead = false
+	state = CharacterState.IDLE
+	health = starting_health
+	disabled = true
+	healthbar.init_health(health)

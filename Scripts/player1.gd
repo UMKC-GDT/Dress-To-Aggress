@@ -10,6 +10,7 @@ func _ready():
 	healthbar = $"/root/Test Level/CanvasLayer/Healthbar"
 	super.scale_stats()
 	healthbar.init_health(health)
+	starting_health = health
 	super._ready()
 
 func report_dead():
