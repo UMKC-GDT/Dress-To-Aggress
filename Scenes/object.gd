@@ -83,19 +83,19 @@ func _on_area_2d_mouse_exited():
 func _on_area_2d_body_entered(body: StaticBody2D):
 	
 	if (body.is_in_group('dropable') and platforms < 1):
-		print("in")
 		platforms += 1
 		is_inside_dropable = true
 		body.modulate = Color(Color.REBECCA_PURPLE, 0.2)
 		body_ref = body
 		updateStatsBar.emit(self, 1)
+		showChange = false
 
 
 #when clothing leaves the platform
 func _on_area_2d_body_exited(body):
 	if body.is_in_group('dropable') and platforms == 1:
-		print("out")
 		platforms -= 1
 		is_inside_dropable = false
 		body.modulate  = Color(Color.MEDIUM_PURPLE, 0.0)
 		updateStatsBar.emit(self, 2)
+		showChange = true
