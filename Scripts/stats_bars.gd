@@ -48,9 +48,7 @@ func updateStatsBars(clickedObj, toDo) -> void:
 			commitChange(speedBar, speedChange, lastSpeedChange)
 			commitChange(damageBar, damageChange, lastDamageChange)
 			commitChange(poseBar, poseChange, lastPoseChange)
-			print(speedStat)
-			print(lastSpeedChange)
-			print(int(round(speedStat+lastSpeedChange)))
+		
 			speedStat += lastSpeedChange
 			healthStat += lastHealthChange
 			damageStat += lastDamageChange

@@ -53,6 +53,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ch7k1")
 step = 1.0
 value = 50.0
 rounded = true
+show_percentage = false
 
 [node name="changeBar" type="ProgressBar" parent="StatsBars/healthBar"]
 z_index = -1
@@ -101,6 +102,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ch7k1")
 step = 1.0
 value = 50.0
 rounded = true
+show_percentage = false
 
 [node name="changeBar" type="ProgressBar" parent="StatsBars/speedBar"]
 z_index = -1
@@ -149,6 +151,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ch7k1")
 step = 1.0
 value = 50.0
 rounded = true
+show_percentage = false
 
 [node name="changeBar" type="ProgressBar" parent="StatsBars/DamageBar"]
 z_index = -1
@@ -197,6 +200,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ch7k1")
 step = 1.0
 value = 50.0
 rounded = true
+show_percentage = false
 
 [node name="changeBar" type="ProgressBar" parent="StatsBars/PoseBar"]
 z_index = -1
