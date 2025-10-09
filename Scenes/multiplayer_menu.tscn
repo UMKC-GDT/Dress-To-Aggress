@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://c03a22xe50oa8"]
+
+[ext_resource type="Script" uid="uid://bd6u0ay5u464d" path="res://Scenes/multiplayer_menu.gd" id="1_djhlm"]
+[ext_resource type="Script" uid="uid://dwehbw0vayoml" path="res://Scripts/Lobby.gd" id="1_k2gfj"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_djhlm")
+
+[node name="Lobby" type="Node" parent="."]
+script = ExtResource("1_k2gfj")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 1180.0
+offset_bottom = 500.0
+
+[node name="Host" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 300.0
+offset_bottom = 300.0
+text = "Host"
+
+[node name="Start" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 125.0
+offset_right = 765.0
+offset_bottom = 225.0
+text = "Start
+Game"
+
+[node name="Join" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 200.0
+offset_right = 880.0
+offset_bottom = 300.0
+text = "Join"
+
+[node name="LineEdit" type="LineEdit" parent="Panel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 250.0
+offset_right = 765.0
+offset_bottom = 300.0
+
+[connection signal="button_down" from="Panel/Host" to="Lobby" method="create_game"]
+[connection signal="button_down" from="Panel/Start" to="Lobby" method="_on_start_pressed"]
+[connection signal="button_down" from="Panel/Join" to="Lobby" method="join_game"]
