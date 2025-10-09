@@ -29,6 +29,8 @@ var pose_damage_mult = 1
 
 var health_mult = 1
 
+var temperature = 1
+
 @export var health = 200
 var starting_health = 0
 @export var health_UI : RichTextLabel
@@ -1151,8 +1153,8 @@ func scale_stats():
 	crouch_punch_data["air_knockback_force"] *= punch_knockback_mult
 	
 	punch_damage_mult += shirt.get_attack_damage_change()
-	punch_data["damage"] *= punch_damage_mult
-	crouch_punch_data["damage"] *= punch_damage_mult 
+	punch_data["damage"] = (punch_data["damage"] * temperature) * punch_damage_mult
+	crouch_punch_data["damage"] = (crouch_punch_data["damage"] * temperature) * punch_damage_mult 
 	
 	kick_speed_mult += pants.get_attack_speed_change()
 	kick_data["startup_frames"] /= kick_speed_mult
@@ -1173,8 +1175,8 @@ func scale_stats():
 	crouch_kick_data["air_knockback_force"] *= kick_knockback_mult
 	
 	kick_damage_mult += pants.get_attack_damage_change()
-	kick_data["damage"] *= kick_damage_mult 
-	crouch_kick_data["damage"] *= kick_damage_mult 
+	kick_data["damage"] = (kick_data["damage"] * temperature) * kick_damage_mult 
+	crouch_kick_data["damage"] = (crouch_kick_data["damage"] * temperature) *  kick_damage_mult 
 	
 	pose_speed_mult += shirt.get_pose_speed_change() + pants.get_pose_speed_change()
 	throw_data["startup_frames"] = 10 / pose_speed_mult
@@ -1190,7 +1192,7 @@ func scale_stats():
 	throw_data["damage"] = 20 * pose_damage_mult
 	
 	health_mult += shirt.get_health_change() + pants.get_health_change()
-	health = 200 * health_mult
+	health = (200 * temperature) * health_mult
 	starting_health = health
 
 func report_dead():

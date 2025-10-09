@@ -59,6 +59,10 @@ func _ready():
 	player_type = 0
 	enemy_name = "Player"
 	healthbar = $"/root/Test Level/CanvasLayer/Healthbar2"
+	
+	#This is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
+	temperature = 1
+	
 	super.scale_stats()
 	healthbar.init_health(health)
 	super._ready()
