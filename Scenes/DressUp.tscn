@@ -15,7 +15,7 @@
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
 [ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
-[ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
+[ext_resource type="Script" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 
@@ -373,7 +373,7 @@ offset_right = 41.965
 offset_bottom = 88.087
 text = "Start"
 
-[node name="To Stage Button" type="Button" parent="."]
+[node name="To Stage Button" type="Button" parent="." node_paths=PackedStringArray("InstructionsBoard")]
 offset_left = 279.0
 offset_top = 167.0
 offset_right = 559.0
@@ -382,6 +382,7 @@ theme_override_fonts/font = ExtResource("13_yagx5")
 theme_override_font_sizes/font_size = 35
 text = "To Stage"
 script = ExtResource("13_ch7k1")
+InstructionsBoard = NodePath("../Instructions Board")
 
 [node name="DifficultySelect" type="OptionButton" parent="."]
 offset_left = -532.0
