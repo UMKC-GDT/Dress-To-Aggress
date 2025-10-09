@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
-[ext_resource type="Script" uid="uid://qfrsgoctq88o" path="res://Scripts/stats_bars.gd" id="1_ch7k1"]
+[ext_resource type="Script" path="res://Scripts/stats_bars.gd" id="1_ch7k1"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
 [ext_resource type="PackedScene" uid="uid://cvacyegnnbes0" path="res://Scenes/object.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="10_afhxr"]
 [ext_resource type="Script" uid="uid://djfj1gcrmcc7t" path="res://Scenes/StartPanel.gd" id="11_v7r8m"]
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
-[ext_resource type="Script" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
+[ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
-[ext_resource type="Script" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
+[ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 
@@ -343,6 +343,7 @@ scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
 [node name="Instructions Board" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
