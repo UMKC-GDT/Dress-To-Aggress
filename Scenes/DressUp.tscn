@@ -343,7 +343,6 @@ scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
 [node name="Instructions Board" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
@@ -354,23 +353,23 @@ script = ExtResource("11_v7r8m")
 position = Vector2(-2.20742, -0.201721)
 scale = Vector2(0.339602, 0.403442)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board/InstructionsDisplay"]
-offset_left = -381.0
-offset_top = -191.0
-offset_right = 407.0
-offset_bottom = 216.0
+[node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board"]
+offset_left = -131.0
+offset_top = -68.0
+offset_right = 128.0
+offset_bottom = 69.0
 theme_override_fonts/normal_font = ExtResource("12_0d1k1")
 text = "Drag and Drop clothing items onto your player.
 
 Create your disguise and click TO STAGE to start!"
 scroll_active = false
 
-[node name="Button" type="Button" parent="Instructions Board/InstructionsDisplay"]
+[node name="Button" type="Button" parent="Instructions Board"]
 modulate = Color(0.921362, 0.63823, 0.965459, 1)
-offset_left = -47.035
-offset_top = 57.087
-offset_right = 41.965
-offset_bottom = 88.087
+offset_left = -47.0
+offset_top = 52.5
+offset_right = 42.0
+offset_bottom = 83.5
 text = "Start"
 
 [node name="To Stage Button" type="Button" parent="." node_paths=PackedStringArray("InstructionsBoard")]
@@ -411,8 +410,8 @@ script = ExtResource("15_2mlfk")
 [connection signal="updateStatsBar" from="randomPants" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomPants2" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomPants3" to="StatsBars" method="updateStatsBars"]
-[connection signal="button_down" from="Instructions Board/InstructionsDisplay/Button" to="Instructions Board" method="_on_button_button_down"]
-[connection signal="button_down" from="Instructions Board/InstructionsDisplay/Button" to="To Stage Button" method="_on_button_button_down"]
+[connection signal="button_down" from="Instructions Board/Button" to="Instructions Board" method="_on_button_button_down"]
+[connection signal="button_down" from="Instructions Board/Button" to="To Stage Button" method="_on_button_button_down"]
 [connection signal="button_down" from="To Stage Button" to="Dressup Timer" method="_on_to_stage_button_button_down"]
 [connection signal="item_selected" from="DifficultySelect" to="DifficultySelect" method="_on_item_selected"]
 
