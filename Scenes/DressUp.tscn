@@ -1,11 +1,9 @@
-
-[gd_scene load_steps=18 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=23 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Script" uid="uid://qfrsgoctq88o" path="res://Scripts/stats_bars.gd" id="1_ch7k1"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
 [ext_resource type="PackedScene" uid="uid://cvacyegnnbes0" path="res://Scenes/object.tscn" id="2_tlwt5"]
-[ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_yagx5"]
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://bwk3nqn71sejv" path="res://Assets/Sprites/mirrorLayer.png" id="4_a1r1u"]
 [ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="5_icb47"]
@@ -15,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="10_afhxr"]
 [ext_resource type="Script" uid="uid://djfj1gcrmcc7t" path="res://Scenes/StartPanel.gd" id="11_v7r8m"]
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
-[ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
+[ext_resource type="Script" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
 [ext_resource type="Script" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
 
@@ -86,7 +84,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("2_yagx5")
+theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Health"
 scroll_active = false
 autowrap_mode = 0
@@ -135,7 +133,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("2_yagx5")
+theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Speed"
 scroll_active = false
 autowrap_mode = 0
@@ -184,7 +182,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("2_yagx5")
+theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Damage"
 scroll_active = false
 autowrap_mode = 0
@@ -233,7 +231,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("2_yagx5")
+theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Pose
 "
 scroll_active = false
@@ -327,7 +325,6 @@ stream = ExtResource("9_a1r1u")
 volume_db = -11.712
 
 [node name="Node2D" type="Node2D" parent="."]
-visible = false
 position = Vector2(440, -2)
 
 [node name="SpeachBuble" type="Sprite2D" parent="Node2D"]
@@ -345,30 +342,29 @@ offset_bottom = -233.0
 scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
-
-[node name="InstructionsDisplay" type="Sprite2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-
+[node name="Instructions Board" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
 texture = ExtResource("10_afhxr")
 script = ExtResource("11_v7r8m")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="InstructionsDisplay"]
-offset_left = -131.0
-offset_top = -68.0
-offset_right = 128.0
-offset_bottom = 69.0
+[node name="InstructionsDisplay" type="Sprite2D" parent="Instructions Board"]
+position = Vector2(-2.20742, -0.201721)
+scale = Vector2(0.339602, 0.403442)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board/InstructionsDisplay"]
+offset_left = -381.0
+offset_top = -191.0
+offset_right = 407.0
+offset_bottom = 216.0
 theme_override_fonts/normal_font = ExtResource("12_0d1k1")
 text = "Drag and Drop clothing items onto your player.
 
 Create your disguise and click TO STAGE to start!"
 scroll_active = false
 
-[node name="Button" type="Button" parent="InstructionsDisplay"]
+[node name="Button" type="Button" parent="Instructions Board/InstructionsDisplay"]
 modulate = Color(0.921362, 0.63823, 0.965459, 1)
 offset_left = -47.035
 offset_top = 57.087
@@ -376,12 +372,11 @@ offset_right = 41.965
 offset_bottom = 88.087
 text = "Start"
 
-
 [node name="To Stage Button" type="Button" parent="."]
-offset_left = 269.0
-offset_top = 211.0
-offset_right = 549.0
-offset_bottom = 301.0
+offset_left = 279.0
+offset_top = 167.0
+offset_right = 559.0
+offset_bottom = 257.0
 theme_override_fonts/font = ExtResource("13_yagx5")
 theme_override_font_sizes/font_size = 35
 text = "To Stage"
@@ -408,19 +403,16 @@ popup/item_3/text = "Hard"
 popup/item_3/id = 3
 script = ExtResource("15_2mlfk")
 
-[connection signal="button_down" from="InstructionsDisplay/Button" to="InstructionsDisplay" method="_on_button_button_down"]
-[connection signal="button_down" from="InstructionsDisplay/Button" to="To Stage Button" method="_on_button_button_down"]
-[connection signal="button_down" from="To Stage Button" to="Dressup Timer" method="_on_to_stage_button_button_down"]
-[connection signal="item_selected" from="DifficultySelect" to="DifficultySelect" method="_on_item_selected"]
-
 [connection signal="updateStatsBar" from="randomShirt" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt2" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt3" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomPants" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomPants2" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomPants3" to="StatsBars" method="updateStatsBars"]
-[connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
-
+[connection signal="button_down" from="Instructions Board/InstructionsDisplay/Button" to="Instructions Board" method="_on_button_button_down"]
+[connection signal="button_down" from="Instructions Board/InstructionsDisplay/Button" to="To Stage Button" method="_on_button_button_down"]
+[connection signal="button_down" from="To Stage Button" to="Dressup Timer" method="_on_to_stage_button_button_down"]
+[connection signal="item_selected" from="DifficultySelect" to="DifficultySelect" method="_on_item_selected"]
 
 [editable path="randomShirt"]
 [editable path="randomShirt2"]
