@@ -8,6 +8,9 @@ var initialPos: Vector2
 var started = false 
 var platforms = 0
 var stat_box : Panel
+var showChange = true;
+
+signal updateStatsBar(clothingObject, toDo)
 
 @export var current_wearable: Wearable # WILL ERROR IF NO WEARABLE PRESENT
 
@@ -28,7 +31,8 @@ func _ready():
 
 func get_current_wearable() -> Wearable:
 	return current_wearable
-	
+
+
 func set_random_pants_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
@@ -40,6 +44,7 @@ func set_random_pants_wearable():
 	
 	#generates random pants
 	current_wearable = load(path + pants[rand] + ".tres")
+
 	
 	#Prevents the nerfing gray shorts from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
 	if current_wearable.name == "grayShorts":
@@ -54,6 +59,7 @@ func set_random_pants_wearable():
 	if current_wearable.name[length_of_name-4] == "o": #Shorts
 		$Area2D/CollisionShape2D.scale.y = 0.2
 	
+
 func set_random_shirt_wearable():
 	var rng = RandomNumberGenerator.new()
 	var path   =  "res://Assets/Resources/Wearables/"
@@ -66,6 +72,7 @@ func set_random_shirt_wearable():
 	
 	#generates random shirt
 	current_wearable = load(path + shirts[rand] + ".tres")
+
 	
 	#Prevents the nerfing gray shirt from spawning by rerolling again if it spawns. If it still happens to spawn after this...I tried.
 	if current_wearable.name == "grayShirtS":
@@ -83,12 +90,17 @@ func set_random_shirt_wearable():
 		$Area2D/CollisionShape2D.scale.y = 0.2 # original = 0.2
 		$Area2D/CollisionShape2D.position.y = -65 # original = -65
 	
+
+
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():
 	if not global.is_dragging:
 		draggable = true
 		self.scale = Vector2(1.05, 1.05)
 		stat_box.visible = true
+		if showChange:
+			updateStatsBar.emit(self, 0)
+
 
 #when mouse shopts hovering over the clothing 
 func _on_area_2d_mouse_exited():
@@ -97,6 +109,8 @@ func _on_area_2d_mouse_exited():
 		draggable = false
 		self.scale = Vector2(1, 1)
 		stat_box.visible = false
+		updateStatsBar.emit(self, 3)
+
 
 #when clothing enters the platform
 func _on_area_2d_body_entered(body: StaticBody2D):
@@ -106,7 +120,9 @@ func _on_area_2d_body_entered(body: StaticBody2D):
 		is_inside_dropable = true
 		body.modulate = Color(Color.REBECCA_PURPLE, 0.2)
 		body_ref = body
-		
+		updateStatsBar.emit(self, 1)
+		showChange = false
+
 
 #when clothing leaves the platform
 func _on_area_2d_body_exited(body):
@@ -114,4 +130,5 @@ func _on_area_2d_body_exited(body):
 		platforms -= 1
 		is_inside_dropable = false
 		body.modulate  = Color(Color.MEDIUM_PURPLE, 0.0)
-		
+		updateStatsBar.emit(self, 2)
+		showChange = true
