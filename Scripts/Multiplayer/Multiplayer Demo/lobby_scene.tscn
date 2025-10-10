@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpgn0jee72vt3"]
+[gd_scene load_steps=3 format=3 uid="uid://dpgn0jee72vt3"]
 
 [ext_resource type="Script" uid="uid://co7qbfmvr3waf" path="res://Scripts/Multiplayer/Multiplayer Demo/LobbyUI.gd" id="1_7hemx"]
+[ext_resource type="Script" uid="uid://dvje5jnjwn5oe" path="res://Scripts/Multiplayer/Multiplayer Demo/AutoStartMultiplayerDemo.gd" id="2_vbf7o"]
 
 [node name="LobbyScene" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_7hemx")
+
+[node name="AutoStart" type="Node" parent="."]
+script = ExtResource("2_vbf7o")
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0

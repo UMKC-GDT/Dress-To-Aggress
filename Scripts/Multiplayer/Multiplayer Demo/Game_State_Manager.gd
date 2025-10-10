@@ -236,7 +236,7 @@ func _serialize_state() -> PackedByteArray:
 	keys.sort()
 	for pid in keys:
 		ordered[str(pid)] = players_pos[pid]
-	var bytes: PackedByteArray = var_to_bytes(ordered)   # <-- Godot 4 global
+	var bytes: PackedByteArray = var_to_bytes(ordered)
 	return bytes
 
 func _deserialize_state(bytes: PackedByteArray) -> void:
