@@ -1,5 +1,7 @@
 extends Node
 
+# Autoload named Lobby
+
 # These signals can be connected to by a UI lobby scene or the game scene.
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -7,7 +9,8 @@ signal server_disconnected
 
 const PORT = 7000
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
-const MAX_CONNECTIONS = 1
+const MAX_CONNECTIONS = 20
+
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
 var players = {}
@@ -19,7 +22,7 @@ var players = {}
 var player_info = {"name": "Name"}
 
 var players_loaded = 0
-var host := false
+
 
 
 func _ready():
@@ -29,19 +32,7 @@ func _ready():
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-# Called by host to create a server
-func create_game():
-	host = true
-	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(PORT, MAX_CONNECTIONS)
-	if error:
-		return error
-	multiplayer.multiplayer_peer = peer
 
-	players[1] = player_info
-	player_connected.emit(1, player_info)
-
-# called by clients to join a server
 func join_game(address = ""):
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
@@ -51,34 +42,45 @@ func join_game(address = ""):
 		return error
 	multiplayer.multiplayer_peer = peer
 
+
+func create_game():
+	var peer = ENetMultiplayerPeer.new()
+	var error = peer.create_server(PORT, MAX_CONNECTIONS)
+	if error:
+		return error
+	multiplayer.multiplayer_peer = peer
+
+	players[1] = player_info
+	player_connected.emit(1, player_info)
+
+
 func remove_multiplayer_peer():
-	multiplayer.multiplayer_peer = null
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
 
 
 # When the server decides to start the game from a UI scene,
 # do Lobby.load_game.rpc(filepath)
-@rpc("authority", "call_local", "reliable")
-func load_game():
-	print("Host loading game" if host else "Client loading game")
-	get_tree().change_scene_to_file("res://Scenes/stageFight.tscn")
-		
+@rpc("call_local", "reliable")
+func load_game(game_scene_path):
+	get_tree().change_scene_to_file(game_scene_path)
 
-# Clients use this to request; host relays the real broadcast
-@rpc("any_peer", "reliable")
-func _request_start() -> void:
-	if host:
-		load_game.rpc()
 
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded():
-	print("Player loaded")
 	if multiplayer.is_server():
 		players_loaded += 1
 		if players_loaded == players.size():
-			$/Scenes/main_menu.tscn.start_game()
+			$/root/Game.start_game()
 			players_loaded = 0
+
+
+# When a peer connects, send them my player info.
+# This allows transfer of all desired data for each player, not only the unique ID.
+func _on_player_connected(id):
+	_register_player.rpc_id(id, player_info)
+
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
@@ -87,32 +89,22 @@ func _register_player(new_player_info):
 	player_connected.emit(new_player_id, new_player_info)
 
 
-# Button handler (connect the button to THIS, not directly to load_game)
-func _on_start_pressed() -> void:
-	if host:
-		load_game.rpc()
-	#else:
-		#_request_start.rpc_id(1)
-
-# When a peer connects, send them my player info.
-# This allows transfer of all desired data for each player, not only the unique ID.
-func _on_player_connected(id):
-	print(("Host" if host else "Client") + " registered player connected: " + str(id))
-	_register_player.rpc_id(id, player_info)
-
 func _on_player_disconnected(id):
 	players.erase(id)
 	player_disconnected.emit(id)
+
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = player_info
 	player_connected.emit(peer_id, player_info)
 
+
 func _on_connected_fail():
-	multiplayer.multiplayer_peer = null
+	remove_multiplayer_peer()
+
 
 func _on_server_disconnected():
-	multiplayer.multiplayer_peer = null
+	remove_multiplayer_peer()
 	players.clear()
 	server_disconnected.emit()
