@@ -1,0 +1,254 @@
+[gd_scene load_steps=25 format=3 uid="uid://cprotiix4mkpw"]
+
+[ext_resource type="Script" uid="uid://du3bem5vbilhf" path="res://Scripts/Multiplayer/Game_State_Manager.gd" id="1_4g7hg"]
+[ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="1_d4vwv"]
+[ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_nogt5"]
+[ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="3_4g7hg"]
+[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/Multiplayer/player1Multi.gd" id="4_vxqhj"]
+[ext_resource type="Script" uid="uid://digd4vhe25hc3" path="res://Scripts/Multiplayer/player2Multi.gd" id="6_4g7hg"]
+[ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="6_xylqa"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="7_nt58u"]
+[ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="8_o1kay"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="9_psxfv"]
+[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="10_atul7"]
+[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="11_su618"]
+[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="12_wlmax"]
+[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="13_lllyf"]
+[ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="14_08ny8"]
+[ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="15_i3eds"]
+[ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="16_g1vea"]
+[ext_resource type="Script" uid="uid://bbqdbwrl8cet2" path="res://Scripts/Multiplayer/GhostVisualizer.gd" id="18_vxqhj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
+size = Vector2(27, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg752"]
+size = Vector2(339, 20)
+
+[sub_resource type="Animation" id="Animation_px76k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c3vem"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3dx3i"]
+resource_name = "fade_to_normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m73bv"]
+_data = {
+&"RESET": SubResource("Animation_px76k"),
+&"fade_to_black": SubResource("Animation_c3vem"),
+&"fade_to_normal": SubResource("Animation_3dx3i")
+}
+
+[node name="Test Level" type="Node2D"]
+script = ExtResource("1_4g7hg")
+metadata/_edit_horizontal_guides_ = [-21.0, 88.0]
+metadata/_edit_vertical_guides_ = [-97.0, 97.0]
+
+[node name="Runway" type="Sprite2D" parent="."]
+position = Vector2(0, 33)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("1_d4vwv")
+
+[node name="Invisible Wall" type="StaticBody2D" parent="Runway"]
+visible = false
+position = Vector2(-560, -188.235)
+scale = Vector2(5.88235, 5.88235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_1c2mv")
+
+[node name="Invisible Wall2" type="StaticBody2D" parent="Runway"]
+visible = false
+position = Vector2(560, -182.353)
+scale = Vector2(5.88235, 5.88235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall2"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_1c2mv")
+
+[node name="Invisible Wall3" type="StaticBody2D" parent="Runway"]
+visible = false
+position = Vector2(0, 480.55)
+scale = Vector2(5.88235, 5.88235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall3"]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_tg752")
+
+[node name="CameraRig" type="Node2D" parent="." node_paths=PackedStringArray("player1", "player2")]
+position = Vector2(-50, 39)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_nogt5")
+player1 = NodePath("../Player")
+player2 = NodePath("../Player1")
+
+[node name="Camera2D" type="Camera2D" parent="CameraRig"]
+offset = Vector2(0, -20.37)
+zoom = Vector2(8.29, 8.29)
+limit_left = -97
+limit_top = 21
+limit_right = 97
+limit_bottom = 88
+
+[node name="Player" parent="." instance=ExtResource("3_4g7hg")]
+position = Vector2(-50, 39)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("4_vxqhj")
+
+[node name="Player1" parent="." instance=ExtResource("3_4g7hg")]
+position = Vector2(50, 40)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("6_4g7hg")
+player_type = 2
+enemy_name = "player2"
+
+[node name="Background Track" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xylqa")
+volume_db = -10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.866667)
+position = Vector2(1.935, 37.1)
+scale = Vector2(0.45, 0.379)
+texture = ExtResource("7_nt58u")
+script = ExtResource("8_o1kay")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -131.0
+offset_top = -85.0
+offset_right = 145.0
+offset_bottom = 63.0
+theme_override_fonts/normal_font = ExtResource("9_psxfv")
+text = "The opposing fashion show contestent is secretly an agent for the drug smuggling ring! 
+
+To move:
+
+
+"
+scroll_active = false
+
+[node name="Button" type="Button" parent="Sprite2D"]
+modulate = Color(0.921362, 0.63823, 0.965459, 1)
+offset_left = -47.035
+offset_top = 57.087
+offset_right = 41.965
+offset_bottom = 88.087
+text = "Start"
+
+[node name="WKey2" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-102.522, 48.6807)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("10_atul7")
+
+[node name="AKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-118.078, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("11_su618")
+
+[node name="DKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-71.4111, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("12_wlmax")
+
+[node name="SKey" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-93.6333, 72.4275)
+scale = Vector2(0.666667, 0.791557)
+texture = ExtResource("13_lllyf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Game Manager" parent="CanvasLayer" instance=ExtResource("14_08ny8")]
+z_index = 3
+position = Vector2(632, 53)
+scale = Vector2(7.14, 7.14)
+
+[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("15_i3eds")]
+z_index = 3
+anchors_preset = -1
+anchor_left = -0.129036
+anchor_top = -0.0196181
+anchor_right = 0.0990885
+anchor_bottom = 0.0095486
+offset_left = 224.167
+offset_top = 52.125
+offset_right = 224.167
+offset_bottom = 52.125
+scale = Vector2(1.64516, 1.64516)
+metadata/_edit_use_anchors_ = true
+
+[node name="Healthbar2" parent="CanvasLayer" instance=ExtResource("16_g1vea")]
+anchors_preset = -1
+anchor_left = 0.183594
+anchor_top = -0.0194444
+anchor_right = 0.414844
+anchor_bottom = 0.00972224
+offset_left = 490.0
+offset_top = 52.0
+offset_right = 490.0
+offset_bottom = 52.0
+scale = Vector2(1.64516, 1.64516)
+metadata/_edit_use_anchors_ = true
+
+[node name="FadeTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="FadeTransition"]
+offset_left = -84.0
+offset_top = -25.0
+offset_right = 1416.0
+offset_bottom = 775.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeTransition"]
+libraries = {
+&"": SubResource("AnimationLibrary_m73bv")
+}
+
+[node name="GhostVisualizer" type="Node2D" parent="."]
+script = ExtResource("18_vxqhj")
+
+[node name="GameStateManager" type="Node2D" parent="."]
+script = ExtResource("1_4g7hg")
+
+[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
+[connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
+[connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

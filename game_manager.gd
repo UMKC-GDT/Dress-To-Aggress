@@ -41,6 +41,8 @@ var win_messages = [
 
 #Like others in this script, this is just a small helper function so we won't have to write these same two lines twice.
 func disable_control():
+	if(global.IsMultiplayer == true):
+		return
 	player.disabled = true
 	cpu.disabled = true
 
