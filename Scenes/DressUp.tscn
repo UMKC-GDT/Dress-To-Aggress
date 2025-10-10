@@ -15,7 +15,7 @@
 [ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="12_0d1k1"]
 [ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
-[ext_resource type="Script" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
+[ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 

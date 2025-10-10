@@ -72,15 +72,9 @@ func start_round() -> void:
 		var tween := create_tween()
 		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	else: #timer that triggers the battle. maybe add a graphic that counts down. There has to be a better way to do this
+	else: #timer that triggers the battle. There has to be a better way to do this
 		print('Start timer started')
-		victory_label.text = '3'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = '2'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = '1'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = ''
+		await get_tree().create_timer(2.0).timeout
 		begin_fight()
 	# Wait for either 10 seconds, or for the player to press the punch button.
 	await wait_for_controls_acknowledgement()
@@ -105,7 +99,7 @@ func begin_fight():
 	player.disabled = false
 	cpu.disabled = false
 	fight_timer.start()
-	
+	fight_timer.paused = false
 	timer_started = true
 
 #Called above, just makes it wait for ten seconds or until the player presses Punch, to give them the time to read the controls. 
@@ -124,8 +118,6 @@ func end_round(condition):
 	fight_timer.paused = true
 	
 	#If the condition is 0 or 1 or if it's 3, run the timeout logic to kill someone and then continue
-	
-	
 	
 	if condition == 0: #If the player's lost...
 		animate_message_label("KO!")
@@ -192,7 +184,7 @@ func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	print('wins:',player_wins,cpu_wins)
 	round_num +=1
-	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	if player_wins >= 2 or cpu_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
@@ -205,6 +197,8 @@ func _on_fight_timer_timeout() -> void:
 func transition():
 	print('fading out')
 	$"../../FadeTransition/AnimationPlayer".play("fade_to_black")
+	fight_timer.start()
+	fight_timer.paused = true
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_to_black":
@@ -222,5 +216,7 @@ func reset() -> void:
 	fight_timer_display.text = "99"
 	#disable both. I think that they will already be disabled but whatever
 	disable_control()
-	#player.revive
+	player.revive()
+	cpu.revive()
 	start_round()
+	
