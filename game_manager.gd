@@ -45,6 +45,10 @@ func disable_control():
 	cpu.disabled = true
 
 func _ready() -> void:
+	$"../../winnerShoes/cpu1".show()
+	$"../../winnerShoes/cpu2".show()
+	$"../../winnerShoes/player1".show()
+	$"../../winnerShoes/player2".show()
 	$"../../FadeTransition/ColorRect".color = 000000
 	randomize() #Apparently, this is a surprise tool that'll help us later with generating a certain random number.
 	message_label.text = ""
@@ -172,19 +176,26 @@ func _process(delta: float) -> void:
 
 #Functions to handle incoming signals and call the according end round condition, or transition to the next part of the game. 
 func _on_player_one_died() -> void:
-	player_wins +=1
+	cpu_wins +=1
+	if cpu_wins == 1:
+		$"../../winnerShoes/player2".hide()
+	elif cpu_wins == 2:
+		$"../../winnerShoes/player1".hide()
 	end_round(0)
 
 func _on_cpu_died() -> void:
-	cpu_wins +=1
-	print("")
+	player_wins +=1
+	if player_wins == 1:
+		$"../../winnerShoes/cpu2".hide()
+	elif player_wins == 2:
+		$"../../winnerShoes/cpu1".hide()
 	end_round(1)
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	print('wins:',player_wins,cpu_wins)
 	round_num +=1
-	tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	if player_wins >= 2 or cpu_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
@@ -213,7 +224,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func reset() -> void:
 	print('RESET')
 	victory_label.text = ""
-	fight_timer_display.text = "99"
+	#fight_timer_display.text = "99"
 	#disable both. I think that they will already be disabled but whatever
 	disable_control()
 	player.revive()
