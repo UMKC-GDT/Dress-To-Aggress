@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://c4rbkb6rgck8l"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=21 format=3 uid="uid://c4rbkb6rgck8l"]
 
 [ext_resource type="Texture2D" uid="uid://cp0h2c2r74y14" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves2.png" id="1_ik8mb"]
 [ext_resource type="Texture2D" uid="uid://wfprhjluofer" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves1.png" id="2_1side"]
+[ext_resource type="Texture2D" uid="uid://c71wj5i2yy5vi" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Crouch Punch Frames/CrouchPunchLongSleeve0.png" id="2_8ag22"]
 [ext_resource type="Texture2D" uid="uid://dhvjdnoflaakm" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve0.png" id="3_klo6d"]
+[ext_resource type="Texture2D" uid="uid://ck0jvb3d4dyg7" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Crouch Punch Frames/CrouchPunchLongSleeve1.png" id="3_t8a01"]
+[ext_resource type="Texture2D" uid="uid://brawdtuh63ol5" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Crouch Punch Frames/CrouchPunchLongSleeve2.png" id="4_86xgl"]
 [ext_resource type="Texture2D" uid="uid://dwxaiy6noqu1q" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve1.png" id="4_falpy"]
 [ext_resource type="Texture2D" uid="uid://dbf76elru6rnq" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve1.png" id="5_eg0ih"]
 [ext_resource type="Texture2D" uid="uid://pbxx8w5v3fxw" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve2.png" id="6_73glt"]
@@ -50,4 +53,7 @@ Pose28 = ExtResource("1_ik8mb")
 knockOut_pose0 = ExtResource("7_falpy")
 knockOut_pose1 = ExtResource("8_eg0ih")
 knockOut_pose2 = ExtResource("9_73glt")
+crouch_punch_pose0 = ExtResource("2_8ag22")
+crouch_punch_pose1 = ExtResource("3_t8a01")
+crouch_punch_pose2 = ExtResource("4_86xgl")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"

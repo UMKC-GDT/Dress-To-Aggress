@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://cksdgi2vkuqn7"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=21 format=3 uid="uid://cksdgi2vkuqn7"]
 
 [ext_resource type="Texture2D" uid="uid://cp0h2c2r74y14" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves2.png" id="1_v4pfx"]
 [ext_resource type="Texture2D" uid="uid://wfprhjluofer" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves1.png" id="2_g6o8y"]
+[ext_resource type="Texture2D" uid="uid://bhvbft1xlk5fm" path="res://Assets/Sprites/Clothing Frames/TankTop/Crouch Punch Frames/CrouchPunchTankTop0.png" id="2_i1et8"]
+[ext_resource type="Texture2D" uid="uid://dd2v3yy5v76j6" path="res://Assets/Sprites/Clothing Frames/TankTop/Crouch Punch Frames/CrouchPunchTankTop1.png" id="3_16gp0"]
 [ext_resource type="Texture2D" uid="uid://dhvjdnoflaakm" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve0.png" id="3_n2l6w"]
+[ext_resource type="Texture2D" uid="uid://7p548xuxwrko" path="res://Assets/Sprites/Clothing Frames/TankTop/Crouch Punch Frames/CrouchPunchTankTop2.png" id="4_ee50i"]
 [ext_resource type="Texture2D" uid="uid://dwxaiy6noqu1q" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve1.png" id="4_p7s42"]
 [ext_resource type="Texture2D" uid="uid://dbf76elru6rnq" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve1.png" id="5_pe8qx"]
 [ext_resource type="Texture2D" uid="uid://pbxx8w5v3fxw" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Kick Frames/KickLongSleeve2.png" id="6_yqgam"]
@@ -30,16 +33,6 @@ color = Color(0.54099, 0.54099, 0.54099, 1)
 stylePoints = 10
 styleMultiplier = 1.0
 attackDamageChange = -0.75
-attackSpeedChange = 0.0
-defenseChange = 0.0
-walkSpeedChange = 0.0
-dashSpeedChange = 0.0
-jumpHeightChange = 0.0
-hitstunLengthChange = 0.0
-knockbackChange = 0.0
-poseSpeedChange = 0.0
-poseHitstunChange = 0.0
-poseKnockbackChange = 0.0
 poseDamageChange = -0.4
 healthChange = -0.3
 mirrorPose = ExtResource("7_i1et8")
@@ -58,4 +51,7 @@ Pose28 = ExtResource("1_v4pfx")
 knockOut_pose0 = ExtResource("7_p7s42")
 knockOut_pose1 = ExtResource("8_pe8qx")
 knockOut_pose2 = ExtResource("9_yqgam")
+crouch_punch_pose0 = ExtResource("2_i1et8")
+crouch_punch_pose1 = ExtResource("3_16gp0")
+crouch_punch_pose2 = ExtResource("4_ee50i")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"
