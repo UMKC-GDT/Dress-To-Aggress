@@ -1,0 +1,9 @@
+L: Hello!
+R: Hi!
+L: How are you?
+R: I'm great!
+N: They continue to talk for hours
+L: Well, I should get going
+R: Me too
+L: Goodbye
+R: See ya

@@ -1,34 +1,82 @@
 extends Node2D
 
+@onready var characterLeft: Sprite2D = $Panel/CharacterLeft
+@onready var characterRight: Sprite2D = $Panel/CharacterRight
+@onready var textBox: Label = $Panel/Name/Text
+@onready var nameBox: Label = $Panel/Name
 
 
-var dialogue_script = ["R: dakljfdlkjfa", "L: alkdjakldsjf", "R: adhfasdjflk", "L: dhfjkadshflkjsa"]
+
+var dialogue_script = ["L: I'm on the left", "R: I'm on the Right", "N: I'm a third voice"]
 
 var letter = 3
 var line = 0
 
+var sceneData
+var dialogueFile
+
+
+func _ready() -> void:
+	var scenePath: String = global.dialogueScene
+	sceneData = load(scenePath)
+	dialogueFile = sceneData.getLinesFile()
+	readFile(dialogueFile)
+	
+	characterLeft.texture = sceneData.getLeftCharacterModel()
+	characterRight.texture = sceneData.getRightCharacterModel()
+	
+	characterLeft.get_child(0).texture = sceneData.getLeftCharacterShirt()
+	characterLeft.get_child(0).modulate = sceneData.getLeftCharacterShirtColor()
+	characterLeft.get_child(1).modulate = sceneData.getLeftCharacterPantsColor()
+	characterLeft.get_child(1).texture = sceneData.getLeftCharacterPants()
+	characterRight.get_child(0).texture = sceneData.getRightCharacterShirt()
+	characterRight.get_child(0).modulate = sceneData.getRightCharacterShirtColor()
+	characterRight.get_child(1).texture = sceneData.getRightCharacterPants()
+	characterRight.get_child(1).modulate = sceneData.getRightCharacterPantsColor()
+	textBox.text = ""
+	nameBox.text = ""
+
+
 func _process(delta):
 	
 	if line < dialogue_script.size() and letter < dialogue_script[line].length():
-		$Panel/Text.text += dialogue_script[line][letter]
+		textBox.text += dialogue_script[line][letter]
 		letter += 1
 		
-	elif Input.is_action_just_pressed("click"):
+	elif (Input.is_action_just_pressed("click") or Input.is_action_just_pressed("Space") or Input.is_action_just_pressed("player_punch")):
 		line +=1
 		letter = 3
-		$Panel/Text.text = ""
+		textBox.text = ""
 	
 	if line < dialogue_script.size() and dialogue_script[line][0] == "R":
-		$Panel/CharacterRight.modulate =   Color(1.0, 1.0, 1.0)
-		$Panel/CharacterLeft.modulate = Color(0.494, 0.494, 0.494)
+		nameBox.text = sceneData.getRightCharacterName()
+		characterRight.modulate =   Color(1.0, 1.0, 1.0)
+		characterLeft.modulate = Color(0.494, 0.494, 0.494)
 		
+	elif line < dialogue_script.size() and dialogue_script[line][0] == "L":
+		nameBox.text = sceneData.getLeftCharacterName()
+		characterRight.modulate = Color(0.494, 0.494, 0.494)
+		characterLeft.modulate = Color(1.0, 1.0, 1.0)
 		
-	if line < dialogue_script.size() and dialogue_script[line][0] == "L":
-		$Panel/CharacterRight.modulate = Color(0.494, 0.494, 0.494)
-		$Panel/CharacterLeft.modulate = Color(1.0, 1.0, 1.0)
+	elif line < dialogue_script.size() and dialogue_script[line][0] == "N":
+		nameBox.text = ""
+		characterRight.modulate = Color(0.494, 0.494, 0.494)
+		characterLeft.modulate = Color(0.494, 0.494, 0.494)
 		
-	if line == dialogue_script.size():
-		$Panel/CharacterRight.modulate =Color(1.0, 1.0, 1.0)
-		$Panel/CharacterLeft.modulate = Color(1.0, 1.0, 1.0)
-	
-	
+	elif line == dialogue_script.size():
+		pass
+		#characterRight.modulate =Color(1.0, 1.0, 1.0)
+		#characterLeft.modulate = Color(1.0, 1.0, 1.0)
+
+
+func readFile(filePath):
+	print("reading File")
+	var file = FileAccess.open(filePath, FileAccess.READ)
+	var content = file.get_as_text()
+	var lineData = ""
+	for char in content:
+		if char != "\n":
+			lineData += char
+		else:
+			dialogue_script.append(lineData)
+			lineData = ""
