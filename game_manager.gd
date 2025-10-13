@@ -62,7 +62,7 @@ func _ready() -> void:
 func start_round() -> void:
 	
 	#First, show the round #
-	message_label.text = 'ROUND'+str(round_num)
+	message_label.text = 'ROUND '+ str(round_num)
 	print('Round:',round_num)
 	#Call begin_fight()
 	
@@ -76,21 +76,25 @@ func start_round() -> void:
 		var tween := create_tween()
 		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		
+		# Wait for either 10 seconds, or for the player to press the punch button.
+		await wait_for_controls_acknowledgement()
+		
+		begin_fight()
+		
+		#Slides the controls back down, off the screen.
+		var tween_out := create_tween()
+		tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+		await tween_out.finished
+		
 	else: #timer that triggers the battle. There has to be a better way to do this
 		print('Start timer started')
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(1.5).timeout
 		begin_fight()
-	# Wait for either 10 seconds, or for the player to press the punch button.
-	await wait_for_controls_acknowledgement()
 	
-	begin_fight()
 	
-	#Slides the controls back down, off the screen.
-	var tween_out := create_tween()
-	tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-
-	await tween_out.finished
 
 func begin_fight():
 	
@@ -191,6 +195,7 @@ func _on_cpu_died() -> void:
 		$"../../winnerShoes/cpu1".hide()
 	end_round(1)
 
+#This is connected to the MessageTimer, run after the timer that it runs once it shows its message.
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	print('wins:',player_wins,cpu_wins)

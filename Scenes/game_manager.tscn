@@ -21,9 +21,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.0
+offset_left = -43.0
 offset_top = 10.0
-offset_right = 30.0
+offset_right = 43.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -37,7 +37,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Message Timer" type="Timer" parent="Message"]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Victory Message" type="RichTextLabel" parent="."]
@@ -61,10 +61,6 @@ text = "That outfit? A fashion disaster."
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Message Timer" type="Timer" parent="Victory Message"]
-wait_time = 5.0
-one_shot = true
 
 [node name="Fight Timer Display" type="RichTextLabel" parent="."]
 anchors_preset = 8
@@ -197,5 +193,4 @@ scale = Vector2(0.6, 0.7)
 texture = ExtResource("11_5tjy5")
 
 [connection signal="timeout" from="Message/Message Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Victory Message/Message Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Fight Timer Display/Fight Timer" to="." method="_on_fight_timer_timeout"]
