@@ -1,4 +1,4 @@
-extends BaseCharacterController
+extends MultiBaseCharacterController
 
 signal one_died
 
