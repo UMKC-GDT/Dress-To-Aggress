@@ -20,8 +20,8 @@ func  _ready() -> void:
 		#generate a random outfit
 		var pants = ClothingDatabase.pants_list
 		var shirts = ClothingDatabase.shirts_list
-		var rand1 = rng.randi_range(0,pants.size()-1)
-		var rand2 = rng.randi_range(0,shirts.size()-1)
+		var rand1 = rng.randi_range(0,pants.size()-2)
+		var rand2 = rng.randi_range(0,shirts.size()-2)
 		pants_text = pants[rand1]
 		shirt_text =  shirts[rand2]
 	else:

@@ -115,16 +115,16 @@ var disabled = false
 @export var DASH_COOLDOWN = 0.2 # Half a second cooldown between valid dashes. This prevents the player from spamming dash across the screen, without stopping.
 @export var MIDAIR_DASH = true
 
-#Note for the below data: onBlock is positive because, if an attack is blocked, the player will transition to the RECOVERY state for (recovery + onBlock) frames. 
+#Note for the below data: onBlock is positive because, if an attack is blocked, the player will transition to the RECOVERY state for (recovery - onBlock) frames. 
 var attack_timer = 0.0
 var punch_data = {
-	"startup_frames" : 6 / punch_speed_mult,
-	"active_frames" : 4,
-	"recovery_frames" : 11 / punch_speed_mult,
-	"blockstun_frames" : 11,
-	"onBlock_FA" : -3,
-	"ground_hitstun": 25 / punch_hitstun_mult,
-	"air_hitstun" : 25 / punch_hitstun_mult,
+	"startup_frames" : 4.0 / punch_speed_mult,
+	"active_frames" : 3,
+	"recovery_frames" : 7.0 / punch_speed_mult,
+	"blockstun_frames" : 9,
+	"onBlock_FA" : -1,
+	"ground_hitstun": 14.0 / punch_hitstun_mult,
+	"air_hitstun" : 14.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 50,
@@ -136,13 +136,13 @@ var punch_data = {
 var punch_deceleration = 10
 
 var crouch_punch_data = {
-	"startup_frames" : 6 / punch_speed_mult,
-	"active_frames" : 4,
-	"recovery_frames" : 11 / punch_speed_mult,
-	"blockstun_frames" : 11,
-	"onBlock_FA" : -3,
-	"ground_hitstun": 25 / punch_hitstun_mult,
-	"air_hitstun" : 25 / punch_hitstun_mult,
+	"startup_frames" : 4.0 / punch_speed_mult,
+	"active_frames" : 2.0,
+	"recovery_frames" : 9.0 / punch_speed_mult,
+	"blockstun_frames" : 10,
+	"onBlock_FA" : -1,
+	"ground_hitstun": 15.0 / punch_hitstun_mult,
+	"air_hitstun" : 15.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 50,
@@ -155,13 +155,13 @@ var crouch_punch_deceleration = 10
 
 
 var kick_data = {
-	"startup_frames" : 14 / kick_speed_mult,
-	"active_frames" : 6,
-	"recovery_frames" : 24 / kick_speed_mult,
-	"blockstun_frames" : 12,
-	"onBlock_FA" : -16,
-	"ground_hitstun": 22 * kick_hitstun_mult,
-	"air_hitstun" : 22 * kick_hitstun_mult,
+	"startup_frames" : 12.0 / kick_speed_mult,
+	"active_frames" : 4,
+	"recovery_frames" : 20.0 / kick_speed_mult,
+	"blockstun_frames" : 24,
+	"onBlock_FA" : -10,
+	"ground_hitstun": 33 * kick_hitstun_mult,
+	"air_hitstun" : 33 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
@@ -172,26 +172,26 @@ var kick_data = {
 }
 
 var crouch_kick_data = {
-	"startup_frames" : 14 / kick_speed_mult,
-	"active_frames" : 6,
-	"recovery_frames" : 24 / kick_speed_mult,
-	"blockstun_frames" : 12,
-	"onBlock_FA" : -16,
-	"ground_hitstun": 22 * kick_hitstun_mult,
-	"air_hitstun" : 22 * kick_hitstun_mult,
+	"startup_frames" : 8.0 / kick_speed_mult,
+	"active_frames" : 3,
+	"recovery_frames" : 19.0 / kick_speed_mult,
+	"blockstun_frames" : 16,
+	"onBlock_FA" : -6,
+	"ground_hitstun": 23 * kick_hitstun_mult,
+	"air_hitstun" : 23 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
-	"damage": 30 * kick_damage_mult,
+	"damage": 15 * kick_damage_mult,
 	"startup_animation" : "kick recovery",
 	"active_animation" : "kick",
 	"recovery_animation" : "kick recovery",
 }
 
 var throw_data = {
-	"startup_frames" : 15 / pose_speed_mult,
+	"startup_frames" : 15.0 / pose_speed_mult,
 	"active_frames" : 3,
-	"recovery_frames" : 30 / pose_speed_mult,
+	"recovery_frames" : 30.0 / pose_speed_mult,
 	"pose_frames" : 50,
 	"ground_hitstun": 77 * pose_hitstun_mult, # This value needs to be pose_frames + 17, so that the attacker has 17 frames of frame advantage for posing first.
 	"ground_knockback_force" : 100 * pose_knockback_mult,
@@ -1058,7 +1058,7 @@ func attack_was_blocked(target):
 				
 				velocity.x = -1 * (facing_direction) * 150 + 50
 				
-				start_recovery((punch_data["recovery_frames"] + (-1 * punch_data["onBlock_FA"])), punch_data["recovery_animation"])
+				start_recovery((punch_data["recovery_frames"] - punch_data["onBlock_FA"]), punch_data["recovery_animation"])
 			
 			CharacterState.CPUNCH:
 				print("Target, " + str(target) + " has blocked my CROUCHING punch!")
@@ -1068,7 +1068,7 @@ func attack_was_blocked(target):
 				
 				velocity.x = -1 * (facing_direction) * 150 + 50
 				
-				start_recovery((crouch_punch_data["recovery_frames"] + (-1 * crouch_punch_data["onBlock_FA"])), crouch_punch_data["recovery_animation"])
+				start_recovery((crouch_punch_data["recovery_frames"] - crouch_punch_data["onBlock_FA"]), crouch_punch_data["recovery_animation"])
 			
 			CharacterState.KICK:
 				print("Target, " + str(target) + " has blocked my kick!")
@@ -1076,7 +1076,7 @@ func attack_was_blocked(target):
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
 				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
-				start_recovery((attack_timer + kick_data["recovery_frames"] + (-1 * kick_data["onBlock_FA"])), kick_data["recovery_animation"])
+				start_recovery((attack_timer + kick_data["recovery_frames"] - kick_data["onBlock_FA"]), kick_data["recovery_animation"])
 			
 			CharacterState.CKICK:
 				print("Target, " + str(target) + " has blocked my CROUCHING kick!")
@@ -1084,7 +1084,7 @@ func attack_was_blocked(target):
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
 				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
-				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] + (-1 * crouch_kick_data["onBlock_FA"])), crouch_kick_data["recovery_animation"])
+				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] -  crouch_kick_data["onBlock_FA"]), crouch_kick_data["recovery_animation"])
 
 #When we're the ones blocking an attack, set state to BLOCK, take negative x velocity of half of the attack's knockback, set block_timer to the given attack's blockstun frames
 func block_attack(attack_data):
