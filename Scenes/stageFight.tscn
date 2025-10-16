@@ -120,12 +120,11 @@ player1 = NodePath("../Player")
 player2 = NodePath("../Player2")
 
 [node name="Camera2D" type="Camera2D" parent="CameraRig"]
-offset = Vector2(0, -20.37)
 zoom = Vector2(8.29, 8.29)
 limit_left = -97
-limit_top = 21
+limit_top = -21
 limit_right = 97
-limit_bottom = 88
+limit_bottom = 87
 
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(-50, 39)
