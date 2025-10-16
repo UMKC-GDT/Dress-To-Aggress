@@ -10,6 +10,7 @@ var dbg_last_corr_tick: int = -1
 
 # ---------- Signals ----------
 signal positions_updated(pos: Dictionary)
+signal input_updated(input: String)
  
 # ---------- Ticks / windows ----------
 const TICK := 1.0 / 60.0
@@ -21,13 +22,13 @@ var accumulator: float = 0.0
 var tick_i: int = 0
 
 # ---------- Sim: positions per player (deterministic ints) ----------
-var players_pos: Dictionary = {}  # peer_id -> Vector2i
+var players_input: Dictionary = {}  # peer_id -> String
 const SPEED_PER_TICK: int = 6
 
 # ---------- History ----------
 var state_buffer: Dictionary = {}     # tick -> PackedByteArray
-var input_buffer: Dictionary = {}     # tick -> Dictionary(peer_id->Vector2i)  (server-auth or received)
-var my_inputs: Dictionary = {}        # tick -> Vector2i
+var input_buffer: Dictionary = {}     # tick -> Dictionary(peer_id->String)  (server-auth or received)
+var my_inputs: Dictionary = {}        # tick -> String
 
 # ---------- Net ----------
 var last_confirmed_tick := -1
@@ -40,9 +41,10 @@ func _ready() -> void:
 		return
 	print("GSM ready | server=", multiplayer.is_server(), " | id=", multiplayer.get_unique_id())
 	# simple: start everyone at 0 (or lay out by small index)
+	var startpos = {}
 	for pid in _all_player_ids():
-		players_pos[pid] = Vector2i(80, 80)
-	emit_signal("positions_updated", players_pos.duplicate(true))
+		startpos[pid] = Vector2i(80, 80)
+	emit_signal("positions_updated", startpos.duplicate(true))
 
 func _process(delta: float) -> void:
 	accumulator += delta
@@ -53,9 +55,8 @@ func _process(delta: float) -> void:
 		accumulator -= TICK
 
 func _tick_once() -> void:
-	var my_move := Vector2i(
-		int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A)),
-		int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W))
+	var my_move := String(
+		checkAllInputs()
 	)
 	my_inputs[tick_i] = my_move
 	_send_input(tick_i, my_move)
@@ -71,7 +72,7 @@ func _tick_once() -> void:
 
 # ---------------- RPC: client → server (inputs) ----------------
 @rpc("any_peer", "unreliable")
-func rpc_client_input(t: int, move: Vector2i) -> void:
+func rpc_client_input(t: int, move: String) -> void:
 	if multiplayer.is_server():
 		var pid := multiplayer.get_remote_sender_id()
 		if input_buffer.get(t) == null: input_buffer[t] = {}
@@ -99,7 +100,7 @@ func rpc_inputs_for_tick(t: int, merged: Dictionary) -> void:
 	_deserialize_state(base_snap)
 
 	for k in range(base_tick + 1, tick_i):  # <- stops at tick_i-1
-		var my_move: Vector2i = my_inputs.get(k, Vector2i.ZERO)
+		var my_move: String = my_inputs.get(k, "null")
 		var merged_k: Dictionary
 		if input_buffer.has(k):
 			merged_k = input_buffer[k]  # authoritative merged (includes server + maybe me)
@@ -126,7 +127,7 @@ func rpc_state_correction(t: int, bytes: PackedByteArray, h: int) -> void:
 	_deserialize_state(bytes)
 
 	for k in range(t + 1, tick_i):
-		var my_move: Vector2i = my_inputs.get(k, Vector2i.ZERO)
+		var my_move: String = my_inputs.get(k, "null")
 		var merged: Dictionary = _merged_inputs_for_tick_local(k, my_move)
 		_step_sim_with_inputs(merged)
 		state_buffer[k] = _serialize_state()
@@ -156,7 +157,7 @@ func _server_maybe_advance() -> void:
 		# --- Debug ---
 		dbg_srv_steps += 1
 		if (t % 15) == 0:
-			print("SRV step t=", t, " merged=", merged, " pos=", players_pos)
+			print("SRV step t=", t, " merged=", merged, " input=", players_input)
 
 		rpc("rpc_inputs_for_tick", t, merged)
 		if (t % RESYNC_EVERY) == 0:
@@ -166,17 +167,17 @@ func _server_maybe_advance() -> void:
 func _merged_inputs_for_tick_server(t: int) -> Dictionary:
 	var merged := {}
 	for pid in _player_ids_for_tick(t):
-		var mv: Vector2i = input_buffer.get(t, {}).get(pid, Vector2i.ZERO)
+		var mv: String = input_buffer.get(t, {}).get(pid, "null")
 		merged[pid] = mv
 	return merged
 
-func _merged_inputs_for_tick_local(t: int, my_move: Vector2i) -> Dictionary:
+func _merged_inputs_for_tick_local(t: int, my_move: String) -> Dictionary:
 	var merged: Dictionary = input_buffer.get(t, {}).duplicate(true) if input_buffer.has(t) else {}
 	var my_id := multiplayer.get_unique_id()
 	if not merged.has(my_id):
 		merged[my_id] = my_move
 	for pid in _player_ids_for_tick(t):
-		if not merged.has(pid): merged[pid] = Vector2i.ZERO
+		if not merged.has(pid): merged[pid] = "null"
 	return merged
 
 func _all_player_ids() -> Array:
@@ -194,7 +195,7 @@ func _player_ids_for_tick(t: int) -> Array:
 	var ids: Array = []
 	for pid in input_buffer.get(t, {}).keys():
 		if not ids.has(pid): ids.append(pid)
-	for pid in players_pos.keys():
+	for pid in players_input.keys():
 		if not ids.has(pid): ids.append(pid)
 	if Lobby != null and typeof(Lobby.players) == TYPE_DICTIONARY:
 		for pid in (Lobby.players as Dictionary).keys():
@@ -206,7 +207,7 @@ func _player_ids_for_tick(t: int) -> Array:
 	return ids
 
 # ---------------- Transport ----------------
-func _send_input(t: int, move: Vector2i) -> void:
+func _send_input(t: int, move: String) -> void:
 	if multiplayer.is_server():
 		var pid := multiplayer.get_unique_id()   # usually 1
 		if input_buffer.get(t) == null:
@@ -219,32 +220,32 @@ func _send_input(t: int, move: Vector2i) -> void:
 # ---------------- Deterministic sim ----------------
 func _step_sim_with_inputs(merged: Dictionary) -> void:
 	for pid in merged.keys():
-		if players_pos.get(pid) == null:
-			players_pos[pid] = Vector2i.ZERO
-		players_pos[pid] += (merged[pid] as Vector2i) * SPEED_PER_TICK
+		if players_input.get(pid) == null:
+			players_input[pid] = "null"
+		players_input[pid] = (merged[pid] as String)
 
 	# make a copy with int keys to avoid "2" vs 2 mismatches
-	var pos_copy: Dictionary = {}
-	for k in players_pos.keys():
-		pos_copy[int(k)] = players_pos[k]
-	emit_signal("positions_updated", pos_copy)
+	var input_copy: Dictionary = {}
+	for k in players_input.keys():
+		input_copy[String(k)] = players_input[k]
+	emit_signal("input_updated", input_copy)
 
 # ---- serialization ----
 func _serialize_state() -> PackedByteArray:
 	var ordered: Dictionary = {}
-	var keys: Array = players_pos.keys()
+	var keys: Array = players_input.keys()
 	keys.sort()
 	for pid in keys:
-		ordered[str(pid)] = players_pos[pid]
+		ordered[str(pid)] = players_input[pid]
 	var bytes: PackedByteArray = var_to_bytes(ordered)
 	return bytes
 
 func _deserialize_state(bytes: PackedByteArray) -> void:
 	var v: Variant = bytes_to_var(bytes)                  # <-- Godot 4 global
 	var state_dict: Dictionary = v as Dictionary
-	players_pos.clear()
+	players_input.clear()
 	for k in state_dict.keys():
-		players_pos[int(k)] = state_dict[k]
+		players_input[String(k)] = state_dict[k]
 
 func _state_hash(bytes: PackedByteArray) -> int:
 	var h: int = hash(bytes)                              # <-- global hash()
@@ -259,3 +260,20 @@ func _prune_buffers() -> void:
 		if k < cutoff: state_buffer.erase(k)
 	for k in my_inputs.keys():
 		if k < cutoff: my_inputs.erase(k)
+
+func checkAllInputs() -> String:
+	if Input.is_action_just_pressed("player_left"):
+		return "player_left"
+	if Input.is_action_just_pressed("player_right"):
+		return "player_right"
+	if Input.is_action_just_pressed("player_jump"):
+		return "player_jump"
+	if Input.is_action_just_pressed("player_punch"):
+		return "player_punch"
+	if Input.is_action_just_pressed("player_kick"):
+		return "player_kick"
+	if Input.is_action_just_pressed("player_throw"):
+		return "player_throw"
+	if Input.is_action_just_pressed("player_crouch"):
+		return "player_crouch"
+	return "null"

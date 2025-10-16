@@ -12,11 +12,13 @@ func _on_positions(pos: Dictionary) -> void:
 	var my_id: int = multiplayer.get_unique_id()
 	for pid in pos.keys():
 		var pid_i: int = int(pid)                # <- coerce
-		var p := Vector2(pos[pid])
+		var p := String(pos[pid])
 		if pid_i == my_id:
-			sprite_online.position = p
-		else:
 			sprite_local.position = p
+			#implement handling for local player input
+		else:
+			sprite_online.position = p
+			#implement handling for online player input
 
 
 func _process(_delta):
@@ -30,5 +32,7 @@ func _process(_delta):
 
 			if pid == multiplayer.get_unique_id():
 				sprite_local.position = pos
+				#implement handling for local player input
 			else:
 				sprite_online.position = pos
+				#implement handling for online player input
