@@ -4,6 +4,7 @@ extends Node
 var is_dragging = false
 
 var difficulty = "Normal"
+var arcade_level = 0
 
 var dialogueScene: String = "res://Assets/Resources/Dialogues/TestDialogue.tres"
 

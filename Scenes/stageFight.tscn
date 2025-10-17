@@ -249,6 +249,7 @@ texture = ExtResource("17_iwpvo")
 flip_h = true
 
 [node name="FadeTransition" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransition"]
 offset_left = -84.0
