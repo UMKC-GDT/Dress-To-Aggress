@@ -1,20 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd2am5yp3e2ll"]
+[gd_scene load_steps=5 format=3 uid="uid://bd2am5yp3e2ll"]
 
 [ext_resource type="Script" uid="uid://dgyhjvc18llnv" path="res://Scripts/Multiplayer/Multiplayer Demo/Game_State_Manager.gd" id="1_gl6un"]
-[ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="2_mog6f"]
 [ext_resource type="Script" uid="uid://cskepw3unr5xl" path="res://Scripts/Multiplayer/Multiplayer Demo/GhostVisualizer.gd" id="3_j5yw3"]
+[ext_resource type="PackedScene" uid="uid://cu6e3mm1f2o3p" path="res://Scripts/Multiplayer/Multiplayer Demo/player.tscn" id="3_mog6f"]
+[ext_resource type="Script" uid="uid://b3d8vck3t61qv" path="res://Scripts/Multiplayer/Multiplayer Demo/InputCollector.gd" id="4_uvkb8"]
 
-[node name="Game" type="Node"]
+[node name="GameStateManager" type="Node"]
 script = ExtResource("1_gl6un")
-
-[node name="GameStateManager" type="Node" parent="."]
-script = ExtResource("1_gl6un")
-
-[node name="Sprite2D_Local" type="Sprite2D" parent="."]
-texture = ExtResource("2_mog6f")
-
-[node name="Sprite2D_Online" type="Sprite2D" parent="."]
-texture = ExtResource("2_mog6f")
 
 [node name="GhostVisualizer" type="Node2D" parent="."]
 script = ExtResource("3_j5yw3")
+sprite_scene = ExtResource("3_mog6f")
+smoothing = 0.1
+use_trails = true
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("4_uvkb8")

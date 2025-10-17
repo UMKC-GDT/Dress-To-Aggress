@@ -1,16 +1,18 @@
 extends Node
 @onready var lobby_ui: Node = get_parent()  # the LobbyScene with LobbyUI.gd
 
+@export var autostart: bool = true
+
 func _ready():
+	if autostart == false: return
 	var role := _get_role()
 	print(role)
-	await get_tree().create_timer(0.5).timeout
 	if role == "Host": 
 		lobby_ui._on_ButtonHost_pressed()
 	elif role == "Client": 
 		lobby_ui._on_ButtonJoin_pressed()
-	await get_tree().create_timer(1).timeout
 	if role == "Host": 
+		await get_tree().create_timer(2).timeout
 		lobby_ui._on_start_pressed()
 
 func _get_role() -> String:
@@ -19,7 +21,6 @@ func _get_role() -> String:
 		var a := String(args[i]).strip_edges()
 		if a == "--":
 			continue
-		# Normalize: remove leading dashes
 		while a.begins_with("-"):
 			a = a.substr(1)
 
