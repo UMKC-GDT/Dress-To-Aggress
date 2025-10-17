@@ -94,13 +94,13 @@ func handle_input(delta):
 	handle_states(direction, delta)
 	
 	#this is where the fun begins
-	match global.difficulty:
-		"Easy":
-			run_easy_ai()
-		"Normal":
-			run_normal_ai()
-		"Hard":
-			run_hard_ai()
+	#match global.difficulty:
+		#"Easy":
+			#run_easy_ai()
+		#"Normal":
+			#run_normal_ai()
+		#"Hard":
+			#run_hard_ai()
 
 #The fun. This is where our AI code can go, and, to whomever's working on the AI code, work your magic here. All of the code below can be edited and extended to however deep you want, based on the given eyes.
 func run_normal_ai():
@@ -179,7 +179,7 @@ func run_normal_ai():
 		if randf() < 0.004:
 			approach()
 			use_pose()
-			
+
 func run_easy_ai():
 	
 	if disabled: return
@@ -244,8 +244,7 @@ func run_easy_ai():
 				block(kick_time)
 		elif randf() < 0.02:
 			dash_away()
-	
-			
+
 func run_hard_ai():
 	
 	if disabled: return
