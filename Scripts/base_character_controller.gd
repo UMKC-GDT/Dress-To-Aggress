@@ -147,9 +147,9 @@ var crouch_punch_data = {
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 50,
 	"damage": 10 * punch_damage_mult,
-	"startup_animation" : "punch recovery",
-	"active_animation" : "punch",
-	"recovery_animation" : "punch recovery",
+	"startup_animation" : "crouch punch recovery",
+	"active_animation" : "crouch punch",
+	"recovery_animation" : "crouch punch recovery",
 }
 var crouch_punch_deceleration = 10
 
@@ -435,15 +435,18 @@ func handle_states(direction, delta):
 			punch_state(delta)
 		
 		CharacterState.CPUNCH:
-			crouch_scale()
+			#crouch_scale()
+			reset_scale()
+			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+			hurtboxCollision.position.y = 14.5
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			crouch_block_legal = false
 			
-			animation_player.play(punch_data["active_animation"])
-			PantsLayer.play(punch_data["active_animation"])
-			ShirtLayer.play(punch_data["active_animation"])
+			animation_player.play(crouch_punch_data["active_animation"])
+			PantsLayer.play(crouch_punch_data["active_animation"])
+			ShirtLayer.play(crouch_punch_data["active_animation"])
 			
 			c_punch_state(delta)
 		
@@ -529,18 +532,20 @@ func handle_states(direction, delta):
 			velocity.x = move_toward(velocity.x, 0, 25)
 		
 		CharacterState.CROUCH:
-			
+			reset_scale()
 			if (direction == facing_direction * -1): 
 				crouch_block_legal = true
 			else: 
 				crouch_block_legal = false
 			
 			#For now, we're gonna set it to idle and manipulate the scale of the animation player. Not a permanent solution. Don't forget to come back and fix this.
-			animation_player.play("idle")
-			PantsLayer.play("idle")
-			ShirtLayer.play("idle")
+			animation_player.play("crouch punch startup")
+			PantsLayer.play("crouch punch startup")
+			ShirtLayer.play("crouch punch startup")
 			
-			crouch_scale()
+			#crouch_scale()
+			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+			hurtboxCollision.position.y = 14.5
 			
 			change_color(Color(Color.WHITE, 1.0))
 			crouch_state(direction)
