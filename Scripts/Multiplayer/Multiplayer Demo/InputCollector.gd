@@ -12,14 +12,9 @@ func _process(_delta: float) -> void:
 	if gsm == null:
 		return
 
-	var move := Vector2i(
-		int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A)),
-		int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W))
-	)
-
 	var inp := {
-		"x": move.x,
-		"y": move.y,
+		"x": int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A)),
+		"y": int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W)),
 		"player_punch": Input.is_action_just_pressed("player_punch")
 	}
 

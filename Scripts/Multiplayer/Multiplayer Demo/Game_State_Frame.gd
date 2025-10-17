@@ -1,5 +1,5 @@
 # res://scripts/game_state_frame.gd
-class_name GameStateFrame        # this registers it globally
+class_name GameStateFrame
 extends RefCounted
 
 var time_stamp: float = 0.0

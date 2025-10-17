@@ -1,5 +1,5 @@
 extends Node
-@onready var lobby_ui: Node = get_parent()  # the LobbyScene with LobbyUI.gd
+@onready var lobby_ui: Node = get_parent()
 
 @export var autostart: bool = true
 
