@@ -69,8 +69,8 @@ func _ready():
 			2: temperature = .8
 			3: temperature = 1
 			4: temperature = 1.1
-			5: temperature = 1.1
-			6: temperature = 1.2
+			5: temperature = 1.2
+			6: temperature = 1.3
 			7: temperature = 1.4
 	else:
 		temperature = 1

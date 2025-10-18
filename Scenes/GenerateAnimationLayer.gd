@@ -27,14 +27,13 @@ func  _ready() -> void:
 		
 	elif(get_parent().name == "Player2"):
 		match global.arcade_level:
-			1: shirt_text = "blueShirtL"; pants_text = "blueShorts"
-			2: shirt_text = "purpleShirtS"; pants_text = "purplePants"
-			3: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
-			4: shirt_text = "blackShirtS"; pants_text = "blackPants"
-			5: shirt_text = "greenShirtS"; pants_text = "greenShorts"
-			6: shirt_text = "redShirtS"; pants_text = "redPants"
-			7: shirt_text = "brownShirtL"; pants_text = "brownPants"
-			
+			1: shirt_text = "grayShirtS"; pants_text = "grayShorts"
+			2: shirt_text = "brownShirtL"; pants_text = "bluePants"
+			3: shirt_text = "greenShirts"; pants_text = "greenPants"
+			4: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
+			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
+			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
+			7: shirt_text = "redShirtL"; pants_text = "redPants"
 	else:
 		#get the clothing items to generate from the save file
 		#var textFile = "res://Assets/OutfitSaveFile.txt"
