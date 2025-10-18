@@ -29,17 +29,10 @@ func  _ready() -> void:
 		match global.arcade_level:
 			1: shirt_text = "grayShirtS"; pants_text = "grayShorts"
 			2: shirt_text = "brownShirtL"; pants_text = "bluePants"
-<<<<<<< HEAD
 			3: shirt_text = "greenShirts"; pants_text = "greenPants"
 			4: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
 			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
 			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
-			7: shirt_text = "redShirtL"; pants_text = "redPants"
-=======
-			3: shirt_text = "greenShirtL"; pants_text = "greenPants"
-			4: shirt_text = "whiteShirtL"; pants_text = "whitePants"
-			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
-			6: shirt_text = "blackShirtL"; pants_text = "blackPants"
 			7: shirt_text = "redShirtL"; pants_text = "redPants"
 			
 >>>>>>> 5ae9e98 (Limit to 3 attempts per level and change enemy outfits)
