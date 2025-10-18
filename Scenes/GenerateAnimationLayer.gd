@@ -34,8 +34,6 @@ func  _ready() -> void:
 			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
 			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
 			7: shirt_text = "redShirtL"; pants_text = "redPants"
-			
->>>>>>> 5ae9e98 (Limit to 3 attempts per level and change enemy outfits)
 	else:
 		#get the clothing items to generate from the save file
 		#var textFile = "res://Assets/OutfitSaveFile.txt"
