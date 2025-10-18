@@ -62,7 +62,7 @@ func _ready():
 	
 	print("SELF NAME: " + self.name)
 	
-	#This is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
+	#Temperature is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
 	if(global.arcade_level > 0):
 		match global.arcade_level:
 			1: temperature = .6
@@ -75,6 +75,7 @@ func _ready():
 	else:
 		temperature = 1
 	
+	print("TEMPERATURE: " + str(temperature))
 	super.scale_stats()
 	healthbar.init_health(health)
 	super._ready()

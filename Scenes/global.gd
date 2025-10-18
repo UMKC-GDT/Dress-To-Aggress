@@ -5,6 +5,7 @@ var is_dragging = false
 
 var difficulty = "Normal"
 var arcade_level = 0
+var instructions_board_seen = false
 
 var dialogueScene: String = "res://Assets/Resources/Dialogues/TestDialogue.tres"
 

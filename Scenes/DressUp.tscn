@@ -354,14 +354,14 @@ position = Vector2(-2.20742, -0.201721)
 scale = Vector2(0.339602, 0.403442)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board"]
-offset_left = -131.0
+offset_left = -130.6604
 offset_top = -68.0
-offset_right = 128.0
+offset_right = 129.89789
 offset_bottom = 69.0
 theme_override_fonts/normal_font = ExtResource("12_0d1k1")
 text = "Drag and Drop clothing items onto your player.
 
-Create your disguise and click TO STAGE to start!"
+Create your disguise and press START to begin the match!"
 scroll_active = false
 
 [node name="Button" type="Button" parent="Instructions Board"]
@@ -370,16 +370,16 @@ offset_left = -47.0
 offset_top = 52.5
 offset_right = 42.0
 offset_bottom = 83.5
-text = "Start"
+text = "OK!"
 
 [node name="To Stage Button" type="Button" parent="." node_paths=PackedStringArray("InstructionsBoard")]
-offset_left = 279.0
+offset_left = 386.0
 offset_top = 167.0
 offset_right = 559.0
 offset_bottom = 257.0
 theme_override_fonts/font = ExtResource("13_yagx5")
 theme_override_font_sizes/font_size = 35
-text = "To Stage"
+text = "START"
 script = ExtResource("13_ch7k1")
 InstructionsBoard = NodePath("../Instructions Board")
 

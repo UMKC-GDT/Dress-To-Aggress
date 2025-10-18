@@ -55,6 +55,7 @@ func _ready() -> void:
 	fight_timer_display.text = "99"
 	victory_label.text = ""
 	
+	print("ARCADE LEVEL: " + str(global.arcade_level))
 	disable_control()
 	start_round()
 
@@ -201,11 +202,25 @@ func _on_timer_timeout() -> void:
 	print('wins:',player_wins,cpu_wins)
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	if player_wins >= 2 or cpu_wins >= 2:
-		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	else:
-		print('ROUND END')
-		transition()
+	match global.arcade_level:
+		0:
+			if player_wins >= 2 or cpu_wins >= 2:
+				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			else: # no winners yet, restart
+				print('ROUND END')
+				transition()
+				
+		1, 2, 3, 4, 5, 6, 7:
+			if player_wins >= 2: 
+				global.arcade_level += 1
+				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			elif cpu_wins >= 2:
+				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			else: # no winners yet, restart
+				print('ROUND END')
+				transition()
+				
+		#8: go to victory screen
 
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
