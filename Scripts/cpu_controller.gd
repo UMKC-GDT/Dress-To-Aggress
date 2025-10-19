@@ -45,6 +45,8 @@ var punch_time = 0.15
 
 var roll = 0
 
+var dummyMode = false
+
 func release_inputs():
 	pressing_left = false
 	pressing_right = false
@@ -105,6 +107,9 @@ func handle_input(delta):
 	find_crouch()
 	check_enemy_attack()
 	handle_states(direction, delta)
+	
+	#Just adding a new switch for when we need to disable the AI for debugging purposes.
+	if dummyMode: return
 	
 	if(global.arcade_level > 0):
 		match global.arcade_level:

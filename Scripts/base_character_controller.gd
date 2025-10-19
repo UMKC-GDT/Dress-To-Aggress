@@ -118,16 +118,16 @@ var disabled = false
 #Note for the below data: onBlock is positive because, if an attack is blocked, the player will transition to the RECOVERY state for (recovery - onBlock) frames. 
 var attack_timer = 0.0
 var punch_data = {
-	"startup_frames" : 4.0 / punch_speed_mult,
-	"active_frames" : 3,
-	"recovery_frames" : 7.0 / punch_speed_mult,
-	"blockstun_frames" : 9,
-	"onBlock_FA" : -1,
-	"ground_hitstun": 14.0 / punch_hitstun_mult,
-	"air_hitstun" : 14.0 / punch_hitstun_mult,
+	"startup_frames" : 4.0 / punch_speed_mult, #Dictates how long after pressing the button until the attack actually comes out
+	"active_frames" : 3, #How long is the attack's hitbox/animation active?
+	"recovery_frames" : 7.0 / punch_speed_mult, #Dictates how long AFTER the attack until the player can act again
+	"blockstun_frames" : 9, #How long that a blocking opponent will be stuck blocking. 
+	"onBlock_FA" : -1, #A little more complex, but this decides how much we're vulnerable when our attack is blocked. Keep it negative and increase this number to increase the window that it can be punished.
+	"ground_hitstun": 24.0 / punch_hitstun_mult, #How long will the opponent be stunned in pain after getting hit?
+	"air_hitstun" : 24.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
-	"forward_force": 50,
+	"forward_force": 50, #How far do WE lunge forward to attack?
 	"damage": 10 * punch_damage_mult,
 	"startup_animation" : "punch recovery",
 	"active_animation" : "punch",
@@ -159,7 +159,7 @@ var kick_data = {
 	"active_frames" : 4,
 	"recovery_frames" : 20.0 / kick_speed_mult,
 	"blockstun_frames" : 24,
-	"onBlock_FA" : -10,
+	"onBlock_FA" : -19,
 	"ground_hitstun": 33 * kick_hitstun_mult,
 	"air_hitstun" : 33 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
@@ -274,6 +274,10 @@ func _ready():
 	if hurtboxCollision and hurtboxCollision.shape:
 		hurtboxCollision.shape = hurtboxCollision.shape.duplicate()
 	
+	if collision and collision.shape:
+		collision.shape = collision.shape.duplicate()
+	
+	
 	
 	if enemy == null:
 		push_error("Enemy node '%s' not found!" % enemy_name)
@@ -308,10 +312,12 @@ func handle_input(delta):
 	handle_states(direction, delta)
 
 func reset_scale():
-	if state == CharacterState.CROUCH: return
 	
 	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 50.0)
 	hurtboxCollision.position.y = 4
+	
+	collision.shape.size = Vector2(collision.shape.size.x, 50.0)
+	collision.position.y = 4
 	
 	animation_player.scale.y = 0.3
 	animation_player.position.y = 4.5
@@ -325,6 +331,9 @@ func reset_scale():
 func crouch_scale():
 	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
 	hurtboxCollision.position.y = 14.5
+	
+	collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+	collision.position.y = 14.5
 	
 	animation_player.scale.y = 0.177
 	animation_player.position.y = 14.61
@@ -440,6 +449,9 @@ func handle_states(direction, delta):
 			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
 			hurtboxCollision.position.y = 14.5
 			
+			collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+			collision.position.y = 14.5
+			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			crouch_block_legal = false
@@ -488,7 +500,6 @@ func handle_states(direction, delta):
 			recovery_state(delta)
 		
 		CharacterState.HURT:
-			
 			reset_scale()
 			
 			block_legal = false
@@ -533,6 +544,7 @@ func handle_states(direction, delta):
 		
 		CharacterState.CROUCH:
 			reset_scale()
+			
 			if (direction == facing_direction * -1): 
 				crouch_block_legal = true
 			else: 
@@ -546,6 +558,9 @@ func handle_states(direction, delta):
 			#crouch_scale()
 			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
 			hurtboxCollision.position.y = 14.5
+			
+			collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+			collision.position.y = 14.5
 			
 			change_color(Color(Color.WHITE, 1.0))
 			crouch_state(direction)
@@ -716,7 +731,6 @@ func kick_state(delta):
 	if attack_timer > 0:
 		attack_timer -= delta
 	else:
-		if player_type == 1: print("end kick state")
 		start_recovery(kick_data["recovery_frames"], kick_data["recovery_animation"])
 
 func start_c_kick():
@@ -778,14 +792,12 @@ func recovery_state(delta):
 	if recovery_timer > 0:
 		recovery_timer -= delta
 	else:
-		if player_type == 0: print("Recovery timer ended!")
-		
-		animation_player.position.x = 4
-		ShirtLayer.position.x = 4
-		PantsLayer.position.x = 4
 		
 		if recovery_continuation != null:
 			recovery_continuation.call()
+			animation_player.position.x = 4
+			ShirtLayer.position.x = 4
+			PantsLayer.position.x = 4
 			recovery_continuation = null
 
 func get_hit_with(attack_data):

@@ -56,7 +56,7 @@ func  _ready() -> void:
 	
 	#set postion to the body (might have   to adjust when merges wit htomies movement)
 	#self.position  = $"../Body".position
-	self.scale = Vector2(0.3,0.3)  #can  be chaanged
+	self.scale = Vector2(0.3,0.3)  #can be chaanged
 	self.modulate = current_wearable.color
 	 
 	

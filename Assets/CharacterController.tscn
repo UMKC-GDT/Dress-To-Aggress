@@ -250,6 +250,7 @@ width = 1.245
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4.5, 4)
 shape = SubResource("RectangleShape2D_5tmop")
+debug_color = Color(0.9125069, 9.722412e-05, 0.72473234, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, 4.5)
