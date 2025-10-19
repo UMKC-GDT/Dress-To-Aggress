@@ -109,7 +109,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
-text = "Arcade*"
+text = "Arcade"
 
 [node name="DemoButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -540,6 +540,7 @@ position = Vector2(546, 490.00076)
 scale = Vector2(0.69470066, 0.69470066)
 texture = ExtResource("17_mkpwh")
 
+[connection signal="button_down" from="VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_button_down"]
 [connection signal="pressed" from="VBoxContainer/DemoButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_pressed"]

@@ -16,7 +16,7 @@ func  _ready() -> void:
 	
 	var rng = RandomNumberGenerator.new()
 	
-	if(get_parent().name == "Player2"):
+	if(get_parent().name == "Player2" and global.arcade_level < 1):
 		#generate a random outfit
 		var pants = ClothingDatabase.pants_list
 		var shirts = ClothingDatabase.shirts_list
@@ -24,6 +24,16 @@ func  _ready() -> void:
 		var rand2 = rng.randi_range(0,shirts.size()-2)
 		pants_text = pants[rand1]
 		shirt_text =  shirts[rand2]
+		
+	elif(get_parent().name == "Player2"):
+		match global.arcade_level:
+			1: shirt_text = "grayShirtS"; pants_text = "grayShorts"
+			2: shirt_text = "brownShirtL"; pants_text = "bluePants"
+			3: shirt_text = "greenShirtS"; pants_text = "greenPants"
+			4: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
+			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
+			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
+			7: shirt_text = "redShirtL"; pants_text = "redPants"
 	else:
 		#get the clothing items to generate from the save file
 		#var textFile = "res://Assets/OutfitSaveFile.txt"

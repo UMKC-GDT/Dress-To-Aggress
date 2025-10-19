@@ -60,9 +60,22 @@ func _ready():
 	enemy_name = "Player"
 	healthbar = $"/root/Test Level/CanvasLayer/Healthbar2"
 	
-	#This is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
-	temperature = 1
+	print("SELF NAME: " + self.name)
 	
+	#Temperature is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
+	if(global.arcade_level > 0):
+		match global.arcade_level:
+			1: temperature = .6
+			2: temperature = .8
+			3: temperature = 1
+			4: temperature = 1.1
+			5: temperature = 1.2
+			6: temperature = 1.3
+			7: temperature = 1.4
+	else:
+		temperature = 1
+	
+	print("TEMPERATURE: " + str(temperature))
 	super.scale_stats()
 	healthbar.init_health(health)
 	super._ready()
@@ -93,20 +106,29 @@ func handle_input(delta):
 	check_enemy_attack()
 	handle_states(direction, delta)
 	
-	#this is where the fun begins
-	#match global.difficulty:
-		#"Easy":
-			#run_easy_ai()
-		#"Normal":
-			#run_normal_ai()
-		#"Hard":
-			#run_hard_ai()
+	if(global.arcade_level > 0):
+		match global.arcade_level:
+			1: run_easy_ai()
+			2: run_easy_ai()
+			3: run_normal_ai()
+			4: run_normal_ai()
+			5: run_hard_ai()
+			6: run_hard_ai()
+			7: run_hard_ai()
+	else:
+		match global.difficulty:
+			"Easy":
+				run_easy_ai()
+			"Normal":
+				run_normal_ai()
+			"Hard":
+				run_hard_ai()
 
 #The fun. This is where our AI code can go, and, to whomever's working on the AI code, work your magic here. All of the code below can be edited and extended to however deep you want, based on the given eyes.
 func run_normal_ai():
 	
 	if disabled: return
-	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
+	# Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
 		if randf() < 0.03: approach()
 	elif horizontal_distance < kick_range - 2:
@@ -117,7 +139,7 @@ func run_normal_ai():
 	if enemy_just_attacked and horizontal_distance < kick_range - 2:
 		if randf() < 0.4: dash_away()
 
-#Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
+	# Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
@@ -138,12 +160,12 @@ func run_normal_ai():
 			else:
 				kick()
 	
-	#Example on how to make the CPU pose at pose range.
+	# Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
 		if randf() < 0.03:
 			if is_on_floor(): use_pose()
 	
-	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
+	# Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
 		if randf() < 0.4:
 			if enemy_crouching:
@@ -183,7 +205,7 @@ func run_normal_ai():
 func run_easy_ai():
 	
 	if disabled: return
-	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
+	# Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
 		if randf() < 0.02: approach()
 	elif horizontal_distance < kick_range - 2:
@@ -194,7 +216,7 @@ func run_easy_ai():
 	if enemy_just_attacked and horizontal_distance < kick_range - 2:
 		if randf() < 0.04: dash_away()
 
-#Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
+	# Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
@@ -215,12 +237,12 @@ func run_easy_ai():
 			else:
 				kick()
 	
-	#Example on how to make the CPU pose at pose range.
+	# Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
 		if randf() < 0.0001:
 			if is_on_floor(): use_pose()
 	
-	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
+	# Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range):
 		if randf() < 0.02:
 			if enemy_crouching:
@@ -248,7 +270,7 @@ func run_easy_ai():
 func run_hard_ai():
 	
 	if disabled: return
-	#Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
+	# Example on how to make the CPU approach to a range. The + and - 2 are necessary because, if it's exact, it starts jittering back and forth. Give it a little leeway.
 	if horizontal_distance > kick_range + 2 or enemy_approaching == 0:
 		if randf() < 0.5: approach()
 	elif horizontal_distance < kick_range - 2:
@@ -259,7 +281,7 @@ func run_hard_ai():
 	if enemy_just_attacked and horizontal_distance < kick_range - 2:
 		if randf() < 0.9: dash_away()
 
-#Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
+	# Example on how to make the CPU anti air. This and the below functions are reactionary, so you might want to link them to a random number to make it only have a CHANCE at reacting and defending. Higher chance == harder CPU.
 	if enemy_state == CharacterState.JUMP: 
 		if vertical_distance < 30:
 			if horizontal_distance < kick_range + 3 and horizontal_distance >= kick_range and enemy_approaching == 1:
@@ -280,12 +302,12 @@ func run_hard_ai():
 			else:
 				kick()
 	
-	#Example on how to make the CPU pose at pose range.
+	# Example on how to make the CPU pose at pose range.
 	if horizontal_distance <= pose_range:
 		if randf() < 0.09:
 			if is_on_floor(): use_pose()
 	
-	#Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
+	# Example on how to make it block. The "***_time" variables tell the CPU to hold block for that long to properly block the attack. Make this chance based, or we'll have a perfect CPU that blocks every attack.
 	if (Input.is_action_just_pressed(enemy.punch_input) and horizontal_distance <= punch_range || horizontal_distance <= punch_range + 1):
 		if randf() <= 0.99:
 			if enemy_crouching:
@@ -310,7 +332,7 @@ func run_hard_ai():
 		elif randf() <= 0.99:
 			dash_away()
 	
-	#Example on punishing after blocking a kick. This can be easily copied to make it punish punches.
+	# Example on punishing after blocking a kick. This can be easily copied to make it punish punches.
 	if (enemy_just_attacked and enemy.state == CharacterState.RECOVERY and horizontal_distance <= kick_range):
 		if randf() < 0.9:
 			kick()
@@ -323,7 +345,7 @@ func run_hard_ai():
 			use_pose()
 
 
-#This set of functions define the CPU's movement relative to the player. A little bit of underlying logic here, might not need to mess with it. Hopefully. Maybe.
+# This set of functions define the CPU's movement relative to the player. A little bit of underlying logic here, might not need to mess with it. Hopefully. Maybe.
 func walk_closer():
 	
 	block_legal = false
