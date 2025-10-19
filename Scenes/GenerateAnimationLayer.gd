@@ -29,7 +29,7 @@ func  _ready() -> void:
 		match global.arcade_level:
 			1: shirt_text = "grayShirtS"; pants_text = "grayShorts"
 			2: shirt_text = "brownShirtL"; pants_text = "bluePants"
-			3: shirt_text = "greenShirts"; pants_text = "greenPants"
+			3: shirt_text = "greenShirtS"; pants_text = "greenPants"
 			4: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
 			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
 			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
