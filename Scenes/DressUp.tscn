@@ -20,7 +20,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch7k1"]
-bg_color = Color(0.77256, 0, 0.150961, 1)
+bg_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yagx5"]
 bg_color = Color(0, 0, 0, 1)
@@ -57,6 +57,11 @@ value = 50.0
 rounded = true
 show_percentage = false
 
+[node name="Line2D" type="Line2D" parent="StatsBars/healthBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
+
 [node name="changeBar" type="ProgressBar" parent="StatsBars/healthBar"]
 z_index = -1
 layout_mode = 1
@@ -84,6 +89,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Health"
 scroll_active = false
@@ -133,10 +139,16 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Speed"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/speedBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="DamageBar" type="ProgressBar" parent="StatsBars"]
 z_index = 1
@@ -182,10 +194,16 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Damage"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/DamageBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="PoseBar" type="ProgressBar" parent="StatsBars"]
 z_index = 1
@@ -231,11 +249,17 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Pose
 "
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/PoseBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="Drag-Interaction-Provider" type="Node2D" parent="."]
 script = ExtResource("1_aqk2v")
