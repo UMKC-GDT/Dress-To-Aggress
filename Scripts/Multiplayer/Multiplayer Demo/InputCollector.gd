@@ -15,7 +15,11 @@ func _process(_delta: float) -> void:
 	var inp := {
 		"x": int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A)),
 		"y": int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W)),
-		"player_punch": Input.is_action_just_pressed("player_punch")
+		"player_punch": Input.is_action_pressed("player_punch"),
+		"player_kick": Input.is_action_pressed("player_kick"),
+		"player_jump": Input.is_action_pressed("player_jump"),
+		"player_throw": Input.is_action_pressed("player_throw"),
+		"player_crouch": Input.is_action_pressed("player_crouch")
 	}
 
 	if gsm.has_method("submit_input_for_current_tick"):

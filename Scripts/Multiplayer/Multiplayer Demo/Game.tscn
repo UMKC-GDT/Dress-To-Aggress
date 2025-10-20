@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd2am5yp3e2ll"]
+[gd_scene load_steps=5 format=3 uid="uid://b8atln84acflt"]
 
 [ext_resource type="Script" uid="uid://dgyhjvc18llnv" path="res://Scripts/Multiplayer/Multiplayer Demo/Game_State_Manager.gd" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://cskepw3unr5xl" path="res://Scripts/Multiplayer/Multiplayer Demo/GhostVisualizer.gd" id="3_j5yw3"]
@@ -11,6 +11,7 @@ script = ExtResource("1_gl6un")
 [node name="GhostVisualizer" type="Node2D" parent="."]
 script = ExtResource("3_j5yw3")
 sprite_scene = ExtResource("3_mog6f")
+punch_flash_color = Color(0.33731958, 0.8175017, 0.99999994, 1)
 smoothing = 0.1
 use_trails = true
 
