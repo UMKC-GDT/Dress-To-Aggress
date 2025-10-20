@@ -87,8 +87,8 @@ func handle_input(delta):
 	horizontal_distance = abs(position.x - enemy.position.x)
 	vertical_distance = enemy.global_position.y - global_position.y
 	
-	if Input.is_action_pressed("DEBUG_hurt_player"):
-		dash_towards()
+	#if Input.is_action_pressed("DEBUG_hurt_player"):
+	#	dash_towards()
 	
 	if not disabled:
 		if pressing_left:
