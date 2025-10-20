@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=21 format=3 uid="uid://b0u7n4r4iytxv"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=22 format=3 uid="uid://b0u7n4r4iytxv"]
 
 [ext_resource type="Texture2D" uid="uid://cp0h2c2r74y14" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves2.png" id="1_0ee17"]
+[ext_resource type="Texture2D" uid="uid://dcqt1hx0m8wqb" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Crouch Kick Frames/CrouchKickLongSleeve1.png" id="2_cc7h3"]
 [ext_resource type="Texture2D" uid="uid://wfprhjluofer" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Pose28/Pose28LongSleeves1.png" id="2_jnqyt"]
 [ext_resource type="Texture2D" uid="uid://c71wj5i2yy5vi" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Crouch Punch Frames/CrouchPunchLongSleeve0.png" id="2_qgt4w"]
 [ext_resource type="Texture2D" uid="uid://dhvjdnoflaakm" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Idle Frames/IdleLongSleeve0.png" id="3_01eqw"]
@@ -55,4 +56,5 @@ knockOut_pose2 = ExtResource("9_yyo4c")
 crouch_punch_pose0 = ExtResource("2_qgt4w")
 crouch_punch_pose1 = ExtResource("3_cc7h3")
 crouch_punch_pose2 = ExtResource("4_dnkh4")
+crouch_kick_pose1 = ExtResource("2_cc7h3")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"
