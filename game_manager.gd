@@ -249,7 +249,7 @@ func _on_timer_timeout() -> void:
 					print("Player lost three times, reset")
 					global.player_level_losses = 0 # reset level losses
 					global.arcade_level = 1 # reset arcade level
-					tree.change_scene_to_file("res://Scenes/DressUp.tscn") # change to loss screen that goes back to dress up and resets arcade level
+					tree.change_scene_to_file("res://Scenes/temp_game_over.tscn") # change to loss screen that goes back to dress up and resets arcade level
 				elif global.player_level_losses < 2: # player has lost less than 2 times
 					global.player_level_losses += 1
 					print("Player has lost " + str(global.player_level_losses) + " times. Try again.")

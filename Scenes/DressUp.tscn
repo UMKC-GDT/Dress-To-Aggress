@@ -373,10 +373,6 @@ scale = Vector2(2.94462, 2.47867)
 texture = ExtResource("10_afhxr")
 script = ExtResource("11_v7r8m")
 
-[node name="InstructionsDisplay" type="Sprite2D" parent="Instructions Board"]
-position = Vector2(-2.20742, -0.201721)
-scale = Vector2(0.339602, 0.403442)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board"]
 offset_left = -130.6604
 offset_top = -68.0
@@ -397,7 +393,7 @@ offset_bottom = 83.5
 text = "OK!"
 
 [node name="To Stage Button" type="Button" parent="." node_paths=PackedStringArray("InstructionsBoard")]
-offset_left = 386.0
+offset_left = 387.0
 offset_top = 167.0
 offset_right = 559.0
 offset_bottom = 257.0
