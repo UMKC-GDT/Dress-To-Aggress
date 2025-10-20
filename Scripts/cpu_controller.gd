@@ -45,7 +45,7 @@ var punch_time = 0.15
 
 var roll = 0
 
-var dummyMode = false
+var dummyMode = true
 
 func release_inputs():
 	pressing_left = false

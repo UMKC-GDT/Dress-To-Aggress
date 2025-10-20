@@ -183,9 +183,9 @@ var crouch_kick_data = {
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
 	"damage": 15 * kick_damage_mult,
-	"startup_animation" : "kick recovery",
-	"active_animation" : "kick",
-	"recovery_animation" : "kick recovery",
+	"startup_animation" : "crouch kick recovery",
+	"active_animation" : "crouch kick",
+	"recovery_animation" : "crouch kick recovery",
 }
 
 var throw_data = {
@@ -478,15 +478,15 @@ func handle_states(direction, delta):
 			kick_state(delta)
 		
 		CharacterState.CKICK:
-			crouch_scale()
+			reset_scale()
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			crouch_block_legal = false
 			
-			animation_player.play(kick_data["active_animation"])
-			PantsLayer.play(kick_data["active_animation"])
-			ShirtLayer.play(kick_data["active_animation"])
+			animation_player.play(crouch_kick_data["active_animation"])
+			PantsLayer.play(crouch_kick_data["active_animation"])
+			ShirtLayer.play(crouch_kick_data["active_animation"])
 			animation_player.position.x = 18
 			ShirtLayer.position.x = 18
 			PantsLayer.position.x = 18
@@ -931,7 +931,7 @@ func check_for_attack():
 			animation_player.position.x = 18
 			ShirtLayer.position.x = 18
 			PantsLayer.position.x = 18
-			crouch_scale()
+			#crouch_scale()
 			
 			start_action(crouch_kick_data["startup_frames"], func():
 				if state==CharacterState.STARTUP:

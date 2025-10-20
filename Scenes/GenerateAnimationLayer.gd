@@ -83,6 +83,9 @@ func  _ready() -> void:
 	createAnimation("crouch punch startup")
 	createAnimation("crouch punch")
 	createAnimation("crouch punch recovery")
+	createAnimation("crouch kick startup")
+	createAnimation("crouch kick")
+	createAnimation("crouch kick recovery")
 	
 
 func createAnimation(anim_name: String):
@@ -142,10 +145,15 @@ func createAnimation(anim_name: String):
 	if(anim_name =="crouch punch startup"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose0(), 1.0)
 	if(anim_name =="crouch punch"):
-		#animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_punch_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose2(), 1.0)
 	if(anim_name =="crouch punch recovery"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose1(), 1.0)
+	if(anim_name =="crouch kick startup"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
+	if(anim_name =="crouch kick"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
+	if(anim_name =="crouch kick recovery"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
 	
 	
 	
