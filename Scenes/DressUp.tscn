@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=24 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Script" uid="uid://qfrsgoctq88o" path="res://Scripts/stats_bars.gd" id="1_ch7k1"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
 [ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
+[ext_resource type="PackedScene" uid="uid://qtqucl3e38hj" path="res://Assets/codec.tscn" id="17_us67f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 
@@ -423,6 +424,13 @@ popup/item_2/id = 2
 popup/item_3/text = "Hard"
 popup/item_3/id = 3
 script = ExtResource("15_2mlfk")
+
+[node name="Codec" parent="." instance=ExtResource("17_us67f")]
+z_index = 1700
+position = Vector2(0, 3)
+scale = Vector2(0.925, 0.925)
+transition_time = 0.5
+text_speed = 0.01
 
 [connection signal="updateStatsBar" from="randomShirt" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt2" to="StatsBars" method="updateStatsBars"]
