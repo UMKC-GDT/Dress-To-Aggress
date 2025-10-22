@@ -68,13 +68,14 @@ func _ready() -> void:
 		return
 	
 	stageNumLabel.text = "STAGE " + str(stageNum)
-	match global.difficulty:
-		"Easy":
-			difficultyLabelTag = easyLabel
-		"Normal":
-			difficultyLabelTag = normalLabel
-		"Hard":
-			difficultyLabelTag = hardLabel
+	match global.arcade_level:
+		1: difficultyLabelTag = easyLabel
+		2: difficultyLabelTag = easyLabel
+		3: difficultyLabelTag = normalLabel
+		4: difficultyLabelTag = normalLabel
+		5: difficultyLabelTag = hardLabel
+		6: difficultyLabelTag = hardLabel
+		7: difficultyLabelTag = hardLabel
 	
 	styleNumLabel.text = str(styleFactor + 0.0) + "X"
 	
