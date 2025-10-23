@@ -13,8 +13,9 @@ func _process(_delta: float) -> void:
 		return
 
 	var inp := {
-		"x": int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A)),
-		"y": int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W)),
+		"x": int(Input.is_action_pressed("player_right")) - int(Input.is_action_pressed("player_left")),
+		"player_left": Input.is_action_pressed("player_left"),
+		"player_right": Input.is_action_pressed("player_right"),
 		"player_punch": Input.is_action_pressed("player_punch"),
 		"player_kick": Input.is_action_pressed("player_kick"),
 		"player_jump": Input.is_action_pressed("player_jump"),
