@@ -83,7 +83,25 @@ func _on_server_tick_inputs(tick: int, inputs: Dictionary) -> void:
 
 		var vx: int = int(inp.get("x", 0))
 		var vy: int = int(inp.get("y", 0))
-		var punch_now: bool = bool(inp.get("player_punch", false))
+		var punch_now = false
+		for l in inp:
+			match l:
+				"player_punch":
+					if(!inp[l]): continue
+					print("Player: " + str(pid) + " punched")
+					punch_now = true
+				"player_kick":
+					if(!inp[l]): continue
+					print("Player: " + str(pid) + " kicked")
+				"player_jump":
+					if(!inp[l]): continue
+					print("Player: " + str(pid) + " jumped")
+				"player_throw":
+					if(!inp[l]): continue
+					print("Player: " + str(pid) + " is throwing")
+				"player_crouch":
+					if(!inp[l]): continue
+					print("Player: " + str(pid) + " crouched")
 
 		var actor: Node2D = _get_or_make_actor(pid)
 
