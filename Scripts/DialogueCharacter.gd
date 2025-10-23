@@ -2,9 +2,6 @@ class_name Dialogue
 extends Resource
 
 @export var linesFile: String 
-@export var background: Texture2D
-@export var nextScene: String
-
 
 @export_category("Right Character")
 @export var rightName: String
@@ -27,8 +24,6 @@ func _init() -> void:
 
 
 func getLinesFile(): return linesFile
-func getBackground(): return background
-func getNextScene(): return nextScene
 
 func getRightCharacterName(): return rightName
 func getRightCharacterModel(): return rightModel
