@@ -49,6 +49,7 @@ class_name Wearable
 @export var crouch_punch_pose0: Texture2D
 @export var crouch_punch_pose1: Texture2D
 @export var crouch_punch_pose2: Texture2D
+@export var crouch_kick_pose1: Texture2D
 
 # Clothing Properties getters
 func get_clothing_type() -> String:
@@ -178,3 +179,6 @@ func get_crouch_punch_pose1() -> Texture2D:
 	
 func get_crouch_punch_pose2() -> Texture2D:
 	return crouch_punch_pose2
+	
+func get_crouch_kick_pose1() -> Texture2D:
+	return crouch_kick_pose1
