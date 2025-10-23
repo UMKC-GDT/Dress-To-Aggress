@@ -174,37 +174,9 @@ func animate_message_label(text):
 	tween.tween_property(message_label, "scale", Vector2(1, 1), 0.2)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-# Debug buttons
-# func _input(event):
-# 	if event.is_action_pressed("comma"):
-# 		print("comma")
-# 		_on_player_one_died()
-# 	if event.is_action_pressed("period"):
-# 		print("period")
-# 		_on_cpu_died()
-# 	if event.is_action_pressed("1"):
-# 		print("1")
-# 		global.arcade_level = 1
-# 	if event.is_action_pressed("2"):
-# 		print("2")
-# 		global.arcade_level = 2
-# 	if event.is_action_pressed("3"):
-# 		print("3")
-# 		global.arcade_level = 3
-# 	if event.is_action_pressed("4"):
-# 		print("4")
-# 		global.arcade_level = 4
-# 	if event.is_action_pressed("5"):
-# 		print("5")
-# 		global.arcade_level = 5
-# 	if event.is_action_pressed("6"):
-# 		print("6")
-# 		global.arcade_level = 6
-# 	if event.is_action_pressed("7"):
-# 		print("7")
-# 		global.arcade_level = 7
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+
 	if timer_started:
 		fight_timer_display.text = str(fight_timer.time_left).pad_decimals(1)
 
@@ -231,6 +203,9 @@ func _on_timer_timeout() -> void:
 	print('wins:',player_wins,cpu_wins)
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+
+
+
 	match global.arcade_level:
 		0:
 			if player_wins >= 2 or cpu_wins >= 2:
@@ -249,7 +224,7 @@ func _on_timer_timeout() -> void:
 					print("Player lost three times, reset")
 					global.player_level_losses = 0 # reset level losses
 					global.arcade_level = 1 # reset arcade level
-					tree.change_scene_to_file("res://Scenes/temp_game_over.tscn") # change to loss screen that goes back to dress up and resets arcade level
+
 				elif global.player_level_losses < 2: # player has lost less than 2 times
 					global.player_level_losses += 1
 					print("Player has lost " + str(global.player_level_losses) + " times. Try again.")

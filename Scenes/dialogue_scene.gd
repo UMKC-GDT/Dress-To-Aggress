@@ -14,13 +14,17 @@ var line = 0
 var nextScene
 var sceneData
 var dialogueFile
-var inPosition = false
-var screenFaded = false
-var speed = 1500
+
+var scenes = ["uid://c4w3dm0al880e"]
+var loseScenes = []
 
 func _on_ready() -> void:
-	var scenePath: String = global.dialogueScene
-	sceneData = load(scenePath)
+	if global.lostLastFight:
+		sceneData = load(loseScenes[global.currentDialogueScene])
+		global.currentDialogueScene = 0
+	else:
+		sceneData = load(scenes[global.currentDialogueScene])
+		global.currentDialogueScene += 1
 	dialogueFile = sceneData.getLinesFile()
 	readFile(dialogueFile)
 	$Panel/TextureRect.texture = sceneData.getBackground()
@@ -28,14 +32,28 @@ func _on_ready() -> void:
 	characterLeft.texture = sceneData.getLeftCharacterModel()
 	characterRight.texture = sceneData.getRightCharacterModel()
 	
-	characterLeft.get_child(0).texture = sceneData.getLeftCharacterShirt()
-	characterLeft.get_child(0).modulate = sceneData.getLeftCharacterShirtColor()
-	characterLeft.get_child(1).modulate = sceneData.getLeftCharacterPantsColor()
-	characterLeft.get_child(1).texture = sceneData.getLeftCharacterPants()
-	characterRight.get_child(0).texture = sceneData.getRightCharacterShirt()
-	characterRight.get_child(0).modulate = sceneData.getRightCharacterShirtColor()
-	characterRight.get_child(1).texture = sceneData.getRightCharacterPants()
-	characterRight.get_child(1).modulate = sceneData.getRightCharacterPantsColor()
+	if sceneData.getLeftCharacterShirt() == null or sceneData.getLeftCharacterPants() == null:
+		var playerOutfit = load("res://Assets/Resources/OutfitSaveResource.tres")
+		var playerShirt = load("res://Assets/Resources/Wearables/" + playerOutfit.shirt + ".tres")
+		var playerPants = load("res://Assets/Resources/Wearables/" + playerOutfit.pants + ".tres")
+		characterLeft.get_child(0).texture = playerShirt.mirrorPose
+		characterLeft.get_child(0).modulate = playerShirt.color
+		characterLeft.get_child(1).texture = playerPants.mirrorPose
+		characterLeft.get_child(1).modulate = playerPants.color
+	else:
+		characterLeft.get_child(0).texture = sceneData.getLeftCharacterShirt()
+		characterLeft.get_child(0).modulate = sceneData.getLeftCharacterShirtColor()
+		characterLeft.get_child(1).modulate = sceneData.getLeftCharacterPantsColor()
+		characterLeft.get_child(1).texture = sceneData.getLeftCharacterPants()
+	
+	if sceneData.getRightCharacterShirt() == null or sceneData.getRightCharacterPants() == null:
+		pass
+	else:
+		characterRight.get_child(0).texture = sceneData.getRightCharacterShirt()
+		characterRight.get_child(0).modulate = sceneData.getRightCharacterShirtColor()
+		characterRight.get_child(1).texture = sceneData.getRightCharacterPants()
+		characterRight.get_child(1).modulate = sceneData.getRightCharacterPantsColor()
+		
 	textBox.text = ""
 	nameBox.text = ""
 	
@@ -82,6 +100,7 @@ func setInPositionToTrue():
 	inPosition = true
 
 func toNextScene():
+	global.lostLastFight = false
 	get_tree().change_scene_to_file(nextScene)
 
 func readFile(filePath):
