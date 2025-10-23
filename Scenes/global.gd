@@ -5,7 +5,8 @@ var is_dragging = false
 
 var difficulty = "Normal"
 
-var dialogueScene: String = "res://Assets/Resources/Dialogues/TestDialogue.tres"
+var currentDialogueScene = 0
+var lostLastFight = false
 
 func roundFloat(flt, place):
 	return (round(flt*pow(10,place))/pow(10,place))

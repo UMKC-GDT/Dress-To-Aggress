@@ -343,6 +343,7 @@ scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
 [node name="Instructions Board" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)

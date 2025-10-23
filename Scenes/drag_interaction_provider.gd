@@ -9,10 +9,11 @@ var body_ref
 var offset: Vector2
 var initialPos: Vector2
 var collider : CollisionShape2D
+var shirt_item_can_enter: Node = null
+var pant_item_can_enter: Node = null
 
 
-
-func _process(delta):
+func _process(_delta):
 	if ( last_clicked is Area2D):
 		if Input.is_action_just_pressed("click"):
 			
@@ -36,11 +37,25 @@ func _process(delta):
 				
 				print("in platform")
 				#last_clicked.gravity_scale = 0.0
-				tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
-				
+				#if ("Shirt" in last_clicked.get_parent().name):
+				if shirt_item_can_enter == null and "Shirt" in last_clicked.get_parent().name :
+					tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
+					shirt_item_can_enter = last_clicked
+					
+				elif pant_item_can_enter == null and "Pants" in last_clicked.get_parent().name :
+					tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
+					pant_item_can_enter = last_clicked
+				else:
+					tween.tween_property( last_clicked.get_parent(), "position",  Vector2(randf_range(100, 200),randf_range(0,100)), 0.2).set_ease(Tween.EASE_OUT)
 				#last_clicked.position = last_clicked.get_parent().body_ref.position
 			else:
 				print("leave")
+				if shirt_item_can_enter == last_clicked and "Shirt" in last_clicked.get_parent().name  :
+					shirt_item_can_enter = null
+					
+				if pant_item_can_enter == last_clicked and "Pants" in last_clicked.get_parent().name:
+					pant_item_can_enter = null
+				
 				#tween.tween_property( last_clicked.get_parent(), "position",initialPos, 0.2).set_ease(Tween.EASE_OUT)
 				
 				#last_clicked.gravity_scale = 1.0

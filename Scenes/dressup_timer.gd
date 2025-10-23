@@ -60,6 +60,7 @@ func _on_timer_timeout() -> void:
 		# DEBUG: print("T1: " + clothing_name)
 		
 		if (clothing_name.contains("Shirt")):
+		
 			shirt_text = clothing_name
 			# DEBUG: print("T1.5: " + shirt_text)
 		elif (clothing_name.contains("Pants") || clothing_name.contains("Shorts")):
@@ -87,7 +88,7 @@ func _on_timer_timeout() -> void:
 	
 	#open new file
 	var tree: SceneTree = get_tree()
-	tree.change_scene_to_file("res://Scenes/stageFight.tscn") #replace with fighting scene
+	tree.change_scene_to_file("res://Scenes/stageFight.tscn")
 
 
 #returns array  of clothingn items that are currently overlapping the platform

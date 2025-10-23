@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="2_f7g2b"]
-[ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_iwpvo"]
+[ext_resource type="Script" path="res://Scenes/camera_rig.gd" id="2_iwpvo"]
 [ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
