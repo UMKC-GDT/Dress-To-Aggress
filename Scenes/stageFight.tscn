@@ -227,6 +227,7 @@ metadata/_edit_use_anchors_ = true
 [node name="FadeTransition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransition"]
+visible = false
 offset_left = -84.0
 offset_top = -25.0
 offset_right = 1416.0
@@ -238,7 +239,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_m73bv")
 }
 
-[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
-[connection signal="cpu_died" from="Player2" to="CanvasLayer/Game Manager" method="_on_cpu_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 [connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

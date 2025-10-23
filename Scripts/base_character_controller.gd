@@ -4,7 +4,6 @@ class_name BaseCharacterController
 @export var player_type  = 0  # 0 = CPU, 1 = Player 1, 2 = Player 2
 @export var enemy_name = "player1"  # Name of the enemy node
 
-
 var movement_speed_mult = 1
 var dash_speed_mult = 1
 var dash_available = true
@@ -32,7 +31,7 @@ var health_mult = 1
 @export var health = 200
 var starting_health = 0
 @export var health_UI : RichTextLabel
-@onready var healthbar = $"/root/Test Level/CanvasLayer/Healthbar"
+@export var healthbar: Node = null  # expects your Healthbar script
 
 # Based on the player type, in a later function, these'll be redefined or left empty depending on who's controlling it. This list will be expanded with each control.
 var left_input = ""
@@ -1091,6 +1090,7 @@ func block_attack(attack_data):
 	block_timer = attack_data["blockstun_frames"] * FRAME
 
 func update_healthbar():
+	if (healthbar == null): return
 	#This is where we'd call on the UI to update the reduced health -- IF I HAD ONE!! ---update from later Tomie: we do have one. it's just funny to leave it here now.
 	healthbar.health = health
 	#health_UI.text = str(health)
@@ -1204,4 +1204,5 @@ func revive():
 	state = CharacterState.IDLE
 	health = starting_health
 	disabled = true
-	healthbar.init_health(health)
+	if healthbar != null:
+		healthbar.init_health(health)
