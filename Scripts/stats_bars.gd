@@ -30,9 +30,14 @@ func updateStatsBars(clickedObj, toDo) -> void:
 			var changeArr = getAverageStatChange(clickedObj)
 			# finds actual amount to increase/decrease
 			var speedDif = speedBar.value * changeArr[0]
+			print("speedDif: " + str(speedDif))
+			print("Healthbar value before: " + str(healthBar.value))
 			var healthDif = healthBar.value * changeArr[1]
+			print("healthDif: " + str(healthDif))
 			var damageDif = damageBar.value * changeArr[2]
+			print("damageDif: " + str(healthDif))
 			var poseDif = poseBar.value * changeArr[3]
+			print("poseDif: " + str(poseDif))
 			
 			showChange(healthBar, healthChange, healthDif)
 			showChange(speedBar, speedChange, speedDif)
@@ -43,22 +48,20 @@ func updateStatsBars(clickedObj, toDo) -> void:
 			lastDamageChange = damageDif
 			lastPoseChange = poseDif
 		1: # changes all bars + all the stats if resetBars() is called at some point
-			print("commiting change")
-			commitChange(healthBar, healthChange, lastHealthChange)
-			commitChange(speedBar, speedChange, lastSpeedChange)
-			commitChange(damageBar, damageChange, lastDamageChange)
-			commitChange(poseBar, poseChange, lastPoseChange)
-		
-			speedStat += lastSpeedChange
+			print("committing change")
+			# update the *true* stat variables first
 			healthStat += lastHealthChange
+			speedStat  += lastSpeedChange
 			damageStat += lastDamageChange
-			poseStat += lastPoseChange
+			poseStat   += lastPoseChange
+			# then refresh all bars from the stat vars
+			resetBars()
 		2: # undos changes caused above when clothes are taken off
 			print("Undoing")
-			speedStat += lastSpeedChange * -1
-			healthStat += lastHealthChange * -1
-			damageStat += lastDamageChange * -1
-			poseStat += lastPoseChange * -1
+			healthStat -= lastHealthChange
+			speedStat  -= lastSpeedChange
+			damageStat -= lastDamageChange
+			poseStat   -= lastPoseChange
 			resetBars()
 		3:
 			print("resetting")
@@ -77,8 +80,8 @@ func getAverageStatChange(clickedObj) -> Array:
 	# averages changes to stats, could be changed because some result in 0 when there are noticable differences
 	speedAvg += clothing.get_walk_speed_change() + clothing.get_dash_speed_change() + clothing.get_pose_speed_change() + clothing.get_attack_speed_change()
 	speedAvg = global.roundFloat(speedAvg / 4, 2)
-	healthAvg += clothing.get_health_change() + clothing.get_defense_change()
-	healthAvg = global.roundFloat( healthAvg / 2, 2)
+	healthAvg += clothing.get_health_change()
+	healthAvg = global.roundFloat( healthAvg / 1, 2)
 	poseAvg += clothing.get_pose_hitstun_change() + clothing.get_pose_knockback_change() + clothing.get_pose_damage_change()
 	poseAvg = global.roundFloat(poseAvg / 3, 2)
 	damageAvg += clothing.get_attack_damage_change() + clothing.get_hitstun_length_change() + clothing.get_knockback_change()
@@ -93,7 +96,7 @@ func showChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
 		# creates new theme with color yellow to give to the bar
 		# this prevents them all from changing color
 		var styleBox = changeBar.get_theme_stylebox("fill").duplicate()
-		styleBox.bg_color = Color.YELLOW;
+		styleBox.bg_color = Color.DARK_RED;
 		changeBar.add_theme_stylebox_override("fill", styleBox)
 		changeBar.value = statBar.value
 		statBar.value += dif
@@ -106,11 +109,8 @@ func showChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
 
 
 func commitChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
-	if dif < 0:
-		changeBar.value = statBar.value
-	else:
-		statBar.value += dif
-		changeBar.value = statBar.value
+	# don't change stat vars or the main bar here — only show the preview
+	changeBar.value = statBar.value + dif
 
 
 func undoChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
