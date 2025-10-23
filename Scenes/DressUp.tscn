@@ -1,13 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1fc1024thyov"]
+[gd_scene load_steps=24 format=3 uid="uid://b1fc1024thyov"]
 
 [ext_resource type="Script" uid="uid://b7amrd0viad8a" path="res://Scenes/drag_interaction_provider.gd" id="1_aqk2v"]
 [ext_resource type="Script" uid="uid://qfrsgoctq88o" path="res://Scripts/stats_bars.gd" id="1_ch7k1"]
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
 [ext_resource type="PackedScene" uid="uid://cvacyegnnbes0" path="res://Scenes/object.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://bwk3nqn71sejv" path="res://Assets/Sprites/mirrorLayer.png" id="4_a1r1u"]
-[ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="5_icb47"]
+[ext_resource type="Texture2D" uid="uid://bhin8y7qc0gwi" path="res://Assets/Sprites/Model1NoFeet.png" id="5_sdfmq"]
 [ext_resource type="PackedScene" uid="uid://dfp7lwjhqnn0k" path="res://Scenes/dressup_timer.tscn" id="8_6bvah"]
+[ext_resource type="Texture2D" uid="uid://dkpqwrr2aljx5" path="res://Assets/Sprites/mirrorLayer2.png" id="8_sdfmq"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="9_a1r1u"]
 [ext_resource type="Texture2D" uid="uid://dsc2o5oxjlle7" path="res://Assets/Sprites/speach buble.png" id="9_g5fta"]
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="10_afhxr"]
@@ -16,11 +16,12 @@
 [ext_resource type="Script" uid="uid://br5d8glnmfsrj" path="res://Scenes/ToStageButton.gd" id="13_ch7k1"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="13_yagx5"]
 [ext_resource type="Script" uid="uid://c3ht28gqevtj4" path="res://Scenes/difficulty_select.gd" id="15_2mlfk"]
+[ext_resource type="PackedScene" uid="uid://qtqucl3e38hj" path="res://Assets/codec.tscn" id="17_us67f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d1k1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch7k1"]
-bg_color = Color(0.77256, 0, 0.150961, 1)
+bg_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yagx5"]
 bg_color = Color(0, 0, 0, 1)
@@ -57,6 +58,11 @@ value = 50.0
 rounded = true
 show_percentage = false
 
+[node name="Line2D" type="Line2D" parent="StatsBars/healthBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
+
 [node name="changeBar" type="ProgressBar" parent="StatsBars/healthBar"]
 z_index = -1
 layout_mode = 1
@@ -84,6 +90,7 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Health"
 scroll_active = false
@@ -133,10 +140,16 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Speed"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/speedBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="DamageBar" type="ProgressBar" parent="StatsBars"]
 z_index = 1
@@ -182,10 +195,16 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Damage"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/DamageBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="PoseBar" type="ProgressBar" parent="StatsBars"]
 z_index = 1
@@ -231,11 +250,17 @@ offset_top = -30.5
 offset_right = 141.0
 offset_bottom = 9.5
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("13_yagx5")
 text = "Pose
 "
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Line2D" type="Line2D" parent="StatsBars/PoseBar"]
+position = Vector2(22.47, 7.055)
+points = PackedVector2Array(115.53003, 44.445007, 115.53003, -14.554993)
+width = 4.0
 
 [node name="Drag-Interaction-Provider" type="Node2D" parent="."]
 script = ExtResource("1_aqk2v")
@@ -250,9 +275,9 @@ texture = ExtResource("2_6bvah")
 
 [node name="Model1" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-259, -19)
+position = Vector2(-258, -19)
 scale = Vector2(2, 2)
-texture = ExtResource("5_icb47")
+texture = ExtResource("5_sdfmq")
 
 [node name="Platform" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(-259, -21)
@@ -312,7 +337,7 @@ offset_bottom = 58.755
 [node name="Mirror" type="Sprite2D" parent="."]
 position = Vector2(-1, 2.99999)
 scale = Vector2(0.765563, 0.665306)
-texture = ExtResource("4_a1r1u")
+texture = ExtResource("8_sdfmq")
 
 [node name="Dressup Timer" parent="." node_paths=PackedStringArray("speech_text") instance=ExtResource("8_6bvah")]
 modulate = Color(0.662085, 0.11511, 0.191862, 1)
@@ -350,19 +375,15 @@ scale = Vector2(2.94462, 2.47867)
 texture = ExtResource("10_afhxr")
 script = ExtResource("11_v7r8m")
 
-[node name="InstructionsDisplay" type="Sprite2D" parent="Instructions Board"]
-position = Vector2(-2.20742, -0.201721)
-scale = Vector2(0.339602, 0.403442)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="Instructions Board"]
-offset_left = -131.0
+offset_left = -130.6604
 offset_top = -68.0
-offset_right = 128.0
+offset_right = 129.89789
 offset_bottom = 69.0
 theme_override_fonts/normal_font = ExtResource("12_0d1k1")
 text = "Drag and Drop clothing items onto your player.
 
-Create your disguise and click TO STAGE to start!"
+Create your disguise and press START to begin the match!"
 scroll_active = false
 
 [node name="Button" type="Button" parent="Instructions Board"]
@@ -371,16 +392,16 @@ offset_left = -47.0
 offset_top = 52.5
 offset_right = 42.0
 offset_bottom = 83.5
-text = "Start"
+text = "OK!"
 
 [node name="To Stage Button" type="Button" parent="." node_paths=PackedStringArray("InstructionsBoard")]
-offset_left = 279.0
+offset_left = 387.0
 offset_top = 167.0
 offset_right = 559.0
 offset_bottom = 257.0
 theme_override_fonts/font = ExtResource("13_yagx5")
 theme_override_font_sizes/font_size = 35
-text = "To Stage"
+text = "START"
 script = ExtResource("13_ch7k1")
 InstructionsBoard = NodePath("../Instructions Board")
 
@@ -404,6 +425,13 @@ popup/item_2/id = 2
 popup/item_3/text = "Hard"
 popup/item_3/id = 3
 script = ExtResource("15_2mlfk")
+
+[node name="Codec" parent="." instance=ExtResource("17_us67f")]
+z_index = 1700
+position = Vector2(0, 3)
+scale = Vector2(0.925, 0.925)
+transition_time = 0.5
+text_speed = 0.01
 
 [connection signal="updateStatsBar" from="randomShirt" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt2" to="StatsBars" method="updateStatsBars"]

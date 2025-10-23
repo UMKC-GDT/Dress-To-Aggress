@@ -16,7 +16,7 @@ func  _ready() -> void:
 	
 	var rng = RandomNumberGenerator.new()
 	
-	if(get_parent().name == "Player2"):
+	if(get_parent().name == "Player2" and global.arcade_level < 1):
 		#generate a random outfit
 		var pants = ClothingDatabase.pants_list
 		var shirts = ClothingDatabase.shirts_list
@@ -24,6 +24,16 @@ func  _ready() -> void:
 		var rand2 = rng.randi_range(0,shirts.size()-2)
 		pants_text = pants[rand1]
 		shirt_text =  shirts[rand2]
+		
+	elif(get_parent().name == "Player2"):
+		match global.arcade_level:
+			1: shirt_text = "grayShirtS"; pants_text = "grayShorts"
+			2: shirt_text = "brownShirtL"; pants_text = "bluePants"
+			3: shirt_text = "greenShirtS"; pants_text = "greenPants"
+			4: shirt_text = "whiteShirtL"; pants_text = "whiteShorts"
+			5: shirt_text = "purpleShirtL"; pants_text = "purplePants"
+			6: shirt_text = "blackShirtL"; pants_text = "blackShorts"
+			7: shirt_text = "redShirtL"; pants_text = "redPants"
 	else:
 		#get the clothing items to generate from the save file
 		#var textFile = "res://Assets/OutfitSaveFile.txt"
@@ -46,7 +56,7 @@ func  _ready() -> void:
 	
 	#set postion to the body (might have   to adjust when merges wit htomies movement)
 	#self.position  = $"../Body".position
-	self.scale = Vector2(0.3,0.3)  #can  be chaanged
+	self.scale = Vector2(0.3,0.3)  #can be chaanged
 	self.modulate = current_wearable.color
 	 
 	
@@ -73,6 +83,9 @@ func  _ready() -> void:
 	createAnimation("crouch punch startup")
 	createAnimation("crouch punch")
 	createAnimation("crouch punch recovery")
+	createAnimation("crouch kick startup")
+	createAnimation("crouch kick")
+	createAnimation("crouch kick recovery")
 	
 
 func createAnimation(anim_name: String):
@@ -132,10 +145,15 @@ func createAnimation(anim_name: String):
 	if(anim_name =="crouch punch startup"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose0(), 1.0)
 	if(anim_name =="crouch punch"):
-		#animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_punch_pose0(), 1.0)
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose2(), 1.0)
 	if(anim_name =="crouch punch recovery"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose1(), 1.0)
+	if(anim_name =="crouch kick startup"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose0(), 1.0)
+	if(anim_name =="crouch kick"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
+	if(anim_name =="crouch kick recovery"):
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
 	
 	
 	

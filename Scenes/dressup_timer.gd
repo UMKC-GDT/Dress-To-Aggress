@@ -42,7 +42,7 @@ func _ready() -> void:
 		#speech_text.visible = false;
 	
 
-func _on_timer_timeout() -> void:
+func toStage() -> void:
 	#results is the array of clothing items that are one the player
 	var results = get_last_outfit();
 	print(results)
@@ -130,9 +130,5 @@ func get_last_outfit() -> Array[Dictionary]:
 	# Note: return bottomResults instead if you want to go back to the old system.
 	return results
 
-
 func _on_to_stage_button_button_down():
-	# Acts as if the timer ran out, and performs all the code to move onto the stage
-	_on_timer_timeout();
-
-	
+	toStage();
