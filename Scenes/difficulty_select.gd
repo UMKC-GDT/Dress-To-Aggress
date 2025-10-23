@@ -1,8 +1,5 @@
 extends OptionButton
 
-func _ready():
-	if global.arcade_level != 0:
-		visible = false
 
 func _on_item_selected(index: int) -> void:
 		match index:
