@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Dialogue" load_steps=7 format=3 uid="uid://c4w3dm0al880e"]
+[gd_resource type="Resource" script_class="Dialogue" load_steps=8 format=3 uid="uid://c4w3dm0al880e"]
 
 [ext_resource type="Script" uid="uid://1lbkk2o5ahi0" path="res://Scripts/DialogueCharacter.gd" id="1_stq62"]
 [ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="1_ufk3x"]
+[ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="1_xmlop"]
 [ext_resource type="Texture2D" uid="uid://bdjjd5fv1j1e" path="res://Assets/Sprites/FinalizedModelTankTop.png" id="2_epxah"]
 [ext_resource type="Texture2D" uid="uid://pdxgrk5kljxd" path="res://Assets/Sprites/Clothing Frames/Pants/Mirror Frames/FinalizedPants.png" id="2_kjppg"]
 [ext_resource type="Texture2D" uid="uid://ialgbdgj5hw0" path="res://Assets/Sprites/Clothing Frames/LongSleeve/Mirror Frames/FinalizedModelLongSleeve.png" id="3_xmlop"]
@@ -10,6 +11,8 @@
 [resource]
 script = ExtResource("1_stq62")
 linesFile = "res://Assets/Resources/Dialogues/Lines/ExampleDialogue.txt"
+background = ExtResource("1_xmlop")
+nextScene = "res://Scenes/DressUp.tscn"
 rightName = "Righty"
 rightModel = ExtResource("1_ufk3x")
 rightShirt = ExtResource("2_epxah")

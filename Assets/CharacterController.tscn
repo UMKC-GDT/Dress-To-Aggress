@@ -248,8 +248,10 @@ points = PackedVector2Array(0, 0, 20, 0)
 width = 1.245
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(4.5, 4)
 shape = SubResource("RectangleShape2D_5tmop")
+debug_color = Color(0.9125069, 9.722412e-05, 0.72473234, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, 4.5)
@@ -276,6 +278,7 @@ script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 script = ExtResource("16_u1c27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -283,6 +286,7 @@ position = Vector2(4.5, 4)
 shape = SubResource("RectangleShape2D_op7ga")
 
 [node name="Punch Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
@@ -292,6 +296,7 @@ shape = SubResource("RectangleShape2D_q13i1")
 debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
 
 [node name="LPunch Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(5, 3)
 script = ExtResource("32_prtgt")
 
@@ -301,6 +306,7 @@ shape = SubResource("RectangleShape2D_p1yd1")
 debug_color = Color(0.0790261, 0.649203, 1.92523e-07, 0.42)
 
 [node name="Kick Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
@@ -310,6 +316,7 @@ shape = SubResource("RectangleShape2D_yu3r3")
 debug_color = Color(0.786632, 0.431925, 0, 0.42)
 
 [node name="LKick Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(5, 3)
 script = ExtResource("32_prtgt")
 
@@ -319,6 +326,7 @@ shape = SubResource("RectangleShape2D_pye2o")
 debug_color = Color(0.494679, 0.573411, 0.304532, 0.42)
 
 [node name="Throw Hitbox" type="Area2D" parent="."]
+visible = false
 script = ExtResource("24_lcnf3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Hitbox"]

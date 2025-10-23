@@ -13,5 +13,3 @@ offset_right = 265.0
 offset_bottom = 85.0
 text = "TIMER HERE"
 scroll_active = false
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
