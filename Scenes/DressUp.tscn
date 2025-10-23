@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://bbxoj2kdkx4qj" path="res://Assets/Sprites/BackgroundLayer.png" id="2_6bvah"]
 [ext_resource type="PackedScene" uid="uid://cvacyegnnbes0" path="res://Scenes/object.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cnlqn7i6s4r" path="res://Scenes/platform.tscn" id="3_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://bhin8y7qc0gwi" path="res://Assets/Sprites/Model1NoFeet.png" id="5_sdfmq"]
+[ext_resource type="Texture2D" uid="uid://bwk3nqn71sejv" path="res://Assets/Sprites/mirrorLayer.png" id="4_a1r1u"]
+[ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="5_icb47"]
 [ext_resource type="PackedScene" uid="uid://dfp7lwjhqnn0k" path="res://Scenes/dressup_timer.tscn" id="8_6bvah"]
-[ext_resource type="Texture2D" uid="uid://dkpqwrr2aljx5" path="res://Assets/Sprites/mirrorLayer2.png" id="8_sdfmq"]
 [ext_resource type="AudioStream" uid="uid://cfxdlpk0w8vf1" path="res://Assets/Music/dress to aggress demo 1.mp3" id="9_a1r1u"]
 [ext_resource type="Texture2D" uid="uid://dsc2o5oxjlle7" path="res://Assets/Sprites/speach buble.png" id="9_g5fta"]
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="10_afhxr"]
@@ -250,9 +250,9 @@ texture = ExtResource("2_6bvah")
 
 [node name="Model1" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-258, -19)
+position = Vector2(-259, -19)
 scale = Vector2(2, 2)
-texture = ExtResource("5_sdfmq")
+texture = ExtResource("5_icb47")
 
 [node name="Platform" parent="." instance=ExtResource("3_tlwt5")]
 position = Vector2(-259, -21)
@@ -312,7 +312,7 @@ offset_bottom = 58.755
 [node name="Mirror" type="Sprite2D" parent="."]
 position = Vector2(-1, 2.99999)
 scale = Vector2(0.765563, 0.665306)
-texture = ExtResource("8_sdfmq")
+texture = ExtResource("4_a1r1u")
 
 [node name="Dressup Timer" parent="." node_paths=PackedStringArray("speech_text") instance=ExtResource("8_6bvah")]
 modulate = Color(0.662085, 0.11511, 0.191862, 1)
@@ -343,7 +343,6 @@ scale = Vector2(2, 2)
 text = "You're on in ten seconds!"
 
 [node name="Instructions Board" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(6.50002, 0.5)
 scale = Vector2(2.94462, 2.47867)
