@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_iwpvo"]
-[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/Multiplayer/player1Multi.gd" id="3_sb12i"]
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
+[ext_resource type="Script" uid="uid://b0jhu3rxm6ufw" path="res://Scripts/player1.gd" id="4_iwpvo"]
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
 [ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="7_8chw7"]
 [ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="8_xqkhk"]
@@ -129,7 +129,7 @@ limit_bottom = 87
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(-50, 39)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("3_sb12i")
+script = ExtResource("4_iwpvo")
 
 [node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(50, 40)
@@ -251,7 +251,6 @@ flip_h = true
 [node name="FadeTransition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransition"]
-visible = false
 offset_left = -84.0
 offset_top = -25.0
 offset_right = 1416.0
@@ -263,5 +262,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_m73bv")
 }
 
+[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
+[connection signal="cpu_died" from="Player2" to="CanvasLayer/Game Manager" method="_on_cpu_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 [connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

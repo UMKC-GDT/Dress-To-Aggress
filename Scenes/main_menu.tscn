@@ -123,7 +123,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
-text = "Start game"
 text = "Demo"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
@@ -155,7 +154,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 text = "Credits"
 
-[node name="Button5" type="Button" parent="VBoxContainer"]
 [node name="HowToButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -168,10 +166,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
-text = "Multiplayer"
-
-[node name="Button3" type="Button" parent="VBoxContainer"]
-text = "How to Play!"
+text = "How To Play"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -192,11 +187,6 @@ stream = ExtResource("4_ce3w2")
 volume_db = -7.964
 autoplay = true
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button5" to="." method="_on_multiplayer_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_exit_pressed"]
 [node name="How to Play 1" type="Panel" parent="."]
 visible = false
 layout_mode = 1
