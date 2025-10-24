@@ -34,6 +34,7 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_net_down)
 	
 	if multiplayer.is_server(): 
+		#print("Multiplayer: " + str(multiplayer.multiplayer_peer.get_unique_id()))
 		rpc("rpc_set_ownership",multiplayer.get_unique_id(), multiplayer.multiplayer_peer.get_unique_id())
 		_on_net_ready(1)
 

@@ -17,7 +17,7 @@ extends Node2D
 var timer_started := false
 
 #3 round system stuff
-var player_wins = 0
+var player1_wins = 0
 var player2_wins = 0
 var round_num = 1
 
@@ -129,18 +129,34 @@ func end_round(condition):
 	
 	
 	
-	if condition == 0: #If the player's lost...
-		animate_message_label("KO!")
+	if condition == "Player1": #If the player 1 won...!
+		if player1.pid == multiplayer.get_unique_id():
+			animate_message_label("KO!")
 		
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = loss_messages[randi() % loss_messages.size()]
-		message_timer.start()
-	elif condition == 1: #But, if the player's won...!
-		animate_message_label("KO!")
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = win_messages[randi() % win_messages.size()]
+			message_timer.start()
+		else:
+			animate_message_label("KO!")
 		
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = win_messages[randi() % win_messages.size()]
-		message_timer.start()
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = loss_messages[randi() % loss_messages.size()]
+			message_timer.start()
+	elif condition == "Player2": #If the player 2 won...!
+		print(player2.pid)
+		print(str(multiplayer.get_unique_id()))
+		if player2.pid == multiplayer.get_unique_id():
+			animate_message_label("KO!")
+		
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = win_messages[randi() % win_messages.size()]
+			message_timer.start()
+		else:
+			animate_message_label("KO!")
+		
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = loss_messages[randi() % loss_messages.size()]
+			message_timer.start()
 	else: #But, the secret third option -- a timeout?? Handles that logic.
 		message_label.text = "TIME!"
 		
@@ -182,20 +198,19 @@ func _process(delta: float) -> void:
 
 #Functions to handle incoming signals and call the according end round condition, or transition to the next part of the game. 
 func _on_player_one_died() -> void:
-	player_wins +=1
-	end_round(0)
+	player2_wins +=1
+	end_round("Player2")
 
 func _on_player_two_died() -> void:
-	player2_wins +=1
-	print("")
-	end_round(1)
+	player1_wins +=1
+	end_round("Player1")
 
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
-	print('wins:',player_wins,player2_wins)
+	print('wins:',player1_wins,player2_wins)
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	if player_wins >= 2 or player2_wins >= 2:
+	if player1_wins >= 2 or player2_wins >= 2:
 		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 	else:
 		print('ROUND END')
@@ -225,4 +240,6 @@ func reset() -> void:
 	#disable both. I think that they will already be disabled but whatever
 	disable_control()
 	#player.revive
+	player1.revive()
+	player2.revive()
 	start_round()

@@ -212,8 +212,13 @@ func send_input(input: Dictionary):
 		var vx: int = int(input.get("x", 0))
 		if vx < 0:
 			pressing_left = true
+			pressing_right = false
 		elif vx > 0: 
 			pressing_right = true
+			pressing_left = false
+		else:
+			pressing_left = false
+			pressing_right = false
 		match l:
 			"player_punch":
 				if(!input[l]): continue
@@ -231,7 +236,9 @@ func send_input(input: Dictionary):
 				if(!input[l]): continue
 				print("Player: " + str(pid) + " is throwing")
 			"player_crouch":
-				if(!input[l]): continue
+				if(!input[l]): 
+					uncrouch()
+					continue 
 				print("Player: " + str(pid) + " crouched")
 				crouch()
 func report_dead():
