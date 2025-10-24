@@ -4,7 +4,7 @@ func _on_ButtonHost_pressed():
 	Lobby.create_game()
 
 func _on_ButtonJoin_pressed():
-	Lobby.join_game("127.0.0.1")
+	Lobby.join_game("192.168.0.100")
 
 func _on_start_pressed():
 	if multiplayer.has_multiplayer_peer():
