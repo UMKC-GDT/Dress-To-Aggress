@@ -9,6 +9,7 @@ var lastHealthChange
 var lastSpeedChange
 var lastPoseChange
 var lastDamageChange
+var changes = {}
 
 @onready var healthBar: ProgressBar = $healthBar
 @onready var healthChange: ProgressBar = $healthBar/changeBar
@@ -29,39 +30,37 @@ func updateStatsBars(clickedObj, toDo) -> void:
 			print("showing change")
 			var changeArr = getAverageStatChange(clickedObj)
 			# finds actual amount to increase/decrease
-			var speedDif = speedBar.value * changeArr[0]
-			print("speedDif: " + str(speedDif))
-			print("Healthbar value before: " + str(healthBar.value))
-			var healthDif = healthBar.value * changeArr[1]
-			print("healthDif: " + str(healthDif))
-			var damageDif = damageBar.value * changeArr[2]
-			print("damageDif: " + str(healthDif))
-			var poseDif = poseBar.value * changeArr[3]
-			print("poseDif: " + str(poseDif))
+			var speedDif = round(speedBar.value * changeArr[0])
+			#print("speedDif: " + str(speedDif))
+			#print("Healthbar value before: " + str(healthBar.value))
+			var healthDif = round(healthBar.value * changeArr[1])
+			#print("healthDif: " + str(healthDif))
+			var damageDif = round(damageBar.value * changeArr[2])
+			#print("damageDif: " + str(healthDif))
+			var poseDif = round(poseBar.value * changeArr[3])
+			#print("poseDif: " + str(poseDif))
 			
 			showChange(healthBar, healthChange, healthDif)
 			showChange(speedBar, speedChange, speedDif)
 			showChange(damageBar, damageChange, damageDif)
 			showChange(poseBar, poseChange, poseDif)
-			lastHealthChange = healthDif
-			lastSpeedChange = speedDif
-			lastDamageChange = damageDif
-			lastPoseChange = poseDif
+			changes[str(clickedObj)] = [speedDif, healthDif, damageDif, poseDif]
+			
 		1: # changes all bars + all the stats if resetBars() is called at some point
 			print("committing change")
 			# update the *true* stat variables first
-			healthStat += lastHealthChange
-			speedStat  += lastSpeedChange
-			damageStat += lastDamageChange
-			poseStat   += lastPoseChange
+			speedStat  += changes[str(clickedObj)][0]
+			healthStat += changes[str(clickedObj)][1]
+			damageStat += changes[str(clickedObj)][2]
+			poseStat   += changes[str(clickedObj)][3]
 			# then refresh all bars from the stat vars
 			resetBars()
 		2: # undos changes caused above when clothes are taken off
 			print("Undoing")
-			healthStat -= lastHealthChange
-			speedStat  -= lastSpeedChange
-			damageStat -= lastDamageChange
-			poseStat   -= lastPoseChange
+			speedStat  -= changes[str(clickedObj)][0]
+			healthStat -= changes[str(clickedObj)][1]
+			damageStat -= changes[str(clickedObj)][2]
+			poseStat   -= changes[str(clickedObj)][3]
 			resetBars()
 		3:
 			print("resetting")
@@ -123,6 +122,8 @@ func undoChange(statBar: ProgressBar, changeBar: ProgressBar, dif: int) -> void:
 
 func resetBars():
 	healthBar.value = healthStat
+	print(healthBar.value)
+	print(healthStat)
 	healthChange.value = healthStat
 	speedBar.value = speedStat
 	speedChange.value = speedStat

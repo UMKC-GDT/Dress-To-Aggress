@@ -433,6 +433,7 @@ scale = Vector2(0.925, 0.925)
 transition_time = 0.5
 text_speed = 0.01
 
+[connection signal="updateStatsBar" from="Drag-Interaction-Provider" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt2" to="StatsBars" method="updateStatsBars"]
 [connection signal="updateStatsBar" from="randomShirt3" to="StatsBars" method="updateStatsBars"]
