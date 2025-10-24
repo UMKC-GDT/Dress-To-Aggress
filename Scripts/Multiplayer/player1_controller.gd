@@ -1,6 +1,6 @@
 extends BaseCharacterController
 
-signal two_died
+signal one_died
 
 var pid
 
@@ -234,6 +234,7 @@ func send_input(input: Dictionary):
 				if(!input[l]): continue
 				print("Player: " + str(pid) + " crouched")
 				crouch()
+				
 func report_dead():
 	SfxManager.playDeath()
-	two_died.emit()
+	one_died.emit()

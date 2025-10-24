@@ -540,5 +540,7 @@ script = ExtResource("19_s3dso")
 player1 = NodePath("../../Player")
 player2 = NodePath("../../Player1")
 
+[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
+[connection signal="two_died" from="Player1" to="CanvasLayer/Game Manager" method="_on_player_two_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 [connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

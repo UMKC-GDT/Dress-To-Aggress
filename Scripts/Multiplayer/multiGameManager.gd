@@ -7,7 +7,7 @@ extends Node2D
 
 @onready var fight_timer_display = $"Fight Timer Display"
 @onready var fight_timer = $"Fight Timer Display/Fight Timer"
-@onready var player = $"/root/Test Level/Player"
+@onready var player1 = $"/root/Test Level/Player"
 @onready var player2 = $"/root/Test Level/Player1"
 @onready var controls_panel = $"Controls Panel"
 
@@ -43,7 +43,7 @@ var win_messages = [
 func disable_control():
 	if(global.IsMultiplayer == true):
 		return
-	player.disabled = true
+	player1.disabled = true
 	player2.disabled = true
 
 func _ready() -> void:
@@ -104,7 +104,7 @@ func begin_fight():
 	await get_tree().create_timer(1.0).timeout
 	
 	message_label.text = ""
-	player.disabled = false
+	player1.disabled = false
 	player2.disabled = false
 	fight_timer.start()
 	
@@ -144,21 +144,21 @@ func end_round(condition):
 	else: #But, the secret third option -- a timeout?? Handles that logic.
 		message_label.text = "TIME!"
 		
-		player.disabled = true
+		player1.disabled = true
 		player2.disabled = true
 		fight_timer.paused = true
 		
 		await get_tree().create_timer(2.5).timeout
 		
-		if player.health > player2.health:
+		if player1.health > player2.health:
 			player2.reduce_health(1000000000)
-		elif player.health < player2.health:
-			player.reduce_health(1000000000)
-		elif player2.health == player.health: #If, somehow, they tie in health, we'll flip a coin and give them a random fifty fifty shot on who dies.
+		elif player1.health < player2.health:
+			player1.reduce_health(1000000000)
+		elif player2.health == player1.health: #If, somehow, they tie in health, we'll flip a coin and give them a random fifty fifty shot on who dies.
 			# sudden death
 			var rng = randi() % 2
 			if rng == 0:
-				player.reduce_health(1000000000)
+				player1.reduce_health(1000000000)
 			else:
 				player2.reduce_health(1000000000)
 
@@ -185,7 +185,7 @@ func _on_player_one_died() -> void:
 	player_wins +=1
 	end_round(0)
 
-func _on_cpu_died() -> void:
+func _on_player_two_died() -> void:
 	player2_wins +=1
 	print("")
 	end_round(1)
@@ -212,7 +212,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_to_black":
 			#set position
 		$"../../Player".global_position = Vector2(-50, 40)
-		$"../../Player2".global_position = Vector2(50, 40)
+		$"../../Player1".global_position = Vector2(50, 40)
 		print()
 		$"../../FadeTransition/AnimationPlayer".play("fade_to_normal")
 		print('faded in')
