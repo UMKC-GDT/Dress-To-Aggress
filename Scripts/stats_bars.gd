@@ -44,6 +44,8 @@ func updateStatsBars(clickedObj, toDo) -> void:
 			showChange(speedBar, speedChange, speedDif)
 			showChange(damageBar, damageChange, damageDif)
 			showChange(poseBar, poseChange, poseDif)
+			# Loads the changes an item would make based on current stats. Will properly undo stats when needed.
+			# Uses the string of the object as key
 			changes[str(clickedObj)] = [speedDif, healthDif, damageDif, poseDif]
 			
 		1: # changes all bars + all the stats if resetBars() is called at some point

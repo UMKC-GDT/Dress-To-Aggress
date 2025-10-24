@@ -1,6 +1,7 @@
 extends Node
 
 @onready var originalPosition = self.position
+
 var draggable = false
 var is_inside_dropable = false
 var body_ref : StaticBody2D

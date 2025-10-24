@@ -74,9 +74,11 @@ func _process(_delta):
 
 
 func _input(event):
-	
+	if !global.can_move_clothes:
+		return
 	#get the object that is clicked
 	if event is InputEventMouseButton and Input.is_action_just_pressed("click") and event.pressed:
+		
 			# Get the mouse position in global (world) coordinates
 		var mouse_pos: Vector2 = get_global_mouse_position()
 			# Perform a collision query at the mouse position

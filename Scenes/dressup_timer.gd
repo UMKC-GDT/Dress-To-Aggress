@@ -88,6 +88,7 @@ func toStage() -> void:
 	
 	#open new file
 	var tree: SceneTree = get_tree()
+	global.can_move_clothes = false
 	tree.change_scene_to_file("res://Scenes/stageFight.tscn")
 
 
