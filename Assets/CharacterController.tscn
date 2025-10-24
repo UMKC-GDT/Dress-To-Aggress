@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://chyj64wwnwo67"]
+[gd_scene load_steps=44 format=3 uid="uid://chyj64wwnwo67"]
 
 [ext_resource type="Texture2D" uid="uid://bkv1eebpqokq1" path="res://Assets/Sprites/Player Sprites/dashb1.png" id="1_n7ghd"]
 [ext_resource type="Script" uid="uid://cmdthl362buy2" path="res://Scripts/base_character_controller.gd" id="1_q13i1"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b5pbw3u8u108i" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody0.png" id="3_l01sm"]
 [ext_resource type="Texture2D" uid="uid://c7bn2ilh2a1n3" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody1.png" id="4_prtgt"]
 [ext_resource type="Texture2D" uid="uid://15o2brjumj6l" path="res://Assets/Sprites/Player Sprites/dashf2.png" id="4_urp6f"]
+[ext_resource type="Texture2D" uid="uid://cnatcarvefi42" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Kick Frames/CrouchBody0.png" id="5_pye2o"]
+[ext_resource type="Texture2D" uid="uid://bcnx0xp5ced66" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Kick Frames/CrouchKickBody1.png" id="6_7ceky"]
 [ext_resource type="Texture2D" uid="uid://cagujdubdoy5q" path="res://Assets/Sprites/Player Sprites/hurt.png" id="6_q13i1"]
 [ext_resource type="Texture2D" uid="uid://cll4n0h2o633e" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody0.png" id="7_164t6"]
 [ext_resource type="Texture2D" uid="uid://cjpdoeaduc5kj" path="res://Assets/Sprites/Player Sprites/walkb1.png" id="7_u1c27"]
@@ -56,6 +58,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7ceky")
+}],
+"loop": true,
+"name": &"crouch kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pye2o")
+}],
+"loop": true,
+"name": &"crouch kick startup",
 "speed": 5.0
 }, {
 "frames": [{
@@ -232,7 +250,7 @@ size = Vector2(29, 29)
 size = Vector2(41, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pye2o"]
-size = Vector2(41, 29)
+size = Vector2(37, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7slhi"]
 size = Vector2(9.5, 50)
@@ -278,7 +296,6 @@ script = ExtResource("23_31scl")
 current_wearable = ExtResource("24_5ye0y")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("16_u1c27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -286,7 +303,6 @@ position = Vector2(4.5, 4)
 shape = SubResource("RectangleShape2D_op7ga")
 
 [node name="Punch Hitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
@@ -296,7 +312,6 @@ shape = SubResource("RectangleShape2D_q13i1")
 debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
 
 [node name="LPunch Hitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(5, 3)
 script = ExtResource("32_prtgt")
 
@@ -306,7 +321,6 @@ shape = SubResource("RectangleShape2D_p1yd1")
 debug_color = Color(0.0790261, 0.649203, 1.92523e-07, 0.42)
 
 [node name="Kick Hitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(5, 3)
 script = ExtResource("17_op7ga")
 
@@ -316,12 +330,11 @@ shape = SubResource("RectangleShape2D_yu3r3")
 debug_color = Color(0.786632, 0.431925, 0, 0.42)
 
 [node name="LKick Hitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(5, 3)
 script = ExtResource("32_prtgt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LKick Hitbox"]
-position = Vector2(14.5, 11.5)
+position = Vector2(12.5, 11.5)
 shape = SubResource("RectangleShape2D_pye2o")
 debug_color = Color(0.494679, 0.573411, 0.304532, 0.42)
 

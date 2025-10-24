@@ -486,9 +486,9 @@ func handle_states(direction, delta):
 			animation_player.play(crouch_kick_data["active_animation"])
 			PantsLayer.play(crouch_kick_data["active_animation"])
 			ShirtLayer.play(crouch_kick_data["active_animation"])
-			animation_player.position.x = 18
-			ShirtLayer.position.x = 18
-			PantsLayer.position.x = 18
+			animation_player.position.x = 8
+			ShirtLayer.position.x = 8
+			PantsLayer.position.x = 8
 			
 			c_kick_state(delta)
 		
@@ -747,12 +747,17 @@ func start_c_kick():
 	SfxManager.playKickVoice()
 
 func c_kick_state(delta):
-	velocity.x = move_toward(velocity.x, 0, punch_deceleration)
+	#velocity.x = move_toward(velocity.x, 0, punch_deceleration)
 	
 	if attack_timer > 0:
 		attack_timer -= delta
 	else:
 		if player_type == 1: print("end kick state")
+		
+		animation_player.position.x = 4
+		ShirtLayer.position.x = 4
+		PantsLayer.position.x = 4
+		
 		start_recovery(crouch_kick_data["recovery_frames"], crouch_kick_data["recovery_animation"])
 
 #In block_state(), slow down at regular speed, decrement block_timer by delta until it's 0 and change_state(CharacterState.IDLE)
@@ -927,9 +932,9 @@ func check_for_attack():
 		if Input.is_action_pressed(crouch_input) and (state == CharacterState.CROUCH or state == CharacterState.RECOVERY):
 			stop_all_timers()
 			
-			animation_player.position.x = 18
-			ShirtLayer.position.x = 18
-			PantsLayer.position.x = 18
+			#animation_player.position.x = 18
+			#ShirtLayer.position.x = 18
+			#PantsLayer.position.x = 18
 			#crouch_scale()
 			
 			start_action(crouch_kick_data["startup_frames"], func():

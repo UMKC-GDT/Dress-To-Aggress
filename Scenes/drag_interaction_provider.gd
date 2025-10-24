@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var last_clicked
 
 var draggable = false
@@ -12,6 +11,8 @@ var collider : CollisionShape2D
 var shirt_item_can_enter: Node = null
 var pant_item_can_enter: Node = null
 
+
+signal updateStatsBar(clothingObject, toDo)
 
 func _process(_delta):
 	if ( last_clicked is Area2D):
@@ -26,6 +27,17 @@ func _process(_delta):
 		if Input.is_action_pressed("click"):
 			last_clicked.get_parent().global_position = get_viewport().get_mouse_position()  - offset
 			#print("follow mouse")
+			is_inside_dropable = last_clicked.get_parent().is_inside_dropable
+			
+			if is_inside_dropable:
+				if shirt_item_can_enter == last_clicked and "Shirt" in last_clicked.get_parent().name :
+						shirt_item_can_enter = null
+						updateStatsBar.emit(last_clicked.get_parent(), 2)
+						last_clicked.get_parent().showChange = true
+				if pant_item_can_enter == last_clicked and "Pants" in last_clicked.get_parent().name:
+					pant_item_can_enter = null
+					updateStatsBar.emit(last_clicked.get_parent(), 2)
+					last_clicked.get_parent().showChange = true
 			
 		elif Input.is_action_just_released("click"):
 			print("release")
@@ -41,20 +53,19 @@ func _process(_delta):
 				if shirt_item_can_enter == null and "Shirt" in last_clicked.get_parent().name :
 					tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
 					shirt_item_can_enter = last_clicked
+					updateStatsBar.emit(last_clicked.get_parent(), 1)
+					last_clicked.get_parent().showChange = false
 					
 				elif pant_item_can_enter == null and "Pants" in last_clicked.get_parent().name :
 					tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
 					pant_item_can_enter = last_clicked
+					updateStatsBar.emit(last_clicked.get_parent(), 1)
+					last_clicked.get_parent().showChange = false
 				else:
-					tween.tween_property( last_clicked.get_parent(), "position",  Vector2(randf_range(100, 200),randf_range(0,100)), 0.2).set_ease(Tween.EASE_OUT)
+					tween.tween_property( last_clicked.get_parent(), "position",  last_clicked.get_parent().originalPosition, 0.2).set_ease(Tween.EASE_OUT)
 				#last_clicked.position = last_clicked.get_parent().body_ref.position
 			else:
 				print("leave")
-				if shirt_item_can_enter == last_clicked and "Shirt" in last_clicked.get_parent().name  :
-					shirt_item_can_enter = null
-					
-				if pant_item_can_enter == last_clicked and "Pants" in last_clicked.get_parent().name:
-					pant_item_can_enter = null
 				
 				#tween.tween_property( last_clicked.get_parent(), "position",initialPos, 0.2).set_ease(Tween.EASE_OUT)
 				
@@ -63,9 +74,11 @@ func _process(_delta):
 
 
 func _input(event):
-	
+	if !global.can_move_clothes:
+		return
 	#get the object that is clicked
 	if event is InputEventMouseButton and Input.is_action_just_pressed("click") and event.pressed:
+		
 			# Get the mouse position in global (world) coordinates
 		var mouse_pos: Vector2 = get_global_mouse_position()
 			# Perform a collision query at the mouse position

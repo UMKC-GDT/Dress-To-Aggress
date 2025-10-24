@@ -172,6 +172,7 @@ func hide_codec():
 	
 	await get_tree().create_timer(transition_time).timeout
 	panel.hide()
+	global.can_move_clothes = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -10,6 +10,7 @@ var player_level_losses = 0
 
 var currentDialogueScene = 0
 var lostLastFight = false
+var can_move_clothes = false
 
 func roundFloat(flt, place):
 	return (round(flt*pow(10,place))/pow(10,place))

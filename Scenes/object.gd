@@ -1,5 +1,7 @@
 extends Node
 
+@onready var originalPosition = self.position
+
 var draggable = false
 var is_inside_dropable = false
 var body_ref : StaticBody2D
@@ -108,7 +110,8 @@ func _on_area_2d_mouse_exited():
 		draggable = false
 		self.scale = Vector2(1, 1)
 		stat_box.visible = false
-		updateStatsBar.emit(self, 3)
+		if showChange:
+			updateStatsBar.emit(self, 3)
 
 
 #when clothing enters the platform
@@ -119,8 +122,6 @@ func _on_area_2d_body_entered(body: StaticBody2D):
 		is_inside_dropable = true
 		body.modulate = Color(Color.REBECCA_PURPLE, 0.2)
 		body_ref = body
-		updateStatsBar.emit(self, 1)
-		showChange = false
 
 
 #when clothing leaves the platform
@@ -129,5 +130,3 @@ func _on_area_2d_body_exited(body):
 		platforms -= 1
 		is_inside_dropable = false
 		body.modulate  = Color(Color.MEDIUM_PURPLE, 0.0)
-		updateStatsBar.emit(self, 2)
-		showChange = true

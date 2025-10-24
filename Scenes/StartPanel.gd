@@ -26,6 +26,7 @@ extends Sprite2D
 			#textbox.text
 func _on_button_button_down() -> void:
 	self.visible = false
+	global.can_move_clothes = true
 	
 	# Don't need this anymore, but if we decide to have an option that re-enables the timer, we can reuse this
 	#$"../Dressup Timer".get_child(0).start(10.0)
