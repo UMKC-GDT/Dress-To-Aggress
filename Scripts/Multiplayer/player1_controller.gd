@@ -222,24 +222,19 @@ func send_input(input: Dictionary):
 		match l:
 			"player_punch":
 				if(!input[l]): continue
-				print("Player: " + str(pid) + " punched")
 				punch()
 			"player_kick":
 				if(!input[l]): continue
-				print("Player: " + str(pid) + " kicked")
 				kick()
 			"player_jump":
 				if(!input[l]): continue
-				print("Player: " + str(pid) + " jumped")
 				jump()
 			"player_throw":
 				if(!input[l]): continue
-				print("Player: " + str(pid) + " is throwing")
 			"player_crouch":
 				if(!input[l]): 
 					uncrouch()
 					continue 
-				print("Player: " + str(pid) + " crouched")
 				crouch()
 				
 func report_dead():

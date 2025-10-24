@@ -32,13 +32,13 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_net_ready)
 	multiplayer.server_disconnected.connect(_on_net_down)
 	multiplayer.connection_failed.connect(_on_net_down)
+
+	_on_net_ready()
 	
 	if multiplayer.is_server(): 
-		#print("Multiplayer: " + str(multiplayer.multiplayer_peer.get_unique_id()))
-		rpc("rpc_set_ownership",multiplayer.get_unique_id(), multiplayer.multiplayer_peer.get_unique_id())
-		_on_net_ready(1)
+		rpc("rpc_set_ownership",multiplayer.get_unique_id(), multiplayer.get_peers().get(0))
 
-func _on_net_ready(_id := 0) -> void:
+func _on_net_ready() -> void:
 	_seed_last_inputs()
 	if not is_processing():
 		set_process(true)

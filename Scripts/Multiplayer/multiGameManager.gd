@@ -143,8 +143,6 @@ func end_round(condition):
 			victory_label.text = loss_messages[randi() % loss_messages.size()]
 			message_timer.start()
 	elif condition == "Player2": #If the player 2 won...!
-		print(player2.pid)
-		print(str(multiplayer.get_unique_id()))
 		if player2.pid == multiplayer.get_unique_id():
 			animate_message_label("KO!")
 		

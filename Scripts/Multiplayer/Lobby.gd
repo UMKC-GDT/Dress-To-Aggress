@@ -26,6 +26,7 @@ var players_loaded = 0
 
 
 func _ready():
+	
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_ok)
@@ -40,6 +41,7 @@ func join_game(address = ""):
 	var error = peer.create_client(address, PORT)
 	if error:
 		return error
+		print("Error: " + error)
 	multiplayer.multiplayer_peer = peer
 
 
