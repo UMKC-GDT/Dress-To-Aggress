@@ -47,12 +47,17 @@ func disable_control():
 	cpu.disabled = true
 
 func _ready() -> void:
+	$"../../winnerShoes/cpu1".show()
+	$"../../winnerShoes/cpu2".show()
+	$"../../winnerShoes/player1".show()
+	$"../../winnerShoes/player2".show()
 	$"../../FadeTransition/ColorRect".color = 000000
 	randomize() #Apparently, this is a surprise tool that'll help us later with generating a certain random number.
 	message_label.text = ""
 	fight_timer_display.text = "99"
 	victory_label.text = ""
 	
+	print("ARCADE LEVEL: " + str(global.arcade_level))
 	disable_control()
 	start_round()
 
@@ -60,7 +65,7 @@ func _ready() -> void:
 func start_round() -> void:
 	
 	#First, show the round #
-	message_label.text = 'ROUND'+str(round_num)
+	message_label.text = 'ROUND '+ str(round_num)
 	print('Round:',round_num)
 	#Call begin_fight()
 	
@@ -74,27 +79,25 @@ func start_round() -> void:
 		var tween := create_tween()
 		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	else: #timer that triggers the battle. maybe add a graphic that counts down. There has to be a better way to do this
-		print('Start timer started')
-		victory_label.text = '3'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = '2'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = '1'
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = ''
+		
+		# Wait for either 10 seconds, or for the player to press the punch button.
+		await wait_for_controls_acknowledgement()
+		
 		begin_fight()
-	# Wait for either 10 seconds, or for the player to press the punch button.
-	await wait_for_controls_acknowledgement()
-	
-	begin_fight()
-	
-	#Slides the controls back down, off the screen.
-	var tween_out := create_tween()
-	tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		
+		#Slides the controls back down, off the screen.
+		var tween_out := create_tween()
+		tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-	await tween_out.finished
+		await tween_out.finished
+		
+	else: #timer that triggers the battle. There has to be a better way to do this
+		print('Start timer started')
+		await get_tree().create_timer(1.5).timeout
+		begin_fight()
+	
+	
 
 func begin_fight():
 	
@@ -107,7 +110,7 @@ func begin_fight():
 	player.disabled = false
 	cpu.disabled = false
 	fight_timer.start()
-	
+	fight_timer.paused = false
 	timer_started = true
 
 #Called above, just makes it wait for ten seconds or until the player presses Punch, to give them the time to read the controls. 
@@ -126,8 +129,6 @@ func end_round(condition):
 	fight_timer.paused = true
 	
 	#If the condition is 0 or 1 or if it's 3, run the timeout logic to kill someone and then continue
-	
-	
 	
 	if condition == 0: #If the player's lost...
 		animate_message_label("KO!")
@@ -176,30 +177,81 @@ func animate_message_label(text):
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+
 	if timer_started:
 		fight_timer_display.text = str(fight_timer.time_left).pad_decimals(1)
 
 #Functions to handle incoming signals and call the according end round condition, or transition to the next part of the game. 
 func _on_player_one_died() -> void:
-	player_wins +=1
+	cpu_wins +=1
+	if cpu_wins == 1:
+		$"../../winnerShoes/player2".hide()
+	elif cpu_wins == 2:
+		$"../../winnerShoes/player1".hide()
 	end_round(0)
 
 func _on_cpu_died() -> void:
-	cpu_wins +=1
-	print("")
+	player_wins +=1
+	if player_wins == 1:
+		$"../../winnerShoes/cpu2".hide()
+	elif player_wins == 2:
+		$"../../winnerShoes/cpu1".hide()
 	end_round(1)
 
+#This is connected to the MessageTimer, run after the timer that it runs once it shows its message.
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
 	print('wins:',player_wins,cpu_wins)
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	if player_wins >= 2 or cpu_wins >= 2:
-		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-	else:
-		print('ROUND END')
-		transition()
+
+
+
+	match global.arcade_level:
+		0:
+			if player_wins >= 2 or cpu_wins >= 2:
+				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			else: # no winners yet, restart
+				print('ROUND END')
+				transition()
+				
+		1, 2, 3, 4, 5, 6:
+			if player_wins >= 2: # player wins round 2 or more times
+				print("Next Level")
+				global.arcade_level += 1
+				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			elif cpu_wins >= 2: # player loses round 2 or more times
+				if global.player_level_losses >= 2: # player loses level 2 or more times
+					print("Player lost three times, reset")
+					global.player_level_losses = 0 # reset level losses
+					global.arcade_level = 1 # reset arcade level
+
+				elif global.player_level_losses < 2: # player has lost less than 2 times
+					global.player_level_losses += 1
+					print("Player has lost " + str(global.player_level_losses) + " times. Try again.")
+					tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			else: # no winners yet, restart
+				print('ROUND END')
+				transition()
+				
+		7: 
+			if player_wins >= 2:
+				tree.change_scene_to_file("res://Scenes/arcade_victory.tscn") # TODO: placeholder, doesn't exist yet
+			elif cpu_wins >= 2:
+				if global.player_level_losses >= 2: # player loses level 2 or more times
+					print("Player lost three times on level 7, reset")
+					global.player_level_losses = 0 # reset level losses
+					global.arcade_level = 1 # reset arcade level
+					tree.change_scene_to_file("res://Scenes/DressUp.tscn") # TODO: change to loss screen that goes back to dress up and resets arcade level
+				elif global.player_level_losses < 2: # player has lost less than 2 times
+					global.player_level_losses += 1
+					print("Player has lost " + str(global.player_level_losses) + " times on level 7. Try again.")
+					tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+			else: # no winners yet, restart
+				print('ROUND END')
+				transition()
+
 
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
@@ -207,6 +259,8 @@ func _on_fight_timer_timeout() -> void:
 func transition():
 	print('fading out')
 	$"../../FadeTransition/AnimationPlayer".play("fade_to_black")
+	fight_timer.start()
+	fight_timer.paused = true
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_to_black":
@@ -221,8 +275,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func reset() -> void:
 	print('RESET')
 	victory_label.text = ""
-	fight_timer_display.text = "99"
+	#fight_timer_display.text = "99"
 	#disable both. I think that they will already be disabled but whatever
 	disable_control()
-	#player.revive
+	player.revive()
+	cpu.revive()
 	start_round()
+	

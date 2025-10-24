@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://2wwxkna8jxuo"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=22 format=3 uid="uid://2wwxkna8jxuo"]
 
 [ext_resource type="Texture2D" uid="uid://cbdaq3w2ioqtq" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants2.png" id="1_bvfd4"]
 [ext_resource type="Texture2D" uid="uid://b1hg3ipsarxko" path="res://Assets/Sprites/Clothing Frames/Pants/Pose28/Pose28Pants1.png" id="2_8nsud"]
+[ext_resource type="Texture2D" uid="uid://dgiu8terlq63q" path="res://Assets/Sprites/Clothing Frames/Pants/Crouch Kick Frames/CrouchKickPants1.png" id="2_k1vxl"]
+[ext_resource type="Texture2D" uid="uid://c85x22n4npvsr" path="res://Assets/Sprites/Clothing Frames/Pants/Crouch Punch Frames/CrouchPunchPants0.png" id="2_xi3ko"]
 [ext_resource type="Texture2D" uid="uid://bsrbv4absdkx1" path="res://Assets/Sprites/Clothing Frames/Pants/Idle Frames/IdlePants0.png" id="3_ctk1g"]
+[ext_resource type="Texture2D" uid="uid://ce2fusf3wpbhl" path="res://Assets/Sprites/Clothing Frames/Pants/Crouch Punch Frames/CrouchPunchPants1.png" id="3_k1vxl"]
+[ext_resource type="Texture2D" uid="uid://colmeylbnxm4o" path="res://Assets/Sprites/Clothing Frames/Pants/Crouch Punch Frames/CrouchPunchPants2.png" id="4_e3cw8"]
 [ext_resource type="Texture2D" uid="uid://byh3nprx5hpui" path="res://Assets/Sprites/Clothing Frames/Pants/Idle Frames/IdlePants1.png" id="4_fhrum"]
 [ext_resource type="Texture2D" uid="uid://dvcjlv868wdq5" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants1.png" id="5_0us1d"]
 [ext_resource type="Texture2D" uid="uid://cvycmdo8x76ah" path="res://Assets/Sprites/Clothing Frames/Pants/Kick Frames/KickPants2.png" id="6_4weu5"]
@@ -31,17 +35,8 @@ stylePoints = 50
 styleMultiplier = 1.0
 attackDamageChange = -0.5
 attackSpeedChange = 1.0
-defenseChange = 0.0
-walkSpeedChange = 0.0
 dashSpeedChange = -0.25
-jumpHeightChange = 0.0
-hitstunLengthChange = 0.0
 knockbackChange = -0.5
-poseSpeedChange = 0.0
-poseHitstunChange = 0.0
-poseKnockbackChange = 0.0
-poseDamageChange = 0.0
-healthChange = 0.0
 mirrorPose = ExtResource("7_xi3ko")
 idlePose0 = ExtResource("3_ctk1g")
 idlePose1 = ExtResource("4_fhrum")
@@ -58,4 +53,8 @@ Pose28 = ExtResource("1_bvfd4")
 knockOut_pose0 = ExtResource("7_fhrum")
 knockOut_pose1 = ExtResource("8_0us1d")
 knockOut_pose2 = ExtResource("9_4weu5")
+crouch_punch_pose0 = ExtResource("2_xi3ko")
+crouch_punch_pose1 = ExtResource("3_k1vxl")
+crouch_punch_pose2 = ExtResource("4_e3cw8")
+crouch_kick_pose1 = ExtResource("2_k1vxl")
 metadata/_custom_type_script = "uid://0bwef23hrt6j"

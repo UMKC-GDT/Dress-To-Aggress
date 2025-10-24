@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=24 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="12_g776m"]
 [ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="13_iwpvo"]
 [ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="14_3dx3i"]
+[ext_resource type="Texture2D" uid="uid://b2xdpsby85lkk" path="res://Assets/Sprites/pixel images/shoe-removebg-preview.png" id="17_iwpvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
@@ -119,12 +120,11 @@ player1 = NodePath("../Player")
 player2 = NodePath("../Player2")
 
 [node name="Camera2D" type="Camera2D" parent="CameraRig"]
-offset = Vector2(0, -20.37)
 zoom = Vector2(8.29, 8.29)
 limit_left = -97
-limit_top = 21
+limit_top = -21
 limit_right = 97
-limit_bottom = 88
+limit_bottom = 87
 
 [node name="Player" parent="." instance=ExtResource("2_f7g2b")]
 position = Vector2(-50, 39)
@@ -223,6 +223,30 @@ offset_right = 490.0
 offset_bottom = 52.0
 scale = Vector2(1.64516, 1.64516)
 metadata/_edit_use_anchors_ = true
+
+[node name="winnerShoes" type="CanvasLayer" parent="."]
+
+[node name="player1" type="Sprite2D" parent="winnerShoes"]
+position = Vector2(109, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_iwpvo")
+
+[node name="player2" type="Sprite2D" parent="winnerShoes"]
+position = Vector2(179, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_iwpvo")
+
+[node name="cpu1" type="Sprite2D" parent="winnerShoes"]
+position = Vector2(1159, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_iwpvo")
+flip_h = true
+
+[node name="cpu2" type="Sprite2D" parent="winnerShoes"]
+position = Vector2(1089, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_iwpvo")
+flip_h = true
 
 [node name="FadeTransition" type="CanvasLayer" parent="."]
 

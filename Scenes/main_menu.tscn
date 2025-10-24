@@ -1,9 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxevk147j4wxs"]
+[gd_scene load_steps=28 format=3 uid="uid://dxevk147j4wxs"]
 
 [ext_resource type="Script" uid="uid://ogdqr5ijgblm" path="res://Scenes/main_menu.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://drlfw2n4iyt86" path="res://Assets/Sprites/MainMenuDTI.png" id="2_48xlc"]
 [ext_resource type="Texture2D" uid="uid://knkvni2oq6kh" path="res://Assets/Sprites/MMGameBackground.png" id="3_ce3w2"]
 [ext_resource type="AudioStream" uid="uid://b0g0j1my3p3pc" path="res://Assets/Music/07-19DresstoAgressTitle.mp3" id="4_ce3w2"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="5_vtepg"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="6_8dnnj"]
+[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="7_m3bi6"]
+[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="8_wyh8j"]
+[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="9_ujyyl"]
+[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="10_mkpwh"]
+[ext_resource type="Texture2D" uid="uid://d36k4m7bxo1td" path="res://Assets/Sprites/key_j.tres" id="11_4nkqq"]
+[ext_resource type="Texture2D" uid="uid://0x8abal8e3j5" path="res://Assets/Sprites/key_k.tres" id="12_ehtkc"]
+[ext_resource type="Texture2D" uid="uid://dosospwu3m8m6" path="res://Assets/Sprites/key_L.tres" id="13_6dk6o"]
+[ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="14_jr6u5"]
+[ext_resource type="Texture2D" uid="uid://ded51jy2l52f8" path="res://Assets/Sprites/Screenshot 2025-10-16 200231.png" id="15_4nkqq"]
+[ext_resource type="Texture2D" uid="uid://be8dawt2nmpvb" path="res://Assets/Sprites/Screenshot 2025-10-16 192309.png" id="15_wyh8j"]
+[ext_resource type="Texture2D" uid="uid://cyjse6ery1umr" path="res://Assets/Sprites/Screenshot 2025-10-16 200243.png" id="16_ehtkc"]
+[ext_resource type="Texture2D" uid="uid://lq8cjov020ex" path="res://Assets/Sprites/Screenshot 2025-10-16 192534.png" id="16_ujyyl"]
+[ext_resource type="Texture2D" uid="uid://dv5j3rflsklqu" path="res://Assets/Sprites/Screenshot 2025-10-16 200409.png" id="17_6dk6o"]
+[ext_resource type="Texture2D" uid="uid://boyucxq3y4lij" path="res://Assets/Sprites/Screenshot 2025-10-16 192216.png" id="17_mkpwh"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
 texture = ExtResource("2_48xlc")
@@ -37,6 +53,12 @@ shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48xlc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m47u"]
+bg_color = Color(0.9490196, 0.23921569, 0.38039216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nkqq"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -68,14 +90,28 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -182.0
-offset_top = 45.0
+offset_top = 40.5
 offset_right = 182.0
-offset_bottom = 278.0
+offset_bottom = 331.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ArcadeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
+text = "Arcade"
+
+[node name="DemoButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -88,8 +124,9 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 text = "Start game"
+text = "Demo"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -104,7 +141,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 text = "Options"
 
-[node name="Button4" type="Button" parent="VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -119,6 +156,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 text = "Credits"
 
 [node name="Button5" type="Button" parent="VBoxContainer"]
+[node name="HowToButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -133,6 +171,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_48xlc")
 text = "Multiplayer"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
+text = "How to Play!"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -156,3 +197,365 @@ autoplay = true
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button5" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_exit_pressed"]
+[node name="How to Play 1" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -645.0
+offset_top = -361.5
+offset_right = 645.0
+offset_bottom = 361.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6m47u")
+
+[node name="Label" type="Label" parent="How to Play 1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 37.5
+offset_right = 168.0
+offset_bottom = 89.5
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_vtepg")
+theme_override_font_sizes/font_size = 45
+text = "1. CONTROLS!"
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(638, 393.74997)
+scale = Vector2(3.6676924, 2.7654026)
+texture = ExtResource("6_8dnnj")
+
+[node name="Move&Jump" type="RichTextLabel" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 202.5
+offset_right = 744.78125
+offset_bottom = 255.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 38
+text = "- Move & Jump"
+
+[node name="DashDescription" type="RichTextLabel" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 373.0
+offset_top = 262.5
+offset_right = 959.0
+offset_bottom = 332.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "Double tap to DASH fast in either direction & midair!"
+
+[node name="Punch" type="RichTextLabel" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 338.5
+offset_right = 744.78125
+offset_bottom = 391.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 38
+text = "- Punch"
+
+[node name="Kick" type="RichTextLabel" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 426.5
+offset_right = 744.78125
+offset_bottom = 479.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 38
+text = "- Kick"
+
+[node name="Pose" type="RichTextLabel" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 520.5
+offset_right = 744.78125
+offset_bottom = 573.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 38
+text = "- POSE!"
+
+[node name="KeyA" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(149, 279.5)
+scale = Vector2(2.001, 1.911)
+texture = ExtResource("7_m3bi6")
+
+[node name="KeyS" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(219, 280.5)
+scale = Vector2(2.001, 1.911)
+texture = ExtResource("8_wyh8j")
+
+[node name="KeyD" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(288, 282.49997)
+scale = Vector2(2.001, 1.911)
+texture = ExtResource("9_ujyyl")
+
+[node name="KeyW" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(219.13168, 209.5858)
+scale = Vector2(2.001, 1.911)
+texture = ExtResource("10_mkpwh")
+
+[node name="KeyJ" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(219.00002, 364.5)
+scale = Vector2(2.006, 1.916)
+texture = ExtResource("11_4nkqq")
+
+[node name="KeyK" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(220.00002, 450.5)
+scale = Vector2(2.006, 1.916)
+texture = ExtResource("12_ehtkc")
+
+[node name="NextButton" type="Button" parent="How to Play 1"]
+layout_mode = 0
+offset_left = 886.0
+offset_top = 549.5
+offset_right = 1140.0
+offset_bottom = 613.5
+theme_override_fonts/font = ExtResource("14_jr6u5")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_4nkqq")
+text = "NEXT >"
+
+[node name="KeyL" type="Sprite2D" parent="How to Play 1"]
+position = Vector2(222, 547.5)
+scale = Vector2(2.006, 1.916)
+texture = ExtResource("13_6dk6o")
+
+[node name="How to Play 2" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -645.0
+offset_top = -361.5
+offset_right = 645.0
+offset_bottom = 361.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6m47u")
+
+[node name="Label" type="Label" parent="How to Play 2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 37.5
+offset_right = 168.0
+offset_bottom = 89.5
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_vtepg")
+theme_override_font_sizes/font_size = 45
+text = "2. COMBAT"
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="How to Play 2"]
+position = Vector2(644.50006, 406.75)
+scale = Vector2(3.8369234, 2.8886254)
+texture = ExtResource("6_8dnnj")
+
+[node name="PunchDesc" type="RichTextLabel" parent="How to Play 2"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 178.5
+offset_right = 676.0
+offset_bottom = 367.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "PUNCHES are your fastest attack. They're easiest to combo, but do little damage on their own. If your opponent blocks, you're still safe!"
+
+[node name="KickDesc" type="RichTextLabel" parent="How to Play 2"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 399.5
+offset_right = 696.0
+offset_bottom = 710.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "KICKS do the most damage and have the most range, but they're SLOW! 
+
+Kicks are really slow. 
+
+Watch opponents who spam kicks and block their attack to easily punish."
+
+[node name="PoseDesc" type="RichTextLabel" parent="How to Play 2"]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 172.5
+offset_right = 1188.0
+offset_bottom = 407.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "POSES are short range but UNBLOCKABLE! Stun your opponent by the sheer aura of your fit."
+
+[node name="BlockDesc" type="RichTextLabel" parent="How to Play 2"]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 411.5
+offset_right = 1164.0
+offset_bottom = 565.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "Hold AWAY from your opponent to BLOCK.
+
+Low attacks must be blocked while crouching."
+
+[node name="NextButton" type="Button" parent="How to Play 2"]
+layout_mode = 0
+offset_left = 819.0
+offset_top = 593.5
+offset_right = 1031.0
+offset_bottom = 657.5
+theme_override_fonts/font = ExtResource("14_jr6u5")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_4nkqq")
+text = "NEXT >"
+
+[node name="Screenshot20251016200231" type="Sprite2D" parent="How to Play 2"]
+position = Vector2(208.99998, 272.5)
+scale = Vector2(0.7556054, 0.75560546)
+texture = ExtResource("15_4nkqq")
+
+[node name="Screenshot20251016200243" type="Sprite2D" parent="How to Play 2"]
+position = Vector2(208, 487.5)
+scale = Vector2(0.6181318, 0.6181318)
+texture = ExtResource("16_ehtkc")
+
+[node name="Screenshot20251016200409" type="Sprite2D" parent="How to Play 2"]
+position = Vector2(786.00006, 283.5)
+scale = Vector2(0.7701422, 0.77014214)
+texture = ExtResource("17_6dk6o")
+
+[node name="How to Play 3" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -645.0
+offset_top = -361.5
+offset_right = 645.0
+offset_bottom = 361.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6m47u")
+
+[node name="Label" type="Label" parent="How to Play 3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 37.5
+offset_right = 168.0
+offset_bottom = 89.5
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_vtepg")
+theme_override_font_sizes/font_size = 45
+text = "3. CLOTHES!"
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="How to Play 3"]
+position = Vector2(644.50006, 406.75)
+scale = Vector2(3.8369234, 2.8886254)
+texture = ExtResource("6_8dnnj")
+
+[node name="ClothingDesc" type="RichTextLabel" parent="How to Play 3"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 172.5
+offset_right = 1159.0
+offset_bottom = 313.5
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "In Dress to Aggress, the CLOTHES you choose change your stats in various ways. Pants and longer shirts have a STRONGER effect than short clothes.
+
+Here are a few outfits. Experiment to find what matches your playstyle!"
+
+[node name="BaseDesc" type="RichTextLabel" parent="How to Play 3"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 350.1632
+offset_right = 466.0
+offset_bottom = 608.1632
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "CAFE
+
+- Completely balanced. Gives you regular base stats. "
+
+[node name="CrimsonDesc" type="RichTextLabel" parent="How to Play 3"]
+layout_mode = 0
+offset_left = 635.0
+offset_top = 350.1632
+offset_right = 820.0
+offset_bottom = 608.1632
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "CRIMSON
+
+- Punisher. Raises your damage, but lowers your attack speed & health."
+
+[node name="WhiteDesc" type="RichTextLabel" parent="How to Play 3"]
+layout_mode = 0
+offset_left = 969.0
+offset_top = 350.1632
+offset_right = 1202.0
+offset_bottom = 608.1632
+theme_override_fonts/normal_font = ExtResource("5_vtepg")
+theme_override_font_sizes/normal_font_size = 24
+text = "SNOW WHITE
+
+- Rushdown. Raises your movement and attack speed, but lowers your damage & health."
+
+[node name="GotItButton" type="Button" parent="How to Play 3"]
+layout_mode = 0
+offset_left = 978.0
+offset_top = 610.5
+offset_right = 1232.0
+offset_bottom = 674.5
+theme_override_fonts/font = ExtResource("14_jr6u5")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_4nkqq")
+text = "GOT IT?"
+
+[node name="Screenshot20251016192309" type="Sprite2D" parent="How to Play 3"]
+position = Vector2(203, 490.16318)
+scale = Vector2(0.7199999, 0.71999997)
+texture = ExtResource("15_wyh8j")
+
+[node name="Screenshot20251016192534" type="Sprite2D" parent="How to Play 3"]
+position = Vector2(885, 484.3316)
+scale = Vector2(0.7331606, 0.7331606)
+texture = ExtResource("16_ujyyl")
+
+[node name="Screenshot20251016192216" type="Sprite2D" parent="How to Play 3"]
+position = Vector2(546, 490.00076)
+scale = Vector2(0.69470066, 0.69470066)
+texture = ExtResource("17_mkpwh")
+
+[connection signal="button_down" from="VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_button_down"]
+[connection signal="pressed" from="VBoxContainer/DemoButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/HowToButton" to="." method="_on_how_to_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="How to Play 1/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="How to Play 2/NextButton" to="." method="_on_next_button_2_pressed"]
+[connection signal="pressed" from="How to Play 3/GotItButton" to="." method="_on_got_it_button_pressed"]

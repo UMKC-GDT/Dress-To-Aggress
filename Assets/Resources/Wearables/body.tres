@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Wearable" load_steps=18 format=3 uid="uid://bqsttykalac5f"]
+[gd_resource type="Resource" script_class="Wearable" load_steps=22 format=3 uid="uid://bqsttykalac5f"]
 
 [ext_resource type="Texture2D" uid="uid://bhawkr50bhrev" path="res://Assets/Sprites/Clothing Frames/body with a head/pose28/Pose28Body2.png" id="1_qr6uq"]
 [ext_resource type="Texture2D" uid="uid://dgciv3nn8v3kp" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody0.png" id="1_yf0vu"]
+[ext_resource type="Texture2D" uid="uid://bcnx0xp5ced66" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Kick Frames/CrouchKickBody1.png" id="2_5wc8u"]
+[ext_resource type="Texture2D" uid="uid://dy1ilwc17njxr" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Punch Frames/CrouchPunchBody0.png" id="2_5wjkd"]
 [ext_resource type="Texture2D" uid="uid://c2vw7fbxkdm3g" path="res://Assets/Sprites/Clothing Frames/body with a head/pose28/Pose28Body1.png" id="2_7vdul"]
 [ext_resource type="Texture2D" uid="uid://bcaciqtdynuym" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody1.png" id="2_e765a"]
+[ext_resource type="Texture2D" uid="uid://ka10gknnh7kf" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Punch Frames/CrouchPunchBody1.png" id="3_5wc8u"]
 [ext_resource type="Texture2D" uid="uid://dekvuh2xltrh1" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody1.png" id="3_yf0vu"]
 [ext_resource type="Texture2D" uid="uid://brmf06qwpr3ac" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody2.png" id="4_e765a"]
+[ext_resource type="Texture2D" uid="uid://cft3knbflryux" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Punch Frames/CrouchPunchBody2.png" id="4_ipvpg"]
 [ext_resource type="Texture2D" uid="uid://btn7txieww8mm" path="res://Assets/Sprites/Clothing Frames/body with a head/Mirror Frames/FinalizedBody(1).png" id="5_7x5ig"]
 [ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="6_6srg8"]
 [ext_resource type="Texture2D" uid="uid://tm0evwng88q2" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody1.png" id="7_icxvb"]
@@ -20,28 +24,7 @@
 
 [resource]
 script = ExtResource("8_tkqwu")
-ClothingType = "BASE"
-Rarity = "BASE"
-name = ""
-outfitSet = ""
-outfitPattern = ""
-description = ""
 color = Color(1, 1, 1, 1)
-stylePoints = 0
-styleMultiplier = 0.0
-attackDamageChange = 0.0
-attackSpeedChange = 0.0
-defenseChange = 0.0
-walkSpeedChange = 0.0
-dashSpeedChange = 0.0
-jumpHeightChange = 0.0
-hitstunLengthChange = 0.0
-knockbackChange = 0.0
-poseSpeedChange = 0.0
-poseHitstunChange = 0.0
-poseKnockbackChange = 0.0
-poseDamageChange = 0.0
-healthChange = 0.0
 mirrorPose = ExtResource("5_7x5ig")
 idlePose0 = ExtResource("1_yf0vu")
 idlePose1 = ExtResource("2_e765a")
@@ -58,3 +41,7 @@ Pose28 = ExtResource("1_qr6uq")
 knockOut_pose0 = ExtResource("7_icxvb")
 knockOut_pose1 = ExtResource("8_qa04o")
 knockOut_pose2 = ExtResource("9_nthol")
+crouch_punch_pose0 = ExtResource("2_5wjkd")
+crouch_punch_pose1 = ExtResource("3_5wc8u")
+crouch_punch_pose2 = ExtResource("4_ipvpg")
+crouch_kick_pose1 = ExtResource("2_5wc8u")

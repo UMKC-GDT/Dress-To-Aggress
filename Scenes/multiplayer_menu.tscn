@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bd6u0ay5u464d" path="res://Scenes/multiplayer_menu.gd" id="1_djhlm"]
 [ext_resource type="Script" uid="uid://boxiaxbqqwtm" path="res://Scripts/Multiplayer/Lobby.gd" id="2_djhlm"]
 [ext_resource type="Script" uid="uid://byr2888e0a0yw" path="res://Scripts/Multiplayer/LobbyUI.gd" id="3_qiuqf"]
+[gd_scene load_steps=3 format=3 uid="uid://e4chfv5ojvtn"]
+
+[ext_resource type="Script" path="res://Scenes/multiplayer_menu.gd" id="1_djhlm"]
+[ext_resource type="Script" path="res://Scripts/Lobby.gd" id="1_k2gfj"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_djhlm")
@@ -16,6 +20,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_qiuqf")
+script = ExtResource("1_k2gfj")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 100.0
@@ -59,3 +64,6 @@ offset_bottom = 300.0
 [connection signal="button_down" from="Panel/Start" to="LobbyUI" method="_on_start_pressed"]
 [connection signal="button_down" from="Panel/Join" to="LobbyUI" method="_on_ButtonJoin_pressed"]
 [connection signal="text_submitted" from="Panel/LineEdit" to="Lobby" method="_on_username_submitted"]
+[connection signal="button_down" from="Panel/Host" to="Lobby" method="create_game"]
+[connection signal="button_down" from="Panel/Start" to="Lobby" method="_on_start_pressed"]
+[connection signal="button_down" from="Panel/Join" to="Lobby" method="join_game"]

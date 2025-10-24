@@ -1,0 +1,172 @@
+[gd_scene load_steps=6 format=3 uid="uid://qtqucl3e38hj"]
+
+[ext_resource type="Texture2D" uid="uid://do5ta8gfsgdv" path="res://Assets/Sprites/CodeDecDTA2.jpg" id="1_je0ou"]
+[ext_resource type="Script" uid="uid://don3r8xe1kc1y" path="res://Assets/codec.gd" id="1_podmo"]
+[ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_podmo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klmiq"]
+bg_color = Color(0, 0, 0, 0.6313726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_podmo"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Codec" type="Node2D"]
+script = ExtResource("1_podmo")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klmiq")
+
+[node name="SolidBlackBackground" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_podmo")
+
+[node name="CodeDecDta2" type="Sprite2D" parent="Panel"]
+position = Vector2(353.77777, 198.99998)
+scale = Vector2(0.9938272, 0.9938273)
+texture = ExtResource("1_je0ou")
+centered = false
+
+[node name="FullDialogueBox" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 409.0
+offset_right = 1024.0
+offset_bottom = 579.0
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 32
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at justo semper, ultricies mi ac, viverra justo. "
+scroll_active = false
+
+[node name="StageNumLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 400.0
+offset_right = 504.00006
+offset_bottom = 473.00003
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "STAGE 1"
+scroll_active = false
+
+[node name="DifficultyLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 450.0
+offset_right = 573.0
+offset_bottom = 515.0
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "DIFFICULTY:"
+scroll_active = false
+
+[node name="DialogueIndicator" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 983.0
+offset_top = 561.0
+offset_right = 1024.0
+offset_bottom = 614.0
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "▼"
+scroll_active = false
+
+[node name="EasyLabelTag" type="RichTextLabel" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 815.0
+offset_top = 450.0
+offset_right = 1100.0
+offset_bottom = 517.0
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "EASY"
+scroll_active = false
+
+[node name="MediumLabelTag" type="RichTextLabel" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 815.0
+offset_top = 450.0
+offset_right = 1100.0
+offset_bottom = 517.0
+theme_override_colors/default_color = Color(1, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "MEDIUM"
+scroll_active = false
+
+[node name="HardLabelTag" type="RichTextLabel" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 815.0
+offset_top = 450.0
+offset_right = 1100.0
+offset_bottom = 517.0
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "HARD"
+scroll_active = false
+
+[node name="StyleLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 500.0
+offset_right = 638.0
+offset_bottom = 557.0
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "STYLE FACTOR:"
+scroll_active = false
+
+[node name="StyleNumLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 500.0
+offset_right = 950.0
+offset_bottom = 562.0
+theme_override_colors/default_color = Color(0.42365184, 0.905523, 0.99999994, 1)
+theme_override_fonts/normal_font = ExtResource("2_podmo")
+theme_override_font_sizes/normal_font_size = 42
+text = "0.6x"
+scroll_active = false
+
+[node name="SpeechLines" type="Node2D" parent="Panel"]
+position = Vector2(778, 370)
+
+[node name="Line2D" type="Line2D" parent="Panel/SpeechLines"]
+points = PackedVector2Array(-22, 16, 1.5, -1)
+width = 5.0
+
+[node name="Line2D2" type="Line2D" parent="Panel/SpeechLines"]
+points = PackedVector2Array(-1.5, -1, 22, 16)
+width = 5.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

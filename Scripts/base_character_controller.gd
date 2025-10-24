@@ -28,6 +28,8 @@ var pose_damage_mult = 1
 
 var health_mult = 1
 
+var temperature = 1
+
 @export var health = 200
 var starting_health = 0
 @export var health_UI : RichTextLabel
@@ -112,19 +114,19 @@ var disabled = false
 @export var DASH_COOLDOWN = 0.2 # Half a second cooldown between valid dashes. This prevents the player from spamming dash across the screen, without stopping.
 @export var MIDAIR_DASH = true
 
-#Note for the below data: onBlock is positive because, if an attack is blocked, the player will transition to the RECOVERY state for (recovery + onBlock) frames. 
+#Note for the below data: onBlock is positive because, if an attack is blocked, the player will transition to the RECOVERY state for (recovery - onBlock) frames. 
 var attack_timer = 0.0
 var punch_data = {
-	"startup_frames" : 6 / punch_speed_mult,
-	"active_frames" : 4,
-	"recovery_frames" : 11 / punch_speed_mult,
-	"blockstun_frames" : 11,
-	"onBlock_FA" : -3,
-	"ground_hitstun": 25 / punch_hitstun_mult,
-	"air_hitstun" : 25 / punch_hitstun_mult,
+	"startup_frames" : 4.0 / punch_speed_mult, #Dictates how long after pressing the button until the attack actually comes out
+	"active_frames" : 3, #How long is the attack's hitbox/animation active?
+	"recovery_frames" : 7.0 / punch_speed_mult, #Dictates how long AFTER the attack until the player can act again
+	"blockstun_frames" : 9, #How long that a blocking opponent will be stuck blocking. 
+	"onBlock_FA" : -1, #A little more complex, but this decides how much we're vulnerable when our attack is blocked. Keep it negative and increase this number to increase the window that it can be punished.
+	"ground_hitstun": 24.0 / punch_hitstun_mult, #How long will the opponent be stunned in pain after getting hit?
+	"air_hitstun" : 24.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
-	"forward_force": 50,
+	"forward_force": 50, #How far do WE lunge forward to attack?
 	"damage": 10 * punch_damage_mult,
 	"startup_animation" : "punch recovery",
 	"active_animation" : "punch",
@@ -133,32 +135,32 @@ var punch_data = {
 var punch_deceleration = 10
 
 var crouch_punch_data = {
-	"startup_frames" : 6 / punch_speed_mult,
-	"active_frames" : 4,
-	"recovery_frames" : 11 / punch_speed_mult,
-	"blockstun_frames" : 11,
-	"onBlock_FA" : -3,
-	"ground_hitstun": 25 / punch_hitstun_mult,
-	"air_hitstun" : 25 / punch_hitstun_mult,
+	"startup_frames" : 4.0 / punch_speed_mult,
+	"active_frames" : 2.0,
+	"recovery_frames" : 9.0 / punch_speed_mult,
+	"blockstun_frames" : 10,
+	"onBlock_FA" : -1,
+	"ground_hitstun": 24.0 / punch_hitstun_mult,
+	"air_hitstun" : 24.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
 	"air_knockback_force" : 50 * punch_knockback_mult,
 	"forward_force": 50,
 	"damage": 10 * punch_damage_mult,
-	"startup_animation" : "punch recovery",
-	"active_animation" : "punch",
-	"recovery_animation" : "punch recovery",
+	"startup_animation" : "crouch punch recovery",
+	"active_animation" : "crouch punch",
+	"recovery_animation" : "crouch punch recovery",
 }
 var crouch_punch_deceleration = 10
 
 
 var kick_data = {
-	"startup_frames" : 14 / kick_speed_mult,
-	"active_frames" : 6,
-	"recovery_frames" : 24 / kick_speed_mult,
-	"blockstun_frames" : 12,
-	"onBlock_FA" : -16,
-	"ground_hitstun": 22 * kick_hitstun_mult,
-	"air_hitstun" : 22 * kick_hitstun_mult,
+	"startup_frames" : 12.0 / kick_speed_mult,
+	"active_frames" : 4,
+	"recovery_frames" : 20.0 / kick_speed_mult,
+	"blockstun_frames" : 24,
+	"onBlock_FA" : -19,
+	"ground_hitstun": 33 * kick_hitstun_mult,
+	"air_hitstun" : 33 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
@@ -169,26 +171,26 @@ var kick_data = {
 }
 
 var crouch_kick_data = {
-	"startup_frames" : 14 / kick_speed_mult,
-	"active_frames" : 6,
-	"recovery_frames" : 24 / kick_speed_mult,
-	"blockstun_frames" : 12,
-	"onBlock_FA" : -16,
-	"ground_hitstun": 22 * kick_hitstun_mult,
-	"air_hitstun" : 22 * kick_hitstun_mult,
+	"startup_frames" : 8.0 / kick_speed_mult,
+	"active_frames" : 3,
+	"recovery_frames" : 19.0 / kick_speed_mult,
+	"blockstun_frames" : 16,
+	"onBlock_FA" : -6,
+	"ground_hitstun": 26 * kick_hitstun_mult,
+	"air_hitstun" : 26 * kick_hitstun_mult,
 	"ground_knockback_force" : 200 * kick_knockback_mult,
 	"air_knockback_force" : 100 * kick_knockback_mult,
 	"forward_force": 100 * kick_forward_mult,
-	"damage": 30 * kick_damage_mult,
-	"startup_animation" : "kick recovery",
-	"active_animation" : "kick",
-	"recovery_animation" : "kick recovery",
+	"damage": 15 * kick_damage_mult,
+	"startup_animation" : "crouch kick recovery",
+	"active_animation" : "crouch kick",
+	"recovery_animation" : "crouch kick recovery",
 }
 
 var throw_data = {
-	"startup_frames" : 15 / pose_speed_mult,
+	"startup_frames" : 15.0 / pose_speed_mult,
 	"active_frames" : 3,
-	"recovery_frames" : 30 / pose_speed_mult,
+	"recovery_frames" : 30.0 / pose_speed_mult,
 	"pose_frames" : 50,
 	"ground_hitstun": 77 * pose_hitstun_mult, # This value needs to be pose_frames + 17, so that the attacker has 17 frames of frame advantage for posing first.
 	"ground_knockback_force" : 100 * pose_knockback_mult,
@@ -271,6 +273,10 @@ func _ready():
 	if hurtboxCollision and hurtboxCollision.shape:
 		hurtboxCollision.shape = hurtboxCollision.shape.duplicate()
 	
+	if collision and collision.shape:
+		collision.shape = collision.shape.duplicate()
+	
+	
 	
 	if enemy == null:
 		push_error("Enemy node '%s' not found!" % enemy_name)
@@ -305,10 +311,12 @@ func handle_input(delta):
 	handle_states(direction, delta)
 
 func reset_scale():
-	if state == CharacterState.CROUCH: return
 	
 	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 50.0)
 	hurtboxCollision.position.y = 4
+	
+	collision.shape.size = Vector2(collision.shape.size.x, 50.0)
+	collision.position.y = 4
 	
 	animation_player.scale.y = 0.3
 	animation_player.position.y = 4.5
@@ -322,6 +330,9 @@ func reset_scale():
 func crouch_scale():
 	hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
 	hurtboxCollision.position.y = 14.5
+	
+	collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+	collision.position.y = 14.5
 	
 	animation_player.scale.y = 0.177
 	animation_player.position.y = 14.61
@@ -432,15 +443,21 @@ func handle_states(direction, delta):
 			punch_state(delta)
 		
 		CharacterState.CPUNCH:
-			crouch_scale()
+			#crouch_scale()
+			reset_scale()
+			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+			hurtboxCollision.position.y = 14.5
+			
+			collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+			collision.position.y = 14.5
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			crouch_block_legal = false
 			
-			animation_player.play(punch_data["active_animation"])
-			PantsLayer.play(punch_data["active_animation"])
-			ShirtLayer.play(punch_data["active_animation"])
+			animation_player.play(crouch_punch_data["active_animation"])
+			PantsLayer.play(crouch_punch_data["active_animation"])
+			ShirtLayer.play(crouch_punch_data["active_animation"])
 			
 			c_punch_state(delta)
 		
@@ -460,15 +477,15 @@ func handle_states(direction, delta):
 			kick_state(delta)
 		
 		CharacterState.CKICK:
-			crouch_scale()
+			reset_scale()
 			
 			change_color(Color(Color.WHITE, 1.0))
 			block_legal = false
 			crouch_block_legal = false
 			
-			animation_player.play(kick_data["active_animation"])
-			PantsLayer.play(kick_data["active_animation"])
-			ShirtLayer.play(kick_data["active_animation"])
+			animation_player.play(crouch_kick_data["active_animation"])
+			PantsLayer.play(crouch_kick_data["active_animation"])
+			ShirtLayer.play(crouch_kick_data["active_animation"])
 			animation_player.position.x = 18
 			ShirtLayer.position.x = 18
 			PantsLayer.position.x = 18
@@ -482,7 +499,6 @@ func handle_states(direction, delta):
 			recovery_state(delta)
 		
 		CharacterState.HURT:
-			
 			reset_scale()
 			
 			block_legal = false
@@ -526,6 +542,7 @@ func handle_states(direction, delta):
 			velocity.x = move_toward(velocity.x, 0, 25)
 		
 		CharacterState.CROUCH:
+			reset_scale()
 			
 			if (direction == facing_direction * -1): 
 				crouch_block_legal = true
@@ -533,11 +550,16 @@ func handle_states(direction, delta):
 				crouch_block_legal = false
 			
 			#For now, we're gonna set it to idle and manipulate the scale of the animation player. Not a permanent solution. Don't forget to come back and fix this.
-			animation_player.play("idle")
-			PantsLayer.play("idle")
-			ShirtLayer.play("idle")
+			animation_player.play("crouch punch startup")
+			PantsLayer.play("crouch punch startup")
+			ShirtLayer.play("crouch punch startup")
 			
-			crouch_scale()
+			#crouch_scale()
+			hurtboxCollision.shape.size = Vector2(hurtboxCollision.shape.size.x, 29.0)
+			hurtboxCollision.position.y = 14.5
+			
+			collision.shape.size = Vector2(collision.shape.size.x, 29.0)
+			collision.position.y = 14.5
 			
 			change_color(Color(Color.WHITE, 1.0))
 			crouch_state(direction)
@@ -708,7 +730,6 @@ func kick_state(delta):
 	if attack_timer > 0:
 		attack_timer -= delta
 	else:
-		if player_type == 1: print("end kick state")
 		start_recovery(kick_data["recovery_frames"], kick_data["recovery_animation"])
 
 func start_c_kick():
@@ -770,14 +791,12 @@ func recovery_state(delta):
 	if recovery_timer > 0:
 		recovery_timer -= delta
 	else:
-		if player_type == 0: print("Recovery timer ended!")
-		
-		animation_player.position.x = 4
-		ShirtLayer.position.x = 4
-		PantsLayer.position.x = 4
 		
 		if recovery_continuation != null:
 			recovery_continuation.call()
+			animation_player.position.x = 4
+			ShirtLayer.position.x = 4
+			PantsLayer.position.x = 4
 			recovery_continuation = null
 
 func get_hit_with(attack_data):
@@ -911,7 +930,7 @@ func check_for_attack():
 			animation_player.position.x = 18
 			ShirtLayer.position.x = 18
 			PantsLayer.position.x = 18
-			crouch_scale()
+			#crouch_scale()
 			
 			start_action(crouch_kick_data["startup_frames"], func():
 				if state==CharacterState.STARTUP:
@@ -1055,7 +1074,7 @@ func attack_was_blocked(target):
 				
 				velocity.x = -1 * (facing_direction) * 150 + 50
 				
-				start_recovery((punch_data["recovery_frames"] + (-1 * punch_data["onBlock_FA"])), punch_data["recovery_animation"])
+				start_recovery((punch_data["recovery_frames"] - punch_data["onBlock_FA"]), punch_data["recovery_animation"])
 			
 			CharacterState.CPUNCH:
 				print("Target, " + str(target) + " has blocked my CROUCHING punch!")
@@ -1065,7 +1084,7 @@ func attack_was_blocked(target):
 				
 				velocity.x = -1 * (facing_direction) * 150 + 50
 				
-				start_recovery((crouch_punch_data["recovery_frames"] + (-1 * crouch_punch_data["onBlock_FA"])), crouch_punch_data["recovery_animation"])
+				start_recovery((crouch_punch_data["recovery_frames"] - crouch_punch_data["onBlock_FA"]), crouch_punch_data["recovery_animation"])
 			
 			CharacterState.KICK:
 				print("Target, " + str(target) + " has blocked my kick!")
@@ -1073,7 +1092,7 @@ func attack_was_blocked(target):
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
 				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
-				start_recovery((attack_timer + kick_data["recovery_frames"] + (-1 * kick_data["onBlock_FA"])), kick_data["recovery_animation"])
+				start_recovery((attack_timer + kick_data["recovery_frames"] - kick_data["onBlock_FA"]), kick_data["recovery_animation"])
 			
 			CharacterState.CKICK:
 				print("Target, " + str(target) + " has blocked my CROUCHING kick!")
@@ -1081,7 +1100,7 @@ func attack_was_blocked(target):
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
 				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
-				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] + (-1 * crouch_kick_data["onBlock_FA"])), crouch_kick_data["recovery_animation"])
+				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] -  crouch_kick_data["onBlock_FA"]), crouch_kick_data["recovery_animation"])
 
 #When we're the ones blocking an attack, set state to BLOCK, take negative x velocity of half of the attack's knockback, set block_timer to the given attack's blockstun frames
 func block_attack(attack_data):
@@ -1151,8 +1170,8 @@ func scale_stats():
 	crouch_punch_data["air_knockback_force"] *= punch_knockback_mult
 	
 	punch_damage_mult += shirt.get_attack_damage_change()
-	punch_data["damage"] *= punch_damage_mult
-	crouch_punch_data["damage"] *= punch_damage_mult 
+	punch_data["damage"] = (punch_data["damage"] * temperature) * punch_damage_mult
+	crouch_punch_data["damage"] = (crouch_punch_data["damage"] * temperature) * punch_damage_mult 
 	
 	kick_speed_mult += pants.get_attack_speed_change()
 	kick_data["startup_frames"] /= kick_speed_mult
@@ -1173,8 +1192,8 @@ func scale_stats():
 	crouch_kick_data["air_knockback_force"] *= kick_knockback_mult
 	
 	kick_damage_mult += pants.get_attack_damage_change()
-	kick_data["damage"] *= kick_damage_mult 
-	crouch_kick_data["damage"] *= kick_damage_mult 
+	kick_data["damage"] = (kick_data["damage"] * temperature) * kick_damage_mult 
+	crouch_kick_data["damage"] = (crouch_kick_data["damage"] * temperature) *  kick_damage_mult 
 	
 	pose_speed_mult += shirt.get_pose_speed_change() + pants.get_pose_speed_change()
 	throw_data["startup_frames"] = 10 / pose_speed_mult
@@ -1190,7 +1209,7 @@ func scale_stats():
 	throw_data["damage"] = 20 * pose_damage_mult
 	
 	health_mult += shirt.get_health_change() + pants.get_health_change()
-	health = 200 * health_mult
+	health = (200 * temperature) * health_mult
 	starting_health = health
 
 func report_dead():

@@ -42,7 +42,7 @@ func _ready() -> void:
 		#speech_text.visible = false;
 	
 
-func _on_timer_timeout() -> void:
+func toStage() -> void:
 	#results is the array of clothing items that are one the player
 	var results = get_last_outfit();
 	print(results)
@@ -60,6 +60,7 @@ func _on_timer_timeout() -> void:
 		# DEBUG: print("T1: " + clothing_name)
 		
 		if (clothing_name.contains("Shirt")):
+		
 			shirt_text = clothing_name
 			# DEBUG: print("T1.5: " + shirt_text)
 		elif (clothing_name.contains("Pants") || clothing_name.contains("Shorts")):
@@ -87,7 +88,7 @@ func _on_timer_timeout() -> void:
 	
 	#open new file
 	var tree: SceneTree = get_tree()
-	tree.change_scene_to_file("res://Scenes/stageFight.tscn") #replace with fighting scene
+	tree.change_scene_to_file("res://Scenes/stageFight.tscn")
 
 
 #returns array  of clothingn items that are currently overlapping the platform
@@ -129,9 +130,5 @@ func get_last_outfit() -> Array[Dictionary]:
 	# Note: return bottomResults instead if you want to go back to the old system.
 	return results
 
-
 func _on_to_stage_button_button_down():
-	# Acts as if the timer ran out, and performs all the code to move onto the stage
-	_on_timer_timeout();
-
-	
+	toStage();
