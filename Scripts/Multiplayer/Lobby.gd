@@ -108,3 +108,8 @@ func _on_server_disconnected():
 	remove_multiplayer_peer()
 	players.clear()
 	server_disconnected.emit()
+
+
+func _on_username_submitted(new_text: String) -> void:
+	player_info["name"] = new_text
+	print("Submitted name")

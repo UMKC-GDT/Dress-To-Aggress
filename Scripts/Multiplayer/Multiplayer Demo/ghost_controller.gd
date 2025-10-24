@@ -1,7 +1,7 @@
 extends Node
 
 @export var nim_path: NodePath = NodePath("../NetworkInputManager")
-@export var ghost_scene: PackedScene    # root must have GhostPuppetController.gd
+@export var ghost_scene: PackedScene
 @onready var nim: Node = get_node_or_null(nim_path)
 
 var _ghosts: Dictionary = {} # pid -> Node
