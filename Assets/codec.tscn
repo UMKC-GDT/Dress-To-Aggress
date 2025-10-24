@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://qtqucl3e38hj"]
 
 [ext_resource type="Texture2D" uid="uid://do5ta8gfsgdv" path="res://Assets/Sprites/CodeDecDTA2.jpg" id="1_je0ou"]
-[ext_resource type="Script" uid="uid://don3r8xe1kc1y" path="res://Assets/codec.gd" id="1_podmo"]
+[ext_resource type="Script" path="res://Assets/codec.gd" id="1_podmo"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_podmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klmiq"]
@@ -60,6 +60,7 @@ text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at justo sem
 scroll_active = false
 
 [node name="StageNumLabel" type="RichTextLabel" parent="Panel"]
+visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 400.0
@@ -71,6 +72,7 @@ text = "STAGE 1"
 scroll_active = false
 
 [node name="DifficultyLabel" type="RichTextLabel" parent="Panel"]
+visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 450.0
@@ -132,6 +134,7 @@ text = "HARD"
 scroll_active = false
 
 [node name="StyleLabel" type="RichTextLabel" parent="Panel"]
+visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 500.0
@@ -143,6 +146,7 @@ text = "STYLE FACTOR:"
 scroll_active = false
 
 [node name="StyleNumLabel" type="RichTextLabel" parent="Panel"]
+visible = false
 layout_mode = 0
 offset_left = 815.0
 offset_top = 500.0

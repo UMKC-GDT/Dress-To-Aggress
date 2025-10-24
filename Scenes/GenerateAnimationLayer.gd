@@ -153,7 +153,7 @@ func createAnimation(anim_name: String):
 	if(anim_name =="crouch kick"):
 		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
 	if(anim_name =="crouch kick recovery"):
-		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_kick_pose1(), 1.0)
+		animation_player.sprite_frames.add_frame(anim_name, current_wearable.get_crouch_punch_pose0(), 1.0)
 	
 	
 	
