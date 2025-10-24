@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="1_d4vwv"]
 [ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_nogt5"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="3_4g7hg"]
-[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/Multiplayer/player1Multi.gd" id="4_vxqhj"]
+[ext_resource type="Script" uid="uid://upooqkhm2kta" path="res://Scripts/Multiplayer/player1_controller.gd" id="4_s3dso"]
+[ext_resource type="Script" uid="uid://04lcb5nwata0" path="res://Scripts/Multiplayer/player2_controller.gd" id="4_vxqhj"]
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="6_xylqa"]
 [ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="7_nt58u"]
 [ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="8_o1kay"]
@@ -250,7 +251,7 @@ func _step_sim_with_inputs(merged: Dictionary) -> void:
 	# make a copy with int keys to avoid \"2\" vs 2 mismatches
 	var input_copy: Dictionary = {}
 	for k in players_input.keys():
-		input_copy[String(k)] = players_input[k]
+		input_copy[str(k)] = players_input[k]
 	emit_signal(\"input_updated\", input_copy)
 
 # ---- serialization ----
@@ -307,19 +308,6 @@ size = Vector2(27, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg752"]
 size = Vector2(339, 20)
-
-[sub_resource type="GDScript" id="GDScript_nt58u"]
-script/source = "extends MultiBaseCharacterController
-
-#WARNING!!!!!!! If you get weird errors, >WARNING< MAKE SURE THAT THE ENEMY NAME IS EXACT TO THE NODE IN THE LEVEL >WARNING<. Check this in case of any weird null errors.
-func _ready():
-	player_type = 2 # 0 = CPU, 1 = Player 1, 2 = Player 2
-	enemy_name = \"Player\"
-	healthbar = $\"/root/Test Level/CanvasLayer/Healthbar2\"
-	super.scale_stats()
-	healthbar.init_health(health)
-	super._ready()
-"
 
 [sub_resource type="Animation" id="Animation_px76k"]
 length = 0.001
@@ -428,12 +416,12 @@ limit_bottom = 88
 [node name="Player" parent="." instance=ExtResource("3_4g7hg")]
 position = Vector2(-50, 39)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_vxqhj")
+script = ExtResource("4_s3dso")
 
 [node name="Player1" parent="." instance=ExtResource("3_4g7hg")]
 position = Vector2(50, 40)
 scale = Vector2(0.75, 0.75)
-script = SubResource("GDScript_nt58u")
+script = ExtResource("4_vxqhj")
 player_type = 2
 enemy_name = "player2"
 
@@ -547,9 +535,10 @@ script = ExtResource("1_4g7hg")
 [node name="GhostVisualizer" type="Node2D" parent="GameStateManager"]
 script = ExtResource("18_vxqhj")
 
-[node name="Input" type="Node2D" parent="GameStateManager"]
+[node name="Input" type="Node2D" parent="GameStateManager" node_paths=PackedStringArray("player1", "player2")]
 script = ExtResource("19_s3dso")
+player1 = NodePath("../../Player")
+player2 = NodePath("../../Player1")
 
-[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 [connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

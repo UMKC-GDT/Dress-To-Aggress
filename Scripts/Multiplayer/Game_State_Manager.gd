@@ -3,10 +3,13 @@ extends Node
 # Collects per-tick inputs from all peers, merges on HOST, and broadcasts.
 
 signal server_tick_inputs(tick: int, inputs: Dictionary) # { pid -> {k -> v} }
+signal server_set_ownership(p1: int, p2: int)
 signal net_ready()
 signal net_down()
 
 @onready var Lobby := get_node_or_null("/root/Lobby")
+@onready var player1: CharacterBody2D = $"../Player"
+@onready var player2: CharacterBody2D = $"../Player1"
 
 const TICK := 1.0 / 60.0
 const SERVER_INPUT_DELAY := 8
@@ -29,7 +32,9 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_net_ready)
 	multiplayer.server_disconnected.connect(_on_net_down)
 	multiplayer.connection_failed.connect(_on_net_down)
-	if multiplayer.is_server():
+	
+	if multiplayer.is_server(): 
+		rpc("rpc_set_ownership",multiplayer.get_unique_id(), multiplayer.multiplayer_peer.get_unique_id())
 		_on_net_ready(1)
 
 func _on_net_ready(_id := 0) -> void:
@@ -82,6 +87,11 @@ func rpc_client_input(t: int, inp: Dictionary) -> void:
 	server_last_received_tick = max(server_last_received_tick, t)
 
 # ---- RPC: server -> all ----
+@rpc("call_local", "unreliable")
+func rpc_set_ownership(p1: int, p2: int) -> void:
+	player2.pid = p2
+	player1.pid = p1
+
 @rpc("call_local", "unreliable")
 func rpc_inputs_for_tick(t: int, merged: Dictionary) -> void:
 	var f := _get_or_make_frame(t)
