@@ -7,8 +7,8 @@ extends Node2D
 
 @onready var fight_timer_display = $"Fight Timer Display"
 @onready var fight_timer = $"Fight Timer Display/Fight Timer"
-@onready var player = $"/root/Test Level/Player"
-@onready var cpu = $"/root/Test Level/Player2"
+@onready var player1 = $"/root/Test Level/Player"
+@onready var player2 = $"/root/Test Level/Player1"
 @onready var controls_panel = $"Controls Panel"
 
 @onready var fight_music = $"/root/Test Level/Background Track"
@@ -17,8 +17,8 @@ extends Node2D
 var timer_started := false
 
 #3 round system stuff
-var player_wins = 0
-var cpu_wins = 0
+var player1_wins = 0
+var player2_wins = 0
 var round_num = 1
 
 
@@ -43,21 +43,16 @@ var win_messages = [
 func disable_control():
 	if(global.IsMultiplayer == true):
 		return
-	player.disabled = true
-	cpu.disabled = true
+	player1.disabled = true
+	player2.disabled = true
 
 func _ready() -> void:
-	$"../../winnerShoes/cpu1".show()
-	$"../../winnerShoes/cpu2".show()
-	$"../../winnerShoes/player1".show()
-	$"../../winnerShoes/player2".show()
 	$"../../FadeTransition/ColorRect".color = 000000
 	randomize() #Apparently, this is a surprise tool that'll help us later with generating a certain random number.
 	message_label.text = ""
 	fight_timer_display.text = "99"
 	victory_label.text = ""
 	
-	print("ARCADE LEVEL: " + str(global.arcade_level))
 	disable_control()
 	start_round()
 
@@ -65,7 +60,7 @@ func _ready() -> void:
 func start_round() -> void:
 	
 	#First, show the round #
-	message_label.text = 'ROUND '+ str(round_num)
+	message_label.text = 'ROUND'+str(round_num)
 	print('Round:',round_num)
 	#Call begin_fight()
 	
@@ -79,25 +74,27 @@ func start_round() -> void:
 		var tween := create_tween()
 		tween.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, 55), 0.5)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		
-		# Wait for either 10 seconds, or for the player to press the punch button.
-		await wait_for_controls_acknowledgement()
-		
-		begin_fight()
-		
-		#Slides the controls back down, off the screen.
-		var tween_out := create_tween()
-		tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-
-		await tween_out.finished
-		
-	else: #timer that triggers the battle. There has to be a better way to do this
+	else: #timer that triggers the battle. maybe add a graphic that counts down. There has to be a better way to do this
 		print('Start timer started')
-		await get_tree().create_timer(1.5).timeout
+		victory_label.text = '3'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = '2'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = '1'
+		await get_tree().create_timer(1.0).timeout
+		victory_label.text = ''
 		begin_fight()
+	# Wait for either 10 seconds, or for the player to press the punch button.
+	await wait_for_controls_acknowledgement()
 	
+	begin_fight()
 	
+	#Slides the controls back down, off the screen.
+	var tween_out := create_tween()
+	tween_out.tween_property(controls_panel, "position", Vector2(controls_panel.position.x, -100), 0.5)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await tween_out.finished
 
 func begin_fight():
 	
@@ -107,10 +104,10 @@ func begin_fight():
 	await get_tree().create_timer(1.0).timeout
 	
 	message_label.text = ""
-	player.disabled = false
-	cpu.disabled = false
+	player1.disabled = false
+	player2.disabled = false
 	fight_timer.start()
-	fight_timer.paused = false
+	
 	timer_started = true
 
 #Called above, just makes it wait for ten seconds or until the player presses Punch, to give them the time to read the controls. 
@@ -130,38 +127,54 @@ func end_round(condition):
 	
 	#If the condition is 0 or 1 or if it's 3, run the timeout logic to kill someone and then continue
 	
-	if condition == 0: #If the player's lost...
-		animate_message_label("KO!")
+	
+	
+	if condition == "Player1": #If the player 1 won...!
+		if player1.pid == multiplayer.get_unique_id():
+			animate_message_label("KO!")
 		
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = loss_messages[randi() % loss_messages.size()]
-		message_timer.start()
-	elif condition == 1: #But, if the player's won...!
-		animate_message_label("KO!")
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = win_messages[randi() % win_messages.size()]
+			message_timer.start()
+		else:
+			animate_message_label("KO!")
 		
-		await get_tree().create_timer(1.0).timeout
-		victory_label.text = win_messages[randi() % win_messages.size()]
-		message_timer.start()
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = loss_messages[randi() % loss_messages.size()]
+			message_timer.start()
+	elif condition == "Player2": #If the player 2 won...!
+		if player2.pid == multiplayer.get_unique_id():
+			animate_message_label("KO!")
+		
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = win_messages[randi() % win_messages.size()]
+			message_timer.start()
+		else:
+			animate_message_label("KO!")
+		
+			await get_tree().create_timer(1.0).timeout
+			victory_label.text = loss_messages[randi() % loss_messages.size()]
+			message_timer.start()
 	else: #But, the secret third option -- a timeout?? Handles that logic.
 		message_label.text = "TIME!"
 		
-		player.disabled = true
-		cpu.disabled = true
+		player1.disabled = true
+		player2.disabled = true
 		fight_timer.paused = true
 		
 		await get_tree().create_timer(2.5).timeout
 		
-		if player.health > cpu.health:
-			cpu.reduce_health(1000000000)
-		elif player.health < cpu.health:
-			player.reduce_health(1000000000)
-		elif cpu.health == player.health: #If, somehow, they tie in health, we'll flip a coin and give them a random fifty fifty shot on who dies.
+		if player1.health > player2.health:
+			player2.reduce_health(1000000000)
+		elif player1.health < player2.health:
+			player1.reduce_health(1000000000)
+		elif player2.health == player1.health: #If, somehow, they tie in health, we'll flip a coin and give them a random fifty fifty shot on who dies.
 			# sudden death
 			var rng = randi() % 2
 			if rng == 0:
-				player.reduce_health(1000000000)
+				player1.reduce_health(1000000000)
 			else:
-				cpu.reduce_health(1000000000)
+				player2.reduce_health(1000000000)
 
 #Called often above to animate the message label with its popout effect.
 func animate_message_label(text):
@@ -177,81 +190,29 @@ func animate_message_label(text):
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 
-func _process(_delta: float) -> void:
-
+func _process(delta: float) -> void:
 	if timer_started:
 		fight_timer_display.text = str(fight_timer.time_left).pad_decimals(1)
 
 #Functions to handle incoming signals and call the according end round condition, or transition to the next part of the game. 
 func _on_player_one_died() -> void:
-	cpu_wins +=1
-	if cpu_wins == 1:
-		$"../../winnerShoes/player2".hide()
-	elif cpu_wins == 2:
-		$"../../winnerShoes/player1".hide()
-	end_round(0)
+	player2_wins +=1
+	end_round("Player2")
 
-func _on_cpu_died() -> void:
-	player_wins +=1
-	if player_wins == 1:
-		$"../../winnerShoes/cpu2".hide()
-	elif player_wins == 2:
-		$"../../winnerShoes/cpu1".hide()
-	end_round(1)
+func _on_player_two_died() -> void:
+	player1_wins +=1
+	end_round("Player1")
 
-#This is connected to the MessageTimer, run after the timer that it runs once it shows its message.
 func _on_timer_timeout() -> void:
 	var tree: SceneTree = get_tree()
-	print('wins:',player_wins,cpu_wins)
+	print('wins:',player1_wins,player2_wins)
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-
-
-
-	match global.arcade_level:
-		0:
-			if player_wins >= 2 or cpu_wins >= 2:
-				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-			else: # no winners yet, restart
-				print('ROUND END')
-				transition()
-				
-		1, 2, 3, 4, 5, 6:
-			if player_wins >= 2: # player wins round 2 or more times
-				print("Next Level")
-				global.arcade_level += 1
-				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-			elif cpu_wins >= 2: # player loses round 2 or more times
-				if global.player_level_losses >= 2: # player loses level 2 or more times
-					print("Player lost three times, reset")
-					global.player_level_losses = 0 # reset level losses
-					global.arcade_level = 1 # reset arcade level
-
-				elif global.player_level_losses < 2: # player has lost less than 2 times
-					global.player_level_losses += 1
-					print("Player has lost " + str(global.player_level_losses) + " times. Try again.")
-					tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-			else: # no winners yet, restart
-				print('ROUND END')
-				transition()
-				
-		7: 
-			if player_wins >= 2:
-				tree.change_scene_to_file("res://Scenes/arcade_victory.tscn") # TODO: placeholder, doesn't exist yet
-			elif cpu_wins >= 2:
-				if global.player_level_losses >= 2: # player loses level 2 or more times
-					print("Player lost three times on level 7, reset")
-					global.player_level_losses = 0 # reset level losses
-					global.arcade_level = 1 # reset arcade level
-					tree.change_scene_to_file("res://Scenes/DressUp.tscn") # TODO: change to loss screen that goes back to dress up and resets arcade level
-				elif global.player_level_losses < 2: # player has lost less than 2 times
-					global.player_level_losses += 1
-					print("Player has lost " + str(global.player_level_losses) + " times on level 7. Try again.")
-					tree.change_scene_to_file("res://Scenes/DressUp.tscn")
-			else: # no winners yet, restart
-				print('ROUND END')
-				transition()
-
+	if player1_wins >= 2 or player2_wins >= 2:
+		tree.change_scene_to_file("res://Scenes/DressUp.tscn")
+	else:
+		print('ROUND END')
+		transition()
 
 func _on_fight_timer_timeout() -> void:
 	end_round(3)
@@ -259,14 +220,12 @@ func _on_fight_timer_timeout() -> void:
 func transition():
 	print('fading out')
 	$"../../FadeTransition/AnimationPlayer".play("fade_to_black")
-	fight_timer.start()
-	fight_timer.paused = true
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_to_black":
 			#set position
 		$"../../Player".global_position = Vector2(-50, 40)
-		$"../../Player2".global_position = Vector2(50, 40)
+		$"../../Player1".global_position = Vector2(50, 40)
 		print()
 		$"../../FadeTransition/AnimationPlayer".play("fade_to_normal")
 		print('faded in')
@@ -275,10 +234,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func reset() -> void:
 	print('RESET')
 	victory_label.text = ""
-	#fight_timer_display.text = "99"
+	fight_timer_display.text = "99"
 	#disable both. I think that they will already be disabled but whatever
 	disable_control()
-	player.revive()
-	cpu.revive()
+	#player.revive
+	player1.revive()
+	player2.revive()
 	start_round()
-	

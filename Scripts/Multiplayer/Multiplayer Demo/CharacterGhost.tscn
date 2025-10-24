@@ -1,0 +1,326 @@
+[gd_scene load_steps=42 format=3 uid="uid://cj24iqkyp1y5b"]
+
+[ext_resource type="Script" uid="uid://cskepw3unr5xl" path="res://Scripts/Multiplayer/Multiplayer Demo/ghost_puppet_controller.gd" id="1_xlutb"]
+[ext_resource type="Texture2D" uid="uid://dy1dxkegdhpbf" path="res://Assets/Sprites/Player Sprites/block.png" id="2_qkwgn"]
+[ext_resource type="Texture2D" uid="uid://b5pbw3u8u108i" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody0.png" id="3_7e18b"]
+[ext_resource type="Texture2D" uid="uid://c7bn2ilh2a1n3" path="res://Assets/Sprites/Clothing Frames/body with a head/Crouch Frames/CrouchBody1.png" id="4_wkf55"]
+[ext_resource type="Texture2D" uid="uid://bkv1eebpqokq1" path="res://Assets/Sprites/Player Sprites/dashb1.png" id="5_l0c6p"]
+[ext_resource type="Texture2D" uid="uid://c12ke1xq1bqrf" path="res://Assets/Sprites/Player Sprites/dashb2.png" id="6_bm5fd"]
+[ext_resource type="Texture2D" uid="uid://basbruxqgetyk" path="res://Assets/Sprites/Player Sprites/dashf1.png" id="7_7l5l7"]
+[ext_resource type="Texture2D" uid="uid://15o2brjumj6l" path="res://Assets/Sprites/Player Sprites/dashf2.png" id="8_ah3do"]
+[ext_resource type="Texture2D" uid="uid://cll4n0h2o633e" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody0.png" id="9_2m1ls"]
+[ext_resource type="Texture2D" uid="uid://tm0evwng88q2" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody1.png" id="10_y7k3v"]
+[ext_resource type="Texture2D" uid="uid://cxa7n3ahs11vt" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody2.png" id="11_jreld"]
+[ext_resource type="Texture2D" uid="uid://b7oro4kwqphj3" path="res://Assets/Sprites/Clothing Frames/body with a head/Knockout Frames/KnockOutBody3.png" id="12_fq1ey"]
+[ext_resource type="Texture2D" uid="uid://cagujdubdoy5q" path="res://Assets/Sprites/Player Sprites/hurt.png" id="13_stfo3"]
+[ext_resource type="Texture2D" uid="uid://dgciv3nn8v3kp" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody0.png" id="14_w81b2"]
+[ext_resource type="Texture2D" uid="uid://bcaciqtdynuym" path="res://Assets/Sprites/Clothing Frames/body with a head/Idle Frames/IdleBody1.png" id="15_aj0u5"]
+[ext_resource type="Texture2D" uid="uid://b6jkfhqjd1vjq" path="res://Assets/Sprites/Player Sprites/jump.png" id="16_ww142"]
+[ext_resource type="Texture2D" uid="uid://ut1m5k3kdcpp" path="res://Assets/Sprites/Player Sprites/jump startup.png" id="17_ghyer"]
+[ext_resource type="Texture2D" uid="uid://brmf06qwpr3ac" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody2.png" id="18_3df6b"]
+[ext_resource type="Texture2D" uid="uid://dekvuh2xltrh1" path="res://Assets/Sprites/Clothing Frames/body with a head/Kick Frames/KickBody1.png" id="19_v207m"]
+[ext_resource type="Texture2D" uid="uid://l7gd33og44cx" path="res://Assets/Sprites/Player Sprites/throw.png" id="20_jr4lw"]
+[ext_resource type="Texture2D" uid="uid://87nsyv7sulrk" path="res://Assets/Sprites/Player Sprites/throw recovery.png" id="21_ju2y4"]
+[ext_resource type="Texture2D" uid="uid://sa0rvvidg838" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody2.png" id="22_172qj"]
+[ext_resource type="Texture2D" uid="uid://bqs23o6agugun" path="res://Assets/Sprites/Clothing Frames/body with a head/Punch Frames/PunchBody1.png" id="23_hrpf8"]
+[ext_resource type="Texture2D" uid="uid://cjpdoeaduc5kj" path="res://Assets/Sprites/Player Sprites/walkb1.png" id="24_8hp7r"]
+[ext_resource type="Texture2D" uid="uid://dvoo30d0ryex8" path="res://Assets/Sprites/Player Sprites/walkb2.png" id="25_eubq5"]
+[ext_resource type="Texture2D" uid="uid://b5bs3y6tt60os" path="res://Assets/Sprites/Player Sprites/walk1.png" id="26_evid1"]
+[ext_resource type="Texture2D" uid="uid://thfvgsvr8gj5" path="res://Assets/Sprites/Player Sprites/walk2.png" id="27_0b0bl"]
+[ext_resource type="Script" uid="uid://c12shv00mnant" path="res://Scenes/GenerateAnimationLayer.gd" id="28_ujl6b"]
+[ext_resource type="Resource" uid="uid://bqsttykalac5f" path="res://Assets/Resources/Wearables/body.tres" id="29_uamup"]
+[ext_resource type="Script" uid="uid://c4tm5bp6m4ur6" path="res://Scripts/hurtbox.gd" id="30_2jdml"]
+[ext_resource type="Script" uid="uid://c2vqkmhy0bijw" path="res://Scripts/hitbox.gd" id="31_dp4a1"]
+[ext_resource type="Script" uid="uid://dmd8ckg8c7g5k" path="res://Scripts/crouch_hitbox.gd" id="32_744w3"]
+[ext_resource type="Script" uid="uid://cpwnjci14lgit" path="res://Scripts/throw_hitbox.gd" id="33_sdv7d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tmop"]
+size = Vector2(13, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbfsw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qkwgn")
+}],
+"loop": true,
+"name": &"block",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7e18b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wkf55")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.4,
+"texture": ExtResource("5_l0c6p")
+}, {
+"duration": 0.4,
+"texture": ExtResource("6_bm5fd")
+}],
+"loop": true,
+"name": &"dash left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.4,
+"texture": ExtResource("7_7l5l7")
+}, {
+"duration": 0.4,
+"texture": ExtResource("8_ah3do")
+}],
+"loop": true,
+"name": &"dash right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_2m1ls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y7k3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jreld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fq1ey")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_stfo3")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_w81b2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_aj0u5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_ww142")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_ghyer")
+}],
+"loop": true,
+"name": &"jump startup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_3df6b")
+}],
+"loop": true,
+"name": &"kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_v207m")
+}],
+"loop": true,
+"name": &"kick recovery",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_v207m")
+}],
+"loop": true,
+"name": &"kick startup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_jr4lw")
+}],
+"loop": true,
+"name": &"pose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_ju2y4")
+}],
+"loop": true,
+"name": &"pose recovery",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_172qj")
+}],
+"loop": true,
+"name": &"punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_hrpf8")
+}],
+"loop": true,
+"name": &"punch recovery",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_hrpf8")
+}],
+"loop": true,
+"name": &"punch startup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": ExtResource("24_8hp7r")
+}, {
+"duration": 0.7,
+"texture": ExtResource("25_eubq5")
+}],
+"loop": true,
+"name": &"walk backward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": ExtResource("26_evid1")
+}, {
+"duration": 0.7,
+"texture": ExtResource("27_0b0bl")
+}],
+"loop": true,
+"name": &"walk forward",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_op7ga"]
+size = Vector2(27, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q13i1"]
+size = Vector2(29, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1yd1"]
+size = Vector2(29, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu3r3"]
+size = Vector2(41, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pye2o"]
+size = Vector2(41, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7slhi"]
+size = Vector2(9.5, 50)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_xlutb")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+position = Vector2(0.207869, 0)
+scale = Vector2(1.16696, 1)
+points = PackedVector2Array(0, 0, 20, 0)
+width = 1.245
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, 4)
+shape = SubResource("RectangleShape2D_5tmop")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4.5)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_pbfsw")
+animation = &"idle"
+script = ExtResource("28_ujl6b")
+current_wearable = ExtResource("29_uamup")
+
+[node name="PantsLayer" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4.5)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_pbfsw")
+animation = &"dead"
+script = ExtResource("28_ujl6b")
+current_wearable = ExtResource("29_uamup")
+
+[node name="ShirtLayer" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4.5)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_pbfsw")
+animation = &"idle"
+script = ExtResource("28_ujl6b")
+current_wearable = ExtResource("29_uamup")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("30_2jdml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4.5, 4)
+shape = SubResource("RectangleShape2D_op7ga")
+
+[node name="Punch Hitbox" type="Area2D" parent="."]
+position = Vector2(5, 3)
+script = ExtResource("31_dp4a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Punch Hitbox"]
+position = Vector2(8.5, -14)
+shape = SubResource("RectangleShape2D_q13i1")
+debug_color = Color(0.809151, 0.00220805, 0.988406, 0.42)
+
+[node name="LPunch Hitbox" type="Area2D" parent="."]
+position = Vector2(5, 3)
+script = ExtResource("32_744w3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LPunch Hitbox"]
+position = Vector2(8.5, 11.5)
+shape = SubResource("RectangleShape2D_p1yd1")
+debug_color = Color(0.0790261, 0.649203, 1.92523e-07, 0.42)
+
+[node name="Kick Hitbox" type="Area2D" parent="."]
+position = Vector2(5, 3)
+script = ExtResource("31_dp4a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kick Hitbox"]
+position = Vector2(14.5, -25)
+shape = SubResource("RectangleShape2D_yu3r3")
+debug_color = Color(0.786632, 0.431925, 0, 0.42)
+
+[node name="LKick Hitbox" type="Area2D" parent="."]
+position = Vector2(5, 3)
+script = ExtResource("32_744w3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LKick Hitbox"]
+position = Vector2(14.5, 11.5)
+shape = SubResource("RectangleShape2D_pye2o")
+debug_color = Color(0.494679, 0.573411, 0.304532, 0.42)
+
+[node name="Throw Hitbox" type="Area2D" parent="."]
+script = ExtResource("33_sdv7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Hitbox"]
+position = Vector2(20.25, 4)
+shape = SubResource("RectangleShape2D_7slhi")

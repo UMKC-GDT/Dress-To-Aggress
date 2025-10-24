@@ -19,6 +19,10 @@ func _on_settings_pressed() -> void:
 	SfxManager.playClick()
 	print("Settings pressed")
 
+func _on_multiplayer_pressed() -> void:
+	SfxManager.playClick()
+	get_tree().change_scene_to_file("res://Scenes/multiplayer_menu.tscn")
+
 func _on_exit_pressed() -> void:
 	SfxManager.playClick()
 	get_tree().quit()

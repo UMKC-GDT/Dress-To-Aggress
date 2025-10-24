@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu6e3mm1f2o3p"]
+
+[ext_resource type="Texture2D" uid="uid://bxsk4wbibm2yg" path="res://Assets/Sprites/Model1.png" id="1_gckms"]
+[ext_resource type="Script" uid="uid://cskepw3unr5xl" path="res://Scripts/Multiplayer/Multiplayer Demo/ghost_puppet_controller.gd" id="2_j44v8"]
+
+[node name="Player" type="Sprite2D"]
+texture = ExtResource("1_gckms")
+script = ExtResource("2_j44v8")

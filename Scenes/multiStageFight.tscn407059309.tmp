@@ -1,22 +1,24 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=26 format=3 uid="uid://cprotiix4mkpw"]
 
-[ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
-[ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
-[ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="2_f7g2b"]
-[ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_iwpvo"]
-[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/Multiplayer/player1Multi.gd" id="3_sb12i"]
-[ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
-[ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
-[ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="7_8chw7"]
-[ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="8_xqkhk"]
-[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="9_muimr"]
-[ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="10_bo4e7"]
-[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="11_g776m"]
-[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="11_tg752"]
-[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="12_g776m"]
-[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="13_iwpvo"]
-[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="14_3dx3i"]
-[ext_resource type="Texture2D" uid="uid://b2xdpsby85lkk" path="res://Assets/Sprites/pixel images/shoe-removebg-preview.png" id="17_iwpvo"]
+[ext_resource type="Script" uid="uid://du3bem5vbilhf" path="res://Scripts/Multiplayer/Game_State_Manager.gd" id="1_4g7hg"]
+[ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="1_d4vwv"]
+[ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_nogt5"]
+[ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="3_4g7hg"]
+[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/Multiplayer/player1Multi.gd" id="4_vxqhj"]
+[ext_resource type="Script" uid="uid://digd4vhe25hc3" path="res://Scripts/Multiplayer/player2Multi.gd" id="6_4g7hg"]
+[ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="6_xylqa"]
+[ext_resource type="Texture2D" uid="uid://chrsq4yc47n62" path="res://Assets/Sprites/panels.PNG" id="7_nt58u"]
+[ext_resource type="Script" uid="uid://tpi0f3vw66es" path="res://Scenes/PanelStartFightScene.gd" id="8_o1kay"]
+[ext_resource type="FontFile" uid="uid://bfwx5rcyywj57" path="res://Assets/Fonts/MintsodaLimeGreen13X16Regular-KVvzA.ttf" id="9_psxfv"]
+[ext_resource type="Texture2D" uid="uid://bbjhablweb6g3" path="res://Assets/Sprites/key_w.tres" id="10_atul7"]
+[ext_resource type="Texture2D" uid="uid://bauqefwylplf1" path="res://Assets/Sprites/key_a.tres" id="11_su618"]
+[ext_resource type="Texture2D" uid="uid://crxqba6o8nakf" path="res://Assets/Sprites/key_d.tres" id="12_wlmax"]
+[ext_resource type="Texture2D" uid="uid://505ins2eeu5s" path="res://Assets/Sprites/key_s.tres" id="13_lllyf"]
+[ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="14_08ny8"]
+[ext_resource type="PackedScene" uid="uid://dlxixpxf0ago6" path="res://Assets/healthbar.tscn" id="15_i3eds"]
+[ext_resource type="PackedScene" uid="uid://qinjj0efwlux" path="res://Assets/enemy_healthbar.tscn" id="16_g1vea"]
+[ext_resource type="Script" uid="uid://cibhbvoay2dt5" path="res://Scripts/Multiplayer/multiGameManager.gd" id="16_vxqhj"]
+[ext_resource type="Script" uid="uid://bbqdbwrl8cet2" path="res://Scripts/Multiplayer/GhostVisualizer.gd" id="18_vxqhj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c2mv"]
 size = Vector2(27, 256)
@@ -77,13 +79,14 @@ _data = {
 }
 
 [node name="Test Level" type="Node2D"]
+script = ExtResource("1_4g7hg")
 metadata/_edit_horizontal_guides_ = [-21.0, 88.0]
 metadata/_edit_vertical_guides_ = [-97.0, 97.0]
 
 [node name="Runway" type="Sprite2D" parent="."]
 position = Vector2(0, 33)
 scale = Vector2(0.17, 0.17)
-texture = ExtResource("2_5oh2v")
+texture = ExtResource("1_d4vwv")
 
 [node name="Invisible Wall" type="StaticBody2D" parent="Runway"]
 visible = false
@@ -115,29 +118,32 @@ shape = SubResource("RectangleShape2D_tg752")
 [node name="CameraRig" type="Node2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 position = Vector2(-50, 39)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("2_iwpvo")
+script = ExtResource("2_nogt5")
 player1 = NodePath("../Player")
-player2 = NodePath("../Player2")
+player2 = NodePath("../Player1")
 
 [node name="Camera2D" type="Camera2D" parent="CameraRig"]
+offset = Vector2(0, -20.37)
 zoom = Vector2(8.29, 8.29)
 limit_left = -97
-limit_top = -21
+limit_top = 21
 limit_right = 97
-limit_bottom = 87
+limit_bottom = 88
 
-[node name="Player" parent="." instance=ExtResource("2_f7g2b")]
+[node name="Player" parent="." instance=ExtResource("3_4g7hg")]
 position = Vector2(-50, 39)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("3_sb12i")
+script = ExtResource("4_vxqhj")
 
-[node name="Player2" parent="." instance=ExtResource("2_f7g2b")]
+[node name="Player1" parent="." instance=ExtResource("3_4g7hg")]
 position = Vector2(50, 40)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_4ptq8")
+script = ExtResource("6_4g7hg")
+player_type = 2
+enemy_name = "player2"
 
 [node name="Background Track" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_6v6pp")
+stream = ExtResource("6_xylqa")
 volume_db = -10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -145,15 +151,15 @@ visible = false
 modulate = Color(1, 1, 1, 0.866667)
 position = Vector2(1.935, 37.1)
 scale = Vector2(0.45, 0.379)
-texture = ExtResource("9_muimr")
-script = ExtResource("10_bo4e7")
+texture = ExtResource("7_nt58u")
+script = ExtResource("8_o1kay")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
 offset_left = -131.0
 offset_top = -85.0
 offset_right = 145.0
 offset_bottom = 63.0
-theme_override_fonts/normal_font = ExtResource("11_g776m")
+theme_override_fonts/normal_font = ExtResource("9_psxfv")
 text = "The opposing fashion show contestent is secretly an agent for the drug smuggling ring! 
 
 To move:
@@ -173,31 +179,32 @@ text = "Start"
 [node name="WKey2" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-102.522, 48.6807)
 scale = Vector2(0.666667, 0.791557)
-texture = ExtResource("11_tg752")
+texture = ExtResource("10_atul7")
 
 [node name="AKey" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-118.078, 72.4275)
 scale = Vector2(0.666667, 0.791557)
-texture = ExtResource("12_g776m")
+texture = ExtResource("11_su618")
 
 [node name="DKey" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-71.4111, 72.4275)
 scale = Vector2(0.666667, 0.791557)
-texture = ExtResource("13_iwpvo")
+texture = ExtResource("12_wlmax")
 
 [node name="SKey" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-93.6333, 72.4275)
 scale = Vector2(0.666667, 0.791557)
-texture = ExtResource("14_3dx3i")
+texture = ExtResource("13_lllyf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Game Manager" parent="CanvasLayer" instance=ExtResource("1_8chw7")]
+[node name="Game Manager" parent="CanvasLayer" instance=ExtResource("14_08ny8")]
 z_index = 3
 position = Vector2(632, 53)
 scale = Vector2(7.14, 7.14)
+script = ExtResource("16_vxqhj")
 
-[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("7_8chw7")]
+[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("15_i3eds")]
 z_index = 3
 anchors_preset = -1
 anchor_left = -0.129036
@@ -211,7 +218,7 @@ offset_bottom = 52.125
 scale = Vector2(1.64516, 1.64516)
 metadata/_edit_use_anchors_ = true
 
-[node name="Healthbar2" parent="CanvasLayer" instance=ExtResource("8_xqkhk")]
+[node name="Healthbar2" parent="CanvasLayer" instance=ExtResource("16_g1vea")]
 anchors_preset = -1
 anchor_left = 0.183594
 anchor_top = -0.0194444
@@ -224,34 +231,9 @@ offset_bottom = 52.0
 scale = Vector2(1.64516, 1.64516)
 metadata/_edit_use_anchors_ = true
 
-[node name="winnerShoes" type="CanvasLayer" parent="."]
-
-[node name="player1" type="Sprite2D" parent="winnerShoes"]
-position = Vector2(109, 120)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_iwpvo")
-
-[node name="player2" type="Sprite2D" parent="winnerShoes"]
-position = Vector2(179, 120)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_iwpvo")
-
-[node name="cpu1" type="Sprite2D" parent="winnerShoes"]
-position = Vector2(1159, 120)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_iwpvo")
-flip_h = true
-
-[node name="cpu2" type="Sprite2D" parent="winnerShoes"]
-position = Vector2(1089, 120)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_iwpvo")
-flip_h = true
-
 [node name="FadeTransition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransition"]
-visible = false
 offset_left = -84.0
 offset_top = -25.0
 offset_right = 1416.0
@@ -263,5 +245,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_m73bv")
 }
 
+[node name="GhostVisualizer" type="Node2D" parent="."]
+script = ExtResource("18_vxqhj")
+
+[node name="GameStateManager" type="Node2D" parent="."]
+script = ExtResource("1_4g7hg")
+
+[connection signal="one_died" from="Player" to="CanvasLayer/Game Manager" method="_on_player_one_died"]
 [connection signal="button_down" from="Sprite2D/Button" to="Sprite2D" method="_on_button_button_down"]
 [connection signal="animation_finished" from="FadeTransition/AnimationPlayer" to="CanvasLayer/Game Manager" method="_on_animation_player_animation_finished"]

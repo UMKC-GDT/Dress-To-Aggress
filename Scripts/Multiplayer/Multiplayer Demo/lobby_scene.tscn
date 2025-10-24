@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpgn0jee72vt3"]
+
+[ext_resource type="Script" uid="uid://co7qbfmvr3waf" path="res://Scripts/Multiplayer/Multiplayer Demo/LobbyUI.gd" id="1_7hemx"]
+[ext_resource type="Script" uid="uid://dvje5jnjwn5oe" path="res://Scripts/Multiplayer/Multiplayer Demo/AutoStartMultiplayerDemo.gd" id="2_vbf7o"]
+
+[node name="LobbyScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7hemx")
+
+[node name="AutoStart" type="Node" parent="."]
+script = ExtResource("2_vbf7o")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 79.0
+offset_right = 196.0
+offset_bottom = 110.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 85.0
+offset_right = 381.0
+offset_bottom = 116.0
+text = "Join"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 97.0
+offset_right = 301.0
+offset_bottom = 128.0
+text = "Start"
+
+[connection signal="button_down" from="Host" to="." method="_on_ButtonHost_pressed"]
+[connection signal="button_down" from="Join" to="." method="_on_ButtonJoin_pressed"]
+[connection signal="button_down" from="Start" to="." method="_on_start_pressed"]

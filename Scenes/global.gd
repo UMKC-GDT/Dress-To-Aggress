@@ -4,6 +4,7 @@ extends Node
 var is_dragging = false
 
 var difficulty = "Normal"
+var IsMultiplayer = true
 var arcade_level = 0
 var player_level_losses = 0
 

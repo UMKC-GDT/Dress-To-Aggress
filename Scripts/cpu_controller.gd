@@ -1,4 +1,5 @@
 extends BaseCharacterController
+class_name CPUController
 
 signal cpu_died
 
