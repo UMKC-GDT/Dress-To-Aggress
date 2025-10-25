@@ -47,6 +47,13 @@ func disable_control():
 	cpu.disabled = true
 
 func _ready() -> void:
+	$"../../denver_airport".hide()
+	$"../../paris".hide()
+	if global.arcade_level == 7:
+		$"../../paris".show()
+	elif global.arcade_level == 6:
+		$"../../denver_airport".show()
+		$"../../denver_airport".play("plane")
 	$"../../winnerShoes/cpu1".show()
 	$"../../winnerShoes/cpu2".show()
 	$"../../winnerShoes/player1".show()
