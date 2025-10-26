@@ -95,7 +95,7 @@ func set_random_shirt_wearable():
 
 #when mouse hovers oveer the clothing 	
 func _on_area_2d_mouse_entered():
-	if not global.is_dragging:
+	if not global.is_dragging and global.can_move_clothes:
 		draggable = true
 		self.scale = Vector2(1.05, 1.05)
 		stat_box.visible = true
@@ -106,7 +106,7 @@ func _on_area_2d_mouse_entered():
 #when mouse shopts hovering over the clothing 
 func _on_area_2d_mouse_exited():
 	stat_box = get_child(2)
-	if not global.is_dragging:
+	if not global.is_dragging and global.can_move_clothes:
 		draggable = false
 		self.scale = Vector2(1, 1)
 		stat_box.visible = false

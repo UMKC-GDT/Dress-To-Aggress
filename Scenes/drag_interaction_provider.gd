@@ -72,10 +72,13 @@ func _process(_delta):
 				#last_clicked.gravity_scale = 1.0
 			last_clicked = self
 
+func _ready() -> void:
+	global.can_move_clothes = false
 
 func _input(event):
 	if !global.can_move_clothes:
 		return
+	
 	#get the object that is clicked
 	if event is InputEventMouseButton and Input.is_action_just_pressed("click") and event.pressed:
 		

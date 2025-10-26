@@ -17,10 +17,13 @@ extends Node2D
 @onready var fullDialogueBox: RichTextLabel = $Panel/FullDialogueBox
 @onready var dialogueIndicator: RichTextLabel = $Panel/DialogueIndicator
 
-@onready var codecSprite: Sprite2D = $Panel/CodeDecDta2
+@onready var codecSprite: AnimatedSprite2D = $Panel/CodecAnimatedSprite
 @onready var blackBackground: Panel = $Panel/SolidBlackBackground
 
 @onready var speechLines: Node2D = $Panel/SpeechLines
+
+@onready var leftShadow: Panel = $Panel/CodecAnimatedSprite/LeftShadow
+@onready var rightShadow: Panel = $Panel/CodecAnimatedSprite/RightShadow
 
 
 var stageText = "STAGE X"
@@ -37,8 +40,8 @@ var dialogue_shown = false
 #Values for animating
 var start_codec_sprite_y = 360.497
 var start_codec_sprite_yScale = 0
-var finish_codec_sprite_y = 200
-var finish_codec_sprite_yScale = 0.994
+var finish_codec_sprite_y = 96
+var finish_codec_sprite_yScale = 1.63
 
 var start_bg_y = 360
 var start_bg_ySize = 0
@@ -124,13 +127,18 @@ func _ready() -> void:
 	codecSprite.hide()
 	blackBackground.hide()
 	speechLines.hide()
+	leftShadow.hide()
+	rightShadow.hide()
 
 	#Call a function to animate showing the codec
 	show_codec()
 
 func show_codec():
+	leftShadow.hide()
 	#Animate the panel fading in?
 	panel.show()
+	
+	codecSprite.play("idle")
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Right here, animate lerping between the intended values for the effect you want
@@ -157,10 +165,12 @@ func show_codec():
 
 func begin_codec():
 	
-	
+	codecSprite.play("right talk")
+
 	#Show the stage number
 	await get_tree().create_timer(transition_time).timeout
-	speechLines.show()
+	leftShadow.show()
+	#speechLines.show()
 	
 	await animate_text(stageNumLabel, text_speed)
 	
@@ -187,12 +197,15 @@ func begin_codec():
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Wait until the player presses any of the buttons...
+	leftShadow.hide()
+	codecSprite.play("idle")
 	wait_for_input = true
 	codec_shown = true
 
 func hide_codec():
 	fullDialogueBox.hide()
-	speechLines.hide()
+	leftShadow.hide()
+	#speechLines.hide()
 	
 	var tween := create_tween().set_parallel()
 	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -206,7 +219,6 @@ func hide_codec():
 	
 	await get_tree().create_timer(transition_time).timeout
 	panel.hide()
-	global.can_move_clothes = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -237,6 +249,7 @@ func _process(_delta: float) -> void:
 				'''
 
 func continue_codec():
+	leftShadow.show()
 	await get_tree().create_timer(transition_time).timeout
 	fullDialogueBox.show()
 	
@@ -247,18 +260,20 @@ func continue_codec():
 	wait_for_input = true
 	dialogue_shown = true
 	if line < dialogue.size() and dialogue[line][0] == "L":
-		codecSprite.texture = left_open_tex
+		codecSprite.play("left talk")
 		fullDialogueBox.text = dialogue[line].substr(3, -1)
 		animate_text(fullDialogueBox, text_speed/2)
 		line += 1
-		speechLines.position = arrow_left_pos
+		rightShadow.show()
+		leftShadow.hide()
 		
 	elif line < dialogue.size() and dialogue[line][0] == "R":
-		codecSprite.texture = right_open_tex
+		codecSprite.play("right talk")
 		fullDialogueBox.text = dialogue[line].substr(3, -1)
 		animate_text(fullDialogueBox, text_speed/2)
 		line += 1
-		speechLines.position = arrow_right_pos
+		rightShadow.hide()
+		leftShadow.show()
 		
 	elif line >= dialogue.size():
 			fullDialogueBox.hide()

@@ -46,15 +46,16 @@ func  _ready() -> void:
 		pants_text = save_resource.get_pants_text()
 	 
 	
+	#!!!WARNING!!! Please DO NOT LEAVE THIS COMMENTED OUT!!! If this is commented out, CLOTHES NO LONGER WORK! If you have to comment this out for debug purposes, WARNING PLEASE DO NOT LEAVE IT COMMENTED OUT T-T
+	#To further set this in, increment this counter every time. Times of having to uncomment this: 1
 	#load pants
-	#if self.name == "PantsLayer":
-		#self.current_wearable = load("res://Assets/Resources/Wearables/"+pants_text+".tres")
-		#
+	if self.name == "PantsLayer":
+		self.current_wearable = load("res://Assets/Resources/Wearables/"+pants_text+".tres")
 	##load shirt
-	#if self.name == "ShirtLayer":
-		#self.current_wearable = load("res://Assets/Resources/Wearables/"+shirt_text+".tres")
+	if self.name == "ShirtLayer":
+		self.current_wearable = load("res://Assets/Resources/Wearables/"+shirt_text+".tres")
 	
-	#set postion to the body (might have   to adjust when merges wit htomies movement)
+	#set postion to the body (might have to adjust when merges wit htomies movement)
 	#self.position  = $"../Body".position
 	self.scale = Vector2(0.3,0.3)  #can be chaanged
 	self.modulate = current_wearable.color
