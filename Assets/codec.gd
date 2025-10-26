@@ -22,6 +22,7 @@ extends Node2D
 
 @onready var speechLines: Node2D = $Panel/SpeechLines
 
+
 var stageText = "STAGE X"
 var difficultyText = "DIFFICULTY:"
 var styleText = "STYLE FACTOR:"
@@ -44,6 +45,25 @@ var start_bg_ySize = 0
 var finish_bg_y = 36
 var finish_bg_ySize = 640
 
+var dialogue1 = ["R: Snake we need you to take down this gang.", "L: Snake? Who's snake?", "R: Sorry, that's a different agent. You still have a mission to complete.", "L: I got it boss, this will be over soon.", "R: I'm on frequency 126.04 when you need me"]
+var dialogue2 = []
+var dialogue3 = []
+var dialogue4 = []
+var dialogue5 = []
+var dialogue6 = []
+var dialogue7 = []
+
+var dialogue = []
+var line = 0
+var arrow_right_pos = Vector2(778, 370)
+var arrow_left_pos = Vector2(500, 370)
+
+var both_closed_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecBothMouthClosed.png")
+var both_open_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecBothMouthOpen.png")
+var left_open_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecLeftMouthOpen.png")
+var right_expres_change = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssion.png")
+var right_open_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecRightMouthOpen.png")
+
 @export var transition_time = 0.4
 @export var text_speed = 0.03
 
@@ -55,17 +75,31 @@ func _ready() -> void:
 	
 	var styleFactor = 0
 	match global.arcade_level:
-			1: styleFactor = 0.6
-			2: styleFactor = 0.8
-			3: styleFactor = 1.0
-			4: styleFactor = 1.1
-			5: styleFactor = 1.2
-			6: styleFactor = 1.3
-			7: styleFactor = 1.4
-	
-	if global.arcade_level == 0:
-		panel.hide()
-		return
+			0:
+				panel.hide()
+				return
+			1: 
+				styleFactor = 0.6 
+				dialogue = dialogue1
+			2: 
+				styleFactor = 0.8
+				dialogue = dialogue2
+			3: 
+				styleFactor = 1.0
+				dialogue = dialogue3
+			4: 
+				styleFactor = 1.1
+				dialogue = dialogue4
+			5: 
+				styleFactor = 1.2
+				dialogue = dialogue5
+			6: 
+				styleFactor = 1.3
+				dialogue = dialogue6
+			7: 
+				styleFactor = 1.4
+				dialogue = dialogue7
+
 	
 	stageNumLabel.text = "STAGE " + str(stageNum)
 	match global.arcade_level:
@@ -175,7 +209,7 @@ func hide_codec():
 	global.can_move_clothes = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if wait_for_input:
 		dialogueIndicator.show()
 		
@@ -190,9 +224,9 @@ func _process(delta: float) -> void:
 				wait_for_input = false
 				
 				#Once we have pre-fight lines, use this one. Otherwise...
-				#continue_codec()
-				hide_codec()
-		
+				continue_codec()
+				#hide_codec()
+		'''
 		if dialogue_shown:
 			if Input.is_action_just_pressed("Space") or Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("player_punch") or Input.is_action_just_pressed("click"):
 				fullDialogueBox.hide()
@@ -200,17 +234,38 @@ func _process(delta: float) -> void:
 				await get_tree().create_timer(transition_time).timeout
 				wait_for_input = false
 				hide_codec()
+				'''
 
 func continue_codec():
 	await get_tree().create_timer(transition_time).timeout
 	fullDialogueBox.show()
 	
 	#This is where we animate the dialogue
-	animate_text(fullDialogueBox, (text_speed / 2))
+	#animate_text(fullDialogueBox, (text_speed / 2))
 	
-	await get_tree().create_timer(2).timeout
+	#await get_tree().create_timer(2).timeout
 	wait_for_input = true
 	dialogue_shown = true
+	if line < dialogue.size() and dialogue[line][0] == "L":
+		codecSprite.texture = left_open_tex
+		fullDialogueBox.text = dialogue[line].substr(3, -1)
+		animate_text(fullDialogueBox, text_speed/2)
+		line += 1
+		speechLines.position = arrow_left_pos
+		
+	elif line < dialogue.size() and dialogue[line][0] == "R":
+		codecSprite.texture = right_open_tex
+		fullDialogueBox.text = dialogue[line].substr(3, -1)
+		animate_text(fullDialogueBox, text_speed/2)
+		line += 1
+		speechLines.position = arrow_right_pos
+		
+	elif line >= dialogue.size():
+			fullDialogueBox.hide()
+			
+			await get_tree().create_timer(transition_time).timeout
+			wait_for_input = false
+			hide_codec()
 
 # Animates a label's text, letter by letter.
 # This function assumes the label's 'text' property is already set.

@@ -14,6 +14,7 @@ var line = 0
 var nextScene
 var sceneData
 var dialogueFile
+var inPosition
 
 var scenes = ["uid://c4w3dm0al880e"]
 var loseScenes = []

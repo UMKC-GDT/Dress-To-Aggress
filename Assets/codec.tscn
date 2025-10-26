@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://qtqucl3e38hj"]
 
-[ext_resource type="Texture2D" uid="uid://do5ta8gfsgdv" path="res://Assets/Sprites/CodeDecDTA2.jpg" id="1_je0ou"]
-[ext_resource type="Script" path="res://Assets/codec.gd" id="1_podmo"]
+[ext_resource type="Script" uid="uid://don3r8xe1kc1y" path="res://Assets/codec.gd" id="1_podmo"]
+[ext_resource type="Texture2D" uid="uid://bb6ysxkrk5q7i" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightMouthOpen.png" id="2_66nrr"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_podmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klmiq"]
@@ -43,9 +43,9 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_podmo")
 
 [node name="CodeDecDta2" type="Sprite2D" parent="Panel"]
-position = Vector2(353.77777, 198.99998)
+position = Vector2(353.00003, 199)
 scale = Vector2(0.9938272, 0.9938273)
-texture = ExtResource("1_je0ou")
+texture = ExtResource("2_66nrr")
 centered = false
 
 [node name="FullDialogueBox" type="RichTextLabel" parent="Panel"]
@@ -56,11 +56,9 @@ offset_right = 1024.0
 offset_bottom = 579.0
 theme_override_fonts/normal_font = ExtResource("2_podmo")
 theme_override_font_sizes/normal_font_size = 32
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at justo semper, ultricies mi ac, viverra justo. "
 scroll_active = false
 
 [node name="StageNumLabel" type="RichTextLabel" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 400.0
@@ -72,7 +70,6 @@ text = "STAGE 1"
 scroll_active = false
 
 [node name="DifficultyLabel" type="RichTextLabel" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 450.0
@@ -134,7 +131,6 @@ text = "HARD"
 scroll_active = false
 
 [node name="StyleLabel" type="RichTextLabel" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 500.0
@@ -146,7 +142,6 @@ text = "STYLE FACTOR:"
 scroll_active = false
 
 [node name="StyleNumLabel" type="RichTextLabel" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 815.0
 offset_top = 500.0
