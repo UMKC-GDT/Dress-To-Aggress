@@ -9,7 +9,16 @@ var tutorialCombat: Panel = $"How to Play 2"
 @onready
 var tutorialClothes: Panel = $"How to Play 3"
 
-
+func _ready():
+	$Intro.play("Title")
+	music()
+	await $Intro.animation_finished
+	$Intro.hide()
+	
+func music():
+	await get_tree().create_timer(5.0).timeout
+	$AudioStreamPlayer.play()
+	
 func _on_start_pressed() -> void:
 	global.arcade_level = 0
 	SfxManager.playClick()
