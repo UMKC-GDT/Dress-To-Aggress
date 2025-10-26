@@ -48,6 +48,27 @@ var start_bg_ySize = 0
 var finish_bg_y = 36
 var finish_bg_ySize = 640
 
+var preArcadeDialogue = [
+	"R: Good to see you again, agent. It’s time for your next mission. Ever heard of a fashion brand called Astra?",
+	"L: Uh, no?",
+	"R: I don’t blame you; it’s not a particularly notable one, or so we thought anyway. They’re holding a showcase soon for this line of high-tech clothes they came up with.",
+	"R: Apparently, they can enhance people's physical abilities.",
+	"L: Why’s a fashion brand interested in something like that?",
+	"R: Strange, right? It's even more strange how a brand without any significant revenue got the funding for this.",
+	"R: We had agents tail some of their models, and we’re almost certain that there’s a crime syndicate behind them.",
+	"L: Let me guess, smuggling?",
+	"R: What else do crime syndicates do? Astra's hiring new models, so you must infiltrate their showcases undercover.",
+	"R: You’re going to try to find out which of their offices is their headquarters, so we can take them down.", 
+	"R: With luck, it’ll be this first one, but if not, you’ll stay undercover and search their other locations.",
+	"L: Quick question: Why am I the one doing this? I didn’t join this organization to model, you know.",
+	"R: Well, no one else wanted it and you’re still new, so yeah. Have fun!",
+	"L: *sigh*",
+	"R: Carnelian: Oh, one more thing.",
+	"R: Astra wants the models to test out the clothes while on the catwalk, so you’ll be doing some fighting, too.",
+	"R: Try not to lose, okay? Can’t gather info if you’re knocked out.",
+	"L: I'm on it."
+]
+
 var dialogue1 = ["R: Snake we need you to take down this gang.", "L: Snake? Who's snake?", "R: Sorry, that's a different agent. You still have a mission to complete.", "L: I got it boss, this will be over soon.", "R: I'm on frequency 126.04 when you need me"]
 var dialogue2 = []
 var dialogue3 = []
@@ -73,11 +94,18 @@ var right_open_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecR
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	if global.arcade_level != 0:
+		start_codec()
+
+func start_codec():
 	#Get the stage number, the current difficulty, and the style text
 	var stageNum = global.arcade_level
 	
 	var styleFactor = 0
+	print(global.arcade_level)
 	match global.arcade_level:
+			-1:
+				dialogue = preArcadeDialogue
 			0:
 				panel.hide()
 				return
@@ -106,6 +134,8 @@ func _ready() -> void:
 	
 	stageNumLabel.text = "STAGE " + str(stageNum)
 	match global.arcade_level:
+		-1: difficultyLabelTag = easyLabel
+		
 		1: difficultyLabelTag = easyLabel
 		2: difficultyLabelTag = easyLabel
 		3: difficultyLabelTag = normalLabel
@@ -161,39 +191,34 @@ func show_codec():
 	tween.tween_property(codecSprite, "position", Vector2(codecSprite.position.x, finish_codec_sprite_y), transition_time)
 	tween.tween_property(codecSprite, "scale", Vector2(codecSprite.scale.x, finish_codec_sprite_yScale), transition_time)
 	
-	begin_codec()
+	if global.arcade_level >= 1:
+		explain_level_info()
+	elif global.arcade_level == -1:
+		run_codec_dialogue()
 
-func begin_codec():
-	
+func explain_level_info():
+	await get_tree().create_timer(transition_time).timeout
 	codecSprite.play("right talk")
-
-	#Show the stage number
-	await get_tree().create_timer(transition_time).timeout
 	leftShadow.show()
-	#speechLines.show()
 	
+	#Show the stage number
 	await animate_text(stageNumLabel, text_speed)
-	
 	await get_tree().create_timer(transition_time).timeout
-	
+
 	#Show the difficulty label
-	await animate_text(difficultyLabel, text_speed)
-	
+	await animate_text(difficultyLabel, text_speed)	
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Show the difficulty
-	await animate_text(difficultyLabelTag, text_speed)
-	
+	await animate_text(difficultyLabelTag, text_speed)	
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Show the style factor label
 	await animate_text(styleLabel, text_speed)
-	
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Show the style factor
 	await animate_text(styleNumLabel, text_speed)
-	
 	await get_tree().create_timer(transition_time).timeout
 	
 	#Wait until the player presses any of the buttons...
@@ -205,7 +230,8 @@ func begin_codec():
 func hide_codec():
 	fullDialogueBox.hide()
 	leftShadow.hide()
-	#speechLines.hide()
+	rightShadow.hide()
+	dialogueIndicator.hide()
 	
 	var tween := create_tween().set_parallel()
 	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -236,29 +262,17 @@ func _process(_delta: float) -> void:
 				wait_for_input = false
 				
 				#Once we have pre-fight lines, use this one. Otherwise...
-				continue_codec()
-				#hide_codec()
-		'''
-		if dialogue_shown:
-			if Input.is_action_just_pressed("Space") or Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("player_punch") or Input.is_action_just_pressed("click"):
-				fullDialogueBox.hide()
-				
-				await get_tree().create_timer(transition_time).timeout
-				wait_for_input = false
-				hide_codec()
-				'''
+				run_codec_dialogue()
 
-func continue_codec():
+func run_codec_dialogue():
 	leftShadow.show()
 	await get_tree().create_timer(transition_time).timeout
 	fullDialogueBox.show()
 	
-	#This is where we animate the dialogue
-	#animate_text(fullDialogueBox, (text_speed / 2))
 	
-	#await get_tree().create_timer(2).timeout
 	wait_for_input = true
 	dialogue_shown = true
+	
 	if line < dialogue.size() and dialogue[line][0] == "L":
 		codecSprite.play("left talk")
 		fullDialogueBox.text = dialogue[line].substr(3, -1)
