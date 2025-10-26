@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qtqucl3e38hj"]
+[gd_scene load_steps=15 format=3 uid="uid://qtqucl3e38hj"]
 
 [ext_resource type="Script" uid="uid://don3r8xe1kc1y" path="res://Assets/codec.gd" id="1_podmo"]
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_podmo"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bb6ysxkrk5q7i" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightMouthOpen.png" id="5_v64lt"]
 [ext_resource type="Texture2D" uid="uid://mjvkwsnuxv20" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssionMouthClose.png" id="5_yix3d"]
 [ext_resource type="Texture2D" uid="uid://cdb87ajj7uoc2" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssionMouthOpen.png" id="6_laus7"]
+[ext_resource type="AudioStream" uid="uid://bflgkmipbjr3f" path="res://Assets/Music/SFX_RetroSinglev4.wav" id="8_v64lt"]
+[ext_resource type="AudioStream" uid="uid://coim2miielp6w" path="res://Assets/Music/SFX_RetroSinglev3.wav" id="9_xwa4u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klmiq"]
 bg_color = Color(0, 0, 0, 0.631373)
@@ -43,7 +45,7 @@ animations = [{
 "texture": ExtResource("6_laus7")
 }],
 "loop": true,
-"name": &"right expression?",
+"name": &"right expression",
 "speed": 9.0
 }, {
 "frames": [{
@@ -107,8 +109,7 @@ centered = false
 position = Vector2(170.667, 96)
 scale = Vector2(1.62963, 1.62963)
 sprite_frames = SubResource("SpriteFrames_ugwvt")
-animation = &"right talk"
-frame_progress = 0.749854
+animation = &"right expression"
 centered = false
 
 [node name="LeftShadow" type="Panel" parent="Panel/CodecAnimatedSprite"]
@@ -261,5 +262,18 @@ width = 5.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="CarnDialogueSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_v64lt")
+volume_db = -5.0
+
+[node name="CarnDialogueSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_v64lt")
+volume_db = -5.0
+pitch_scale = 0.86
+
+[node name="RubyDialogueSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_xwa4u")
+volume_db = -5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

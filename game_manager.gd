@@ -213,8 +213,6 @@ func _on_timer_timeout() -> void:
 	round_num +=1
 	#tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 
-
-
 	match global.arcade_level:
 		0:
 			if player_wins >= 2 or cpu_wins >= 2:
@@ -223,16 +221,18 @@ func _on_timer_timeout() -> void:
 				print('ROUND END')
 				transition()
 				
-		1, 2, 3, 4, 5, 6:
+		1, 2, 3, 4, 5, 6: #For every other level...
 			if player_wins >= 2: # player wins round 2 or more times
 				print("Next Level")
 				global.arcade_level += 1
 				tree.change_scene_to_file("res://Scenes/DressUp.tscn")
 			elif cpu_wins >= 2: # player loses round 2 or more times
-				if global.player_level_losses >= 2: # player loses level 2 or more times
+				if global.player_level_losses >= 2: # player loses the level 2 or more times
 					print("Player lost three times, reset")
 					global.player_level_losses = 0 # reset level losses
 					global.arcade_level = 1 # reset arcade level
+					
+					tree.change_scene_to_file("res://Scenes/temp_game_over.tscn") # TODO: change to loss screen that goes back to dress up and resets arcade level
 
 				elif global.player_level_losses < 2: # player has lost less than 2 times
 					global.player_level_losses += 1
@@ -244,7 +244,7 @@ func _on_timer_timeout() -> void:
 				
 		7: 
 			if player_wins >= 2:
-				tree.change_scene_to_file("res://Scenes/arcade_victory.tscn") # TODO: placeholder, doesn't exist yet
+				tree.change_scene_to_file("res://Scenes/arcade_victory.tscn") # this was supposed to be a placeholder but ig it's real now
 			elif cpu_wins >= 2:
 				if global.player_level_losses >= 2: # player loses level 2 or more times
 					print("Player lost three times on level 7, reset")

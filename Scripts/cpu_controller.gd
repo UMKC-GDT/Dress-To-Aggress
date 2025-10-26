@@ -68,7 +68,7 @@ func _ready():
 	#Temperature is a new, VERY magic number. Will multiply the CPU's health and damage by whatever number you set here. This multiplies the base stats, so it's BEFORE the clothing mult is applied. Be careful.
 	if(global.arcade_level > 0):
 		match global.arcade_level:
-			1: temperature = .6
+			1: temperature = 0.6
 			2: temperature = .8
 			3: temperature = 1
 			4: temperature = 1.1

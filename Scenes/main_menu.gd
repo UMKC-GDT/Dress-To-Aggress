@@ -58,4 +58,4 @@ func _on_got_it_button_pressed() -> void:
 
 func _on_arcade_button_button_down() -> void:
 	global.arcade_level = 1
-	get_tree().change_scene_to_file("res://Scenes/DressUp.tscn")
+	get_tree().change_scene_to_file("res://Scenes/PreArcade_Dialogue.tscn")
