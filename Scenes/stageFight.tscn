@@ -1,15 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://dtp5eywvmmy1j"]
+[gd_scene load_steps=24 format=3 uid="uid://dtp5eywvmmy1j"]
 
 [ext_resource type="PackedScene" uid="uid://craw0c07od0ad" path="res://Scenes/game_manager.tscn" id="1_8chw7"]
-[ext_resource type="Texture2D" uid="uid://b3upqo11c4q3s" path="res://Scenes/paris_fight.png" id="2_3dx3i"]
 [ext_resource type="Texture2D" uid="uid://dgwr1qvgkgqwt" path="res://Assets/Sprites/Runway.png" id="2_5oh2v"]
 [ext_resource type="PackedScene" uid="uid://chyj64wwnwo67" path="res://Assets/CharacterController.tscn" id="2_f7g2b"]
 [ext_resource type="Script" uid="uid://d1yhqdj5h3gy5" path="res://Scenes/camera_rig.gd" id="2_iwpvo"]
-<<<<<<< Updated upstream
-=======
-[ext_resource type="Texture2D" uid="uid://bkl5e8s46dwfo" path="res://Assets/Sprites/denver_airport_frames/sprite_sheet.png" id="2_px76k"]
-[ext_resource type="Script" uid="uid://doprhsee3brm1" path="res://Scripts/player1.gd" id="3_sb12i"]
->>>>>>> Stashed changes
 [ext_resource type="Script" uid="uid://bwkxcwywhs86c" path="res://Scripts/cpu_controller.gd" id="4_4ptq8"]
 [ext_resource type="Script" uid="uid://b0jhu3rxm6ufw" path="res://Scripts/player1.gd" id="4_iwpvo"]
 [ext_resource type="AudioStream" uid="uid://cjydp54g8armk" path="res://Assets/Music/Dress to Agress - Battle!.mp3" id="5_6v6pp"]
@@ -29,133 +23,6 @@ size = Vector2(27, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg752"]
 size = Vector2(339, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c3vem"]
-atlas = ExtResource("2_px76k")
-region = Rect2(0, 0, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m73bv"]
-atlas = ExtResource("2_px76k")
-region = Rect2(1440, 0, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jp2kp"]
-atlas = ExtResource("2_px76k")
-region = Rect2(2880, 0, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eskt5"]
-atlas = ExtResource("2_px76k")
-region = Rect2(4320, 0, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_41rpy"]
-atlas = ExtResource("2_px76k")
-region = Rect2(5760, 0, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6k7sv"]
-atlas = ExtResource("2_px76k")
-region = Rect2(0, 810, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igi13"]
-atlas = ExtResource("2_px76k")
-region = Rect2(1440, 810, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qj1sc"]
-atlas = ExtResource("2_px76k")
-region = Rect2(2880, 810, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q3wsn"]
-atlas = ExtResource("2_px76k")
-region = Rect2(4320, 810, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ifeli"]
-atlas = ExtResource("2_px76k")
-region = Rect2(5760, 810, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_64r1d"]
-atlas = ExtResource("2_px76k")
-region = Rect2(0, 1620, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_js5nu"]
-atlas = ExtResource("2_px76k")
-region = Rect2(1440, 1620, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sslg"]
-atlas = ExtResource("2_px76k")
-region = Rect2(2880, 1620, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lpk51"]
-atlas = ExtResource("2_px76k")
-region = Rect2(4320, 1620, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7tpqa"]
-atlas = ExtResource("2_px76k")
-region = Rect2(5760, 1620, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nfq4n"]
-atlas = ExtResource("2_px76k")
-region = Rect2(0, 2430, 1440, 810)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mfhu7"]
-atlas = ExtResource("2_px76k")
-region = Rect2(1440, 2430, 1440, 810)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_puytq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c3vem")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m73bv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jp2kp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eskt5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_41rpy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6k7sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igi13")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qj1sc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q3wsn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ifeli")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_64r1d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_js5nu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5sslg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lpk51")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tpqa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nfq4n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mfhu7")
-}],
-"loop": true,
-"name": &"plane",
-"speed": 7.0
-}]
 
 [sub_resource type="Animation" id="Animation_px76k"]
 length = 0.001
@@ -244,17 +111,6 @@ scale = Vector2(5.88235, 5.88235)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Runway/Invisible Wall3"]
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_tg752")
-
-[node name="denver_airport" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2.861023e-06, 33.5)
-scale = Vector2(0.13472222, 0.1345679)
-sprite_frames = SubResource("SpriteFrames_puytq")
-animation = &"plane"
-
-[node name="paris" type="Sprite2D" parent="."]
-position = Vector2(1.3028345, 35.25)
-scale = Vector2(0.29510304, 0.2951031)
-texture = ExtResource("2_3dx3i")
 
 [node name="CameraRig" type="Node2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 position = Vector2(-50, 39)
@@ -393,7 +249,6 @@ texture = ExtResource("17_iwpvo")
 flip_h = true
 
 [node name="FadeTransition" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransition"]
 offset_left = -84.0
