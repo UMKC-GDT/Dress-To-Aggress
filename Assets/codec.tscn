@@ -4,12 +4,12 @@
 [ext_resource type="FontFile" uid="uid://cisiueanfm47k" path="res://Assets/Fonts/PixelEmulator-xq08.ttf" id="2_podmo"]
 [ext_resource type="Texture2D" uid="uid://ie7ylpnskabx" path="res://Assets/Sprites/Codec Talking Frames/CodeDecBothMouthClosed.png" id="3_yix3d"]
 [ext_resource type="Texture2D" uid="uid://ytf7unrg7iwy" path="res://Assets/Sprites/Codec Talking Frames/CodeDecLeftMouthOpen.png" id="4_laus7"]
-[ext_resource type="Texture2D" uid="uid://bv2nh8j3j5lef" path="res://Assets/Sprites/Codec Talking Frames/CodeDecDTAExpressionsClosed.JPG" id="5_laus7"]
 [ext_resource type="Texture2D" uid="uid://bb6ysxkrk5q7i" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightMouthOpen.png" id="5_v64lt"]
-[ext_resource type="Texture2D" uid="uid://cr1t74knm5nlg" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssion.png" id="6_xwa4u"]
+[ext_resource type="Texture2D" uid="uid://mjvkwsnuxv20" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssionMouthClose.png" id="5_yix3d"]
+[ext_resource type="Texture2D" uid="uid://cdb87ajj7uoc2" path="res://Assets/Sprites/Codec Talking Frames/CodeDecRightChangeExpresssionMouthOpen.png" id="6_laus7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klmiq"]
-bg_color = Color(0, 0, 0, 0.6313726)
+bg_color = Color(0, 0, 0, 0.631373)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_podmo"]
 bg_color = Color(0, 0, 0, 1)
@@ -37,14 +37,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_laus7")
+"texture": ExtResource("5_yix3d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_xwa4u")
+"texture": ExtResource("6_laus7")
 }],
 "loop": true,
 "name": &"right expression?",
-"speed": 2.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -98,17 +98,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_podmo")
 
 [node name="CodeDecDta2" type="Sprite2D" parent="Panel"]
 visible = false
-position = Vector2(353.00003, 199)
-scale = Vector2(0.9938272, 0.9938273)
+position = Vector2(353, 199)
+scale = Vector2(0.993827, 0.993827)
 texture = ExtResource("5_v64lt")
 centered = false
 
 [node name="CodecAnimatedSprite" type="AnimatedSprite2D" parent="Panel"]
-position = Vector2(170.66699, 96.000015)
-scale = Vector2(1.6296294, 1.6296296)
+position = Vector2(170.667, 96)
+scale = Vector2(1.62963, 1.62963)
 sprite_frames = SubResource("SpriteFrames_ugwvt")
-animation = &"right expression?"
-frame_progress = 0.5035727
+animation = &"right talk"
+frame_progress = 0.749854
 centered = false
 
 [node name="LeftShadow" type="Panel" parent="Panel/CodecAnimatedSprite"]
@@ -118,10 +118,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -197.59108
-offset_top = -142.97728
-offset_right = -83.45471
-offset_bottom = 8.590897
+offset_left = -197.591
+offset_top = -142.977
+offset_right = -83.4547
+offset_bottom = 8.5909
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yix3d")
@@ -133,10 +133,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 84.68167
-offset_top = -136.84091
-offset_right = 198.2044
-offset_bottom = 5.522705
+offset_left = 84.6817
+offset_top = -136.841
+offset_right = 198.204
+offset_bottom = 5.52271
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_laus7")
@@ -155,8 +155,8 @@ scroll_active = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 400.0
-offset_right = 504.00006
-offset_bottom = 473.00003
+offset_right = 504.0
+offset_bottom = 473.0
 theme_override_fonts/normal_font = ExtResource("2_podmo")
 theme_override_font_sizes/normal_font_size = 42
 text = "STAGE 1"
@@ -240,7 +240,7 @@ offset_left = 815.0
 offset_top = 500.0
 offset_right = 950.0
 offset_bottom = 562.0
-theme_override_colors/default_color = Color(0.42365184, 0.905523, 0.99999994, 1)
+theme_override_colors/default_color = Color(0.423652, 0.905523, 1, 1)
 theme_override_fonts/normal_font = ExtResource("2_podmo")
 theme_override_font_sizes/normal_font_size = 42
 text = "0.6x"
