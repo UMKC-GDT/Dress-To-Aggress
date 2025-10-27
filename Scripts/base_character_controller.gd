@@ -178,12 +178,12 @@ var crouch_kick_data = {
 	"active_frames" : 3,
 	"recovery_frames" : 19.0 / kick_speed_mult,
 	"blockstun_frames" : 16,
-	"onBlock_FA" : -6,
-	"ground_hitstun": 26 * kick_hitstun_mult,
-	"air_hitstun" : 26 * kick_hitstun_mult,
-	"ground_knockback_force" : 200 * kick_knockback_mult,
+	"onBlock_FA" : -10,
+	"ground_hitstun": 20 * kick_hitstun_mult,
+	"air_hitstun" : 20 * kick_hitstun_mult,
+	"ground_knockback_force" : 150 * kick_knockback_mult,
 	"air_knockback_force" : 100 * kick_knockback_mult,
-	"forward_force": 100 * kick_forward_mult,
+	"forward_force": 80 * kick_forward_mult,
 	"damage": 15 * kick_damage_mult,
 	"startup_animation" : "crouch kick recovery",
 	"active_animation" : "crouch kick",
@@ -216,6 +216,9 @@ var recovery_timer = 0.0
 var recovery_continuation = null
 
 var pose_timer = 0.0
+
+var hurt_timer = 0.0
+var hurt_continuation = null
 
 func set_controls():
 	match player_type:
@@ -506,14 +509,13 @@ func handle_states(direction, delta):
 			
 			block_legal = false
 			crouch_block_legal = false
-			disable_hitboxes()
 			change_color(Color(Color.PALE_VIOLET_RED, 1.0))
-			if is_on_floor():
-				velocity.x = move_toward(velocity.x, 0, 25)
 			
 			animation_player.position.x = 4
 			ShirtLayer.position.x = 4
 			PantsLayer.position.x = 4
+			
+			hurt_state(delta)
 		
 		CharacterState.BLOCK:
 			animation_player.play("block")
@@ -742,9 +744,9 @@ func start_c_kick():
 	attack_timer = crouch_kick_data["active_frames"] * FRAME
 	velocity.x = crouch_kick_data["forward_force"] * facing_direction
 	l_kick_hitbox.enable()
-		
+	
 	cancellable = false
-		
+	
 	change_state(CharacterState.CKICK)
 	SfxManager.playKickMiss()
 	SfxManager.playKickVoice()
@@ -783,6 +785,7 @@ func start_recovery(frames, animation):
 	animation_player.play(animation)
 	PantsLayer.play(animation)
 	ShirtLayer.play(animation)
+	
 	recovery_timer = frames * FRAME
 	recovery_continuation = func(): 
 		if state != CharacterState.STARTUP and state != CharacterState.HURT: 
@@ -790,6 +793,21 @@ func start_recovery(frames, animation):
 				change_state(CharacterState.CROUCH)
 			else:
 				change_state(CharacterState.IDLE)
+
+func hurt_state(delta):
+	if is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, 25)
+	
+	disable_hitboxes()
+	
+	if hurt_timer > 0:
+		hurt_timer -= delta
+	else:
+		
+		if hurt_continuation != null:
+			hurt_continuation.call()
+			hurt_continuation = null
+	
 
 func recovery_state(delta):
 	if (is_on_floor()): velocity.x = move_toward(velocity.x, 0, punch_deceleration)
@@ -822,21 +840,22 @@ func get_hit_with(attack_data):
 	
 	stop_all_timers()
 	
-	var wait_time = 0.0
-	
 	if is_on_floor():
 		velocity.x = -1 * (facing_direction) * attack_data["ground_knockback_force"]
-		wait_time = FRAME * attack_data["ground_hitstun"]
+		hurt_timer = FRAME * attack_data["ground_hitstun"]
 		stop_all_timers()
 	else:
 		stop_all_timers()
 		velocity.y = -1 * attack_data["air_knockback_force"]
 		velocity.x = -1 * (facing_direction) * attack_data["air_knockback_force"]
 		
-		wait_time = FRAME * attack_data["air_hitstun"]
+		hurt_timer = FRAME * attack_data["air_hitstun"]
 	
-	var timer = get_tree().create_timer(wait_time)
-	timer.timeout.connect(func(): change_state(CharacterState.IDLE))
+	hurt_continuation = func():
+		change_state(CharacterState.IDLE)
+		
+	#var timer = get_tree().create_timer(wait_time)
+	#timer.timeout.connect(func(): change_state(CharacterState.IDLE))
 
 func start_action(frames, continuation, animation):
 	change_state(CharacterState.STARTUP)
@@ -999,22 +1018,26 @@ func attack_hit(target):
 				print("Hitting " + str(target) + " with the almighty punch!")
 				SfxManager.playPunchHit()
 				target.get_hit_with(punch_data)
+				velocity.x = punch_data["forward_force"] * facing_direction * -1
 				
 			
 			CharacterState.KICK:
 				print("Hitting " + str(target) + " with the almighty kick!")
 				SfxManager.playKickHit()
 				target.get_hit_with(kick_data)
+				velocity.x = kick_data["forward_force"] * facing_direction * -1
 			
 			CharacterState.CPUNCH:
 				print("Hitting " + str(target) + " with the almighty CROUCH punch!")
 				SfxManager.playPunchHit()
 				target.get_hit_with(crouch_punch_data)
+				velocity.x = crouch_punch_data["forward_force"] * facing_direction * -1
 			
 			CharacterState.CKICK:
 				print("Hitting " + str(target) + " with the almighty CROUCH kick!")
 				SfxManager.playKickHit()
 				target.get_hit_with(crouch_kick_data)
+				velocity.x = crouch_kick_data["forward_force"] * facing_direction * -1
 
 func reduce_health(damage):
 	health -= damage

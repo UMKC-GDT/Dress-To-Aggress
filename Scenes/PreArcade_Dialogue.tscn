@@ -16,3 +16,4 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jalrw")
 
 [node name="Codec" parent="." instance=ExtResource("1_v4ip3")]
 position = Vector2(640, 360)
+text_speed = 0.01

@@ -58,23 +58,33 @@ var skip_typing := false
 var preArcadeDialogue = [
 	"R: Good to see you again, agent. It’s time for your next mission. Ever heard of a fashion brand called Astra?",
 	"L: Uh, no?",
-	"T: I don’t blame you; it’s not a particularly notable one, or so we thought anyway.",
-	"R: They’re holding a showcase soon for this line of high-tech clothes they came up with.",
-	"R: Apparently, they can enhance people's physical abilities.",
+	"L: Uh, no?",
+	"T: I don’t blame you; it’s not a particularly notable one.", 
+	"R: Or so we thought.",
+	"R: They’re holding showcases soon for a new line of high-tech clothes that enhance physical abilities.",
 	"L: Why’s a fashion brand interested in something like that?",
 	"T: Strange, right? It's even more strange how a brand without any significant revenue got the funding for this.",
 	"R: We had agents tail some of their models, and we’re almost certain that there’s a crime syndicate behind them.",
 	"L: Let me guess, smuggling?",
 	"R: What else do crime syndicates do? Astra's hiring new models, so you must infiltrate their showcases undercover.",
-	"R: You’re going to try to find out which of their offices is their headquarters, so we can take them down.", 
+	"R: You have to find out which of their offices is their headquarters so we can take them down.",
+	"R: High Command says these clothes might be a cover for a new weapon, so prevention is vital.", 
 	"R: With luck, it’ll be this first one, but if not, you’ll stay undercover and search their other locations.",
 	"L: Quick question: Why am I the one doing this? I didn’t join this organization to model, you know.",
 	"R: Well, no one else wanted it and you’re still new, so yeah. Have fun!",
 	"L: *sigh*",
 	"R: Oh, one more thing.",
 	"R: Astra wants the models to test out the clothes while on the catwalk, so you’ll be doing some fighting, too.",
-	"T: Try not to lose, okay? Can’t gather info if you’re knocked out.", #this one needs his new expression
-	"L: I'm on it."
+	"T: Try not to lose, okay? Can’t gather info if you’re knocked out.", 
+	"L: I won't. I'll just have to dress to kill.",
+	"R: Or I guess you could say you'll have to...",
+	"L: Don't.",
+	"R: Dress to...",
+	"L: Carnelian i beg you",
+	"T: ...Aggress?",
+	"L: ...",
+	"R: Like you're aggressive and attacking first?",
+	"L: ..."
 ]
 
 var dialogue1 = [
@@ -138,8 +148,7 @@ var right_open_tex = preload("res://Assets/Sprites/Codec Talking Frames/CodeDecR
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	if global.arcade_level != 0:
-		setup_codec()
+	setup_codec()
 
 func setup_codec():
 	#Get the stage number, the current difficulty, and the style text

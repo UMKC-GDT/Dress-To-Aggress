@@ -1,5 +1,7 @@
 extends Control
 
+@onready var buttonList: VBoxContainer = $VBoxContainer
+
 @onready
 var tutorialControls: Panel = $"How to Play 1"
 
@@ -10,9 +12,11 @@ var tutorialCombat: Panel = $"How to Play 2"
 var tutorialClothes: Panel = $"How to Play 3"
 
 func _ready():
+	buttonList.hide()
 	$Intro.play("Title")
 	music()
 	await $Intro.animation_finished
+	buttonList.show()
 	$Intro.hide()
 	
 func music():
