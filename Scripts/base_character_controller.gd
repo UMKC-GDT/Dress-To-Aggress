@@ -139,7 +139,7 @@ var crouch_punch_data = {
 	"active_frames" : 2.0,
 	"recovery_frames" : 9.0 / punch_speed_mult,
 	"blockstun_frames" : 10,
-	"onBlock_FA" : -1,
+	"onBlock_FA" : -6,
 	"ground_hitstun": 24.0 / punch_hitstun_mult,
 	"air_hitstun" : 24.0 / punch_hitstun_mult,
 	"ground_knockback_force" : 150 * punch_knockback_mult,
