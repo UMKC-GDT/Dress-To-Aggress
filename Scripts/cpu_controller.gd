@@ -46,7 +46,7 @@ var punch_time = 0.15
 
 var roll = 0
 
-var dummyMode = true
+var dummyMode = false
 
 var enemy_punch_count = 0
 var enemy_kick_count = 0
