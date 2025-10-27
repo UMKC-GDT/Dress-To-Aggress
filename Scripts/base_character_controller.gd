@@ -4,6 +4,9 @@ class_name BaseCharacterController
 @export var player_type  = 0  # 0 = CPU, 1 = Player 1, 2 = Player 2
 @export var enemy_name = "player1"  # Name of the enemy node
 
+var hit_block_slowdown = false
+var original_speed = 0
+
 var movement_speed_mult = 1
 var dash_speed_mult = 1
 var dash_available = true
@@ -1075,20 +1078,46 @@ func attack_was_blocked(target):
 				print("Target, " + str(target) + " has blocked my punch!")
 				target.block_attack(punch_data)
 				SfxManager.playBlock()
+				
+				# Apply slowdown penalty for punching a blocking enemy
+				if not hit_block_slowdown and player_type != 0:
+					hit_block_slowdown = true
+					original_speed = SPEED
+					SPEED = SPEED * 0.3
+					disabled = true
+					
+					await get_tree().create_timer(0.1).timeout
+					
+					SPEED = original_speed
+					disabled = false
+					hit_block_slowdown = false
+				
 				await get_tree().create_timer(attack_timer).timeout
-				
 				velocity.x = -1 * (facing_direction) * 150 + 50
-				
 				start_recovery((punch_data["recovery_frames"] - punch_data["onBlock_FA"]), punch_data["recovery_animation"])
 			
 			CharacterState.CPUNCH:
 				print("Target, " + str(target) + " has blocked my CROUCHING punch!")
 				target.block_attack(crouch_punch_data)
 				SfxManager.playBlock()
+				
+				# Knockback for blocked crouch punch
+				velocity.x = -1 * (facing_direction) * 200
+				
+				# Apply slowdown penalty for crouching punch on block
+				if not hit_block_slowdown and player_type != 0:
+					hit_block_slowdown = true
+					original_speed = SPEED
+					SPEED = SPEED * 0.3
+					disabled = true
+					
+					await get_tree().create_timer(0.1).timeout
+					
+					SPEED = original_speed
+					disabled = false
+					hit_block_slowdown = false
+				
 				await get_tree().create_timer(attack_timer).timeout
-				
-				velocity.x = -1 * (facing_direction) * 150 + 50
-				
 				start_recovery((crouch_punch_data["recovery_frames"] - crouch_punch_data["onBlock_FA"]), crouch_punch_data["recovery_animation"])
 			
 			CharacterState.KICK:
@@ -1096,17 +1125,18 @@ func attack_was_blocked(target):
 				target.block_attack(kick_data)
 				SfxManager.playBlock()
 				await get_tree().create_timer(attack_timer).timeout
-				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
 				start_recovery((attack_timer + kick_data["recovery_frames"] - kick_data["onBlock_FA"]), kick_data["recovery_animation"])
 			
 			CharacterState.CKICK:
 				print("Target, " + str(target) + " has blocked my CROUCHING kick!")
 				target.block_attack(crouch_kick_data)
 				SfxManager.playBlock()
+				
+				# Knockback for blocked crouch kick
+				velocity.x = -1 * (facing_direction) * 250
+				
 				await get_tree().create_timer(attack_timer).timeout
-				#velocity.x = -1 * (facing_direction) * kick_data["ground_knockback_force"] - 100
 				start_recovery((attack_timer + crouch_kick_data["recovery_frames"] -  crouch_kick_data["onBlock_FA"]), crouch_kick_data["recovery_animation"])
-
 #When we're the ones blocking an attack, set state to BLOCK, take negative x velocity of half of the attack's knockback, set block_timer to the given attack's blockstun frames
 func block_attack(attack_data):
 	change_state(CharacterState.BLOCK)
@@ -1144,8 +1174,8 @@ func scale_stats():
 	var pants = get_child(3).current_wearable
 	var shirt = get_child(4).current_wearable
 	
-	movement_speed_mult += pants.get_walk_speed_change() + shirt.get_walk_speed_change()
-	SPEED *= movement_speed_mult
+	#movement_speed_mult += pants.get_walk_speed_change() + shirt.get_walk_speed_change()
+	#SPEED *= movement_speed_mult
 	dash_speed_mult += pants.get_dash_speed_change()+ shirt.get_dash_speed_change()
 	DASH_SPEED *= dash_speed_mult
 	DASH_TIME /= dash_speed_mult
